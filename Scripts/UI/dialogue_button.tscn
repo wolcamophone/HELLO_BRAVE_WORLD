@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://ny2ax2j1h1ew"]
+
+[ext_resource type="Script" path="res://Scripts/UI/DialogueButton.gd" id="1_532qu"]
+
+[node name="DialogueButton" type="Button"]
+size_flags_horizontal = 4
+text = " OK "
+script = ExtResource("1_532qu")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

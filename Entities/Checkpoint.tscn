@@ -1,0 +1,79 @@
+[gd_scene load_steps=13 format=3 uid="uid://do6cmx571d3b3"]
+
+[ext_resource type="Script" path="res://Entities/Checkpoint.gd" id="1_ieiay"]
+[ext_resource type="ArrayMesh" uid="uid://buccyf3jux5ms" path="res://Models/Props/VendingMachine.obj" id="4_ig2xs"]
+[ext_resource type="Texture2D" uid="uid://tkj2pxorliay" path="res://Models/Props/VendingMachine.png" id="5_stcm8"]
+[ext_resource type="Texture2D" uid="uid://vwaxqoy4ypgr" path="res://Models/Props/VendingMachine_n.png" id="6_3ka63"]
+[ext_resource type="Script" path="res://Scripts/trigger_interaction.gd" id="6_8pi41"]
+[ext_resource type="Texture2D" uid="uid://cgmmofy88oake" path="res://Graphics/Particles/p_star2.jpg" id="7_wd34i"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0gim0"]
+size = Vector3(2.2, 3, 1.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8s43"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_omykv"]
+albedo_texture = ExtResource("5_stcm8")
+normal_enabled = true
+normal_texture = ExtResource("6_3ka63")
+
+[sub_resource type="QuadMesh" id="QuadMesh_cgowo"]
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ly083"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("7_wd34i")
+albedo_texture_force_srgb = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+fixed_size = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wkdc8"]
+size = Vector3(2, 0.25, 2)
+
+[node name="Checkpoint" type="StaticBody3D" groups=["checkpoint", "entities", "persistent"]]
+script = ExtResource("1_ieiay")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, 1.5, -1.5)
+shape = SubResource("BoxShape3D_0gim0")
+
+[node name="VendingMachine" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+mesh = ExtResource("4_ig2xs")
+surface_material_override/0 = SubResource("StandardMaterial3D_p8s43")
+surface_material_override/1 = SubResource("StandardMaterial3D_omykv")
+
+[node name="PointLight" type="MeshInstance3D" parent="VendingMachine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34, 2.65, 0.21)
+mesh = SubResource("QuadMesh_cgowo")
+surface_material_override/0 = SubResource("StandardMaterial3D_ly083")
+
+[node name="ScreenGlow" type="OmniLight3D" parent="VendingMachine"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 2.3, 0.1)
+light_color = Color(0, 1, 0, 1)
+shadow_enabled = true
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="InteractionArea" type="Area3D" parent="."]
+monitorable = false
+script = ExtResource("6_8pi41")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("BoxShape3D_wkdc8")
+
+[connection signal="area_entered" from="InteractionArea" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_entered" from="InteractionArea" to="InteractionArea" method="_on_area_entered"]
+[connection signal="area_exited" from="InteractionArea" to="." method="_on_area_3d_area_exited"]
+[connection signal="area_exited" from="InteractionArea" to="InteractionArea" method="_on_area_exited"]

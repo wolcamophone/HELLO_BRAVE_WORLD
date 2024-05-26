@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://b63gj2ifboghy"]
+
+[ext_resource type="Script" path="res://Scripts/UI/Console.gd" id="1_mf3kt"]
+
+[node name="Console" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_mf3kt")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextOutput" type="TextEdit" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "\"Hello Brave World!\"
+Indev"
+editable = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+placeholder_text = "enter command..."
+middle_mouse_paste_enabled = false
+drag_and_drop_selection_enabled = false
+caret_blink = true

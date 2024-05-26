@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://db8ogdw2isibb"]
+
+[ext_resource type="Script" path="res://Scripts/Console/name_of_group.gd" id="1"]
+
+[node name="name_of_group" type="Node"]
+script = ExtResource("1")

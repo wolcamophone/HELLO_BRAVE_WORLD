@@ -1,0 +1,255 @@
+[gd_scene load_steps=3 format=3 uid="uid://b0e5eduwpbkep"]
+
+[ext_resource type="Script" path="res://Scripts/UI/SettingsMenu4.gd" id="1_1jo3n"]
+[ext_resource type="Theme" uid="uid://24bml6th7hoi" path="res://Graphics/UI/Def_UI.theme" id="1_wfoid"]
+
+[node name="SettingsMenu" type="TabContainer"]
+custom_minimum_size = Vector2(760, 535)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -227.5
+offset_right = 300.0
+offset_bottom = 227.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+theme = ExtResource("1_wfoid")
+current_tab = 3
+script = ExtResource("1_1jo3n")
+
+[node name="Gameplay" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="Gameplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Gameplay/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ViewBob" type="CheckBox" parent="Gameplay/HBox/VBox"]
+layout_mode = 2
+button_pressed = true
+text = "View Bob"
+
+[node name="VBox2" type="VBoxContainer" parent="Gameplay/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Joysticks" type="CheckBox" parent="Gameplay/HBox/VBox2"]
+layout_mode = 2
+tooltip_text = "Alternative Method for getting input 
+strength for movement. May produce 
+unwanted movement deadzones."
+text = "Joystick Movement Method (experimental)"
+
+[node name="Video" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="Video"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Video/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Video/HBox/VBox"]
+layout_mode = 2
+text = "Display / Resolution:"
+
+[node name="HBox" type="HBoxContainer" parent="Video/HBox/VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Video/HBox/VBox/HBox"]
+layout_mode = 2
+text = "Resolution:"
+
+[node name="ResButton" type="OptionButton" parent="Video/HBox/VBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Fullscreen" type="CheckBox" parent="Video/HBox/VBox"]
+layout_mode = 2
+tooltip_text = "Toggles borderless fullscreen mode"
+text = "Fullscreen"
+
+[node name="V-Sync" type="CheckBox" parent="Video/HBox/VBox"]
+layout_mode = 2
+tooltip_text = "Synchronizes the framerate of the game to the refresh rate of your monitor"
+button_pressed = true
+text = "Vertical Sync"
+
+[node name="VBox2" type="VBoxContainer" parent="Video/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="Video/HBox/VBox2"]
+layout_mode = 2
+text = "Rendering Quality:"
+
+[node name="FXAA" type="CheckBox" parent="Video/HBox/VBox2"]
+layout_mode = 2
+tooltip_text = "Uses a cheap screenspace effect to smooth out pixels so they don't appear too sharp"
+text = "FXAA"
+
+[node name="OcclusionCulling" type="CheckBox" parent="Video/HBox/VBox2"]
+layout_mode = 2
+tooltip_text = "Uses a cheap screenspace effect to smooth out pixels so they don't appear too sharp"
+button_pressed = true
+text = "Occlusion Culling"
+
+[node name="HBox" type="HBoxContainer" parent="Video/HBox/VBox2"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Video/HBox/VBox2/HBox"]
+layout_mode = 2
+text = "Shadow Quality:"
+
+[node name="ShadowQuality" type="OptionButton" parent="Video/HBox/VBox2/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 5
+selected = 1
+popup/item_0/text = "Fastest"
+popup/item_0/id = 0
+popup/item_1/text = "Fast"
+popup/item_1/id = 1
+popup/item_2/text = "Average"
+popup/item_2/id = 2
+popup/item_3/text = "High"
+popup/item_3/id = 3
+popup/item_4/text = "Ultra"
+popup/item_4/id = 4
+
+[node name="Audio" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Audio"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Mater" type="Label" parent="Audio/VBoxContainer"]
+layout_mode = 2
+text = "Master Volume"
+
+[node name="VolMaster" type="HSlider" parent="Audio/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -50.0
+max_value = 0.0
+rounded = true
+tick_count = 11
+
+[node name="Music" type="Label" parent="Audio/VBoxContainer"]
+layout_mode = 2
+text = "Music"
+
+[node name="VolMusic" type="HSlider" parent="Audio/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -50.0
+max_value = -5.0
+value = -5.0
+rounded = true
+tick_count = 11
+
+[node name="SFX" type="Label" parent="Audio/VBoxContainer"]
+layout_mode = 2
+text = "Sound Effects"
+
+[node name="VolSFX" type="HSlider" parent="Audio/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -50.0
+max_value = 0.0
+rounded = true
+tick_count = 11
+
+[node name="Ambience" type="Label" parent="Audio/VBoxContainer"]
+layout_mode = 2
+text = "Ambience"
+
+[node name="VolAmbience" type="HSlider" parent="Audio/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -50.0
+max_value = 0.0
+rounded = true
+tick_count = 11
+
+[node name="Voice" type="Label" parent="Audio/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Voice"
+
+[node name="VolVoice" type="HSlider" parent="Audio/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -50.0
+max_value = 0.0
+rounded = true
+tick_count = 11
+
+[node name="Radio" type="Label" parent="Audio/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "Radio"
+
+[node name="VolRadio" type="HSlider" parent="Audio/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -50.0
+max_value = 0.0
+rounded = true
+tick_count = 11
+
+[node name="UI" type="Label" parent="Audio/VBoxContainer"]
+visible = false
+layout_mode = 2
+text = "User Interface"
+
+[node name="VolUI" type="HSlider" parent="Audio/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -50.0
+max_value = 0.0
+rounded = true
+tick_count = 11
+
+[node name="Debug" type="TabBar" parent="."]
+layout_mode = 2
+
+[connection signal="toggled" from="Gameplay/HBox/VBox/ViewBob" to="." method="_on_view_bob_toggled"]
+[connection signal="item_selected" from="Video/HBox/VBox/HBox/ResButton" to="." method="_on_ResButton_item_selected"]
+[connection signal="value_changed" from="Audio/VBoxContainer/VolMaster" to="." method="_on_vol_master_value_changed"]
+[connection signal="value_changed" from="Audio/VBoxContainer/VolMusic" to="." method="_on_VolMusic_value_changed"]
+[connection signal="value_changed" from="Audio/VBoxContainer/VolSFX" to="." method="_on_VolSFX_value_changed"]
+[connection signal="value_changed" from="Audio/VBoxContainer/VolAmbience" to="." method="_on_VolAmbience_value_changed"]
+[connection signal="value_changed" from="Audio/VBoxContainer/VolVoice" to="." method="_on_VolVoice_value_changed"]
+[connection signal="value_changed" from="Audio/VBoxContainer/VolRadio" to="." method="_on_VolRadio_value_changed"]
+[connection signal="value_changed" from="Audio/VBoxContainer/VolUI" to="." method="_on_VolUI_value_changed"]

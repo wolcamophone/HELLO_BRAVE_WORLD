@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://5cbowougkyer"]
+
+[ext_resource type="Script" path="res://GameMaster.gd" id="1_ofe50"]
+
+[node name="Game Master" type="Node" groups=["system"]]
+process_mode = 3
+script = ExtResource("1_ofe50")

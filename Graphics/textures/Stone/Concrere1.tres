@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://bpy57tl3t0af5"]
+
+[ext_resource type="Texture2D" uid="uid://cmh87jno6shg1" path="res://Graphics/textures/Stone/Concrere1.png" id="1_n3kd4"]
+
+[resource]
+albedo_texture = ExtResource("1_n3kd4")
+metallic_specular = 0.0
+texture_filter = 2

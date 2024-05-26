@@ -1,0 +1,11 @@
+[gd_resource type="SpatialMaterial" load_steps=3 format=3]
+
+[ext_resource type="Texture" uid="uid://bkblgx8akuhd3" path="res://Player/Body.jpg" id="1"]
+[ext_resource type="Texture" uid="uid://sl5h0farsfri" path="res://Player/BodyBMP.jpg" id="2"]
+
+[resource]
+albedo_texture = ExtResource( 1 )
+metallic_specular = 0.0
+normal_enabled = true
+normal_scale = 1.0
+normal_texture = ExtResource( 2 )

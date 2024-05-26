@@ -1,0 +1,137 @@
+[gd_scene load_steps=6 format=3 uid="uid://dpdrl5c7pe1op"]
+
+[ext_resource type="Theme" uid="uid://24bml6th7hoi" path="res://Graphics/UI/Def_UI.theme" id="1_5qcna"]
+[ext_resource type="Script" path="res://Scripts/UI/MainMenu.gd" id="2_cb50o"]
+[ext_resource type="PackedScene" uid="uid://b63gj2ifboghy" path="res://Scripts/console.tscn" id="3_8oeox"]
+[ext_resource type="PackedScene" uid="uid://b0e5eduwpbkep" path="res://Scripts/UI/Settings_Menu4.tscn" id="3_n6s02"]
+[ext_resource type="PackedScene" uid="uid://balk1jtgylghr" path="res://Scripts/Console/console.tscn" id="4_q78sm"]
+
+[node name="MainMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 99
+script = ExtResource("2_cb50o")
+
+[node name="Control" type="Control" parent="."]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 6
+size_flags_vertical = 6
+mouse_filter = 1
+theme = ExtResource("1_5qcna")
+
+[node name="TabContainer" type="TabContainer" parent="Control"]
+custom_minimum_size = Vector2(780, 580)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" type="TabBar" parent="Control/TabContainer"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../Debug")
+focus_neighbor_right = NodePath("../Settings")
+focus_next = NodePath("../Settings")
+focus_previous = NodePath("../Debug")
+
+[node name="HBox" type="HBoxContainer" parent="Control/TabContainer/MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Control/TabContainer/MainMenu/HBox"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="Control/TabContainer/MainMenu/HBox/PanelContainer"]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox"]
+layout_mode = 2
+focus_next = NodePath("../Load")
+focus_previous = NodePath("../Quit")
+text = "Start Game"
+
+[node name="Load" type="Button" parent="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox"]
+layout_mode = 2
+focus_next = NodePath("../Resume")
+focus_previous = NodePath("../Start")
+text = "Load Game"
+
+[node name="Resume" type="Button" parent="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox"]
+layout_mode = 2
+focus_next = NodePath("../Title")
+focus_previous = NodePath("../Load")
+text = "Resume"
+
+[node name="ToMovementTest" type="Button" parent="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+text = "To Movement Test"
+
+[node name="Title" type="Button" parent="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox"]
+layout_mode = 2
+text = "Exit to Title"
+
+[node name="Quit" type="Button" parent="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox"]
+layout_mode = 2
+focus_next = NodePath("../Start")
+focus_previous = NodePath("../Title")
+text = "Quit to Desktop"
+
+[node name="Console" parent="Control/TabContainer/MainMenu/HBox" instance=ExtResource("3_8oeox")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Settings" type="TabBar" parent="Control/TabContainer"]
+visible = false
+layout_mode = 2
+focus_neighbor_left = NodePath("../MainMenu")
+focus_neighbor_right = NodePath("../Debug")
+focus_next = NodePath("../Debug")
+focus_previous = NodePath("../MainMenu")
+
+[node name="SettingsMenu" parent="Control/TabContainer/Settings" groups=["system", "user_interface"] instance=ExtResource("3_n6s02")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 760.0
+offset_bottom = 535.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Debug" type="TabBar" parent="Control/TabContainer"]
+visible = false
+layout_mode = 2
+focus_neighbor_left = NodePath("../Settings")
+focus_neighbor_right = NodePath("../MainMenu")
+focus_next = NodePath("../MainMenu")
+focus_previous = NodePath("../Settings")
+
+[node name="Console" parent="Control/TabContainer/Debug" instance=ExtResource("4_q78sm")]
+layout_mode = 1
+
+[connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/ToMovementTest" to="." method="_on_to_movement_test_pressed"]
+[connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Title" to="." method="_on_title_pressed"]
+[connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Quit" to="." method="_on_quit_pressed"]

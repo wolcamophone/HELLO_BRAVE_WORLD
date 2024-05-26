@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://3x5nioot53bp"]
+
+[ext_resource type="Script" path="res://Entities/Coin.gd" id="1_wj3t6"]
+[ext_resource type="AudioStream" uid="uid://bmjtjjexghuwi" path="res://Audio/SFX/hl2/flashlight1.wav" id="2_yf7d4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrk60"]
+shading_mode = 2
+disable_ambient_light = true
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(1, 1, 0, 1)
+albedo_texture_force_srgb = true
+metallic = 1.0
+metallic_specular = 1.0
+metallic_texture_channel = 4
+roughness = 0.5
+emission = Color(1, 1, 1, 1)
+emission_operator = 1
+rim_tint = 1.0
+refraction_scale = 1.0
+disable_receive_shadows = true
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6plj4"]
+material = SubResource("StandardMaterial3D_qrk60")
+top_radius = 0.25
+bottom_radius = 0.25
+height = 0.1
+radial_segments = 12
+
+[sub_resource type="Animation" id="Animation_o55nu"]
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_ghq3o"]
+resource_name = "rotate"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:rotation:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 6.28319, 0, 0, 0, 0),
+"times": PackedFloat32Array(0, 2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ydq8k"]
+_data = {
+"RESET": SubResource("Animation_o55nu"),
+"rotate": SubResource("Animation_ghq3o")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k1uuv"]
+radius = 0.3
+
+[node name="Coin" type="Area3D" groups=["entities", "persistent"]]
+script = ExtResource("1_wj3t6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_6plj4")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ydq8k")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_k1uuv")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_yf7d4")
+bus = &"Sound Effects"
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

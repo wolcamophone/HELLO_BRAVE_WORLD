@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://balk1jtgylghr"]
+
+[node name="Console" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+follow_focus = true
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 2
+
+[node name="HBox" type="HBoxContainer" parent="ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBox" type="VBoxContainer" parent="ScrollContainer/HBox"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="ScrollContainer/HBox/VBox"]
+layout_mode = 2
+
+[node name="VBox2" type="VBoxContainer" parent="ScrollContainer/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBox3" type="VBoxContainer" parent="ScrollContainer/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3

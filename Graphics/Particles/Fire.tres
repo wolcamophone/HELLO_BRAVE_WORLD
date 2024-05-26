@@ -1,0 +1,29 @@
+[gd_resource type="ParticlesMaterial" load_steps=5 format=3 uid="uid://bghib0v0017ok"]
+
+[sub_resource type="Gradient" id="9"]
+offsets = PackedFloat32Array(0.2, 0.66, 1)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.784314, 0, 1, 1, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="10"]
+gradient = SubResource("9")
+width = 1024
+
+[sub_resource type="Curve" id="5"]
+bake_resolution = 25
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.121622, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.514583), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="6"]
+width = 128
+curve = SubResource("5")
+
+[resource]
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_sphere_radius = 0.5
+direction = Vector3(0, 0, 0)
+spread = 180.0
+gravity = Vector3(0, 3, 0)
+angular_velocity_max = 180.0
+scale_curve = SubResource("6")
+color_ramp = SubResource("10")

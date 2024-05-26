@@ -1,0 +1,68 @@
+[gd_scene load_steps=6 format=3 uid="uid://cgcbt2f8j12l"]
+
+[ext_resource type="Environment" uid="uid://5wulfb8tnebp" path="res://Levels/boot_menu.tres" id="1_1f1ws"]
+[ext_resource type="Script" path="res://Levels/boot_menu.gd" id="1_qf5ao"]
+[ext_resource type="AudioStream" uid="uid://dduf4c54rb553" path="res://Audio/Music/Meat Wall.ogg" id="2_ebpd8"]
+[ext_resource type="Script" path="res://Levels/RotateSkybox.gd" id="2_o7u8n"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_a600k"]
+dof_blur_far_distance = 110.55
+
+[node name="Boot Menu" type="Node3D"]
+process_mode = 3
+script = ExtResource("1_qf5ao")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("1_1f1ws")
+camera_attributes = SubResource("CameraAttributesPractical_a600k")
+script = ExtResource("2_o7u8n")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ebpd8")
+autoplay = true
+mix_target = 1
+bus = &"Music"
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -258.5
+offset_right = 258.5
+offset_bottom = 210.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 48
+text = "
+
+HELLO BRAVE WORLD!"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -23.0
+offset_right = 20.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 24
+text = "Press [Esc] or Start to continue...
+ 
+ 
+ "

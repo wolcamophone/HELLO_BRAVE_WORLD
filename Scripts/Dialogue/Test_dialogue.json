@@ -1,0 +1,32 @@
+[
+	{
+		"commands_raw": "This is a huge expositional block of text here to \nexplain the game mechanics to you. Should you accept?\n\n?> Ja! -> Yes\n?> Nein! -> No",
+		"gnode_name": "start",
+		"id": 0,
+		"name": "Start",
+		"position": [
+			260,
+			280
+		]
+	},
+	{
+		"commands_raw": "You chose Yes! ",
+		"gnode_name": "yes",
+		"id": 1,
+		"name": "Yes",
+		"position": [
+			440,
+			220
+		]
+	},
+	{
+		"commands_raw": "You chose No! ",
+		"gnode_name": "no",
+		"id": 2,
+		"name": "No",
+		"position": [
+			440,
+			320
+		]
+	}
+]

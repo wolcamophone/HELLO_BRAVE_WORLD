@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://d2elnxgsc6btx"]
+
+[ext_resource type="ArrayMesh" uid="uid://dwajy22c83yy" path="res://Models/Props/light_ceil_long.obj" id="1_1ff2u"]
+[ext_resource type="Script" path="res://Models/Props/prop_light.gd" id="1_nbhv1"]
+[ext_resource type="Material" uid="uid://dpnrevrbhtqvm" path="res://Models/Props/prop_light.material" id="3_3g2ts"]
+[ext_resource type="ArrayMesh" uid="uid://cw7c4f2pckqoe" path="res://Models/Props/light_ceil_short.obj" id="4_7n35b"]
+[ext_resource type="Material" uid="uid://dkkf7er17jlh" path="res://Models/Props/prop_light_emission.material" id="4_hl564"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0e5cr"]
+size = Vector3(2, 0.2, 3)
+
+[node name="Prop_Light" type="StaticBody3D" groups=["prop static"]]
+script = ExtResource("1_nbhv1")
+
+[node name="Long" type="StaticBody3D" parent="."]
+visible = false
+
+[node name="MeshLong" type="MeshInstance3D" parent="Long"]
+mesh = ExtResource("1_1ff2u")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("3_3g2ts")
+surface_material_override/1 = ExtResource("4_hl564")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Long"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+shape = SubResource("BoxShape3D_0e5cr")
+
+[node name="Short" type="StaticBody3D" parent="."]
+
+[node name="MeshShort" type="MeshInstance3D" parent="Short"]
+mesh = ExtResource("4_7n35b")
+skeleton = NodePath("../../..")
+surface_material_override/0 = ExtResource("3_3g2ts")
+surface_material_override/1 = ExtResource("4_hl564")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Short"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.98023e-08, -0.1, 0)
+shape = SubResource("BoxShape3D_0e5cr")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." groups=["light"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+light_energy = 8.0
+shadow_enabled = true
+omni_range = 16.0

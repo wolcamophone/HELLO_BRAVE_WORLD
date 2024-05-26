@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5n82vj0nnhjr"]
+
+[ext_resource type="Script" path="res://Scripts/Console/Name of Module.gd" id="1"]
+
+[node name="Name of Module" type="Node"]
+script = ExtResource("1")

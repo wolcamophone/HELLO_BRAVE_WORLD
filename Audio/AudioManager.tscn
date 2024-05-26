@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://lioiiuybngfg"]
+
+[ext_resource type="Script" path="res://Audio/AudioManager.gd" id="1_glmo1"]
+[ext_resource type="AudioStream" uid="uid://bdiarom0tyj62" path="res://Audio/SFX/hl2/buttonclickrelease.wav" id="2_ieoao"]
+
+[node name="AudioManager" type="Node" groups=["system"]]
+script = ExtResource("1_glmo1")
+
+[node name="UI_SELECT" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ieoao")

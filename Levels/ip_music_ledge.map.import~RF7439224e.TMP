@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://bmkcskpxiot2i"
+path="res://.godot/imported/ip_music_ledge.map-cb1db36a7906d0a16cc0a9b336cba331.tres"
+
+[deps]
+
+source_file="res://Levels/ip_music_ledge.map"
+dest_files=["res://.godot/imported/ip_music_ledge.map-cb1db36a7906d0a16cc0a9b336cba331.tres"]
+
+[params]
+

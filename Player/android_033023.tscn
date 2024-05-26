@@ -1,0 +1,121 @@
+[gd_scene load_steps=12 format=3 uid="uid://cbo0xk3jms3ww"]
+
+[ext_resource type="Script" path="res://Player/android_033023.gd" id="1_pds78"]
+[ext_resource type="PackedScene" uid="uid://c2f2xn44h37mg" path="res://Player/PlayerModel.tscn" id="3_2dqd0"]
+[ext_resource type="Script" path="res://Player/camera_movement.gd" id="3_aj8b8"]
+[ext_resource type="Texture2D" uid="uid://bbvgdi64v0q4n" path="res://Graphics/Particles/p_shadow.png" id="6_kk83b"]
+[ext_resource type="PackedScene" uid="uid://dm5vmdqfgedfg" path="res://Scripts/attack_box.tscn" id="6_kycxc"]
+[ext_resource type="AudioStream" uid="uid://bt505dv8l1mgc" path="res://Audio/SFX/hl2/beam_start.wav" id="7_ygxwh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_utlkd"]
+radius = 0.4
+height = 2.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6yvbp"]
+radius = 0.2
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8jnu4"]
+radius = 0.4
+height = 2.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dg4qi"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 0.129412)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4a04s"]
+material = SubResource("StandardMaterial3D_dg4qi")
+radius = 0.4
+height = 2.4
+
+[node name="Android033023" type="CharacterBody3D" groups=["persistent", "player"]]
+process_mode = 1
+process_physics_priority = 1
+top_level = true
+collision_layer = 6
+collision_mask = 15
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+slide_on_ceiling = false
+wall_min_slide_angle = 0.174533
+floor_constant_speed = true
+floor_max_angle = 0.802851
+floor_snap_length = 0.25
+script = ExtResource("1_pds78")
+_attack_type = ExtResource("6_kycxc")
+GRAVITY = 20.0
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="WallSlideCooldown" type="Timer" parent="."]
+
+[node name="iFrames" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+shape = SubResource("CapsuleShape3D_utlkd")
+
+[node name="RotationRoot" type="Node3D" parent="."]
+
+[node name="PlayerModel" parent="RotationRoot" instance=ExtResource("3_2dqd0")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+light_color = Color(0.784314, 0.784314, 1, 1)
+light_energy = 0.33
+light_indirect_energy = 0.0
+light_specular = 0.0
+omni_range = 15.0
+omni_attenuation = 0.5
+
+[node name="Marker3D" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
+
+[node name="AudioListener3D" type="AudioListener3D" parent="Marker3D"]
+current = true
+
+[node name="SpringArm3D" type="SpringArm3D" parent="Marker3D"]
+process_priority = -1
+process_physics_priority = -1
+top_level = true
+shape = SubResource("SphereShape3D_6yvbp")
+spring_length = 8.0
+script = ExtResource("3_aj8b8")
+cam_upper_limit = -75
+
+[node name="Camera3D" type="Camera3D" parent="Marker3D/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.990268, 0.139173, 0, -0.139173, 0.990268, 0, 0, 0)
+current = true
+fov = 80.0
+
+[node name="HitBox" type="Area3D" parent="." groups=["player"]]
+visible = false
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+shape = SubResource("CapsuleShape3D_8jnu4")
+
+[node name="ColMeshDebug" type="MeshInstance3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_4a04s")
+
+[node name="LandingShadow" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -8, 0)
+size = Vector3(2, 16, 2)
+texture_albedo = ExtResource("6_kk83b")
+emission_energy = 2.0
+normal_fade = 0.25
+upper_fade = 0.1
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ygxwh")
+
+[connection signal="area_entered" from="HitBox" to="." method="_hit_box"]

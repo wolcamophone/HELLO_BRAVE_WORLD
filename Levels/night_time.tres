@@ -1,0 +1,15 @@
+[gd_resource type="Environment" load_steps=2 format=2]
+
+[sub_resource type="PanoramaSky" id=157]
+
+[resource]
+background_mode = 2
+background_sky = SubResource( 157 )
+background_sky_orientation = Basis( 0.707107, -0.707107, 0, 0.707107, 0.707107, 0, 0, 0, 1 )
+background_color = Color( 0.619608, 0.619608, 0.619608, 0.733333 )
+ambient_light_color = Color( 0.335, 0.34325, 0.5, 1 )
+fog_enabled = true
+fog_depth_begin = 0.0
+fog_depth_end = 500.0
+fog_depth_curve = 2.0
+adjustment_brightness = 1.84

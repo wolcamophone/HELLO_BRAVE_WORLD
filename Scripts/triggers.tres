@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="QodotFGDBaseClass" load_steps=3 format=3 uid="uid://bddbqpfkfgk3r"]
+
+[ext_resource type="Resource" uid="uid://cikryn3k51ukx" path="res://Scripts/trigger_music.tres" id="1_r2mbk"]
+[ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_base_class.gd" id="2_3e8rw"]
+
+[resource]
+script = ExtResource("2_3e8rw")
+class_options = "----------------------------------------------------------------"
+classname = "triggers"
+description = "Activates upon detecting the player colliding or entering an area."
+qodot_internal = false
+base_classes = Array[Resource]([ExtResource("1_r2mbk")])
+class_properties = {}
+class_property_descriptions = {}
+meta_properties = {
+"color": Color(0.8, 0.8, 0.8, 1),
+"size": AABB(-8, -8, -8, 8, 8, 8)
+}
+node_options = "----------------------------------------------------------------"
+node_class = ""
+transient_node = false

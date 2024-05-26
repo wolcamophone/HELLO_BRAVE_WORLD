@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://xk228ixujfgk"]
+
+[ext_resource type="ArrayMesh" uid="uid://dchb44hn41a0l" path="res://Models/Vitruvian2.obj" id="1_c3egx"]
+[ext_resource type="Script" path="res://Models/info_player_start.gd" id="2_4426l"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nxh8l"]
+blend_mode = 1
+shading_mode = 2
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(0, 1, 0, 1)
+albedo_texture_force_srgb = true
+
+[node name="InfoPlayerStart" type="Node3D" groups=["InfoPlayerStart"]]
+script = ExtResource("2_4426l")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." groups=["gizmo"]]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+layers = 524288
+mesh = ExtResource("1_c3egx")
+surface_material_override/0 = SubResource("StandardMaterial3D_nxh8l")
