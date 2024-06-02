@@ -7,7 +7,7 @@ func _ready():
 	animation.play("rotate")
 
 func _on_area_entered(area):
-	GameMaster.COINS + 1
+	GameMaster.COINS += 1
 	visible = false
 	AudioManager.UI_SELECT.play()
 	queue_free()

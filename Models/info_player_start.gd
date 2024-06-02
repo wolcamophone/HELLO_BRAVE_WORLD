@@ -7,3 +7,4 @@ extends Node3D
 func _ready():
 	visible = false
 	GameMaster.spawn_player()
+	GameMaster.spawnpoints_available[warpable_name] = self

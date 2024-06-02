@@ -1,12 +1,14 @@
 class_name InteractiveDoor
 extends StaticBody3D
 
+@export var overwrite_prompt_text:String
 @export var dynamic_to_save:bool 
 @export var warp_door:bool
+@export var transfer_to_level:String
 @export var warp_target:String
 
 #@onready var door_model = 
-@onready var trigger_zone = $Area3D
+@onready var trigger_zone = $InteractionArea
 @onready var animation_player = $AnimationPlayer
 @onready var sound = $AudioStreamPlayer3D
 
@@ -16,6 +18,8 @@ var player_detected:bool = false
 func _ready():
 	if open:
 		animation_player.seek(0.6)
+	if overwrite_prompt_text != null:
+		trigger_zone.prompt_text = overwrite_prompt_text
 
 func _on_area_3d_area_entered(area):
 	if area.is_in_group("player"):
@@ -33,8 +37,8 @@ func _input(event):
 			animation_player.play_backwards("Open")
 		if !warp_door:
 			open = !open
-		else:
-			GameMaster.warp()
+		elif warp_door:
+			GameMaster.load_level(transfer_to_level)
 
 func save():
 	if dynamic_to_save:

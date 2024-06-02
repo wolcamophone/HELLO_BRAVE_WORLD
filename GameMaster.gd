@@ -12,7 +12,12 @@ extends Node
 @export var warp_destination:Node3D
 @export var checkpoint_current: Checkpoint
 var checkpoint_previous: Checkpoint
-var checkpoints_available:Dictionary
+var checkpoints_available:Dictionary = {
+	"":Node3D,
+}
+var spawnpoints_available:Dictionary = {
+	"":Node3D,
+}
 
 @export_group("Cheats")
 @export var godmode:bool = false

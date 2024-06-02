@@ -27,8 +27,11 @@ func _ready():
 		#_screen_emission.surface_material_override.emission_enabled = false
 	elif claimed:
 		screen_glow.visible = true
-	
+	register_checkpoint()
 
+
+func register_checkpoint():
+	GameMaster.checkpoints_available[checkpoint_name] = self
 
 
 func _on_area_3d_area_entered(area):
@@ -51,8 +54,7 @@ func _input(event):
 		screen_glow.visible = true
 		print("Checkpoint activated!")
 
-func register_checkpoint():
-	GameMaster.checkpoints_available["Hubworld"] = self
+
 
 
 
