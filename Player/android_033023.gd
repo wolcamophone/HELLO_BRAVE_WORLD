@@ -9,6 +9,12 @@ signal dead()
 @export_category("ANDROID 9001")
 @export_group("Gameplay Values and Objects")
 @export var MAX_HEALTH: int = 8
+var HEALTH:int = 8:
+	set(value):
+		HEALTH = clamp(value, 0, MAX_HEALTH)
+		health_changed.emit(HEALTH)
+	#get:
+		#return godmode
 @export var _attack_type: PackedScene
 enum States {idle,
 			walking,
@@ -45,7 +51,7 @@ var FOLLOW_TWEEN: Tween
 const LERP_VAL:float = 0.2
 
 #	ON READY VARS
-@onready var HEALTH:int = MAX_HEALTH
+#@onready var HEALTH:int = MAX_HEALTH
 
 #@onready var _state_machine = $StateMachine
 @onready var _spring_arm: SpringArm3D = $Marker3D/SpringArm3D

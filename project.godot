@@ -50,7 +50,7 @@ import/fbx/enabled=false
 
 [gui]
 
-theme/custom="res://Graphics/UI/Def_UI.theme"
+theme/custom="res://Graphics/UI/HBW.theme"
 
 [importer_defaults]
 

@@ -5,7 +5,7 @@ extends CanvasLayer
 
 #@onready var state = {}
 @onready var _health_bar = $Control/HealthBar
-@onready var _coin_counter = $CoinCounter
+@onready var _coin_counter = $Control/CoinCounter
 @onready var _dialogue_box:PanelContainer = $Control/Diaract/Control/DialogueBox
 @onready var _EzDialogueInst = $Control/EzDialogue
 @onready var _interact_text = $Control/Diaract/Control2/HBoxContainer/InteractText

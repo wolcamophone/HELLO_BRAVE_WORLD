@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://byijc8y0njbfs"]
+
+[ext_resource type="Texture2D" uid="uid://bfh37sodktfcm" path="res://Graphics/textures/metal/crosshatch_2.png" id="1_upmf4"]
+
+[resource]
+albedo_texture = ExtResource("1_upmf4")
+metallic_specular = 0.0
+texture_filter = 2

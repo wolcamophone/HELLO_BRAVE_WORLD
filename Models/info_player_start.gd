@@ -1,7 +1,8 @@
-extends Node3D
 class_name InfoPlayerStart
+extends Node3D
 
-@export var name_of_target:String  = ""
+@export var default_spawn_point:bool
+@export var warpable_name:String  = ""
 
 func _ready():
 	visible = false

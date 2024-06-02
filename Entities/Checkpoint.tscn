@@ -37,7 +37,7 @@ particles_anim_loop = false
 fixed_size = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wkdc8"]
-size = Vector3(2, 0.25, 2)
+size = Vector3(2, 0.2, 2)
 
 [node name="Checkpoint" type="StaticBody3D" groups=["checkpoint", "entities", "persistent"]]
 script = ExtResource("1_ieiay")
@@ -70,10 +70,8 @@ monitorable = false
 script = ExtResource("6_8pi41")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 shape = SubResource("BoxShape3D_wkdc8")
 
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_area_3d_area_entered"]
-[connection signal="area_entered" from="InteractionArea" to="InteractionArea" method="_on_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="." method="_on_area_3d_area_exited"]
-[connection signal="area_exited" from="InteractionArea" to="InteractionArea" method="_on_area_exited"]

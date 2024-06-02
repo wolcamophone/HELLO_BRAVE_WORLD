@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dh6bggefnv0ri"]
+
+[ext_resource type="Texture2D" uid="uid://brwqy4vv3l061" path="res://Graphics/textures/metal/metal_brick_chiseled.png" id="1_q017j"]
+
+[resource]
+albedo_texture = ExtResource("1_q017j")
+metallic_specular = 0.0
+texture_filter = 2

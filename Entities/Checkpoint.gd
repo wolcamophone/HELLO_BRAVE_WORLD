@@ -1,6 +1,7 @@
 extends Node3D
 class_name Checkpoint
 
+@export var checkpoint_name:String = ""
 @export var claimed: bool = false
 @export var active: bool = false
 @onready var activation_zone:Area3D = $Area3D
@@ -15,6 +16,7 @@ var player_detected = false
 
 
 func _ready():
+	#GameMaster.register_checkpoint(self)
 	#respawn_player()
 	if GameMaster.checkpoint_current != self:
 		pin_light.visible = false
@@ -48,6 +50,9 @@ func _input(event):
 		GameMaster.checkpoint_current = self
 		screen_glow.visible = true
 		print("Checkpoint activated!")
+
+func register_checkpoint():
+	GameMaster.checkpoints_available["Hubworld"] = self
 
 
 

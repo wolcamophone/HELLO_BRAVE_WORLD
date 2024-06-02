@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dfq3uytirea8o"]
+
+[ext_resource type="Texture2D" uid="uid://bg0b6shtv73ir" path="res://Graphics/textures/stone/concrete_light.png" id="1_p2vim"]
+
+[resource]
+albedo_texture = ExtResource("1_p2vim")
+metallic_specular = 0.0
+texture_filter = 2

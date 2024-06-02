@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhh28gadc62kf"]
+
+[ext_resource type="Script" path="res://Scripts/trigger_interaction.gd" id="1_5hhn0"]
+[ext_resource type="Script" path="res://Scripts/test_tp_obj.gd" id="1_t086k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5uxda"]
+transparency = 1
+albedo_color = Color(1, 0, 0, 0.501961)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lig8v"]
+material = SubResource("StandardMaterial3D_5uxda")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_61h5g"]
+size = Vector3(4, 4, 4)
+
+[node name="TestTPObj" type="Node3D"]
+script = ExtResource("1_t086k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_lig8v")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+script = ExtResource("1_5hhn0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_61h5g")
+
+[connection signal="activation" from="InteractionArea" to="." method="_on_interaction_area_activation"]
+[connection signal="area_entered" from="InteractionArea" to="InteractionArea" method="_on_area_entered"]
+[connection signal="area_exited" from="InteractionArea" to="InteractionArea" method="_on_area_exited"]

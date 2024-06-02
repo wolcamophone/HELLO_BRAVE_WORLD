@@ -8,10 +8,14 @@ extends Node
 @export_dir var sprite_folder_path: String
 @export var level_instance:Node3D
 @export var level_previous:Node3D
-@export var warp_target:Node3D
-var checkpoints_available 
+@export var teleport_destination:Node3D
+@export var warp_destination:Node3D
 @export var checkpoint_current: Checkpoint
-@export var checkpoint_previous: Checkpoint
+var checkpoint_previous: Checkpoint
+var checkpoints_available:Dictionary
+
+@export_group("Cheats")
+@export var godmode:bool = false
 
 @export_group("Environmental Variables")
 @export var DayTime:bool = true
@@ -19,7 +23,7 @@ var checkpoints_available
 
 @export_group("Player Variables")
 @export var selected_player:PackedScene = preload("res://Player/android_033023.tscn")
-@export var active_player:CharacterBody3D
+var active_player:CharacterBody3D
 @export var AltMoveMethod: bool = false
 @export var ATTACK_POWER:float = 1
 ###	If multiplayer is something we can integrate later, 
@@ -44,7 +48,7 @@ var checkpoints_available
 
 @export_group("Spooky Numbers")
 var random_float = randf()
-var random_int_range = randi_range(69, 420)
+var random_int_range = randi_range(1, 120)
 
 func _ready():
 	DisplayServer.window_set_title("HELLO BRAVE WORLD!")
@@ -61,6 +65,7 @@ func unload_level():
 
 
 func load_level(level_name: String):
+	### Loading a Level should be called to change the scene.
 	level_previous = level_instance
 	unload_level()
 	var level_path = "res://Levels/%s.tscn" % level_name
@@ -70,7 +75,7 @@ func load_level(level_name: String):
 		get_tree().change_scene_to_file(level_path)
 	else:
 		print("Error! Could not find level instance named" % level_name)
-	warp_target = find_child("Checkpoint")
+	#warp_destination = $"../Checkpoint"
 	#print_orphan_nodes()
 	if level_name != "boot_menu":
 		HUD.visible = true
@@ -82,26 +87,40 @@ func load_level(level_name: String):
 
 
 func spawn_player():
-	warp_target = $"../Checkpoint"
+	### A player should always spawn in after a level loads to ensure there is a player.
+	### (Would be cool to hook around this so that loading into a new scene/level knows
+	### to spawn the default android player or a special player for minigame sections)
+	### If the func is called again while a player is active in the scene tree, they will
+	### be erased, have their states reset, and recreated at the designated location. -CD
+	warp_destination = $"../Checkpoint"
 	if active_player:
 		active_player.queue_free()
 	var playa = selected_player.instantiate()
 	playa.top_level = true
+	active_player = playa
 	add_child(playa)
-	if warp_target:
-		playa.global_position = warp_target.global_position
+	if warp_destination:
+		active_player.global_position = warp_destination.global_position
 	else:
 		print("No warp target set or found, spawning player at global origin.")
-	active_player = playa
 	print("Player respawn.")
 
 
-func teleport():
-	if warp_target:
-		get_tree().find_child("Android033023").position = warp_target.position
+func teleport(teleport_destination):
+	### Teleport should be used only to move the player or an entity instantaneously
+	### to a new position in the scene. If the player wants to go through a loading
+	### process for a new or even the same scene, use warp func! -CD
+	if teleport_destination:
+		active_player.global_position = teleport_destination.global_position
 	else:
-		print("Error! Could not find warp target named" % warp_target)
+		print("Error! Could not find tp target named '" % teleport_destination + "'")
 
+
+func warp():
+	### Warp should be used to move to a new scene or put a loading screen between
+	### the player and their destination. This function will handle level transitions
+	### and names/positions of teleport targets.
+	pass
 
 
 ###	SAVE AND LOAD FUNCTIONS COPIED FROM ENGINE DOCS -CD
