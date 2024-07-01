@@ -12,7 +12,7 @@ config_version=5
 
 config/name="HELLO BRAVE WORLD"
 config/tags=PackedStringArray("third_person", "platformer")
-run/main_scene="res://Levels/boot_menu.tscn"
+run/main_scene="res://levels/boot_menu/boot_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="res://Splash.png"
@@ -27,8 +27,12 @@ buses/default_bus_layout="res://Audio/default_bus_layout.tres"
 
 GameMaster="*res://GameMaster.tscn"
 AudioManager="*res://Audio/AudioManager.tscn"
-HUD="*res://Scripts/UI/HUD.tscn"
-MainMenu="*res://Scripts/UI/MainMenu.tscn"
+HUD="*res://scripts/UI/HUD.tscn"
+MainMenu="*res://scripts/UI/MainMenu.tscn"
+ScoreCounter="*res://scripts/ScoreCounter.gd"
+QuestVars="*res://scripts/QuestVars.gd"
+KeyIndex="*res://scripts/KeyIndex.gd"
+Cheats="*res://scripts/Cheats.gd"
 
 [display]
 
@@ -72,6 +76,17 @@ texture={
 "process/size_limit": 0,
 "roughness/mode": 0,
 "roughness/src_normal": ""
+}
+oggvorbisstr={
+"bar_beats": 4,
+"beat_count": 0,
+"bpm": 0,
+"loop": true,
+"loop_offset": 0
+}
+animation_library={
+"animation/fps": 24.0,
+"animation/trimming": true
 }
 
 [input]

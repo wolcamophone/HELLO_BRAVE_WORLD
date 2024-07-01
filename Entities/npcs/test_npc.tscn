@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://crp6jl3pw07y0"]
+
+[ext_resource type="Script" path="res://Entities/npcs/test_npc.gd" id="1_2q081"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kr7m1"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_tnoav"]
+material = SubResource("StandardMaterial3D_kr7m1")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_855p0"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_xlvas"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 1.0
+radial_segments = 12
+
+[node name="TestNPC" type="CharacterBody3D"]
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_2q081")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_tnoav")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_855p0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.2, 1.2, 0.5)
+mesh = SubResource("CylinderMesh_xlvas")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+avoidance_enabled = true
+
+[node name="BehaviorTimerIdle" type="Timer" parent="."]
+wait_time = 7.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="BehaviorTimerIdle" to="." method="_on_behavior_timer_idle_timeout"]

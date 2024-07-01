@@ -5,7 +5,7 @@ extends StaticBody3D
 @export var dynamic_to_save:bool 
 @export var warp_door:bool
 @export var transfer_to_level:String
-@export var warp_target:String
+@export var warp_to_position:Vector3
 
 #@onready var door_model = 
 @onready var trigger_zone = $InteractionArea
@@ -38,6 +38,7 @@ func _input(event):
 		if !warp_door:
 			open = !open
 		elif warp_door:
+			GameMaster.warp_position = warp_to_position
 			GameMaster.load_level(transfer_to_level)
 
 func save():

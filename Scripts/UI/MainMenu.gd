@@ -21,14 +21,7 @@ func _unhandled_input(event):
 	elif paused and event.is_action_pressed("Pause") or event.is_action_pressed("ui_cancel"):
 		unpause_game()
 
-#	if event.is_action("ui_down"):
-#		set_process(not is_processing())
 
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func _on_resume_pressed():
 	unpause_game()
@@ -40,15 +33,20 @@ func _on_quit_pressed():
 	GameMaster.quit_game()
 
 func _on_start_pressed():
-	GameMaster.load_level("hub_world")
+	GameMaster.load_level("hub_world/hub_world")
 	unpause_game()
 
+func _on_save_pressed():
+	GameMaster.save_game()
+func _on_load_pressed():
+	GameMaster.load_game()
+
 func _on_title_pressed():
-	GameMaster.load_level("boot_menu")
+	GameMaster.load_level("boot_menu/boot_menu")
 	unpause_game()
 
 func _on_to_movement_test_pressed():
-	GameMaster.load_level("boot_menu")
+	GameMaster.load_level("movement_testing/movement_testing")
 	MainMenu.unpause_game()
 
 
@@ -68,6 +66,3 @@ func unpause_game():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	self.visible = false
 	print("Unpaused")
-
-
-

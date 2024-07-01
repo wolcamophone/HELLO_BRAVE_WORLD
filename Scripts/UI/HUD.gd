@@ -23,7 +23,7 @@ func _ready():
 
 func _process(update):
 	_health_bar.value = display_health
-	_coin_counter.text = "Coins: " + str(GameMaster.COINS)
+	_coin_counter.text = "Coins: " + str(ScoreCounter.COINS)
 	pass
 
 func scene_transition():

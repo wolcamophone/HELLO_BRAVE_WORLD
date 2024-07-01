@@ -1,5 +1,8 @@
-extends Node3D
 class_name Checkpoint
+extends Node3D
+
+signal checkpoint_activated
+
 
 @export var checkpoint_name:String = ""
 @export var claimed: bool = false
@@ -53,6 +56,7 @@ func _input(event):
 		GameMaster.checkpoint_current = self
 		screen_glow.visible = true
 		print("Checkpoint activated!")
+		emit_signal("checkpoint_activated")
 
 
 

@@ -4,7 +4,7 @@
 [ext_resource type="ArrayMesh" uid="uid://buccyf3jux5ms" path="res://Models/Props/VendingMachine.obj" id="4_ig2xs"]
 [ext_resource type="Texture2D" uid="uid://tkj2pxorliay" path="res://Models/Props/VendingMachine.png" id="5_stcm8"]
 [ext_resource type="Texture2D" uid="uid://vwaxqoy4ypgr" path="res://Models/Props/VendingMachine_n.png" id="6_3ka63"]
-[ext_resource type="Script" path="res://Scripts/trigger_interaction.gd" id="6_8pi41"]
+[ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="6_8pi41"]
 [ext_resource type="Texture2D" uid="uid://cgmmofy88oake" path="res://Graphics/Particles/p_star2.jpg" id="7_wd34i"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0gim0"]

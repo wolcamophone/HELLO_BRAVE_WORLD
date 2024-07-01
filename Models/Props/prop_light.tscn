@@ -16,6 +16,7 @@ script = ExtResource("1_nbhv1")
 visible = false
 
 [node name="MeshLong" type="MeshInstance3D" parent="Long"]
+cast_shadow = 0
 mesh = ExtResource("1_1ff2u")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("3_3g2ts")
@@ -28,6 +29,7 @@ shape = SubResource("BoxShape3D_0e5cr")
 [node name="Short" type="StaticBody3D" parent="."]
 
 [node name="MeshShort" type="MeshInstance3D" parent="Short"]
+cast_shadow = 0
 mesh = ExtResource("4_7n35b")
 skeleton = NodePath("../../..")
 surface_material_override/0 = ExtResource("3_3g2ts")
@@ -39,6 +41,6 @@ shape = SubResource("BoxShape3D_0e5cr")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." groups=["light"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-light_energy = 8.0
+light_energy = 6.0
 shadow_enabled = true
-omni_range = 16.0
+omni_range = 20.0

@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://hjv2ufmyscrb"]
+
+[ext_resource type="ArrayMesh" uid="uid://8co610q7pjpc" path="res://Models/Props/box_android.obj" id="1_brnku"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_drlhs"]
+points = PackedVector3Array(-0.6, -1.2002, -0.4, -0.400078, -1.4, -0.4, -0.6, -1.2002, 0.3, -0.6, 1.19992, -0.4, -0.400078, -1.4, 0.3, 0.399961, -1.4, -0.4, -0.6, 1.19992, 0.3, -0.400078, 1.39973, -0.4, 0.399961, -1.4, 0.3, 0.6, -1.2002, -0.4, -0.400078, 1.39973, 0.3, 0.399961, 1.39973, -0.4, 0.6, -1.2002, 0.3, 0.6, 1.19992, -0.4, 0.399961, 1.39973, 0.3, 0.6, 1.19992, 0.3)
+
+[node name="Box_android" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_brnku")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_drlhs")

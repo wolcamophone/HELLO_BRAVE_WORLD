@@ -4,12 +4,12 @@
 {
 "mapversion" "220"
 "classname" "worldspawn"
-"_tb_textures" "textures/Dev;textures/Env;textures/Floors;textures/glass;textures/Metal;textures/stone;textures/Supernatural;textures/Tech;textures/Walls;textures/Wood"
+"_tb_textures" "textures/dev;textures/env;textures/floors;textures/glass;textures/metal;textures/natural;textures/stone;textures/supernatural;textures/tech;textures/walls;textures/wood"
 // brush 0
 {
 ( -256 384 -128 ) ( -256 384 0 ) ( -256 -384 -128 ) stone/stone_rough [ 0 -1 0 0 ] [ 0 0 -1 0 ] 0 0.5 0.5
 ( -384 -256 -128 ) ( -384 -256 0 ) ( 384 -256 -128 ) stone/stone_rough [ 1 0 0 0 ] [ 0 0 -1 0 ] 0 0.5 0.5
-( -384 384 -32 ) ( -384 -384 -32 ) ( 384 384 -32 ) stone/stone_rough [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 0.5 0.5
+( -384 384 -128 ) ( -384 -384 -128 ) ( 384 384 -128 ) stone/stone_rough [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 0.5 0.5
 ( -384 -384 0 ) ( -384 384 0 ) ( 384 -384 0 ) stone/stone_rough [ 1 0 0 0 ] [ 0 -1 0 0 ] 0 0.5 0.5
 ( 384 256 -128 ) ( 384 256 0 ) ( -384 256 -128 ) stone/stone_rough [ -1 0 0 0 ] [ 0 0 -1 0 ] 0 0.5 0.5
 ( 256 -384 -128 ) ( 256 -384 0 ) ( 256 384 -128 ) stone/stone_rough [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 0.5 0.5
@@ -22,6 +22,8 @@
 "_tb_name" "Skybox"
 "_tb_id" "1"
 "_tb_layer_sort_index" "0"
+"_tb_layer_locked" "1"
+"_tb_layer_omit_from_export" "1"
 // brush 0
 {
 ( 8448 8704 8704 ) ( 8448 -8704 8704 ) ( 8448 8704 -8704 ) Dev/devDark [ 0 1 0 0 ] [ 0 0 -1 0 ] 0 0.25 0.25

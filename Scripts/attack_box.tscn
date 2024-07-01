@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://dm5vmdqfgedfg"]
 
-[ext_resource type="Script" path="res://Scripts/attack_box.gd" id="1_yrk3s"]
+[ext_resource type="Script" path="res://scripts/attack_box.gd" id="1_yrk3s"]
 [ext_resource type="Texture2D" uid="uid://cgmmofy88oake" path="res://Graphics/Particles/p_star2.jpg" id="2_78vch"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gb8an"]

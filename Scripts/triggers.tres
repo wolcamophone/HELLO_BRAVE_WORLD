@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="QodotFGDBaseClass" load_steps=3 format=3 uid="uid://bddbqpfkfgk3r"]
 
-[ext_resource type="Resource" uid="uid://cikryn3k51ukx" path="res://Scripts/trigger_music.tres" id="1_r2mbk"]
+[ext_resource type="Resource" uid="uid://cikryn3k51ukx" path="res://scripts/trigger_music.tres" id="1_r2mbk"]
 [ext_resource type="Script" path="res://addons/qodot/src/resources/game-definitions/fgd/qodot_fgd_base_class.gd" id="2_3e8rw"]
 
 [resource]

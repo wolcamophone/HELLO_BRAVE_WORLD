@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://dp5lywrjh6jmp"]
+
+[ext_resource type="ArrayMesh" uid="uid://bbvai86o8bdh6" path="res://Models/Props/string_lights.obj" id="1_wcx4n"]
+[ext_resource type="Texture2D" uid="uid://b5c11d216biq1" path="res://Models/Props/string_lights.png" id="2_jmvb8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_av4y7"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 2
+alpha_antialiasing_edge = 0.3
+albedo_texture = ExtResource("2_jmvb8")
+
+[node name="StringLight" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+cast_shadow = 0
+mesh = ExtResource("1_wcx4n")
+surface_material_override/0 = SubResource("StandardMaterial3D_av4y7")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.6, 0)
+shadow_enabled = true
+omni_range = 16.0

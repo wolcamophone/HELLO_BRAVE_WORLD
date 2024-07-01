@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://dpdrl5c7pe1op"]
 
 [ext_resource type="Theme" uid="uid://24bml6th7hoi" path="res://Graphics/UI/Def_UI.theme" id="1_5qcna"]
-[ext_resource type="Script" path="res://Scripts/UI/MainMenu.gd" id="2_cb50o"]
-[ext_resource type="PackedScene" uid="uid://b63gj2ifboghy" path="res://Scripts/console.tscn" id="3_8oeox"]
-[ext_resource type="PackedScene" uid="uid://b0e5eduwpbkep" path="res://Scripts/UI/Settings_Menu4.tscn" id="3_n6s02"]
-[ext_resource type="PackedScene" uid="uid://balk1jtgylghr" path="res://Scripts/Console/console.tscn" id="4_q78sm"]
+[ext_resource type="Script" path="res://scripts/UI/MainMenu.gd" id="2_cb50o"]
+[ext_resource type="PackedScene" uid="uid://b63gj2ifboghy" path="res://scripts/console.tscn" id="3_8oeox"]
+[ext_resource type="PackedScene" uid="uid://b0e5eduwpbkep" path="res://scripts/UI/Settings_Menu4.tscn" id="3_n6s02"]
+[ext_resource type="PackedScene" uid="uid://balk1jtgylghr" path="res://scripts/Console/console.tscn" id="4_q78sm"]
 
 [node name="MainMenu" type="CanvasLayer"]
 process_mode = 3
@@ -60,23 +60,29 @@ layout_mode = 2
 [node name="VBox" type="VBoxContainer" parent="Control/TabContainer/MainMenu/HBox/PanelContainer"]
 layout_mode = 2
 
+[node name="Resume" type="Button" parent="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox"]
+layout_mode = 2
+focus_next = NodePath("../Title")
+focus_previous = NodePath("../Load")
+text = "Resume"
+
 [node name="Start" type="Button" parent="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox"]
 layout_mode = 2
 focus_next = NodePath("../Load")
 focus_previous = NodePath("../Quit")
 text = "Start Game"
 
+[node name="Save" type="Button" parent="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox"]
+layout_mode = 2
+focus_next = NodePath("../Resume")
+focus_previous = NodePath("../Start")
+text = "Save Game"
+
 [node name="Load" type="Button" parent="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox"]
 layout_mode = 2
 focus_next = NodePath("../Resume")
 focus_previous = NodePath("../Start")
 text = "Load Game"
-
-[node name="Resume" type="Button" parent="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox"]
-layout_mode = 2
-focus_next = NodePath("../Title")
-focus_previous = NodePath("../Load")
-text = "Resume"
 
 [node name="ToMovementTest" type="Button" parent="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox"]
 custom_minimum_size = Vector2(200, 40)
@@ -130,8 +136,10 @@ focus_previous = NodePath("../Settings")
 [node name="Console" parent="Control/TabContainer/Debug" instance=ExtResource("4_q78sm")]
 layout_mode = 1
 
-[connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Start" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Load" to="." method="_on_load_pressed"]
 [connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/ToMovementTest" to="." method="_on_to_movement_test_pressed"]
 [connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Title" to="." method="_on_title_pressed"]
 [connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Quit" to="." method="_on_quit_pressed"]

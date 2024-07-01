@@ -1,8 +1,8 @@
 [gd_scene load_steps=13 format=3 uid="uid://d4ko1bybcv8mu"]
 
-[ext_resource type="Script" path="res://Scripts/interactive_door.gd" id="1_eojj6"]
+[ext_resource type="Script" path="res://scripts/interactive_door.gd" id="1_eojj6"]
 [ext_resource type="ArrayMesh" uid="uid://h82syyglahoc" path="res://Models/Props/Doorframe.obj" id="2_m1jxb"]
-[ext_resource type="Script" path="res://Scripts/trigger_interaction.gd" id="3_qa5ew"]
+[ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="3_qa5ew"]
 [ext_resource type="AudioStream" uid="uid://dt7rcfrncjjqi" path="res://Audio/SFX/Door/DoorOpen1.ogg" id="4_eycqy"]
 [ext_resource type="ArrayMesh" uid="uid://dvn0w63uruucn" path="res://Models/Props/Doorslide.obj" id="5_3dntb"]
 

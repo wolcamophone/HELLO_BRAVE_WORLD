@@ -30,4 +30,5 @@ Sounds used in SCP Containment Breach
 
 
 ###	Special Thanks and Guides:
-Brackeys 
+Brackeys https://www.youtube.com/@Brackeys
+Game Endeavor https://www.youtube.com/@GameEndeavor

@@ -1,4 +1,4 @@
-extends Node
+extends Node3D
 
 @export var light_group_active:bool = false
 

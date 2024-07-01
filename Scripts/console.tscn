@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b63gj2ifboghy"]
 
-[ext_resource type="Script" path="res://Scripts/UI/Console.gd" id="1_mf3kt"]
+[ext_resource type="Script" path="res://scripts/UI/Console.gd" id="1_mf3kt"]
 
 [node name="Console" type="Control"]
 layout_mode = 3
@@ -22,8 +22,16 @@ grow_vertical = 2
 [node name="TextOutput" type="TextEdit" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "\"Hello Brave World!\"
-Indev"
+placeholder_text = "\"Hello Brave World!\"
+Indev
+
+Controls:
+Move = WASD or Left Stick
+Jump = Spacebar or A/X  -  (You can double jump and jump off of walls!)
+Interact = E or Y/△
+Attack = Left Click or X/⬜  -  (Currently doesn't do anything.)
+
+The goal is to explore and chill. There is no save functionality yet."
 editable = false
 drag_and_drop_selection_enabled = false
 virtual_keyboard_enabled = false

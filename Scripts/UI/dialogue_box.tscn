@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bldggv8gt1tht"]
 
 [ext_resource type="Theme" uid="uid://24bml6th7hoi" path="res://Graphics/UI/Def_UI.theme" id="1_m7xam"]
-[ext_resource type="Script" path="res://Scripts/UI/DialogueBox.gd" id="2_et3dx"]
+[ext_resource type="Script" path="res://scripts/UI/DialogueBox.gd" id="2_et3dx"]
 
 [node name="DialogueBox" type="PanelContainer"]
 process_mode = 3

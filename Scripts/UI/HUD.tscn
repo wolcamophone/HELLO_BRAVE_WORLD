@@ -1,12 +1,12 @@
 [gd_scene load_steps=15 format=3 uid="uid://bb2hcbb3vaxyu"]
 
-[ext_resource type="Script" path="res://Scripts/UI/HUD.gd" id="1_n7kud"]
-[ext_resource type="JSON" path="res://Scripts/Dialogue/Test_dialogue.json" id="2_o1v84"]
+[ext_resource type="Script" path="res://scripts/UI/HUD.gd" id="1_n7kud"]
+[ext_resource type="JSON" path="res://scripts/Dialogue/Test_dialogue.json" id="2_o1v84"]
 [ext_resource type="Theme" uid="uid://24bml6th7hoi" path="res://Graphics/UI/Def_UI.theme" id="2_v80lq"]
 [ext_resource type="Texture2D" uid="uid://bqcok4y83au00" path="res://Graphics/UI/HUD/health_radial_0.png" id="3_v2uxw"]
 [ext_resource type="Texture2D" uid="uid://dvxf4do6lmw1h" path="res://Graphics/UI/HUD/health_radial_2.png" id="4_iclye"]
 [ext_resource type="Script" path="res://addons/ez_dialogue/ez_dialogue_node.gd" id="5_8mc7c"]
-[ext_resource type="PackedScene" uid="uid://bldggv8gt1tht" path="res://Scripts/UI/dialogue_box.tscn" id="6_4dfct"]
+[ext_resource type="PackedScene" uid="uid://bldggv8gt1tht" path="res://scripts/UI/dialogue_box.tscn" id="6_4dfct"]
 [ext_resource type="Texture2D" uid="uid://ruijco38yggy" path="res://Graphics/UI/AtlasController.png" id="8_786k8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8f6y2"]
