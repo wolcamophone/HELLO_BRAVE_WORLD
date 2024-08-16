@@ -82,6 +82,7 @@ mesh = SubResource("CylinderMesh_6plj4")
 libraries = {
 "": SubResource("AnimationLibrary_ydq8k")
 }
+autoplay = "rotate"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_k1uuv")

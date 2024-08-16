@@ -11,7 +11,9 @@ var teleport_position:Vector3
 var warp_destination:Node3D
 var warp_position:Vector3
 var checkpoint_current: Checkpoint
+var checkpoint_current_name: String
 var checkpoint_previous: Checkpoint
+var checkpoint_previous_name: String
 var checkpoints_available:Dictionary = {
 	"xx-example-xx":Node3D,
 }
@@ -36,9 +38,6 @@ var active_player:CharacterBody3D
 ###	If multiplayer is something we can integrate later, 
 ### players spawned in may need to be given ID's 
 ###	with a function and put into lists or something.
-
-
-
 
 #@onready var MainMenu:CanvasLayer = $MainMenu
 #@onready var HUD:CanvasLayer = $HUD
@@ -67,7 +66,7 @@ func unload_level():
 func load_level(level_name: String):
 	unload_level() 
 	### vvv  Process of Instantiation  vvv
-	var level_path = "res://Levels/%s.tscn" % level_name
+	var level_path = "res://levels/%s/%s.tscn" % [level_name, level_name]
 	var level_resource = load(level_path)
 	if level_resource:
 		level_instance = level_resource.instantiate()
@@ -79,9 +78,8 @@ func load_level(level_name: String):
 		HUD.visible = true
 	elif level_name == "boot_menu":
 		HUD.visible = false	
-	_ready() ### For objects outside of the scene but still in game's runtime
-	if level_instance:
-		### Printing a bunch of stuff to show scene tree for better debug
+	_ready() ### To refresh any objects outside of the level but still in game's runtime
+	if level_instance: ### Printing a bunch of stuff to show scene tree for better debug
 		print_tree_pretty()
 		print(spawnpoints_available)
 		#print_orphan_nodes()
@@ -97,7 +95,6 @@ func spawn_player():
 	### to spawn either a default player obj or a special player for minigame sections)
 	### If the func is called again while a player is already in the scene tree, they will
 	### be erased and recreated. -CD
-	
 	if active_player:
 		active_player.queue_free()
 	var p = selected_player.instantiate()
@@ -128,6 +125,7 @@ func warp(warp_destination:Node3D):
 
 ###	SAVE AND LOAD FUNCTIONS COPIED FROM ENGINE DOCS -CD
 func save_game():
+	print("Saving...")
 	var game_save = FileAccess.open("user://savegame_hbw.save", FileAccess.WRITE)
 	var saved_nodes = get_tree().get_nodes_in_group("persistent")
 	for node in saved_nodes:
@@ -152,7 +150,8 @@ func save_game():
 
 
 func load_game():
-	if not FileAccess.file_exists("user://savegame.save"):
+	print("Loading...")
+	if not FileAccess.file_exists("user://savegame_hbw.save"):
 		return # Error! We don't have a save to load.
 
 	# We need to revert the game state so we're not cloning objects
@@ -165,7 +164,7 @@ func load_game():
 
 	# Load the file line by line and process that dictionary to restore
 	# the object it represents.
-	var game_save = FileAccess.open("user://savegame.save", FileAccess.READ)
+	var game_save = FileAccess.open("user://savegame_hbw.save", FileAccess.READ)
 	while game_save.get_position() < game_save.get_length():
 		var json_string = game_save.get_line()
 		# Creates the helper class to interact with JSON
@@ -180,14 +179,27 @@ func load_game():
 		var node_data = json.get_data()
 		# Firstly, we need to create the object and add it to the tree and set its position.
 		var new_object = load(node_data["filename"]).instantiate()
-		get_node(node_data["parent"]).add_child(new_object)
-		new_object.position = Vector2(node_data["pos_x"], node_data["pos_y"])
+		#get_node(node_data["parent"]).add_child(new_object)
+	
 		# Now we set the remaining variables.
 		for i in node_data.keys():
-			if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y":
+			if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y" or i == "pos_z":
 				continue
 			new_object.set(i, node_data[i])
+			active_player.position = Vector3(node_data["pos_x"],node_data["pos_y"],node_data["pos_z"])
+			print(node_data.keys())
+		#load_level()
 
+func save():
+	var save_dict = {
+		"filename" : get_scene_file_path(),
+		"parent" : get_parent().get_path(),
+		"level_instance" : level_instance,
+		"level_previous" : level_previous,
+		"checkpoint_current" : checkpoint_current,
+		"checkpoint_previous" : checkpoint_previous,
+	}
+	return save_dict
 
 func quit_game():
 	get_tree().quit()

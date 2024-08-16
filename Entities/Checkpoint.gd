@@ -54,6 +54,7 @@ func _input(event):
 	if player_detected && event.is_action_pressed("interact") && !active:
 		active = true
 		GameMaster.checkpoint_current = self
+		GameMaster.checkpoint_current_name = checkpoint_name
 		screen_glow.visible = true
 		print("Checkpoint activated!")
 		emit_signal("checkpoint_activated")

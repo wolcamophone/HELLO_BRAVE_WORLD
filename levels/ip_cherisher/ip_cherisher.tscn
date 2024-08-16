@@ -1,11 +1,11 @@
-[gd_scene load_steps=304 format=3 uid="uid://nvof62vec04o"]
+[gd_scene load_steps=307 format=3 uid="uid://nvof62vec04o"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_5pgo5"]
-[ext_resource type="Environment" uid="uid://dc3kt4ox6pxd6" path="res://levels/env_mojave_night.tres" id="1_l5noj"]
 [ext_resource type="PackedScene" uid="uid://d2elnxgsc6btx" path="res://Models/Props/prop_light.tscn" id="2_2g75j"]
 [ext_resource type="Resource" uid="uid://bkhxcqsquw1yg" path="res://addons/func_godot/func_godot_default_map_settings.tres" id="2_k1umx"]
 [ext_resource type="Material" uid="uid://dlen5vhnflyp1" path="res://Graphics/textures/metal/crosshatch_2.material" id="3_d25ge"]
 [ext_resource type="Material" uid="uid://crqpvt2uberg6" path="res://Graphics/textures/stone/concrete_plates.material" id="4_kfew8"]
+[ext_resource type="AudioStream" uid="uid://bdu4tw1g2e7dn" path="res://Audio/Radio/Horse.wav" id="4_yt51x"]
 [ext_resource type="Material" uid="uid://dkq7rgv2m2mcb" path="res://Graphics/textures/walls/bricks_planks_reenforced.material" id="5_eyknb"]
 [ext_resource type="Material" uid="uid://cbsnulm3xy0ll" path="res://Graphics/textures/stone/Teal2.material" id="6_kynqp"]
 [ext_resource type="Texture2D" uid="uid://cf6ajwjqbpesg" path="res://Graphics/textures/floors/Tile1.png" id="7_ukihg"]
@@ -19,8 +19,27 @@
 [ext_resource type="Material" uid="uid://2njddyyk0s50" path="res://Graphics/textures/dev/devdark.material" id="15_3ghlg"]
 [ext_resource type="Material" uid="uid://bfom1cedyo4sc" path="res://Graphics/textures/env/skybox_2d.material" id="16_i24qe"]
 [ext_resource type="Texture2D" uid="uid://dfmyrfiod5ryk" path="res://Graphics/textures/tech/Tech14.png" id="17_b34ja"]
-[ext_resource type="PackedScene" uid="uid://d4ko1bybcv8mu" path="res://Entities/Door.tscn" id="18_7co5l"]
+[ext_resource type="PackedScene" uid="uid://d4ko1bybcv8mu" path="res://Entities/doors/Door.tscn" id="18_7co5l"]
 [ext_resource type="AudioStream" uid="uid://c5u57m5gtk4jo" path="res://Audio/Music/macho.ogg" id="21_dctyx"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ox3d8"]
+sky_top_color = Color(0.0196078, 0.0705882, 0.101961, 1)
+sky_horizon_color = Color(0.286275, 0.317647, 0.34902, 1)
+sky_curve = 0.05
+ground_bottom_color = Color(0.0196078, 0.0705882, 0.101961, 1)
+ground_horizon_color = Color(0.286275, 0.317647, 0.34902, 1)
+ground_curve = 0.125
+
+[sub_resource type="Sky" id="Sky_si5n5"]
+sky_material = SubResource("ProceduralSkyMaterial_ox3d8")
+
+[sub_resource type="Environment" id="Environment_y8oho"]
+background_mode = 2
+sky = SubResource("Sky_si5n5")
+fog_light_color = Color(0, 0, 0.12549, 1)
+fog_density = 0.02
+volumetric_fog_enabled = true
+volumetric_fog_albedo = Color(0, 0, 0.188235, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7o4rb"]
 albedo_texture = ExtResource("7_ukihg")
@@ -1073,8 +1092,14 @@ _surfaces = [{
 
 [node name="ip_cherisher" type="Node3D"]
 
+[node name="InteractiveDoor" parent="." instance=ExtResource("18_7co5l")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -18, 0, -12)
+warp_door = true
+transfer_to_level = "hub_world"
+warp_to_position = Vector3(66, 8, -18)
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("1_l5noj")
+environment = SubResource("Environment_y8oho")
 
 [node name="PropLights" type="Node3D" parent="."]
 
@@ -1161,11 +1186,20 @@ light_energy = 8.0
 omni_range = 24.0
 omni_attenuation = 0.66
 
-[node name="InteractiveDoor" parent="." instance=ExtResource("18_7co5l")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -18, 0, -12)
-warp_door = true
-transfer_to_level = "hub_world/hub_world"
-warp_to_position = Vector3(66, 8, -18)
+[node name="Macho" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 4, 36)
+stream = ExtResource("21_dctyx")
+autoplay = true
+max_distance = 40.0
+bus = &"Music"
+
+[node name="Macho2" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 45, 1, 13)
+stream = ExtResource("4_yt51x")
+attenuation_model = 3
+autoplay = true
+max_distance = 3.0
+bus = &"Radio"
 
 [node name="FuncGodotMap" type="Node3D" parent="."]
 script = ExtResource("1_5pgo5")
@@ -2015,9 +2049,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36.0372, 1.9536, 38.9297)
 cast_shadow = 2
 gi_mode = 0
 mesh = SubResource("ArrayMesh_imwo2")
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 4, 36)
-stream = ExtResource("21_dctyx")
-autoplay = true
-max_distance = 40.0

@@ -6,13 +6,13 @@ extends CanvasLayer
 @onready var start_button:Control = $Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Start
 @onready var title_button:Control = $Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Title
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("Main Menu loaded!")
 	paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	self.visible = false
-
 
 
 func _unhandled_input(event):
@@ -22,9 +22,9 @@ func _unhandled_input(event):
 		unpause_game()
 
 
-
 func _on_resume_pressed():
 	unpause_game()
+
 
 func _on_quit_pressed():
 #	get_tree().quit()
@@ -32,21 +32,27 @@ func _on_quit_pressed():
 #	SceneTree.quit()
 	GameMaster.quit_game()
 
+
 func _on_start_pressed():
-	GameMaster.load_level("hub_world/hub_world")
+	GameMaster.load_level("hub_world")
 	unpause_game()
+
 
 func _on_save_pressed():
 	GameMaster.save_game()
+
+
 func _on_load_pressed():
 	GameMaster.load_game()
 
+
 func _on_title_pressed():
-	GameMaster.load_level("boot_menu/boot_menu")
+	GameMaster.load_level("boot_menu")
 	unpause_game()
 
+
 func _on_to_movement_test_pressed():
-	GameMaster.load_level("movement_testing/movement_testing")
+	GameMaster.load_level("movement_testing")
 	MainMenu.unpause_game()
 
 
@@ -58,6 +64,7 @@ func pause_game():
 #	$Cont/VBox/Resume.grab_focus()
 	self.visible = true
 	print("Paused")
+
 
 func unpause_game():
 	# Unpauses

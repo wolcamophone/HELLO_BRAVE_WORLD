@@ -11,6 +11,7 @@ extends StaticBody3D
 @onready var trigger_zone = $InteractionArea
 @onready var animation_player = $AnimationPlayer
 @onready var sound = $AudioStreamPlayer3D
+@export var model:MeshInstance3D
 
 var open:bool = false
 var player_detected:bool = false

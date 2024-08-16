@@ -39,6 +39,7 @@ var WALL_JUMP_COUNT:int = 1
 @export var AIR_FRICTION: float = 0.9
 @export var MAX_JUMP_VELOCITY: float = 12
 @export var MIN_JUMP_VELOCITY: float = 6
+@export var WALL_JUMP_TOLLERANCE: int = 2
 
 
 @export var CUSTOM_GRAVITY: bool = false
@@ -54,6 +55,7 @@ var WALL_JUMP_COUNT:int = 1
 var direction = Vector3.ZERO
 var FOLLOW_TWEEN: Tween
 const LERP_VAL:float = 0.2
+var pos_dict = []
 
 #	ON READY VARS
 #@onready var HEALTH:int = MAX_HEALTH
@@ -110,7 +112,7 @@ func _apply_jumping():
 		_sfx_jump.play()
 	clampi(AIR_JUMP_COUNT, 0, MAX_JUMP_COUNT)
 	# Wall Jumping
-	if is_on_wall_only() and Input.is_action_just_pressed("jump") and velocity.y < -1 && WALL_JUMP_COUNT > 0:
+	if is_on_wall_only() and Input.is_action_just_pressed("jump") and velocity.y < WALL_JUMP_TOLLERANCE && WALL_JUMP_COUNT > 0:
 		velocity = get_wall_normal() * MIN_JUMP_VELOCITY
 		velocity.y = MAX_JUMP_VELOCITY
 		WALL_JUMP_COUNT -= 1
@@ -234,6 +236,9 @@ func _hit_box(area):
 
 
 func save():
+	pos_dict.append(position.x)
+	pos_dict.append(position.y)
+	pos_dict.append(position.z)
 	var save_dict = {
 		"filename" : get_scene_file_path(),
 		"parent" : get_parent().get_path(),

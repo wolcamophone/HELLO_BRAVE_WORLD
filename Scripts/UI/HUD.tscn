@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bb2hcbb3vaxyu"]
+[gd_scene load_steps=14 format=3 uid="uid://bb2hcbb3vaxyu"]
 
 [ext_resource type="Script" path="res://scripts/UI/HUD.gd" id="1_n7kud"]
 [ext_resource type="JSON" path="res://scripts/Dialogue/Test_dialogue.json" id="2_o1v84"]
@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bqcok4y83au00" path="res://Graphics/UI/HUD/health_radial_0.png" id="3_v2uxw"]
 [ext_resource type="Texture2D" uid="uid://dvxf4do6lmw1h" path="res://Graphics/UI/HUD/health_radial_2.png" id="4_iclye"]
 [ext_resource type="Script" path="res://addons/ez_dialogue/ez_dialogue_node.gd" id="5_8mc7c"]
-[ext_resource type="PackedScene" uid="uid://bldggv8gt1tht" path="res://scripts/UI/dialogue_box.tscn" id="6_4dfct"]
 [ext_resource type="Texture2D" uid="uid://ruijco38yggy" path="res://Graphics/UI/AtlasController.png" id="8_786k8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8f6y2"]
@@ -96,18 +95,6 @@ layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 1
 
-[node name="DialogueBox" parent="Control/Diaract/Control" instance=ExtResource("6_4dfct")]
-clip_contents = true
-layout_mode = 1
-anchors_preset = 8
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -96.0
-offset_bottom = 96.0
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
 [node name="Control2" type="Control" parent="Control/Diaract"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -144,6 +131,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="HealthBar" type="TextureProgressBar" parent="Control"]
+visible = false
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 1
 anchors_preset = 2
