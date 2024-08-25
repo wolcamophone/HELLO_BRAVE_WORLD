@@ -1,5 +1,5 @@
 extends Node3D
-class_name Level
+#class_name Level
 
 @export var lvl_title:String = "Untitled Level"
 @export var lvl_description:String = "This is a level description for HELLO BRAVE WORLD"
