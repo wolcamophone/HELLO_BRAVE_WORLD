@@ -32,4 +32,3 @@ func _on_choice_selected(choice_index: int):
 	print(choice_index)
 	($"../EzDialogue" as EzDialogue).next(choice_index)
 	
-

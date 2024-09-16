@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgtl1mooaeiqs"]
+
+[ext_resource type="Texture2D" uid="uid://cytmnkkfa2dvc" path="res://Entities/npcs/mr_eyes/glimpse1.png" id="1_k8vfd"]
+[ext_resource type="AudioStream" uid="uid://bspvkhtq1rckm" path="res://Audio/Music/gathering_darkness.ogg" id="2_t5dsj"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_1xcju"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dl3b8"]
+blend_mode = 1
+shading_mode = 0
+albedo_texture = ExtResource("1_k8vfd")
+billboard_mode = 2
+proximity_fade_distance = 2.0
+distance_fade_mode = 1
+distance_fade_min_distance = 40.0
+distance_fade_max_distance = 60.0
+
+[node name="mr_eyes" type="Node3D"]
+
+[node name="Face" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+mesh = SubResource("QuadMesh_1xcju")
+surface_material_override/0 = SubResource("StandardMaterial3D_dl3b8")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("2_t5dsj")
+volume_db = -36.0
+autoplay = true
+max_distance = 24.0
+panning_strength = 0.0
+bus = &"Sound Effects"
