@@ -55,6 +55,17 @@ enabled=PackedStringArray("res://addons/SimpleTODO/plugin.cfg", "res://addons/fu
 import/blender/enabled=false
 import/fbx/enabled=false
 
+[global_group]
+
+checkpoint=""
+persistent=""
+"prop static"=""
+InfoPlayerStart=""
+gizmo=""
+entities=""
+"prop light"=""
+"env light"=""
+
 [gui]
 
 theme/custom="res://Graphics/UI/HBW.theme"

@@ -3,7 +3,7 @@ extends Area3D
 
 signal activation
 
-@export var prompt_text:String = "Interact"
+@export var prompt_text:String = "Activate"
 @onready var area:Area3D 
 
 var player_detected:bool = false
@@ -15,7 +15,7 @@ func _ready():
 func _on_area_entered(area):
 	if area.is_in_group("player"):
 		player_detected = true
-		HUD._interact_text = prompt_text
+		HUD._interact_text.text = prompt_text
 		HUD._interact_prompt.visible = true
 func _on_area_exited(area):
 	if area.is_in_group("player"):

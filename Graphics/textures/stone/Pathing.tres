@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dt3k3j1yid0af"]
+
+[ext_resource type="Texture2D" uid="uid://dqjec2g7fm0fu" path="res://Graphics/textures/stone/Pathing.png" id="1_hpsnc"]
+
+[resource]
+albedo_texture = ExtResource("1_hpsnc")
+metallic_specular = 0.0
+texture_filter = 2

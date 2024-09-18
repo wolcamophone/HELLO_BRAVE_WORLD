@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://daypky1dmg833"]
+
+[ext_resource type="Texture2D" uid="uid://i1y220i6b16f" path="res://Graphics/textures/metal/metal_brushed_rusty.png" id="1_dve1x"]
+
+[resource]
+albedo_texture = ExtResource("1_dve1x")
+metallic_specular = 0.0
+texture_filter = 2

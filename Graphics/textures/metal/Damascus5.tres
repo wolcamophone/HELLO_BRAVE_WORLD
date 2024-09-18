@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cv5tp8lbidlmh"]
+
+[ext_resource type="Texture2D" uid="uid://d2t133ml7ia3p" path="res://Graphics/textures/metal/Damascus5.png" id="1_5vh8a"]
+
+[resource]
+albedo_texture = ExtResource("1_5vh8a")
+metallic_specular = 0.0
+texture_filter = 2

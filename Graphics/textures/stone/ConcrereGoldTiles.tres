@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://crnho1mjqqco1"]
+
+[ext_resource type="Texture2D" uid="uid://c5moduv361eqy" path="res://Graphics/textures/stone/ConcrereGoldTiles.png" id="1_8ai50"]
+
+[resource]
+albedo_texture = ExtResource("1_8ai50")
+metallic_specular = 0.0
+texture_filter = 2

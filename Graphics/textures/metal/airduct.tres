@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://b8rwrgwwfgc2i"]
+
+[ext_resource type="Texture2D" uid="uid://bvl3sm71dkkiv" path="res://Graphics/textures/metal/airduct.png" id="1_li5rs"]
+
+[resource]
+albedo_texture = ExtResource("1_li5rs")
+metallic_specular = 0.0
+texture_filter = 2

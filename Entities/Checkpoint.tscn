@@ -58,9 +58,8 @@ mesh = SubResource("QuadMesh_cgowo")
 surface_material_override/0 = SubResource("StandardMaterial3D_ly083")
 
 [node name="ScreenGlow" type="OmniLight3D" parent="VendingMachine"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 2.3, 0.1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.3, 0.2)
 light_color = Color(0, 1, 0, 1)
-shadow_enabled = true
 
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)

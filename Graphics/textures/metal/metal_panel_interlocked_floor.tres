@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cwlhtft1cho3k"]
+
+[ext_resource type="Texture2D" uid="uid://c0o7bwbvj0y5i" path="res://Graphics/textures/metal/metal_panel_interlocked_floor.png" id="1_71ng8"]
+
+[resource]
+albedo_texture = ExtResource("1_71ng8")
+metallic_specular = 0.0
+texture_filter = 2
