@@ -31,6 +31,8 @@ Jump = Spacebar or A/X  -  (You can double jump and jump off of walls!)
 Interact = E or Y/△
 Attack = Left Click or X/⬜  -  (Currently doesn't do anything.)
 
+Toggle Zoom = Mouse Middle-Click or R3
+
 The goal is to explore and chill. There is no save functionality yet."
 editable = false
 drag_and_drop_selection_enabled = false

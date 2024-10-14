@@ -94,12 +94,12 @@ process_priority = -1
 process_physics_priority = -1
 top_level = true
 shape = SubResource("SphereShape3D_ryo0o")
-spring_length = 8.0
+spring_length = 4.0
 script = ExtResource("3_aj8b8")
 cam_upper_limit = -75
 
 [node name="Camera3D" type="Camera3D" parent="CameraHead/SpringArm3D"]
-transform = Transform3D(1, 0, 0, 0, 0.990268, 0.139173, 0, -0.139173, 0.990268, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.997564, 0.0697565, 0, -0.0697565, 0.997564, 0, 0, 0)
 current = true
 fov = 80.0
 

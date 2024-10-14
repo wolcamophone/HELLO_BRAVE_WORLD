@@ -38,12 +38,12 @@ bus = &"Sound Effects"
 
 [node name="meow" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("3_pe81t")
-pitch_scale = 0.9
+pitch_scale = 0.8
 autoplay = true
 max_distance = 12.0
 bus = &"Sound Effects"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Meshwell" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_nk4fl")
 surface_material_override/0 = SubResource("StandardMaterial3D_y2kj7")
 surface_material_override/1 = SubResource("StandardMaterial3D_4fmq1")

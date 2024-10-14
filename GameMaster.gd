@@ -188,7 +188,7 @@ func load_game():
 			new_object.set(i, node_data[i])
 			active_player.position = Vector3(node_data["pos_x"],node_data["pos_y"],node_data["pos_z"])
 			print(node_data.keys())
-		#load_level()
+			load_level(node_data["level_saved_in"])
 
 func save():
 	var save_dict = {

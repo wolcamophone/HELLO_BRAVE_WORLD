@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://nksp2lgneif2"]
+
+[ext_resource type="Texture2D" uid="uid://bmp2sqs18m8u8" path="res://Entities/doors/sliding_door.png" id="1_rfg37"]
+[ext_resource type="Texture2D" uid="uid://b3j3fs7y63waj" path="res://Entities/doors/sliding_door_n.png" id="2_chxc4"]
+
+[resource]
+albedo_texture = ExtResource("1_rfg37")
+metallic = 1.0
+metallic_texture = ExtResource("2_chxc4")
+roughness_texture = ExtResource("2_chxc4")
+normal_enabled = true
+normal_scale = 0.5
+normal_texture = ExtResource("2_chxc4")

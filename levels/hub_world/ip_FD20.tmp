@@ -1,0 +1,14 @@
+[remap]
+
+importer="func_godot.map"
+type="Resource"
+uid="uid://ixpm5d2vd72u"
+path="res://.godot/imported/ip_HUB.map-a3157e0c885b66da736403b577d4cf6c.tres"
+
+[deps]
+
+source_file="res://levels/hub_world/ip_HUB.map"
+dest_files=["res://.godot/imported/ip_HUB.map-a3157e0c885b66da736403b577d4cf6c.tres"]
+
+[params]
+

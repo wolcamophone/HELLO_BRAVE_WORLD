@@ -24,6 +24,15 @@ size_flags_vertical = 6
 mouse_filter = 1
 theme = ExtResource("1_5qcna")
 
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.337255)
+
 [node name="TabContainer" type="TabContainer" parent="Control"]
 custom_minimum_size = Vector2(780, 580)
 layout_mode = 1
@@ -38,6 +47,7 @@ offset_right = 300.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
+current_tab = 0
 
 [node name="MainMenu" type="TabBar" parent="Control/TabContainer"]
 layout_mode = 2
@@ -45,6 +55,7 @@ focus_neighbor_left = NodePath("../Debug")
 focus_neighbor_right = NodePath("../Settings")
 focus_next = NodePath("../Settings")
 focus_previous = NodePath("../Debug")
+metadata/_tab_index = 0
 
 [node name="HBox" type="HBoxContainer" parent="Control/TabContainer/MainMenu"]
 layout_mode = 1
@@ -110,6 +121,7 @@ focus_neighbor_left = NodePath("../MainMenu")
 focus_neighbor_right = NodePath("../Debug")
 focus_next = NodePath("../Debug")
 focus_previous = NodePath("../MainMenu")
+metadata/_tab_index = 1
 
 [node name="SettingsMenu" parent="Control/TabContainer/Settings" groups=["system", "user_interface"] instance=ExtResource("3_n6s02")]
 layout_mode = 0
@@ -132,6 +144,7 @@ focus_neighbor_left = NodePath("../Settings")
 focus_neighbor_right = NodePath("../MainMenu")
 focus_next = NodePath("../MainMenu")
 focus_previous = NodePath("../Settings")
+metadata/_tab_index = 2
 
 [node name="Console" parent="Control/TabContainer/Debug" instance=ExtResource("4_q78sm")]
 layout_mode = 1

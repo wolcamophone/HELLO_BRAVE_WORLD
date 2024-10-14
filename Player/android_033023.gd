@@ -197,8 +197,8 @@ func tweener():
 		if FOLLOW_TWEEN:
 			FOLLOW_TWEEN.kill()
 		FOLLOW_TWEEN = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO).set_parallel(true)
-		FOLLOW_TWEEN.tween_property(_spring_arm, "position", _head.global_position,0.3)
-		FOLLOW_TWEEN.tween_property(_spring_arm, "position:y", _head.global_position.y,0.6)
+		FOLLOW_TWEEN.tween_property(_spring_arm, "position", _head.global_position,0.5)
+		FOLLOW_TWEEN.tween_property(_spring_arm, "position:y", _head.global_position.y,0.5)
 	elif !GameMaster.ViewBob:
 		_spring_arm.global_position = _head.global_position
 	#if GameMaster.teleport():

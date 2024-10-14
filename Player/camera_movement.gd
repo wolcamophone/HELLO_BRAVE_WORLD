@@ -4,9 +4,9 @@ extends SpringArm3D
 @export var controller_sensitivity = 5
 @export var cam_upper_limit = -65
 @export var cam_lower_limit = 60
-@export var zoom_toggled:bool = false
+@export var zoom_level:int = 2
 
-@onready var FOV = $Camera3D.fov
+@onready var FOV = $Camera3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +20,21 @@ func _unhandled_input(event):
 #		rotation_degrees.y -= event.relative.x * controller_sensitivity_horizontal * 0.1
 #	rotation_degrees.x = clamp(rotation_degrees.x, cam_upper_limit, cam_lower_limit)
 #	rotation_degrees.y = wrapf(rotation_degrees.y, 0, 360)
+	if event.is_action_pressed("cam_zoom"):
+		zoom_level += 1
+		if zoom_level > 3:
+			zoom_level = 1
+		print("Zoom Level: ",zoom_level)
+
+		if zoom_level == 1:
+			spring_length = 0
+			FOV.fov = 85
+		elif zoom_level == 2:
+			spring_length = 4
+			FOV.fov = 80
+		elif zoom_level == 3:
+			spring_length = 8
+			FOV.fov = 75
 
 
 func _process(delta):
@@ -36,22 +51,6 @@ func _physics_process(delta):
 	if Input.is_action_pressed("look_right"):
 		rotation_degrees.y -= controller_sensitivity * 0.5
 
-
-
-	if Input.is_action_just_pressed("cam_zoom"):
-		print("zoom toggled")
-		if zoom_toggled:
-			zoom_toggled = true
-		elif not zoom_toggled:
-			zoom_toggled = false
-	if zoom_toggled:
-		spring_length = 8
-		FOV = 70
-	elif not zoom_toggled:
-		spring_length = 4
-		FOV = 80
-
-		# Zooming
 	
 #	zoom += Input.get_axis("zoom_in", "zoom_out") * zoom_speed * delta
 #	zoom = clamp(zoom, zoom_maximum, zoom_minimum)
