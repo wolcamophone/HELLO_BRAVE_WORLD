@@ -2,6 +2,7 @@ extends Node3D
 
 @export var default_spawn_point:bool
 @export var warpable_name:String  = ""
+@export var team:String = "" # Testing: a generic name to pull for custom spawn handling conditionals/sorting
 
 func _ready():
 	visible = false

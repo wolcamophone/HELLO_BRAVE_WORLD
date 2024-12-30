@@ -1,40 +1,62 @@
-# HELLO_BRAVE_WORLD \n
+# HELLO_BRAVE_WORLD 
  
-Indev \n
+Indev 
 
-Made in Godot Engine v4.2.2.stable \n
-By Skull Kracker Studios \n
+Made in Godot Engine v4.3 stable 
 
-###	Addons used in Godot Engine: \n
-Map Importer for Quake .map files - FuncGodot \n
-https://github.com/func-godot/func_godot_plugin \n
+By Skull Kracker Studios 
 
-Dialogue Management System - Dialogic - Emi and Jowan \n
-https://dialogic.pro/ \n
-https://github.com/dialogic-godot/dialogic/releases \n
+##	Addons used in Godot Engine: 
 
-###	Texture Sources: \n
-textures.com \n
-Kenney Prototype Textures \n
-https://polyhaven.com/ \n
-http://texturelib.com/ \n
-https://opengameart.org/ \n
-https://archive.org/details/textures-backgrounds \n
-https://archive.org/details/RepeatableBackgroundsWoodBrickTileStoneTextures \n
-https://crus.cc/ \n
+Map Importer for Quake .map files - FuncGodot 
 
-All textures have been remade from scratch in Paint.NET with aid of plugins, but pattern designs and colors have come from these sources. \n
+https://github.com/func-godot/func_godot_plugin 
 
-###	Audio, Sound Effects Sources: \n
-https://www.freesfx.co.uk/ \n
-Half Life 2 sfx library \n
-Sounds used in SCP Containment Breach \n
+Dialogue Management System - Dialogic - Emi and Jowan 
+
+https://dialogic.pro/ 
+
+https://github.com/dialogic-godot/dialogic/releases 
+
+##	Texture Sources: 
+
+https://www.textures.com
+
+Kenney Prototype Textures 
+
+https://polyhaven.com/ 
+
+http://texturelib.com/ 
+
+https://opengameart.org/ 
+
+https://archive.org/details/textures-backgrounds 
+
+https://archive.org/details/RepeatableBackgroundsWoodBrickTileStoneTextures 
+
+https://crus.cc/
+
+geg-fairbear8974 PSX Style Water Surface - https://godotshaders.com/shader/psx-style-water-surface-pixelation-waves-scrolling-textures/  
+
+All textures have been remade from scratch in Paint.NET with aid of plugins, but pattern designs and colors have come from these sources. 
+
+##	Audio, Sound Effects Sources: 
+
+https://www.freesfx.co.uk/ 
+
+Half Life 2 SFX library 
+
+Sounds used in SCP Containment Breach 
 
 
-###	Special Thanks and Guides: \n
-Brackeys https://www.youtube.com/@Brackeys \n
-Game Endeavor https://www.youtube.com/@GameEndeavor \n
+##	Special Thanks and Guides: 
 
-###	Contact and Support: \n
-Itch.io Page \n
-Discord @wolcamophone \n
+Brackeys https://www.youtube.com/@Brackeys 
+
+Game Endeavor https://www.youtube.com/@GameEndeavor 
+
+##	Contact and Support: 
+
+Itch.io Page 
+
+Discord @wolcamophone 

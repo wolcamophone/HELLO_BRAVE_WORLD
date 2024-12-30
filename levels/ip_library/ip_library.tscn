@@ -1,4 +1,4 @@
-[gd_scene load_steps=756 format=4 uid="uid://cmb1kn2p3w221"]
+[gd_scene load_steps=753 format=4 uid="uid://cmb1kn2p3w221"]
 
 [ext_resource type="Environment" uid="uid://beq60j21ecfcs" path="res://levels/env_wyoming_night.tres" id="1_dx3ji"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_brpcs"]
@@ -9,19 +9,16 @@
 [ext_resource type="Texture2D" uid="uid://clo5i3oryrg1k" path="res://Graphics/textures/wood/Mahogany.png" id="8_n43xs"]
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot_HBW_map_settings.tres" id="9_1cvsi"]
 [ext_resource type="Texture2D" uid="uid://h67me886xp0r" path="res://Graphics/textures/wood/Oak.png" id="10_poowb"]
-[ext_resource type="Material" uid="uid://bbysc055l1f0s" path="res://Graphics/textures/Wood/Ghost.material" id="10_q7j8o"]
-[ext_resource type="Texture2D" uid="uid://cc88c64i3mxkx" path="res://Graphics/textures/Floors/CarpetPurple.png" id="11_evv0x"]
-[ext_resource type="Material" uid="uid://dywuyr2iug15i" path="res://Graphics/textures/Walls/Brick8.material" id="12_8gl3t"]
+[ext_resource type="Material" uid="uid://bbysc055l1f0s" path="res://Graphics/textures/wood/Ghost.material" id="10_q7j8o"]
+[ext_resource type="Texture2D" uid="uid://cc88c64i3mxkx" path="res://Graphics/textures/floors/CarpetPurple.png" id="11_evv0x"]
 [ext_resource type="Material" uid="uid://b7bmrxepcj1ne" path="res://Graphics/textures/stone/concrete_dark.material" id="14_2ar2d"]
-[ext_resource type="Texture2D" uid="uid://clo5i3oryrg1k" path="res://Graphics/textures/Wood/Mahogany.png" id="14_tktgr"]
 [ext_resource type="Material" uid="uid://6sgel0euehol" path="res://Graphics/textures/metal/trailer_dark.material" id="15_d3bo0"]
 [ext_resource type="Texture2D" uid="uid://dcvc4xob0hxru" path="res://Graphics/textures/world_props/Bookshelf.png" id="15_j60my"]
-[ext_resource type="Texture2D" uid="uid://h67me886xp0r" path="res://Graphics/textures/Wood/Oak.png" id="15_t8uhq"]
-[ext_resource type="Texture2D" uid="uid://bkhcsbb4wibri" path="res://Graphics/textures/Wood/Oak2.png" id="16_gi1nm"]
+[ext_resource type="Texture2D" uid="uid://bkhcsbb4wibri" path="res://Graphics/textures/wood/Oak2.png" id="16_gi1nm"]
 [ext_resource type="Texture2D" uid="uid://buk2mmpoc6cp" path="res://Graphics/textures/wood/wood_4.png" id="17_byw04"]
-[ext_resource type="Material" uid="uid://ch2xot7kjiklo" path="res://Graphics/textures/Wood/wood_3.material" id="17_m8reu"]
+[ext_resource type="Material" uid="uid://ch2xot7kjiklo" path="res://Graphics/textures/wood/wood_3.material" id="17_m8reu"]
 [ext_resource type="Material" uid="uid://cvqto2kirpj81" path="res://Graphics/textures/stone/concrete_gold.material" id="18_8c0s0"]
-[ext_resource type="Texture2D" uid="uid://bq5ji1mgcj3lp" path="res://Graphics/textures/Floors/Shining15.png" id="18_po7p6"]
+[ext_resource type="Texture2D" uid="uid://bq5ji1mgcj3lp" path="res://Graphics/textures/floors/Shining15.png" id="18_po7p6"]
 [ext_resource type="Texture2D" uid="uid://clg0csxtwnh1r" path="res://Graphics/textures/wood/wood_barrel.png" id="21_3ffrx"]
 [ext_resource type="Material" uid="uid://dik23nxslt74m" path="res://Graphics/textures/stone/ConcrereGoldTiles.material" id="22_emn38"]
 [ext_resource type="Material" uid="uid://dwygjcex07oof" path="res://Graphics/textures/metal/FenceCrooked.material" id="24_pl647"]
@@ -44,12 +41,12 @@ metallic_specular = 0.0
 texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gww4c"]
-albedo_texture = ExtResource("14_tktgr")
+albedo_texture = ExtResource("8_n43xs")
 metallic_specular = 0.0
 texture_filter = 2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xkk0h"]
-albedo_texture = ExtResource("15_t8uhq")
+albedo_texture = ExtResource("10_poowb")
 metallic_specular = 0.0
 texture_filter = 2
 
@@ -124,7 +121,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 936,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8AMAAxADIAMAAyADMANAA1ADYANAA2ADcAOAA5ADoAOAA6ADsAPAA9AD4APAA+AD8AQABBAEIAQABCAEMARABFAEYARABGAEcASABJAEoASABKAEsATABNAE4ATABOAE8AUABRAFIAUABSAFMAVABVAFYAVABWAFcAWABZAFoAWABaAFsAXABdAF4AXABeAF8AYABhAGIAYABiAGMAZABlAGYAZABmAGcAaABpAGoAaABqAGsAbABtAG4AbABuAG8AcABxAHIAcAByAHMAdAB1AHYAdAB2AHcAeAB5AHoAeAB6AHsAfAB9AH4AfAB+AH8AgACBAIIAgACCAIMAhACFAIYAhACGAIcAiACJAIoAiACKAIsAjACNAI4AjACOAI8AkACRAJIAkACSAJMAlACVAJYAlACWAJcAmACZAJoAmACaAJsAnACdAJ4AnACeAJ8AoAChAKIAoACiAKMApAClAKYApACmAKcAqACpAKoAqACqAKsArACtAK4ArACuAK8AsACxALIAsACyALMAtAC1ALYAtAC2ALcAuAC5ALoAuAC6ALsAvAC9AL4AvAC+AL8AwADBAMIAwADCAMMAxADFAMYAxADGAMcAyADJAMoAyADKAMsAzADNAM4AzADOAM8A0ADRANIA0ADSANMA1ADVANYA1ADWANcA2ADZANoA2ADaANsA3ADdAN4A3ADeAN8A4ADhAOIA4ADiAOMA5ADlAOYA5ADmAOcA6ADpAOoA6ADqAOsA7ADtAO4A7ADuAO8A8ADxAPIA8ADyAPMA9AD1APYA9AD2APcA+AD5APoA+AD6APsA/AD9AP4A/AD+AP8AAAEBAQIBAAECAQMBBAEFAQYBBAEGAQcBCAEJAQoBCAEKAQsBDAENAQ4BDAEOAQ8BEAERARIBEAESARMBFAEVARYBFAEWARcBGAEZARoBGAEaARsBHAEdAR4BHAEeAR8BIAEhASIBIAEiASMBJAElASYBJAEmAScBKAEpASoBKAEqASsBLAEtAS4BLAEuAS8BMAExATIBMAEyATMBNAE1ATYBNAE2ATcBOAE5AToBOAE6ATsBPAE9AT4BPAE+AT8BQAFBAUIBQAFCAUMBRAFFAUYBRAFGAUcBSAFJAUoBSAFKAUsBTAFNAU4BTAFOAU8BUAFRAVIBUAFSAVMBVAFVAVYBVAFWAVcBWAFZAVoBWAFaAVsBXAFdAV4BXAFeAV8BYAFhAWIBYAFiAWMBZAFlAWYBZAFmAWcBaAFpAWoBaAFqAWsBbAFtAW4BbAFuAW8BcAFxAXIBcAFyAXMBdAF1AXYBdAF2AXcBeAF5AXoBeAF6AXsBfAF9AX4BfAF+AX8BgAGBAYIBgAGCAYMBhAGFAYYBhAGGAYcBiAGJAYoBiAGKAYsBjAGNAY4BjAGOAY8BkAGRAZIBkAGSAZMBlAGVAZYBlAGWAZcBmAGZAZoBmAGaAZsBnAGdAZ4BnAGeAZ8BoAGhAaIBoAGiAaMBpAGlAaYBpAGmAacBqAGpAaoBqAGqAasBrAGtAa4BrAGuAa8BsAGxAbIBsAGyAbMBtAG1AbYBtAG2AbcBuAG5AboBuAG6AbsBvAG9Ab4BvAG+Ab8BwAHBAcIBwAHCAcMBxAHFAcYBxAHGAccByAHJAcoByAHKAcsBzAHNAc4BzAHOAc8B0AHRAdIB0AHSAdMB1AHVAdYB1AHWAdcB2AHZAdoB2AHaAdsB3AHdAd4B3AHeAd8B4AHhAeIB4AHiAeMB5AHlAeYB5AHmAecB6AHpAeoB6AHqAesB7AHtAe4B7AHuAe8B8AHxAfIB8AHyAfMB9AH1AfYB9AH2AfcB+AH5AfoB+AH6AfsB/AH9Af4B/AH+Af8BAAIBAgICAAICAgMCBAIFAgYCBAIGAgcCCAIJAgoCCAIKAgsCDAINAg4CDAIOAg8CEAIRAhICEAISAhMCFAIVAhYCFAIWAhcCGAIZAhoCGAIaAhsCHAIdAh4CHAIeAh8CIAIhAiICIAIiAiMCJAIlAiYCJAImAicCKAIpAioCKAIqAisCLAItAi4CLAIuAi8CMAIxAjICMAIyAjMCNAI1AjYCNAI2AjcCOAI5AjoCOAI6AjsCPAI9Aj4CPAI+Aj8CQAJBAkICQAJCAkMCRAJFAkYCRAJGAkcCSAJJAkoCSAJKAksCTAJNAk4CTAJOAk8CUAJRAlICUAJSAlMCVAJVAlYCVAJWAlcCWAJZAloCWAJaAlsCXAJdAl4CXAJeAl8CYAJhAmICYAJiAmMCZAJlAmYCZAJmAmcCaAJpAmoCaAJqAmsCbAJtAm4CbAJuAm8C"),
-"material": ExtResource("12_8gl3t"),
+"material": ExtResource("6_piwdn"),
 "name": "Walls/Brick8",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),

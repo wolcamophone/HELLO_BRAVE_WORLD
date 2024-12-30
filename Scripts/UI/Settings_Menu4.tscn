@@ -19,12 +19,13 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme = ExtResource("1_wfoid")
-current_tab = 3
+current_tab = 1
 script = ExtResource("1_1jo3n")
 
 [node name="Gameplay" type="TabBar" parent="."]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="HBox" type="HBoxContainer" parent="Gameplay"]
 layout_mode = 1
@@ -55,8 +56,8 @@ unwanted movement deadzones."
 text = "Joystick Movement Method (experimental)"
 
 [node name="Video" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="HBox" type="HBoxContainer" parent="Video"]
 layout_mode = 1
@@ -125,10 +126,9 @@ text = "Shadow Quality:"
 [node name="ShadowQuality" type="OptionButton" parent="Video/HBox/VBox2/HBox"]
 layout_mode = 2
 size_flags_horizontal = 3
-item_count = 5
 selected = 1
+item_count = 5
 popup/item_0/text = "Fastest"
-popup/item_0/id = 0
 popup/item_1/text = "Fast"
 popup/item_1/id = 1
 popup/item_2/text = "Average"
@@ -138,9 +138,16 @@ popup/item_3/id = 3
 popup/item_4/text = "Ultra"
 popup/item_4/id = 4
 
+[node name="Vignette" type="CheckBox" parent="Video/HBox/VBox2"]
+layout_mode = 2
+tooltip_text = "Darkens the edges of the screen."
+button_pressed = true
+text = "Vignette Enable"
+
 [node name="Audio" type="TabBar" parent="."]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Audio" groups=["Persist"]]
 layout_mode = 1
@@ -242,7 +249,9 @@ rounded = true
 tick_count = 11
 
 [node name="Debug" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
+metadata/_tab_index = 3
 
 [node name="HBox" type="HBoxContainer" parent="Debug"]
 layout_mode = 1
@@ -267,6 +276,7 @@ size_flags_horizontal = 3
 [connection signal="toggled" from="Gameplay/HBox/VBox/ViewBob" to="." method="_on_view_bob_toggled"]
 [connection signal="item_selected" from="Video/HBox/VBox/HBox/ResButton" to="." method="_on_ResButton_item_selected"]
 [connection signal="toggled" from="Video/HBox/VBox/Fullscreen" to="." method="_on_fullscreen_toggled"]
+[connection signal="toggled" from="Video/HBox/VBox2/Vignette" to="." method="_on_vignette_toggled"]
 [connection signal="value_changed" from="Audio/VBoxContainer/VolMaster" to="." method="_on_vol_master_value_changed"]
 [connection signal="value_changed" from="Audio/VBoxContainer/VolMusic" to="." method="_on_VolMusic_value_changed"]
 [connection signal="value_changed" from="Audio/VBoxContainer/VolSFX" to="." method="_on_VolSFX_value_changed"]

@@ -28,6 +28,7 @@ enum States {idle,
 @export var SPEED: float = 10
 var RUN_SPEED: float = 10
 var SPRINT_SPEED: float = 16
+var SNEAK_SPEED_PERC: float = 0.5
 @export var AIR_SPEED: float = 0.05
 
 @export_group("Physics Values")
@@ -44,7 +45,7 @@ var WALL_JUMP_COUNT:int = 1
 
 @export var CUSTOM_GRAVITY: bool = false
 @export var GRAVITY:float 
-@export_enum("Down:1", "Zero-G:0", "Up:-1") var GRAVITY_STATE = 1
+@export_enum("Down:1", "Zero-G:0", "Up:-1") var GRAVITY_DIR = 1
 
 #@export var GRAVITY: int = 20
 #	Get the gravity from the project settings to be synced with RigidBody nodes.
@@ -96,8 +97,9 @@ func _physics_process(delta):
 func _apply_gravity(delta):
 	if !CUSTOM_GRAVITY:
 		GRAVITY = ProjectSettings.get_setting("physics/3d/default_gravity")
+
 	if not is_on_floor():
-		velocity.y -= GRAVITY * GRAVITY_STATE * delta
+		velocity.y -= GRAVITY * GRAVITY_DIR * delta
 	
 
 func _apply_jumping():
@@ -127,6 +129,11 @@ func _apply_movement():
 	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	direction = direction.rotated(Vector3.UP, _spring_arm.rotation.y).normalized()
 	
+	# For some reason, the crouch has to be called before direction calc, 
+	# and sprint called after direction calc. Something in the way the math works?
+	if Input.is_action_pressed("sneak"):
+		SPEED *= SNEAK_SPEED_PERC
+	
 	# This determines the appropriate methods for player model's rotation
 	if direction && velocity && is_on_floor(): ### Player rotates in direction of input movement
 		_rotation_root.rotation.y = lerp_angle(_rotation_root.rotation.y, atan2(-direction.x, -direction.z), 
@@ -148,7 +155,6 @@ func _apply_movement():
 	else:
 		velocity.x = lerpf(velocity.x, 0.0, FRICTION)
 		velocity.z = lerpf(velocity.z, 0.0, FRICTION)
-	
 
 	if Input.is_action_pressed("sprint"):
 		SPEED = SPRINT_SPEED
@@ -184,7 +190,7 @@ func _input(event):
 func _process(delta):
 	tweener()
 	_ears.rotation = _spring_arm.rotation
-	if global_transform.origin.y < -50000: #Respawns the player if falling below this boundary.
+	if global_transform.origin.y < -50000: # Respawns the player if falling below this boundary.
 		global_transform.origin = Vector3(0,3,0)
 
 	if Input.is_action_just_pressed("attack1"):
@@ -224,7 +230,7 @@ func _set_health(value):
 func _hit_box(area):
 #	if ![area.is_in_group("attack_player")].has(area):
 #		print("Player collided!")
-	if area.is_in_group("trigger_hurt"):
+	if area.is_in_group("area_hurt"):
 		damage(1)
 		HUD.display_health = HEALTH
 		print("Damage taken! ", HEALTH)

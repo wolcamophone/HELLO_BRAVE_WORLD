@@ -1,5 +1,9 @@
 extends Control
 
+### Gameplay Vars ###
+var view_bob
+
+### Video Vars ###
 @onready var ResButton = $Video/HBox/VBox/HBox/ResButton
 @onready var fullscreen = $Video/HBox/VBox/Fullscreen
 
@@ -13,12 +17,12 @@ var Resolutions: Dictionary = {
 	"2560x1440":Vector2i(2560,1440),
 	"3840x2160":Vector2i(3840,2160)
 }
-
-var view_bob
-
 # Check this against save func later to see if .json supports Vector2
 var display_current_resolution:Vector2i
 
+var vignette_enabled:bool = true
+
+### Audio Vars ###
 var audio_vol_master:int = 0
 var audio_vol_music:int = -12
 var audio_vol_sfx:int = 0
@@ -74,7 +78,9 @@ func _on_LargeCursor_toggled(button_pressed):
 		var CursorM = load("res://Graphics/UI/CursorM.png")
 		Input.set_custom_mouse_cursor(CursorM)
 
-
+func _on_vignette_toggled(toggled_on: bool) -> void:
+	vignette_enabled = toggled_on
+	HUD._vignette.visible = vignette_enabled
 
 
 ### Audio Settings. ###
@@ -170,5 +176,6 @@ func save():
 		"audio_vol_voice": audio_vol_voice,
 		"audio_vol_radio": audio_vol_radio,
 		"audio_vol_ui": audio_vol_ui,
+		"vignette_enabled": vignette_enabled,
 	}
 	return save_dict

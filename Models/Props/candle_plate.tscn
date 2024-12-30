@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://de8txdcusjk02"]
 
 [ext_resource type="ArrayMesh" uid="uid://c2klfditlxhkd" path="res://Models/candle.obj" id="1_m0uf6"]
-[ext_resource type="Texture2D" uid="uid://o3i6k5m8ufa3" path="res://Graphics/Particles/p_fire1.jpg" id="2_qk0qg"]
+[ext_resource type="Texture2D" uid="uid://b4cmkwgacq6tt" path="res://Graphics/Particles/p_fire1.png" id="2_qk0qg"]
 
 [sub_resource type="Gradient" id="Gradient_mvs0y"]
 colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
@@ -40,7 +40,22 @@ particles_anim_loop = false
 [sub_resource type="QuadMesh" id="QuadMesh_lnwh0"]
 lightmap_size_hint = Vector2i(7, 7)
 material = SubResource("StandardMaterial3D_cj715")
-size = Vector2(0.1, 0.1)
+size = Vector2(0.2, 0.2)
+
+[sub_resource type="Animation" id="Animation_swoc8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OmniLight3D:omni_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [6.0]
+}
 
 [sub_resource type="Animation" id="Animation_kk4bn"]
 resource_name = "flicker"
@@ -57,21 +72,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [6.0, 4.0]
-}
-
-[sub_resource type="Animation" id="Animation_swoc8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("OmniLight3D:omni_range")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [6.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xh5ds"]

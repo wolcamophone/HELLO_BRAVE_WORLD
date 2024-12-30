@@ -27,7 +27,10 @@ Indev
 
 Controls:
 Move = WASD or Left Stick
+Sprint = Shift or RT
+Sneak = Ctrl or LT
 Jump = Spacebar or A/X  -  (You can double jump and jump off of walls!)
+
 Interact = E or Y/△
 Attack = Left Click or X/⬜  -  (Currently doesn't do anything.)
 

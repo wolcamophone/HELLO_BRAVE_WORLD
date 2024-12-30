@@ -52,12 +52,12 @@ func _ready():
 
 
 func unload_level():
-	### Remember to add a scene transition here -CD
+	### Remember to add a scene transition animation here -CD
 	level_previous = level_instance
 	if (is_instance_valid(level_instance)):
 		level_instance.queue_free()
 	level_instance = null
-	if active_player:
+	if active_player != null:
 		active_player.queue_free()
 	checkpoints_available.clear()
 	spawnpoints_available.clear()
@@ -65,7 +65,7 @@ func unload_level():
 
 func load_level(level_name: String):
 	unload_level() 
-	### vvv  Process of Instantiation  vvv
+	### Process of Instantiation
 	var level_path = "res://levels/%s/%s.tscn" % [level_name, level_name]
 	var level_resource = load(level_path)
 	if level_resource:
@@ -76,9 +76,11 @@ func load_level(level_name: String):
 		print("Error! Could not find level instance named" % level_name)
 	if level_name != "boot_menu":
 		HUD.visible = true
+		#MainMenu.title_button.visible = true
 	elif level_name == "boot_menu":
 		HUD.visible = false	
-	_ready() ### To refresh any objects outside of the level but still in game's runtime
+		#MainMenu.title_button.visible = false
+	#_ready() ### To refresh any objects outside of the level but still in game's runtime
 	if level_instance: ### Printing a bunch of stuff to show scene tree for better debug
 		print_tree_pretty()
 		print(spawnpoints_available)
@@ -95,7 +97,7 @@ func spawn_player():
 	### to spawn either a default player obj or a special player for minigame sections)
 	### If the func is called again while a player is already in the scene tree, they will
 	### be erased and recreated. -CD
-	if active_player:
+	if active_player != null:
 		active_player.queue_free()
 	var p = selected_player.instantiate()
 	p.top_level = true
@@ -104,11 +106,10 @@ func spawn_player():
 	active_player = p
 	print("Player respawn called")
 
-
+### Teleport should be used only to move the player or an entity instantaneously
+### to a new position in the scene. If the player wants to go to a specific
+### entity, they should use warp. -CD
 func teleport(tp_target):
-	### Teleport should be used only to move the player or an entity instantaneously
-	### to a new position in the scene. If the player wants to go to a specific
-	### entity, they should use warp. -CD
 	if tp_target:
 		active_player.global_position = tp_target.global_position
 		active_player._spring_arm.global_position = active_player._head.global_position
@@ -116,6 +117,8 @@ func teleport(tp_target):
 		print("Error! Could not find tp target")
 
 
+### Warp takes in a Vector3 of coordinates for the input 
+### and places the player at those coordinates. -CD
 func warp(warp_destination:Node3D):
 	if warp_destination:
 		active_player.global_position = warp_destination.global_position
@@ -123,7 +126,7 @@ func warp(warp_destination:Node3D):
 		print("No warp target set or found, spawning player at global origin.")
 
 
-###	SAVE AND LOAD FUNCTIONS COPIED FROM ENGINE DOCS -CD
+###	SAVE AND LOAD FUNCTIONS COPIED FROM ENGINE DOCS. -CD
 func save_game():
 	print("Saving...")
 	var game_save = FileAccess.open("user://savegame_hbw.save", FileAccess.WRITE)
@@ -190,7 +193,12 @@ func load_game():
 			print(node_data.keys())
 			load_level(node_data["level_saved_in"])
 
-func save():
+
+
+### This is a generic func to be placed in other nodes within the group "persistent."
+### As it currently stands, the save_game func only reaches out to child nodes in the tree,
+### so this code here doesn't get written to the save file but is good to copy + paste. -CD
+func save(): 
 	var save_dict = {
 		"filename" : get_scene_file_path(),
 		"parent" : get_parent().get_path(),
