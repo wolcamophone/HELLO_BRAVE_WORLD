@@ -5,7 +5,7 @@
 [ext_resource type="Material" uid="uid://crqpvt2uberg6" path="res://Graphics/textures/stone/concrete_plates.material" id="4_kfew8"]
 [ext_resource type="AudioStream" uid="uid://bdu4tw1g2e7dn" path="res://Audio/Radio/Horse.wav" id="4_yt51x"]
 [ext_resource type="Material" uid="uid://cbsnulm3xy0ll" path="res://Graphics/textures/stone/Teal2.material" id="6_kynqp"]
-[ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot_HBW_map_settings.tres" id="6_n676b"]
+[ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="6_n676b"]
 [ext_resource type="Material" uid="uid://dlen5vhnflyp1" path="res://Graphics/textures/metal/crosshatch_2.material" id="7_21pe8"]
 [ext_resource type="Material" uid="uid://dkq7rgv2m2mcb" path="res://Graphics/textures/walls/bricks_planks_reenforced.material" id="9_460px"]
 [ext_resource type="Material" uid="uid://bk6ms3ic1l1gr" path="res://Graphics/textures/stone/concrete_panel.material" id="9_nhxhm"]

@@ -7,11 +7,11 @@ signal checkpoint_activated
 @export var checkpoint_name:String = ""
 @export var claimed: bool = false
 @export var active: bool = false
-@onready var activation_zone:Area3D = $Area3D
+#@onready var activation_zone:Area3D = $Area3D
 @onready var screen_glow:OmniLight3D = $VendingMachine/ScreenGlow
 #@onready var _screen_emission = $VendingMachine
 @onready var pin_light:MeshInstance3D = $VendingMachine/PointLight
-@onready var hud_prompt:GPUParticles3D = $HUDparticle
+#@onready var hud_prompt:GPUParticles3D = $HUDparticle
 @onready var respawn_position:Marker3D = $Marker3D
 
 var player_detected = false

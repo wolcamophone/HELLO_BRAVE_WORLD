@@ -1,0 +1,30 @@
+[gd_resource type="Resource" script_class="TrenchBroomGameConfig" load_steps=7 format=3 uid="uid://ck4n8xqymd31p"]
+
+[ext_resource type="Resource" uid="uid://b4xhdj0e16lop" path="res://addons/func_godot/game_config/trenchbroom/tb_face_tag_clip.tres" id="1_loyti"]
+[ext_resource type="Resource" uid="uid://ca7377sfgj074" path="res://addons/func_godot/game_config/trenchbroom/tb_face_tag_skip.tres" id="2_rpmn1"]
+[ext_resource type="Resource" uid="uid://bkjxc54mmdhbo" path="res://addons/func_godot/game_config/trenchbroom/tb_face_tag_origin.tres" id="3_kp1r4"]
+[ext_resource type="Resource" uid="uid://df1rchebl52hf" path="res://addons/func_godot/HBW_fgd.tres" id="4_r6n7g"]
+[ext_resource type="Texture2D" uid="uid://rl7w7th1ahye" path="res://addons/func_godot/icon_32.png" id="5_cgrpo"]
+[ext_resource type="Script" path="res://addons/func_godot/src/trenchbroom/trenchbroom_game_config.gd" id="6_01rph"]
+
+[resource]
+script = ExtResource("6_01rph")
+export_file = false
+game_name = "HELLO_BRAVE_WORLD"
+icon = ExtResource("5_cgrpo")
+map_formats = Array[Dictionary]([{
+"format": "Valve",
+"initialmap": "initial_valve.map"
+}, {
+"format": "Standard",
+"initialmap": "initial_standard.map"
+}])
+textures_root_folder = "textures"
+texture_exclusion_patterns = Array[String](["*_albedo", "*_ao", "*_emission", "*_height", "*_metallic", "*_normal", "*_orm", "*_roughness", "*_sss"])
+palette_path = "Graphics/textures/palette.lmp"
+fgd_file = ExtResource("4_r6n7g")
+entity_scale = "32"
+brush_tags = Array[Resource]([])
+brushface_tags = Array[Resource]([ExtResource("1_loyti"), ExtResource("2_rpmn1"), ExtResource("3_kp1r4")])
+default_uv_scale = Vector2(1, 1)
+game_config_version = 0

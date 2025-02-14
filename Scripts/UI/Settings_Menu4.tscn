@@ -19,11 +19,10 @@ grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 theme = ExtResource("1_wfoid")
-current_tab = 1
+current_tab = 0
 script = ExtResource("1_1jo3n")
 
 [node name="Gameplay" type="TabBar" parent="."]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -56,6 +55,7 @@ unwanted movement deadzones."
 text = "Joystick Movement Method (experimental)"
 
 [node name="Video" type="TabBar" parent="."]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 

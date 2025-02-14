@@ -41,7 +41,7 @@ Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
 
 directories/dch_directory={}
 directories/dtl_directory={
-"test_dialogue": "res://scripts/Dialogue/test_dialogue.dtl"
+"test_dialogue": "res://_deprec/Dialogue/test_dialogue.dtl"
 }
 layout/style_list=["res://scripts/Dialogue/HBW_dialogic_skin.tres"]
 layout/default_style="res://scripts/Dialogue/HBW_dialogic_skin.tres"

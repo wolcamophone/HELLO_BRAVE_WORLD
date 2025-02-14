@@ -81,7 +81,7 @@ light_color = Color(0.75, 0.75, 1, 1)
 light_energy = 0.25
 light_indirect_energy = 0.0
 light_specular = 0.0
-omni_range = 15.0
+omni_range = 16.0
 omni_attenuation = 0.5
 
 [node name="CameraHead" type="Marker3D" parent="."]
@@ -102,7 +102,6 @@ cam_upper_limit = -75
 [node name="Camera3D" type="Camera3D" parent="CameraHead/SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 0.997564, 0.0697565, 0, -0.0697565, 0.997564, 0, 0, 0)
 current = true
-fov = 80.0
 
 [node name="HitBox" type="Area3D" parent="." groups=["player"]]
 visible = false

@@ -1,0 +1,7 @@
+{
+	"disabled_build_options": {
+		"openxr": false
+	},
+	"disabled_classes": [],
+	"type": "build_profile"
+}

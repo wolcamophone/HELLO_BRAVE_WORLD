@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgcbt2f8j12l"]
+[gd_scene load_steps=7 format=3 uid="uid://cgcbt2f8j12l"]
 
 [ext_resource type="Environment" uid="uid://5wulfb8tnebp" path="res://levels/boot_menu/boot_menu.tres" id="1_1f1ws"]
 [ext_resource type="Script" path="res://levels/boot_menu/boot_menu.gd" id="1_qf5ao"]
 [ext_resource type="AudioStream" uid="uid://dduf4c54rb553" path="res://Audio/Music/Meat Wall.ogg" id="2_ebpd8"]
 [ext_resource type="Script" path="res://levels/RotateSkybox.gd" id="2_o7u8n"]
+[ext_resource type="PackedScene" uid="uid://bx87bbwldno2l" path="res://levels/boot_menu/intro_cutscene.tscn" id="5_r0xcm"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_a600k"]
 dof_blur_far_distance = 110.55
@@ -19,7 +20,6 @@ script = ExtResource("2_o7u8n")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_ebpd8")
-autoplay = true
 mix_target = 1
 bus = &"Music"
 
@@ -66,3 +66,7 @@ text = "Press [Esc] or Start to continue...
  
  
  "
+
+[node name="IntroCutscene" parent="." instance=ExtResource("5_r0xcm")]
+
+[connection signal="finished" from="IntroCutscene" to="." method="_on_intro_cutscene_finished"]

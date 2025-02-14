@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dm5vmdqfgedfg"]
 
 [ext_resource type="Script" path="res://scripts/attack_box.gd" id="1_yrk3s"]
-[ext_resource type="Texture2D" uid="uid://cgmmofy88oake" path="res://Graphics/Particles/p_star2.jpg" id="2_78vch"]
+[ext_resource type="Texture2D" uid="uid://cx2j0k8nvg32m" path="res://Graphics/Particles/p_orb.png" id="2_vmecr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gb8an"]
 radius = 1.0
@@ -12,7 +12,7 @@ blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(0, 1, 1, 1)
-albedo_texture = ExtResource("2_78vch")
+albedo_texture = ExtResource("2_vmecr")
 billboard_mode = 3
 particles_anim_h_frames = 1
 particles_anim_v_frames = 1

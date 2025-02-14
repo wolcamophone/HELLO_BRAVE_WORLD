@@ -1,9 +1,11 @@
 extends Control
 
-### Gameplay Vars ###
+var config = ConfigFile.new()
+
+### Gameplay Menu Vars ###
 var view_bob
 
-### Video Vars ###
+### Video Menu Vars ###
 @onready var ResButton = $Video/HBox/VBox/HBox/ResButton
 @onready var fullscreen = $Video/HBox/VBox/Fullscreen
 
@@ -22,7 +24,7 @@ var display_current_resolution:Vector2i
 
 var vignette_enabled:bool = true
 
-### Audio Vars ###
+### Audio Menu Vars ###
 var audio_vol_master:int = 0
 var audio_vol_music:int = -12
 var audio_vol_sfx:int = 0
@@ -32,14 +34,14 @@ var audio_vol_radio:int = 0
 var audio_vol_ui:int = 0
 
 
-### Gameplay Settings. ###
+### Gameplay Settings Funcs ###
 func _on_view_bob_toggled(toggled_on):
 	GameMaster.ViewBob = toggled_on
 	view_bob = GameMaster.ViewBob
 
 
 
-### Video Settings. ###
+### Video Settings Funcs ###
 func _ready():
 	AddResolutions()
 
@@ -83,7 +85,7 @@ func _on_vignette_toggled(toggled_on: bool) -> void:
 	HUD._vignette.visible = vignette_enabled
 
 
-### Audio Settings. ###
+### Audio Settings Funcs ###
 func _on_vol_master_value_changed(value):
 	AudioServer.set_bus_volume_db(0, value)
 	if value > -48:
@@ -149,19 +151,18 @@ func _on_VolUI_value_changed(value):
 
 
 
-### Debug Settings ###
+### Debug Settings Funcs ###
 func _on_check_box_toggled(toggled_on):
 	Cheats.slowmo_enabled = toggled_on
 	Cheats.slowmo()
 
-
-
 func _on_Shell_pressed():
 	OS.shell_open(ProjectSettings.globalize_path("user://"))
 
-
 func _on_Shell2_pressed():
 	OS.shell_open(ProjectSettings.globalize_path("res://"))
+
+
 
 func save():
 	var save_dict = {

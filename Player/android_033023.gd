@@ -67,16 +67,16 @@ var pos_dict = []
 @onready var _ears: AudioListener3D = $CameraHead/AudioListener3D
 @onready var _rotation_root: Node3D = $RotationRoot
 @onready var _anim_tree: AnimationTree = $RotationRoot/PlayerModel/AnimationTree
-@onready var _anim_player: AnimationPlayer = $RotationRoot/PlayerModel/AnimationPlayer
+#@onready var _anim_player: AnimationPlayer = $RotationRoot/PlayerModel/AnimationPlayer
 @onready var _iFrames_timer: Timer = $iFrames
 #@onready var _wall_slide_cooldown: Timer = $WallSlideCooldown
-@onready var _LedgeGrabberY: RayCast3D = $RotationRoot/LedgeGrabberY
-@onready var _LedgeGrabberZ: RayCast3D = $RotationRoot/LedgeGrabberZ
-@onready var _HeadBumper: Area3D = $RotationRoot/HeadBumper
-@onready var _LandingShadow: Decal = $LandingShadow
+#@onready var _LedgeGrabberY: RayCast3D = $RotationRoot/LedgeGrabberY
+#@onready var _LedgeGrabberZ: RayCast3D = $RotationRoot/LedgeGrabberZ
+#@onready var _HeadBumper: Area3D = $RotationRoot/HeadBumper
+#@onready var _LandingShadow: Decal = $LandingShadow
 #@onready var _last_strong_direction = Vector3.FORWARD
 @onready var _sfx_jump:AudioStreamPlayer3D = $Jump
-@onready var _stair_stepper:RayCast3D = $RotationRoot/StairStepper
+#@onready var _stair_stepper:RayCast3D = $RotationRoot/StairStepper
 
 
 

@@ -23,7 +23,7 @@ func _ready():
 	_interact_prompt.visible = false
 	_dialogue_container.visible = false
 
-func _process(update):
+func _process(delta):
 	_health_bar.value = display_health
 	_coin_counter.text = "Coins: " + str(ScoreCounter.COINS)
 	pass

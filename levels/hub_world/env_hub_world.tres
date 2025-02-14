@@ -1,0 +1,30 @@
+[gd_resource type="Environment" load_steps=6 format=3 uid="uid://cncylpouxuq5h"]
+
+[sub_resource type="Gradient" id="Gradient_r23uf"]
+offsets = PackedFloat32Array(0.9, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_p5f10"]
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_iehwh"]
+width = 2048
+height = 1024
+seamless = true
+color_ramp = SubResource("Gradient_r23uf")
+noise = SubResource("FastNoiseLite_p5f10")
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_3hg80"]
+panorama = SubResource("NoiseTexture2D_iehwh")
+
+[sub_resource type="Sky" id="Sky_2rr44"]
+sky_material = SubResource("PanoramaSkyMaterial_3hg80")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_2rr44")
+ambient_light_source = 2
+ambient_light_color = Color(0.12549, 0.12549, 0.12549, 1)
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_sky_affect = 0.0
