@@ -1,0 +1,72 @@
+[gd_scene load_steps=10 format=3 uid="uid://b55prrwd5gny5"]
+
+[ext_resource type="Texture2D" uid="uid://bknj24jo2bhqj" path="res://Graphics/textures/metal/pipes_1.png" id="1_5vf8v"]
+[ext_resource type="ArrayMesh" uid="uid://brjrq3jfuj3ml" path="res://Player/android_gibb_arm_r.obj" id="2_rq3cg"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lot8o"]
+size = Vector3(25, 0.1, 25)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vgrvw"]
+albedo_color = Color(0, 0.5, 0.5, 1)
+albedo_texture = ExtResource("1_5vf8v")
+
+[sub_resource type="BoxMesh" id="BoxMesh_mu5tr"]
+material = SubResource("StandardMaterial3D_vgrvw")
+size = Vector3(25, 0.1, 25)
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_g1mlb"]
+bounce = 0.2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vgh2c"]
+size = Vector3(0.2, 0.9, 0.2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_guc43"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pkvwl"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+angle_min = -90.0
+angle_max = 90.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+orbit_velocity_min = 20.0
+orbit_velocity_max = 20.0
+radial_velocity_min = 20.0
+radial_velocity_max = 20.0
+
+[node name="GibsPlayerTesting" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+shape = SubResource("BoxShape3D_lot8o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+mesh = SubResource("BoxMesh_mu5tr")
+skeleton = NodePath("../CollisionShape3D")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+visible = false
+physics_material_override = SubResource("PhysicsMaterial_g1mlb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_vgh2c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1, 0)
+mesh = ExtResource("2_rq3cg")
+
+[node name="GibbsArms" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_guc43")
+cast_shadow = 0
+emitting = false
+amount = 2
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 48
+process_material = SubResource("ParticleProcessMaterial_pkvwl")
+draw_pass_1 = ExtResource("2_rq3cg")

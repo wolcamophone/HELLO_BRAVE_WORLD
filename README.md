@@ -1,6 +1,4 @@
 # HELLO_BRAVE_WORLD 
- 
-Indev 
 
 Made in Godot Engine v4.3 stable 
 
@@ -12,9 +10,7 @@ Map Importer for Quake .map files - FuncGodot
 
 https://github.com/func-godot/func_godot_plugin 
 
-Dialogue Management System - Dialogic - Emi and Jowan 
-
-https://dialogic.pro/ 
+Dialogic by Emi and Jowan: https://dialogic.pro/ 
 
 https://github.com/dialogic-godot/dialogic/releases 
 
@@ -36,11 +32,12 @@ https://archive.org/details/RepeatableBackgroundsWoodBrickTileStoneTextures
 
 https://crus.cc/
 
-geg-fairbear8974 PSX Style Water Surface - https://godotshaders.com/shader/psx-style-water-surface-pixelation-waves-scrolling-textures/  
+geg-fairbear8974 PSX Style Water Surface: https://godotshaders.com/shader/psx-style-water-surface-pixelation-waves-scrolling-textures/  
 
-All textures have been remade from scratch in Paint.NET with aid of plugins, but pattern designs and colors have come from these sources. 
+(All textures have been remade from scratch in Paint.NET with aid of plugins, but pattern designs and colors have come from these sources.)
 
-##	Audio, Sound Effects Sources: 
+
+##	Sound Effects Sources: 
 
 https://www.freesfx.co.uk/ 
 
@@ -49,14 +46,33 @@ Half Life 2 SFX library
 Sounds used in SCP Containment Breach 
 
 
+##	Music:
+OST by Skull Krackers
+
+
 ##	Special Thanks and Guides: 
 
-Brackeys https://www.youtube.com/@Brackeys 
+Func_Godot and TrenchBroom Discord servers for direct consulting.
 
-Game Endeavor https://www.youtube.com/@GameEndeavor 
+Brackeys: https://www.youtube.com/@Brackeys 
+
+Game Endeavor: https://www.youtube.com/@GameEndeavor 
+
+This Godot Forum post for helping to clarify Save Load functionality: https://forum.godotengine.org/t/how-to-load-and-save-things-with-godot-a-complete-tutorial-about-serialization/44515
+
+Ville Kallio
+
+Lance Leeder
+
+Joseph
+
+Ivy Tech Community College
 
 ##	Contact and Support: 
 
-Itch.io Page 
+Itch.io Page: https://skull-kracker-studios.itch.io/hello-brave-world
 
-Discord @wolcamophone 
+Email: the_wolcamophone@yahoo.com
+
+Discord: @wolcamophone 
+

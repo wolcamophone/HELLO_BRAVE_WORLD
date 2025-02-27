@@ -16,7 +16,7 @@ size = Vector3(4, 4, 4)
 [node name="TestTPObj" type="Node3D"]
 script = ExtResource("1_t086k")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." groups=["gizmo"]]
 mesh = SubResource("CylinderMesh_lig8v")
 
 [node name="InteractionArea" type="Area3D" parent="."]

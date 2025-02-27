@@ -1,9 +1,9 @@
 [gd_scene load_steps=18 format=3 uid="uid://bqxet0paa37vn"]
 
-[ext_resource type="Script" path="res://Entities/explosion.gd" id="1_34h73"]
-[ext_resource type="AudioStream" uid="uid://b8nkg2su40rmj" path="res://Audio/SFX/explode5.wav" id="1_vy38i"]
-[ext_resource type="Texture2D" uid="uid://df82lxutlyquf" path="res://Graphics/Particles/p_fog3.jpg" id="2_3gy66"]
-[ext_resource type="Texture2D" uid="uid://ebicrjaqklmh" path="res://Graphics/Particles/p_star5.jpg" id="2_pkvix"]
+[ext_resource type="Script" path="res://entities/explosion.gd" id="1_34h73"]
+[ext_resource type="AudioStream" uid="uid://b8nkg2su40rmj" path="res://audio/SFX/explode5.wav" id="1_vy38i"]
+[ext_resource type="Texture2D" uid="uid://cnayjag6olaul" path="res://Graphics/particles/p_star5.png" id="2_3gy66"]
+[ext_resource type="Texture2D" uid="uid://cx2j0k8nvg32m" path="res://Graphics/particles/p_orb.png" id="4_lcjvv"]
 [ext_resource type="Script" path="res://scripts/area_hurt.gd" id="5_ed2as"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8plt"]
@@ -11,11 +11,11 @@ blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
 albedo_color = Color(1, 0.752941, 0, 1)
-albedo_texture = ExtResource("2_pkvix")
+albedo_texture = ExtResource("2_3gy66")
 
 [sub_resource type="Curve" id="Curve_kyeg4"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_5v8fu"]
 curve = SubResource("Curve_kyeg4")
@@ -33,20 +33,25 @@ scale_curve = SubResource("CurveTexture_5v8fu")
 blend_mode = 1
 shading_mode = 0
 vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
 albedo_color = Color(3, 2, 1, 1)
 albedo_texture = ExtResource("2_3gy66")
+albedo_texture_force_srgb = true
+texture_filter = 0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lrpxy"]
+emission_shape = 1
+emission_sphere_radius = 0.1
 gravity = Vector3(0, 0, 0)
-scale_min = 0.0
+scale_min = 3.0
 scale_max = 4.0
 scale_curve = SubResource("CurveTexture_5v8fu")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1iupt"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e7x0v"]
 blend_mode = 2
 shading_mode = 0
 vertex_color_use_as_albedo = true
-albedo_texture = ExtResource("2_3gy66")
+albedo_texture = ExtResource("4_lcjvv")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f1sy0"]
 angle_min = 1.07288e-05
@@ -54,7 +59,7 @@ angle_max = 180.0
 radial_velocity_min = 0.999978
 radial_velocity_max = 0.999978
 gravity = Vector3(0, 0, 0)
-scale_min = 0.0
+scale_min = 6.0
 scale_max = 6.0
 scale_curve = SubResource("CurveTexture_5v8fu")
 
@@ -93,8 +98,8 @@ draw_pass_1 = SubResource("QuadMesh_ph3p6")
 [node name="fireball" type="GPUParticles3D" parent="."]
 material_override = SubResource("StandardMaterial3D_ilff3")
 emitting = false
-amount = 2
-lifetime = 0.6
+amount = 1
+lifetime = 0.2
 one_shot = true
 explosiveness = 1.0
 fixed_fps = 48
@@ -103,7 +108,7 @@ process_material = SubResource("ParticleProcessMaterial_lrpxy")
 draw_pass_1 = SubResource("QuadMesh_ph3p6")
 
 [node name="smoke" type="GPUParticles3D" parent="."]
-material_override = SubResource("StandardMaterial3D_1iupt")
+material_override = SubResource("StandardMaterial3D_e7x0v")
 emitting = false
 amount = 2
 lifetime = 0.6

@@ -7,7 +7,8 @@ extends Node3D
 func _ready():
 	visible = false
 	GameMaster.default_spawn_point = self
-	GameMaster.active_player.global_position = self.global_position
+	GameMaster.teleport(self)
+	GameMaster.active_player._spring_arm.global_position = GameMaster.active_player._head.global_position
 
 func register_spawnpoint():
 	GameMaster.spawnpoints_available[warpable_name] = self

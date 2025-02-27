@@ -5,6 +5,7 @@ signal checkpoint_activated
 
 
 @export var checkpoint_name:String = ""
+@export var status_report:String = ""
 @export var claimed: bool = false
 @export var active: bool = false
 #@onready var activation_zone:Area3D = $Area3D
@@ -34,7 +35,8 @@ func _ready():
 
 
 func register_checkpoint():
-	GameMaster.checkpoints_available[checkpoint_name] = self
+	#GameMaster.checkpoints_available[checkpoint_name] += self
+	return checkpoint_name
 
 
 func _on_area_3d_area_entered(area):
@@ -69,5 +71,10 @@ func save():
 		"parent" : get_parent().get_path(),
 		"claimed" : claimed,
 		"active" : active,
+		"level_name_current" : name,
+		"level_instance" : GameMaster.level_instance,
+		"level_previous" : GameMaster.level_previous,
+		"checkpoint_current" : GameMaster.checkpoint_current,
+		"checkpoint_previous" : GameMaster.checkpoint_previous,
 	}
 	return save_dict

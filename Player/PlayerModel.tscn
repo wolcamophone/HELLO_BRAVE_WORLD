@@ -3,7 +3,7 @@
 [ext_resource type="Curve" uid="uid://vxanmxb2nnjv" path="res://scripts/quickcurve.tres" id="1_ld3bj"]
 [ext_resource type="Texture2D" uid="uid://dx3ppph2jwa7i" path="res://Player/Android.png" id="1_sxygi"]
 [ext_resource type="Texture2D" uid="uid://dlm612fo82nfb" path="res://Player/Android_n.png" id="2_13ujk"]
-[ext_resource type="AudioStream" uid="uid://bplwsqmckwyc0" path="res://Audio/SFX/footstep-04.wav" id="4_kjolg"]
+[ext_resource type="AudioStream" uid="uid://bplwsqmckwyc0" path="res://audio/SFX/footstep-04.wav" id="4_kjolg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rc33x"]
 shading_mode = 2

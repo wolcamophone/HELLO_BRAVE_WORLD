@@ -217,6 +217,7 @@ func damage(amount):
 
 func kill():
 	queue_free()
+	print("Android has been destroyed!")
 
 func _set_health(value):
 	var prev_health = HEALTH
@@ -242,15 +243,12 @@ func _hit_box(area):
 
 
 func save():
-	pos_dict.append(position.x)
-	pos_dict.append(position.y)
-	pos_dict.append(position.z)
 	var save_dict = {
 		"filename" : get_scene_file_path(),
 		"parent" : get_parent().get_path(),
-		"pos_x" : position.x, # Vector2 is not supported by JSON
-		"pos_y" : position.y,
-		"pos_z" : position.z,
+		"player_pos_x" : snapped(position.x, 0.001), # Vector2 and 3 are not supported by JSON
+		"player_pos_y" : snapped(position.y, 0.001),
+		"player_pos_z" : snapped(position.z, 0.001),
 		"current_health" : HEALTH,
 	}
 	return save_dict

@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dm5vmdqfgedfg"]
 
 [ext_resource type="Script" path="res://scripts/attack_box.gd" id="1_yrk3s"]
-[ext_resource type="Texture2D" uid="uid://cx2j0k8nvg32m" path="res://Graphics/Particles/p_orb.png" id="2_vmecr"]
+[ext_resource type="Texture2D" uid="uid://cx2j0k8nvg32m" path="res://Graphics/particles/p_orb.png" id="2_vmecr"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_gb8an"]
 radius = 1.0

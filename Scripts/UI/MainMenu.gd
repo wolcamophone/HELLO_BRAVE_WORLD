@@ -1,10 +1,12 @@
 extends CanvasLayer
 
 @export var paused = false
-
 @onready var main_menu_tab:Control = $Control/TabContainer/MainMenu
 @onready var start_button:Control = $Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Start
 @onready var title_button:Control = $Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Title
+@onready var save_button: Button = $Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Save
+@onready var load_button: Button = $Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Load
+@onready var to_movement_test_button: Button = $Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/ToMovementTest
 
 
 # Called when the node enters the scene tree for the first time.
@@ -16,48 +18,35 @@ func _ready():
 
 
 func _unhandled_input(event):
-	if not paused and event.is_action_pressed("Pause"): 
+	if !paused && event.is_action_pressed("Pause"): 
 		pause_game()
-	elif paused and event.is_action_pressed("Pause") or event.is_action_pressed("ui_cancel"):
+	elif paused && event.is_action_pressed("Pause") or event.is_action_pressed("ui_cancel"):
 		unpause_game()
 
 
 func _on_resume_pressed():
 	unpause_game()
-
-
 func _on_quit_pressed():
 #	get_tree().quit()
 #	get_tree().get_root().propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
 #	SceneTree.quit()
 	GameMaster.quit_game()
-
-
 func _on_start_pressed():
 	GameMaster.load_level("hub_world")
 	unpause_game()
-
-
 func _on_save_pressed():
 	GameMaster.save_game()
-
-
 func _on_load_pressed():
 	GameMaster.load_game()
-
-
 func _on_title_pressed():
 	GameMaster.load_level("boot_menu")
 	unpause_game()
-
-
 func _on_to_movement_test_pressed():
 	GameMaster.load_level("movement_testing")
-	MainMenu.unpause_game()
+	unpause_game()
 
 
 func pause_game():
-	# Pauses
 	paused = true
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -67,7 +56,6 @@ func pause_game():
 
 
 func unpause_game():
-	# Unpauses
 	paused = false
 	get_tree().paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)

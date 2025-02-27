@@ -1,11 +1,12 @@
 extends Node
-### This node acts as one overarching manager to load in data like saves and settings, 
-### as well as be able to load levels to drop the player into. -CD
+
+### *AHEM* This node acts as one overarching manager to handle game events like player teleporting, saving/loading game data, and loading levels to drop the player into. To increase the modularity of OOP-scripting for other potential projects, and because singletons are not reached by get_tree(), this node should not hold too many important vars and instead should call to other children nodes in the scene for the data to pass into functions. -CD
+
 @export_category("Game Master")
 @export_group("Game Variables")
 @export var NewGame:bool = false
 @export var skip_intro_cutscene:bool = false
-@export var ViewBob:bool = true
+@export var ViewBob:bool = true # TODO: This should be moved to settings at some point...
 
 # Level Related Vars
 var level_instance:Node3D
@@ -17,21 +18,22 @@ var teleport_position:Vector3
 var warp_destination:Node3D
 var warp_position:Vector3
 
-# Checkpoint Vars
-var checkpoint_current: Checkpoint
-var checkpoint_current_name: String
-var checkpoint_previous: Checkpoint
-var checkpoint_previous_name: String
-var checkpoints_available:Dictionary = {
-	"xx-example-xx":Node3D,
-}
-
 # Player Spawning Vars
 var default_spawn_point:Node3D
 var spawnpoints_available:Dictionary = {
 	"xx-example-xx":Node3D,
 }
 
+# Checkpoint Vars
+var checkpoint_current: Checkpoint
+var checkpoint_current_name: String
+var checkpoint_previous: Checkpoint
+var checkpoint_previous_name: String
+var checkpoints_available:Array
+
+# Saving & Loading Vars
+var save_game_path = "user://savegame_hbw.json"
+var load_data_dict:Dictionary = {}
 
 @export_group("Cheats")
 @export var godmode:bool = false
@@ -88,10 +90,16 @@ func load_level(level_name: String):
 	# Hide the HUD if viewing intro cutscene or on boot menu.
 	if level_name != "boot_menu" or level_name != "intro_cutscene":
 		HUD.visible = true
-		#MainMenu.title_button.visible = true
+		MainMenu.title_button.visible = true
 	elif level_name == "boot_menu" or level_name == "intro_cutscene":
 		HUD.visible = false
-		#MainMenu.title_button.visible = false
+		MainMenu.title_button.visible = false
+
+	# Show HUD if scene contains a WorldSpaceInfo
+	if get_tree().get("WorldSpaceInfo"):
+		HUD.visible = true
+		MainMenu.title_button.visible = true
+		MainMenu
 
 	#_ready() ### To refresh any objects outside of the level but still in game's runtime
 	if level_instance: ### Printing a bunch of stuff to show scene tree for better debug
@@ -99,47 +107,71 @@ func load_level(level_name: String):
 		print(spawnpoints_available)
 		#print_orphan_nodes()
 		
+		# Store all checkpoints found in the level into an array
+		checkpoints_available = get_tree().get_nodes_in_group("checkpoint")
+		
 		### Once we are sure every bit of the level is prepped, then we
 		spawn_player()
-	warp_destination = null
 
 
 func spawn_player():
-# A player should always spawn in after a level loads to ensure there is a player. (Would be cool to hook around this so that loading into a new scene/level knows to spawn either a default player obj or a special player for minigame sections). If the func is called again while a player is already in the scene tree, they will be erased and recreated. -CD
+### A player should always spawn in after a level loads to ensure there is a player. (Would be cool to hook around this so that loading into a new scene/level knows to spawn either a default player obj or a special player for minigame sections). If the func is called again while a player is already in the scene tree, they will be erased and recreated. -CD
 	if active_player != null:
 		active_player.queue_free()
 	var p = selected_player.instantiate()
 	add_child(p)
 	p.top_level = true
 	p.global_position = warp_position
+	p._rotation_root.rotation.y
 	active_player = p
 	print("Player respawn called")
 
-### Teleport should be used only to move the player or an entity instantaneously
-### to a new position in the scene. If the player wants to go to a specific
-### entity, they should use warp. -CD
+### Teleport targets a specific entity and retrieves rotation/position data from said entity to apply to the player. -CD
 func teleport(tp_target):
 	if tp_target:
 		active_player.global_position = tp_target.global_position
-		active_player._spring_arm.global_position = active_player._head.global_position
+		active_player._rotation_root.rotation.y = tp_target.rotation.y
+		active_player._spring_arm.rotation.y = tp_target.rotation.y
+		active_player._spring_arm.global_position = active_player._head.global_position # Avoid camera awkwardly zooping super fast back to player across level.
 	else:
 		print("Error! Could not find tp target")
+		return
 
 
 ### Warp takes in a Vector3 of coordinates for the input 
 ### and places the player at those coordinates. -CD
-func warp():
-	if warp_destination:
-		active_player.global_position = warp_destination.global_position
+func warp(wp_position:Vector3, wp_rotation:int):
+	if wp_position && wp_rotation:
+		active_player.global_position = wp_position
+		active_player._rotation_root.rotation.y = wp_rotation
+		active_player._spring_arm.rotation.y = wp_rotation
+		active_player._spring_arm.global_position = active_player._head.global_position # Avoid camera awkwardly zooping super fast back to player across level.
 	else:
-		print("No warp target set or found, spawning player at global origin.")
+		print("Error! Invalid warp coordinates given. Please provide a Vector3 for global position and ")
+		return
 
+func teleport_new(target):
+	if target is Vector4: # First values of Vector 4 correlate to XYZ positional values while fourth value W is the rotation in degrees.
+		active_player.global_position.x = target.x
+		active_player.global_position.y = target.y
+		active_player.global_position.z = target.z
+		active_player._spring_arm.rotation.y = target.w
+		active_player._rotation_root.rotation.y = target.w
+	elif target is Node3D:
+		active_player.global_position = target.global_position
+		active_player._spring_arm.rotation.y = target.rotation
+		active_player._rotation_root.rotation.y = target.rotation
+	else:
+		print("Error! Invalid 'target' given for 'teleport_new()'")
+		return
+	
+	active_player._spring_arm.global_position = active_player._head.global_position # Avoid camera awkwardly zooping super fast back to player across level.
 
-###	SAVE AND LOAD FUNCTIONS COPIED FROM ENGINE DOCS. -CD
+###	SAVE FUNCTION COPIED FROM ENGINE DOCS. -CD
 func save_game():
 	print("Saving...")
-	var game_save = FileAccess.open("user://savegame_hbw.json", FileAccess.WRITE)
-	var saved_nodes = get_tree().get_nodes_in_group("persistent")
+	var game_save = FileAccess.open(save_game_path, FileAccess.WRITE)
+	var saved_nodes = get_tree().get_nodes_in_group("persistent") + get_tree().get("WorldSpaceInfo")
 	for node in saved_nodes:
 		# Check the node is an instanced scene so it can be instanced again during load.
 		if node.scene_file_path.is_empty():
@@ -153,60 +185,72 @@ func save_game():
 
 		# Call the node's save function.
 		var node_data = node.call("save")
-
 		# JSON provides a static method to serialized JSON string.
 		var json_string = JSON.stringify(node_data)
-
 		# Store the save dictionary as a new line in the save file.
 		game_save.store_line(json_string)
 
+	print("Saved game to ", save_game_path)
 
+
+### LOAD FUNCTIONS REWRITTEN FROM GROUND UP AFTER ENGINE DOCS. -CD
 func load_game():
 	print("Loading...")
-	if not FileAccess.file_exists("user://savegame_hbw.json"):
-		return # Error! We don't have a save to load.
-
-	# We need to revert the game state so we're not cloning objects
-	# during loading. This will vary wildly depending on the needs of a
-	# project, so take care with this step.
-	# For our example, we will accomplish this by deleting saveable objects.
-	var save_nodes = get_tree().get_nodes_in_group("persistent")
-	for i in save_nodes:
-		i.queue_free()
-
-	# Load the file line by line and process that dictionary to restore
-	# the object it represents.
-	var game_save = FileAccess.open("user://savegame_hbw.save", FileAccess.READ)
-	while game_save.get_position() < game_save.get_length():
-		var json_string = game_save.get_line()
-		# Creates the helper class to interact with JSON
-		var json = JSON.new()
-		# Check if there is any error while parsing the JSON string, skip in case of failure
-		var parse_result = json.parse(json_string)
-		if not parse_result == OK:
-			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", 
-			json.get_error_line())
-			continue
-		# Get the data from the JSON object
-		var node_data = json.get_data()
-		# Firstly, we need to create the object and add it to the tree and set its position.
-		var new_object = load(node_data["filename"]).instantiate()
-		#get_node(node_data["parent"]).add_child(new_object)
 	
-		# Now we set the remaining variables.
-		for i in node_data.keys():
-			if i == "filename" or i == "parent" or i == "pos_x" or i == "pos_y" or i == "pos_z":
+	var saved_nodes = get_tree().get_nodes_in_group("persistent")
+	
+	if not FileAccess.file_exists(save_game_path):
+		print("No save game file was found to load.")
+		return
+	
+	### Open the file to read and store path in a var, convert path to text var, convert the text var back into JSON data, close file and use that JSON var to retrieve data from. -CD
+	else:
+		var save_file_for_loading = FileAccess.open(save_game_path, FileAccess.READ)
+		# Loop through lines of JSON file.
+		while save_file_for_loading.get_position() < save_file_for_loading.get_length():
+			var json_string = save_file_for_loading.get_line()
+			var json_inst:JSON = JSON.new()
+			var load_data_loaded = json_inst.parse(json_string)
+			if not load_data_loaded == OK:
+				print("JSON Parse Error: ", json_inst.get_error_message(), " in ", json_string, " at line ", 
+				json_inst.get_error_line())
 				continue
-			new_object.set(i, node_data[i])
-			#active_player.position = Vector3(node_data["pos_x"],node_data["pos_y"],node_data["pos_z"])
-			print(node_data.keys())
-			#load_level(node_data["level_name_current"])
+			
+			var load_data_dict:Dictionary = json_inst.data
+			print(load_data_dict) # Debug
+			
+			### Now we set the variables in the current game to match what is in the save file by running an IF through the loop to match appropriate data. 'i' is each line stored into load_data_dict. -CD
+			GameMaster.active_player.global_position.x = load_data_dict.get("pos_x")
+			GameMaster.active_player.global_position.y = load_data_dict.get("pos_y")
+			GameMaster.active_player.global_position.z = load_data_dict.get("pos_z")
+			
+			
+		### Close the file to save on space.
+		save_file_for_loading.close()
+	print("Finished Loading!")
 
-
-
-### This is a generic func to be placed in other nodes within the group "persistent."
-### As it currently stands, the save_game func only reaches out to child nodes in the tree,
-### so this code here doesn't get written to the save file but is good to copy + paste. -CD
+func load_game_2():
+	print("Loading...")
+	if !FileAccess.file_exists(save_game_path):
+		print("No save game file was found at ", save_game_path)
+		return
+	
+	### I pulled my goddamn hair out over this func to get it to work so here we go! -CD
+	var save_file_for_loading = FileAccess.open(save_game_path, FileAccess.READ) # Open file.
+	var json_string = save_file_for_loading.get_line() # Convert to string.
+	save_file_for_loading.close() # Close file now that we're done to save memory.
+	print(json_string) # Debug.
+	
+	var json_inst = JSON.new() # Create an instance of JSON cause you can't call non-static parse() on JSON directly aside from parse_string(). Still with me?
+	var error = json_inst.parse(json_string)
+	if error:
+		print("JSON Parse Error: ", json_inst.get_error_message(), " in ", json_string, " at line ", json_inst.get_error_line())
+		return
+	
+	#GameMaster.active_player.global_position.x = load_data_dict.player_save_data.pos_x
+	print("Finished Loading!")
+	
+### This is a generic func to be placed in other nodes within the group "persistent." As it currently stands, the save_game func only reaches out to child nodes in the tree, so this dict below and any other save funcs as a scene don't get written to the save file. -CD
 func save(): 
 	var save_dict = {
 		"filename" : get_scene_file_path(),

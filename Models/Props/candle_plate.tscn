@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://de8txdcusjk02"]
 
-[ext_resource type="ArrayMesh" uid="uid://c2klfditlxhkd" path="res://Models/candle.obj" id="1_m0uf6"]
-[ext_resource type="Texture2D" uid="uid://b4cmkwgacq6tt" path="res://Graphics/Particles/p_fire1.png" id="2_qk0qg"]
+[ext_resource type="ArrayMesh" uid="uid://c2klfditlxhkd" path="res://models/candle.obj" id="1_m0uf6"]
+[ext_resource type="Texture2D" uid="uid://b4cmkwgacq6tt" path="res://Graphics/particles/p_fire1.png" id="2_qk0qg"]
 
 [sub_resource type="Gradient" id="Gradient_mvs0y"]
 colors = PackedColorArray(1, 0, 0, 1, 1, 1, 0, 1)
@@ -17,8 +17,11 @@ point_count = 2
 curve = SubResource("Curve_358dp")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_8vjny"]
-angle_max = 360.0
-gravity = Vector3(0, 1, 0)
+angle_min = -180.0
+angle_max = 180.0
+angular_velocity_min = -90.0
+angular_velocity_max = 90.0
+gravity = Vector3(0, 6, 0)
 scale_min = 0.0
 scale_curve = SubResource("CurveTexture_tuhj3")
 color_ramp = SubResource("GradientTexture1D_d03sj")
@@ -32,15 +35,11 @@ vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_texture = ExtResource("2_qk0qg")
 texture_filter = 0
-billboard_mode = 3
-particles_anim_h_frames = 1
-particles_anim_v_frames = 1
-particles_anim_loop = false
 
 [sub_resource type="QuadMesh" id="QuadMesh_lnwh0"]
 lightmap_size_hint = Vector2i(7, 7)
 material = SubResource("StandardMaterial3D_cj715")
-size = Vector2(0.2, 0.2)
+size = Vector2(0.4, 0.4)
 
 [sub_resource type="Animation" id="Animation_swoc8"]
 length = 0.001
@@ -90,14 +89,17 @@ mesh = ExtResource("1_m0uf6")
 transform = Transform3D(-0.5, -0.866025, 0, 0.866025, -0.5, 0, 0, 0, 1, 0, 0.4, 0)
 amount = 2
 lifetime = 0.3
-randomness = 0.5
 fixed_fps = 24
+transform_align = 1
 process_material = SubResource("ParticleProcessMaterial_8vjny")
 draw_pass_1 = SubResource("QuadMesh_lnwh0")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 light_color = Color(1, 0.752941, 0.501961, 1)
+distance_fade_enabled = true
+distance_fade_begin = 60.0
+distance_fade_length = 20.0
 omni_range = 6.0
 omni_attenuation = 0.5
 

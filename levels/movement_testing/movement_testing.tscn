@@ -1,11 +1,11 @@
 [gd_scene load_steps=89 format=4 uid="uid://bu06r5hylwxxx"]
 
-[ext_resource type="Script" path="res://levels/WorldSpaceInfo.gd" id="1_fajpr"]
+[ext_resource type="Script" path="res://levels/world_space_info.gd" id="1_fajpr"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_ibfb2"]
 [ext_resource type="Environment" uid="uid://bn5lbw6ng06y5" path="res://levels/env_mojave_day.tres" id="6_1mrwq"]
 [ext_resource type="Material" uid="uid://c7knrjiilnaow" path="res://Graphics/textures/natural/Water2.material" id="8_ce4ej"]
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="9_5wl4i"]
-[ext_resource type="PackedScene" uid="uid://d4ko1bybcv8mu" path="res://Entities/doors/Door.tscn" id="9_cs2u8"]
+[ext_resource type="PackedScene" uid="uid://d4ko1bybcv8mu" path="res://entities/doors/Door.tscn" id="9_cs2u8"]
 [ext_resource type="Material" uid="uid://2njddyyk0s50" path="res://Graphics/textures/dev/devdark.material" id="9_xvt05"]
 [ext_resource type="Material" uid="uid://kjgh4u04rlik" path="res://Graphics/textures/dev/skip.material" id="10_rtg25"]
 [ext_resource type="PackedScene" uid="uid://dhh28gadc62kf" path="res://scripts/test_tp_obj.tscn" id="11_aydrv"]
@@ -14,8 +14,8 @@
 [ext_resource type="Material" uid="uid://b44aqqbtdvbjy" path="res://Graphics/textures/dev/dark/texture_10.material" id="12_w1uo1"]
 [ext_resource type="Material" uid="uid://ch2xot7kjiklo" path="res://Graphics/textures/wood/wood_3.material" id="13_ggqsa"]
 [ext_resource type="Material" uid="uid://bqpgj6ynoqav" path="res://Graphics/textures/wood/wood_12.material" id="14_cp4mj"]
-[ext_resource type="PackedScene" uid="uid://crp6jl3pw07y0" path="res://Entities/npcs/test_npc.tscn" id="14_fed0x"]
-[ext_resource type="PackedScene" uid="uid://cf6mgolusc5p0" path="res://Entities/npcs/mr_test_dialogue/mr_test_dialogue2.tscn" id="16_6s6pw"]
+[ext_resource type="PackedScene" uid="uid://crp6jl3pw07y0" path="res://entities/npcs/test_npc.tscn" id="14_fed0x"]
+[ext_resource type="PackedScene" uid="uid://cf6mgolusc5p0" path="res://entities/npcs/mr_test_dialogue/mr_test_dialogue2.tscn" id="16_6s6pw"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4kr4c"]
 size = Vector3(4, 6, 0.1)
@@ -356,7 +356,6 @@ vertices = PackedVector3Array(-6, 1.5, -8, -6, -1.5, -8, 6, -1.5, -8, 6, 1.5, -8
 indices = PackedInt32Array(0, 1, 2, 0, 2, 3, 4, 5, 6, 4, 6, 7, 8, 9, 10, 8, 10, 11, 12, 13, 14, 12, 14, 15, 16, 17, 18, 16, 18, 19, 20, 21, 22, 20, 22, 23)
 
 [node name="MovementTesting" type="Node3D"]
-script = ExtResource("1_fajpr")
 
 [node name="InteractiveDoor" parent="." instance=ExtResource("9_cs2u8")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 48, 0, 2)
@@ -629,3 +628,9 @@ mesh = SubResource("ArrayMesh_h16lv")
 
 [node name="entity_3_occluder_instance" type="OccluderInstance3D" parent="FuncGodotMap/entity_3_func_illusionary"]
 occluder = SubResource("ArrayOccluder3D_2odmp")
+
+[node name="WorldSpaceInfo" type="Node3D" parent="."]
+script = ExtResource("1_fajpr")
+lvl_title = "Movement Testing"
+lvl_description = "An area for debugging player movement."
+environment_type = 2

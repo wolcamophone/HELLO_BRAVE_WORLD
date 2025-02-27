@@ -1,6 +1,7 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+/autosave/
 .import/
 export.cfg
 export_presets.cfg

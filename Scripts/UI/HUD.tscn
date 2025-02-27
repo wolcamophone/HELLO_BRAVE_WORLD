@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://bb2hcbb3vaxyu"]
+[gd_scene load_steps=17 format=3 uid="uid://bb2hcbb3vaxyu"]
 
 [ext_resource type="Script" path="res://scripts/UI/HUD.gd" id="1_n7kud"]
 [ext_resource type="JSON" path="res://_deprec/Dialogue/Test_dialogue.json" id="2_o1v84"]
@@ -38,12 +38,20 @@ outline_color = Color(0, 0, 0, 0.501961)
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 0.501961)
 
+[sub_resource type="LabelSettings" id="LabelSettings_otgro"]
+font_size = 18
+font_color = Color(1, 0, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.501961)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.501961)
+
 [sub_resource type="Animation" id="Animation_iu6pd"]
 resource_name = "Fade"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control/ColorRect:color")
+tracks/0/path = NodePath("Control/ShaderRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -58,7 +66,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Control/ColorRect:color")
+tracks/0/path = NodePath("Control/ShaderRect:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -181,6 +189,44 @@ label_settings = SubResource("LabelSettings_ku1is")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="CheckpointMenu" type="PanelContainer" parent="Control"]
+visible = false
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -150.0
+offset_right = 125.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Control/CheckpointMenu"]
+layout_mode = 2
+
+[node name="SaveGame" type="Button" parent="Control/CheckpointMenu/VBox"]
+layout_mode = 2
+text = "Save Game"
+
+[node name="GetStatusReport" type="Button" parent="Control/CheckpointMenu/VBox"]
+layout_mode = 2
+text = "Get Status Report"
+
+[node name="Leave" type="Button" parent="Control/CheckpointMenu/VBox"]
+layout_mode = 2
+text = "Leave Checkpoint"
+
+[node name="Label" type="Label" parent="Control/CheckpointMenu"]
+self_modulate = Color(1, 1, 1, 0.25098)
+layout_mode = 2
+size_flags_vertical = 8
+text = "Work in Progress. 
+Menu function is limited."
+
 [node name="HealthBar" type="TextureProgressBar" parent="Control"]
 visible = false
 custom_minimum_size = Vector2(150, 150)
@@ -199,10 +245,21 @@ tint_progress = Color(0, 1, 0, 1)
 
 [node name="CoinCounter" type="Label" parent="Control"]
 layout_mode = 1
-offset_right = 1280.0
-offset_bottom = 37.0
+offset_left = 24.0
+offset_top = 12.0
+offset_right = 1304.0
+offset_bottom = 49.0
 text = "Coins: 0"
 label_settings = SubResource("LabelSettings_3bwea")
+
+[node name="CoinCounterRed" type="Label" parent="Control"]
+layout_mode = 1
+offset_left = 24.0
+offset_top = 32.0
+offset_right = 1304.0
+offset_bottom = 69.0
+text = "Red Coins: 0"
+label_settings = SubResource("LabelSettings_otgro")
 
 [node name="FadeTransition" type="AnimationPlayer" parent="Control"]
 root_node = NodePath("../..")
@@ -210,7 +267,7 @@ libraries = {
 "": SubResource("AnimationLibrary_4ujh3")
 }
 
-[node name="ColorRect" type="ColorRect" parent="Control"]
+[node name="ShaderRect" type="ColorRect" parent="Control"]
 visible = false
 layout_mode = 2
 offset_right = 1280.0

@@ -1,11 +1,11 @@
 [gd_scene load_steps=12 format=3 uid="uid://calafgdd8c5xh"]
 
-[ext_resource type="ArrayMesh" uid="uid://bh37rjo01cx34" path="res://Entities/npcs/maxwell/dingus.obj" id="1_nk4fl"]
-[ext_resource type="Script" path="res://Entities/npcs/maxwell/maxwell.gd" id="1_vsa0s"]
-[ext_resource type="Texture2D" uid="uid://d13s81k5jb6sm" path="res://Entities/npcs/maxwell/dingus_nowhiskers.png" id="2_wvbrd"]
-[ext_resource type="Texture2D" uid="uid://td52f8qtj618" path="res://Entities/npcs/maxwell/dingus_whiskers.png" id="3_043ih"]
-[ext_resource type="AudioStream" uid="uid://cjw8c3n6am2jo" path="res://Entities/npcs/maxwell/meow.wav" id="3_pe81t"]
-[ext_resource type="AudioStream" uid="uid://bgeg0q14mnaig" path="res://Entities/npcs/maxwell/maxwell.ogg" id="4_leynl"]
+[ext_resource type="ArrayMesh" uid="uid://bh37rjo01cx34" path="res://entities/npcs/maxwell/dingus.obj" id="1_nk4fl"]
+[ext_resource type="Script" path="res://entities/npcs/maxwell/maxwell.gd" id="1_vsa0s"]
+[ext_resource type="Texture2D" uid="uid://d13s81k5jb6sm" path="res://entities/npcs/maxwell/dingus_nowhiskers.png" id="2_wvbrd"]
+[ext_resource type="Texture2D" uid="uid://td52f8qtj618" path="res://entities/npcs/maxwell/dingus_whiskers.png" id="3_043ih"]
+[ext_resource type="AudioStream" uid="uid://cjw8c3n6am2jo" path="res://entities/npcs/maxwell/meow.wav" id="3_pe81t"]
+[ext_resource type="AudioStream" uid="uid://bgeg0q14mnaig" path="res://entities/npcs/maxwell/maxwell.ogg" id="4_leynl"]
 [ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="6_tq2as"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y2kj7"]

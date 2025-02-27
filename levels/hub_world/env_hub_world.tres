@@ -28,3 +28,5 @@ tonemap_mode = 2
 fog_enabled = true
 fog_light_color = Color(0, 0, 0, 1)
 fog_sky_affect = 0.0
+fog_depth_begin = 32.0
+fog_depth_end = 128.0

@@ -1,8 +1,8 @@
 [gd_scene load_steps=8 format=3 uid="uid://cf6mgolusc5p0"]
 
-[ext_resource type="Script" path="res://Entities/npcs/mr_test_dialogue/mr_test_dialogue_2.gd" id="1_rf5jy"]
 [ext_resource type="Texture2D" uid="uid://bknj24jo2bhqj" path="res://Graphics/textures/metal/pipes_1.png" id="2_sdpvc"]
 [ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="3_16i4y"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogic_prompter.gd" id="3_cg015"]
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_v7f2p"]
 
@@ -16,7 +16,10 @@ albedo_texture = ExtResource("2_sdpvc")
 radius = 2.0
 
 [node name="MrTestDialogue2" type="StaticBody3D"]
-script = ExtResource("1_rf5jy")
+
+[node name="DialoguePrompter" type="Node" parent="."]
+script = ExtResource("3_cg015")
+dialogue_to_prompt = "test_dialogue"
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -35,4 +38,4 @@ prompt_text = "Talk"
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
 shape = SubResource("CylinderShape3D_ho425")
 
-[connection signal="activation" from="InteractionArea" to="." method="trigger_dialogue"]
+[connection signal="activation" from="InteractionArea" to="DialoguePrompter" method="_on_interaction_area_activation"]

@@ -20,5 +20,6 @@ fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.0941176, 0.0313726, 0, 1)
 fog_density = 1.0
+fog_sky_affect = 0.5
 fog_depth_begin = 16.0
 fog_depth_end = 128.0

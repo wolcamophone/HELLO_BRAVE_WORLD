@@ -1,13 +1,13 @@
 extends Control
 
-var config = ConfigFile.new()
-
 ### Gameplay Menu Vars ###
 var view_bob
 
 ### Video Menu Vars ###
-@onready var ResButton = $Video/HBox/VBox/HBox/ResButton
-@onready var fullscreen = $Video/HBox/VBox/Fullscreen
+@onready var res_button: OptionButton = $Video/SaveSettingsBelowBox/HBox/VBox/HBox/ResButton
+@onready var fullscreen: CheckBox = $Video/SaveSettingsBelowBox/HBox/VBox/Fullscreen
+@onready var v_sync_button: CheckBox = $"Video/SaveSettingsBelowBox/HBox/VBox/V-Sync"
+@onready var save_settings_button: Button = $"../SaveSettings"
 
 var Resolutions: Dictionary = {
 	"800x600": Vector2i(800,600),
@@ -21,7 +21,6 @@ var Resolutions: Dictionary = {
 }
 # Check this against save func later to see if .json supports Vector2
 var display_current_resolution:Vector2i
-
 var vignette_enabled:bool = true
 
 ### Audio Menu Vars ###
@@ -33,18 +32,21 @@ var audio_vol_voice:int = 0
 var audio_vol_radio:int = 0
 var audio_vol_ui:int = 0
 
+### Save Settings Config Vars ###
+var config = ConfigFile.new()
+var save_settings_path = "user://settings.cfg"
+
+######################### Functions Below ############################
+
+func _ready():
+	AddResolutions()
 
 ### Gameplay Settings Funcs ###
 func _on_view_bob_toggled(toggled_on):
 	GameMaster.ViewBob = toggled_on
 	view_bob = GameMaster.ViewBob
 
-
-
 ### Video Settings Funcs ###
-func _ready():
-	AddResolutions()
-
 func _on_fullscreen_toggled(toggled_on):
 	if toggled_on:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -53,11 +55,11 @@ func _on_fullscreen_toggled(toggled_on):
 
 func AddResolutions():
 	for r in Resolutions:
-		ResButton.add_item(r)
+		res_button.add_item(r)
 
 func _on_ResButton_item_selected(index): 
 	# Gets Vector 2 from dropdown menu then resizes window.
-	var size = ResButton.get_item_text(index)
+	var size = res_button.get_item_text(index)
 	get_window().set_size(Resolutions[size])
 	display_current_resolution = Resolutions[size]
 
@@ -76,7 +78,7 @@ func _on_LargeCursor_toggled(button_pressed):
 	if button_pressed:
 		var CursorL = load("res://Graphics/UI/CursorL.png")
 		Input.set_custom_mouse_cursor(CursorL)
-	elif not button_pressed:
+	elif !button_pressed:
 		var CursorM = load("res://Graphics/UI/CursorM.png")
 		Input.set_custom_mouse_cursor(CursorM)
 
@@ -163,20 +165,10 @@ func _on_Shell2_pressed():
 	OS.shell_open(ProjectSettings.globalize_path("res://"))
 
 
-
-func save():
-	var save_dict = {
-		"filename" : get_scene_file_path(),
-		"parent" : get_parent().get_path(),
-		"view_bob": view_bob,
-		"display_current_resolution": display_current_resolution,
-		"audio_vol_master": audio_vol_master,
-		"audio_vol_music": audio_vol_music,
-		"audio_vol_sfx": audio_vol_sfx,
-		"audio_vol_ambience": audio_vol_ambience,
-		"audio_vol_voice": audio_vol_voice,
-		"audio_vol_radio": audio_vol_radio,
-		"audio_vol_ui": audio_vol_ui,
-		"vignette_enabled": vignette_enabled,
-	}
-	return save_dict
+### Save Settings to Config ###
+func save_settings():
+	config.set_value("Game Settings", "", fullscreen)
+	config.set_value("Video Settings", "fullscreen", fullscreen)
+	config.set_value("Video Settings", "vignette_enabled", vignette_enabled)
+	config.set_value("Audio", "fullscreen", fullscreen)
+	config.save(save_settings_path)

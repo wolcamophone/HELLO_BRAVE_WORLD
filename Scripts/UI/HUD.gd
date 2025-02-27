@@ -5,12 +5,13 @@ extends CanvasLayer
 
 #@onready var state = {}
 @onready var _health_bar = $Control/HealthBar
-@onready var _coin_counter:Control = $Control/CoinCounter
+@onready var _coin_counter: Label = $Control/CoinCounter
+@onready var _coin_counter_red: Label = $Control/CoinCounterRed
 
 @onready var _interact_text:Control = $Control/Diaract/BottomHalf/HBoxContainer/InteractText
 @onready var _interact_prompt:Control = $Control/Diaract/BottomHalf/HBoxContainer
 @onready var _fade_transitioner:AnimationPlayer = $Control/FadeTransition
-@onready var _fade_block:ColorRect = $Control/ColorRect
+@onready var _fade_block:ColorRect = $Control/ShaderRect
 @onready var _dialogue_container:Control = $Control/Diaract/TopHalf/MarginContainer
 @onready var _dialogue_text: RichTextLabel = $Control/Diaract/TopHalf/MarginContainer/RichTextLabel
 @onready var _vignette: TextureRect = $Control/Vignette
@@ -26,6 +27,7 @@ func _ready():
 func _process(delta):
 	_health_bar.value = display_health
 	_coin_counter.text = "Coins: " + str(ScoreCounter.COINS)
+	_coin_counter_red.text = "Red Coins: " + str(ScoreCounter.RED_COINS)
 	pass
 
 func scene_transition():

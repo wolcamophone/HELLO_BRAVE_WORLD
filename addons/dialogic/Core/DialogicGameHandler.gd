@@ -155,7 +155,7 @@ var Voice := preload("res://addons/dialogic/Modules/Voice/subsystem_voice.gd").n
 ## Autoloads are added first, so this happens REALLY early on game startup.
 func _ready() -> void:
 	_collect_subsystems()
-
+	process_mode = Node.PROCESS_MODE_ALWAYS # I added this so the game could pause during dialogue. -CD
 	clear()
 
 

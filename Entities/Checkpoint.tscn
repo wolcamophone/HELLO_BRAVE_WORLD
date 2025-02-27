@@ -1,11 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://do6cmx571d3b3"]
+[gd_scene load_steps=16 format=3 uid="uid://do6cmx571d3b3"]
 
-[ext_resource type="Script" path="res://Entities/Checkpoint.gd" id="1_ieiay"]
-[ext_resource type="ArrayMesh" uid="uid://buccyf3jux5ms" path="res://Models/Props/VendingMachine.obj" id="4_ig2xs"]
-[ext_resource type="Texture2D" uid="uid://0mnva33w5fer" path="res://Graphics/Particles/p_star1.png" id="5_pwc66"]
-[ext_resource type="Texture2D" uid="uid://tkj2pxorliay" path="res://Models/Props/VendingMachine.png" id="5_stcm8"]
-[ext_resource type="Texture2D" uid="uid://vwaxqoy4ypgr" path="res://Models/Props/VendingMachine_n.png" id="6_3ka63"]
+[ext_resource type="Script" path="res://entities/checkpoint.gd" id="1_ieiay"]
+[ext_resource type="ArrayMesh" uid="uid://buccyf3jux5ms" path="res://models/Props/VendingMachine.obj" id="4_ig2xs"]
+[ext_resource type="Texture2D" uid="uid://0mnva33w5fer" path="res://Graphics/particles/p_star1.png" id="5_pwc66"]
+[ext_resource type="Texture2D" uid="uid://dtlt6gclarmwr" path="res://models/Props/VendingMachine.png" id="5_stcm8"]
+[ext_resource type="Texture2D" uid="uid://vwaxqoy4ypgr" path="res://models/Props/VendingMachine_n.png" id="6_3ka63"]
 [ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="6_8pi41"]
+[ext_resource type="AudioStream" uid="uid://ctb7c0hq7of0n" path="res://audio/SFX/computer_fan.ogg" id="7_flvl6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_0gim0"]
 size = Vector3(2.2, 3, 1.2)
@@ -42,6 +43,20 @@ particles_anim_v_frames = 1
 particles_anim_loop = false
 fixed_size = true
 
+[sub_resource type="QuadMesh" id="QuadMesh_katb1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kggh1"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("5_pwc66")
+albedo_texture_force_srgb = true
+billboard_mode = 3
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_wkdc8"]
 size = Vector3(2, 0.2, 2)
 
@@ -59,13 +74,19 @@ surface_material_override/0 = SubResource("StandardMaterial3D_p8s43")
 surface_material_override/1 = SubResource("StandardMaterial3D_omykv")
 
 [node name="PointLight" type="MeshInstance3D" parent="VendingMachine"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34, 2.65, 0.21)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34, 2.65, 0.2)
 mesh = SubResource("QuadMesh_cgowo")
 surface_material_override/0 = SubResource("StandardMaterial3D_ly083")
+
+[node name="PointLight2" type="MeshInstance3D" parent="VendingMachine/PointLight"]
+mesh = SubResource("QuadMesh_katb1")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_kggh1")
 
 [node name="ScreenGlow" type="OmniLight3D" parent="VendingMachine"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.3, 0.2)
 light_color = Color(0, 1, 0, 1)
+distance_fade_begin = 120.0
 omni_attenuation = 0.5
 
 [node name="Marker3D" type="Marker3D" parent="."]
@@ -78,6 +99,16 @@ script = ExtResource("6_8pi41")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 shape = SubResource("BoxShape3D_wkdc8")
+
+[node name="ComputerFan" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2, -1.5)
+stream = ExtResource("7_flvl6")
+attenuation_model = 3
+volume_db = -12.0
+autoplay = true
+max_distance = 20.0
+bus = &"Sound Effects"
+doppler_tracking = 1
 
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="." method="_on_area_3d_area_exited"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dgtl1mooaeiqs"]
 
-[ext_resource type="Texture2D" uid="uid://cytmnkkfa2dvc" path="res://Entities/npcs/mr_eyes/glimpse1.png" id="1_k8vfd"]
-[ext_resource type="AudioStream" uid="uid://bspvkhtq1rckm" path="res://Audio/Music/gathering_darkness.ogg" id="2_t5dsj"]
+[ext_resource type="Texture2D" uid="uid://cytmnkkfa2dvc" path="res://entities/npcs/mr_eyes/glimpse1.png" id="1_k8vfd"]
+[ext_resource type="AudioStream" uid="uid://bspvkhtq1rckm" path="res://audio/Music/gathering_darkness.ogg" id="2_t5dsj"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_1xcju"]
 

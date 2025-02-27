@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://ceb0h8ojaqnge"]
 
-[ext_resource type="ArrayMesh" uid="uid://bso38whta2lxw" path="res://Models/Props/barrel.obj" id="1_cb5h2"]
+[ext_resource type="ArrayMesh" uid="uid://bso38whta2lxw" path="res://models/Props/barrel.obj" id="1_cb5h2"]
 [ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="2_v3yoq"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_2wflw"]

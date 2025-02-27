@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://dm5vmdqfgedfg" path="res://scripts/attack_box.tscn" id="2_jmy7u"]
 [ext_resource type="PackedScene" uid="uid://c2f2xn44h37mg" path="res://Player/PlayerModel.tscn" id="3_2dqd0"]
 [ext_resource type="Script" path="res://Player/camera_movement.gd" id="3_aj8b8"]
-[ext_resource type="Texture2D" uid="uid://bbvgdi64v0q4n" path="res://Graphics/Particles/p_shadow.png" id="6_kk83b"]
-[ext_resource type="AudioStream" uid="uid://bq02rq7rurx20" path="res://Audio/SFX/jump.wav" id="6_r36ni"]
+[ext_resource type="Texture2D" uid="uid://bbvgdi64v0q4n" path="res://Graphics/particles/p_shadow.png" id="6_kk83b"]
+[ext_resource type="AudioStream" uid="uid://bq02rq7rurx20" path="res://audio/SFX/jump.wav" id="6_r36ni"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_utlkd"]
 radius = 0.35
