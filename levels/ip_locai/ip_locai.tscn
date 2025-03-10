@@ -1,4 +1,4 @@
-[gd_scene load_steps=240 format=4 uid="uid://cbsl2ly6whgwv"]
+[gd_scene load_steps=241 format=4 uid="uid://cbsl2ly6whgwv"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_bvn45"]
 [ext_resource type="Material" uid="uid://cvex6toty8yn7" path="res://addons/func_godot/textures/default_material.tres" id="2_g0sjc"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://j0vqcs8cecn6" path="res://Graphics/textures/natural/dirt.png" id="11_ugtnc"]
 [ext_resource type="Material" uid="uid://ch2xot7kjiklo" path="res://Graphics/textures/wood/wood_3.material" id="12_rk5jv"]
 [ext_resource type="PackedScene" uid="uid://d4ko1bybcv8mu" path="res://entities/doors/Door.tscn" id="13_a1uad"]
+[ext_resource type="Script" path="res://levels/world_space_info.gd" id="14_ufn50"]
 
 [sub_resource type="Resource" id="Resource_v8q2c"]
 script = ExtResource("4_rvycn")
@@ -23,6 +24,7 @@ base_texture_dir = "res://Graphics/textures"
 texture_file_extensions = Array[String](["png", "jpg", "jpeg", "bmp", "tga", "webp"])
 clip_texture = "dev/clip"
 skip_texture = "dev/skip"
+origin_texture = "special/origin"
 texture_wads = Array[Resource]([])
 material_file_extension = "material"
 default_material = ExtResource("2_g0sjc")
@@ -34,7 +36,7 @@ roughness_map_pattern = "%s_roughness.%s"
 emission_map_pattern = "%s_emission.%s"
 ao_map_pattern = "%s_ao.%s"
 height_map_pattern = "%s_height.%s"
-unshaded = false
+orm_map_pattern = "%s_orm.%s"
 save_generated_materials = false
 uv_unwrap_texel_size = 1.0
 use_trenchbroom_groups_hierarchy = false
@@ -853,6 +855,7 @@ _surfaces = [{
 script = ExtResource("1_bvn45")
 local_map_file = "res://levels/ip_landofcakeandicecreams/ip_landofcakeandicecreams.map"
 map_settings = SubResource("Resource_v8q2c")
+metadata/_edit_group_ = true
 
 [node name="entity_0_worldspawn" type="StaticBody3D" parent="FuncGodotMap"]
 
@@ -1523,3 +1526,7 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 178, 7
 warp_door = true
 transfer_to_level = "hub_world"
 warp_to_position = Vector3(-2, -21, -192)
+
+[node name="WorldSpaceInfo" type="Node" parent="."]
+script = ExtResource("14_ufn50")
+lvl_description = "The ocean breathes salty, won't you carry it in your head and your mouth and your soul?"

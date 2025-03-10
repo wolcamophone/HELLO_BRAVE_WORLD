@@ -1,0 +1,1 @@
+Any shader files placed in this folder are the shader scripts and not preset materials used for shaders.

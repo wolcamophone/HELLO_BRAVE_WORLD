@@ -1,6 +1,7 @@
-[gd_scene load_steps=861 format=4 uid="uid://cmb1kn2p3w221"]
+[gd_scene load_steps=862 format=4 uid="uid://cmb1kn2p3w221"]
 
 [ext_resource type="Environment" uid="uid://beq60j21ecfcs" path="res://levels/env_wyoming_night.tres" id="1_dx3ji"]
+[ext_resource type="PackedScene" uid="uid://cld3ln8yx636k" path="res://models/Props/prop_radio.tscn" id="1_oadv0"]
 [ext_resource type="Script" path="res://levels/world_space_info.gd" id="1_qoetn"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_brpcs"]
 [ext_resource type="PackedScene" uid="uid://d2elnxgsc6btx" path="res://models/Props/prop_light.tscn" id="2_eub83"]
@@ -45,6 +46,10 @@
 [ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="45_kyra7"]
 [ext_resource type="Material" uid="uid://dnijgww2libn" path="res://Graphics/textures/floors/stairsfade.material" id="45_t04ry"]
 [ext_resource type="Texture2D" uid="uid://bjvdh886sljg6" path="res://Graphics/textures/paintings/worldmap.png" id="46_8o3xb"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_57at2"]
+height = 4.0
+radius = 4.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfb40"]
 albedo_texture = ExtResource("12_0ju5w")
@@ -3563,17 +3568,213 @@ _surfaces = [{
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ccmp8"]
 data = PackedVector3Array(-12, 0.375, -13.25, -12, -0.625, -13.25, 12, -0.625, -13.25, -12, 0.375, -13.25, 12, -0.625, -13.25, 12, 0.375, -13.25, -12, 0.375, -13.25, -12, 0.375, -13, -12, -0.625, -13, -12, 0.375, -13.25, -12, -0.625, -13, -12, -0.625, -13.25, 12, -0.625, -13.25, -12, -0.625, -13.25, -12, -0.625, -13, 12, -0.625, -13.25, -12, -0.625, -13, 12, -0.625, -13, 12, 0.375, -13.25, 12, 0.375, -13, -12, 0.375, -13, 12, 0.375, -13.25, -12, 0.375, -13, -12, 0.375, -13.25, 12, 0.375, -13.25, 12, -0.625, -13.25, 12, -0.625, -13, 12, 0.375, -13.25, 12, -0.625, -13, 12, 0.375, -13, -12, 0.375, -13, 12, 0.375, -13, 12, -0.625, -13, -12, 0.375, -13, 12, -0.625, -13, -12, -0.625, -13, 12, 0.375, -13, 12, -0.625, -13, 12.25, -0.625, -13, 12, 0.375, -13, 12.25, -0.625, -13, 12.25, 0.375, -13, 12, 0.375, -13, 12, 0.375, 13, 12, -0.625, 13, 12, 0.375, -13, 12, -0.625, 13, 12, -0.625, -13, 12.25, -0.625, -13, 12, -0.625, -13, 12, -0.625, 13, 12.25, -0.625, -13, 12, -0.625, 13, 12.25, -0.625, 13, 12.25, 0.375, -13, 12.25, 0.375, 13, 12, 0.375, 13, 12.25, 0.375, -13, 12, 0.375, 13, 12, 0.375, -13, 12.25, 0.375, -13, 12.25, -0.625, -13, 12.25, -0.625, 13, 12.25, 0.375, -13, 12.25, -0.625, 13, 12.25, 0.375, 13, 12, 0.375, 13, 12.25, 0.375, 13, 12.25, -0.625, 13, 12, 0.375, 13, 12.25, -0.625, 13, 12, -0.625, 13, 12, 0.625, -13, 12, 0.375, -13, 12.25, 0.375, -13, 12, 0.625, -13, 12.25, 0.375, -13, 12.25, 0.625, -13, 12, 0.625, -13, 12, 0.625, 13.25, 12, 0.375, 13.25, 12, 0.625, -13, 12, 0.375, 13.25, 12, 0.375, -13, 12.25, 0.375, -13, 12, 0.375, -13, 12, 0.375, 13.25, 12.25, 0.375, -13, 12, 0.375, 13.25, 12.25, 0.375, 13.25, 12.25, 0.625, -13, 12.25, 0.625, 13.25, 12, 0.625, 13.25, 12.25, 0.625, -13, 12, 0.625, 13.25, 12, 0.625, -13, 12.25, 0.625, -13, 12.25, 0.375, -13, 12.25, 0.375, 13.25, 12.25, 0.625, -13, 12.25, 0.375, 13.25, 12.25, 0.625, 13.25, 12, 0.625, 13.25, 12.25, 0.625, 13.25, 12.25, 0.375, 13.25, 12, 0.625, 13.25, 12.25, 0.375, 13.25, 12, 0.375, 13.25, -12.25, 0.625, -13.25, -12.25, 0.375, -13.25, 12.25, 0.375, -13.25, -12.25, 0.625, -13.25, 12.25, 0.375, -13.25, 12.25, 0.625, -13.25, -12.25, 0.625, -13.25, -12.25, 0.625, -13, -12.25, 0.375, -13, -12.25, 0.625, -13.25, -12.25, 0.375, -13, -12.25, 0.375, -13.25, 12.25, 0.375, -13.25, -12.25, 0.375, -13.25, -12.25, 0.375, -13, 12.25, 0.375, -13.25, -12.25, 0.375, -13, 12.25, 0.375, -13, 12.25, 0.625, -13.25, 12.25, 0.625, -13, -12.25, 0.625, -13, 12.25, 0.625, -13.25, -12.25, 0.625, -13, -12.25, 0.625, -13.25, 12.25, 0.625, -13.25, 12.25, 0.375, -13.25, 12.25, 0.375, -13, 12.25, 0.625, -13.25, 12.25, 0.375, -13, 12.25, 0.625, -13, -12.25, 0.625, -13, 12.25, 0.625, -13, 12.25, 0.375, -13, -12.25, 0.625, -13, 12.25, 0.375, -13, -12.25, 0.375, -13, -12.25, 0.375, -13, -12.25, -0.625, -13, -12, -0.625, -13, -12.25, 0.375, -13, -12, -0.625, -13, -12, 0.375, -13, -12.25, 0.375, -13, -12.25, 0.375, 13, -12.25, -0.625, 13, -12.25, 0.375, -13, -12.25, -0.625, 13, -12.25, -0.625, -13, -12, -0.625, -13, -12.25, -0.625, -13, -12.25, -0.625, 13, -12, -0.625, -13, -12.25, -0.625, 13, -12, -0.625, 13, -12, 0.375, -13, -12, 0.375, 13, -12.25, 0.375, 13, -12, 0.375, -13, -12.25, 0.375, 13, -12.25, 0.375, -13, -12, 0.375, -13, -12, -0.625, -13, -12, -0.625, 13, -12, 0.375, -13, -12, -0.625, 13, -12, 0.375, 13, -12.25, 0.375, 13, -12, 0.375, 13, -12, -0.625, 13, -12.25, 0.375, 13, -12, -0.625, 13, -12.25, -0.625, 13, -12.25, 0.625, -13, -12.25, 0.375, -13, -12, 0.375, -13, -12.25, 0.625, -13, -12, 0.375, -13, -12, 0.625, -13, -12.25, 0.625, -13, -12.25, 0.625, 13.25, -12.25, 0.375, 13.25, -12.25, 0.625, -13, -12.25, 0.375, 13.25, -12.25, 0.375, -13, -12, 0.375, -13, -12.25, 0.375, -13, -12.25, 0.375, 13.25, -12, 0.375, -13, -12.25, 0.375, 13.25, -12, 0.375, 13.25, -12, 0.625, -13, -12, 0.625, 13.25, -12.25, 0.625, 13.25, -12, 0.625, -13, -12.25, 0.625, 13.25, -12.25, 0.625, -13, -12, 0.625, -13, -12, 0.375, -13, -12, 0.375, 13.25, -12, 0.625, -13, -12, 0.375, 13.25, -12, 0.625, 13.25, -12.25, 0.625, 13.25, -12, 0.625, 13.25, -12, 0.375, 13.25, -12.25, 0.625, 13.25, -12, 0.375, 13.25, -12.25, 0.375, 13.25, 12, 0.375, -13.25, 12, -0.625, -13.25, 12.25, -0.625, -13.25, 12, 0.375, -13.25, 12.25, -0.625, -13.25, 12.25, 0.375, -13.25, 12, 0.375, -13.25, 12, 0.375, -13, 12, -0.625, -13, 12, 0.375, -13.25, 12, -0.625, -13, 12, -0.625, -13.25, 12.25, -0.625, -13.25, 12, -0.625, -13.25, 12, -0.625, -13, 12.25, -0.625, -13.25, 12, -0.625, -13, 12.25, -0.625, -13, 12.25, 0.375, -13.25, 12.25, 0.375, -13, 12, 0.375, -13, 12.25, 0.375, -13.25, 12, 0.375, -13, 12, 0.375, -13.25, 12.25, 0.375, -13.25, 12.25, -0.625, -13.25, 12.25, -0.625, -13, 12.25, 0.375, -13.25, 12.25, -0.625, -13, 12.25, 0.375, -13, 12, 0.375, -13, 12.25, 0.375, -13, 12.25, -0.625, -13, 12, 0.375, -13, 12.25, -0.625, -13, 12, -0.625, -13, -12.25, 0.375, -13.25, -12.25, -0.625, -13.25, -12, -0.625, -13.25, -12.25, 0.375, -13.25, -12, -0.625, -13.25, -12, 0.375, -13.25, -12.25, 0.375, -13.25, -12.25, 0.375, -13, -12.25, -0.625, -13, -12.25, 0.375, -13.25, -12.25, -0.625, -13, -12.25, -0.625, -13.25, -12, -0.625, -13.25, -12.25, -0.625, -13.25, -12.25, -0.625, -13, -12, -0.625, -13.25, -12.25, -0.625, -13, -12, -0.625, -13, -12, 0.375, -13.25, -12, 0.375, -13, -12.25, 0.375, -13, -12, 0.375, -13.25, -12.25, 0.375, -13, -12.25, 0.375, -13.25, -12, 0.375, -13.25, -12, -0.625, -13.25, -12, -0.625, -13, -12, 0.375, -13.25, -12, -0.625, -13, -12, 0.375, -13, -12.25, 0.375, -13, -12, 0.375, -13, -12, -0.625, -13, -12.25, 0.375, -13, -12, -0.625, -13, -12.25, -0.625, -13, -12.25, 0.375, 13, -12.25, -0.625, 13, -12, -0.625, 13, -12.25, 0.375, 13, -12, -0.625, 13, -12, 0.375, 13, -12.25, 0.375, 13, -12.25, 0.375, 13.25, -12.25, -0.625, 13.25, -12.25, 0.375, 13, -12.25, -0.625, 13.25, -12.25, -0.625, 13, -12, -0.625, 13, -12.25, -0.625, 13, -12.25, -0.625, 13.25, -12, -0.625, 13, -12.25, -0.625, 13.25, -12, -0.625, 13.25, -12, 0.375, 13, -12, 0.375, 13.25, -12.25, 0.375, 13.25, -12, 0.375, 13, -12.25, 0.375, 13.25, -12.25, 0.375, 13, -12, 0.375, 13, -12, -0.625, 13, -12, -0.625, 13.25, -12, 0.375, 13, -12, -0.625, 13.25, -12, 0.375, 13.25, -12.25, 0.375, 13.25, -12, 0.375, 13.25, -12, -0.625, 13.25, -12.25, 0.375, 13.25, -12, -0.625, 13.25, -12.25, -0.625, 13.25, -12, 0.375, 13, -12, -0.625, 13, 12, -0.625, 13, -12, 0.375, 13, 12, -0.625, 13, 12, 0.375, 13, -12, 0.375, 13, -12, 0.375, 13.25, -12, -0.625, 13.25, -12, 0.375, 13, -12, -0.625, 13.25, -12, -0.625, 13, 12, -0.625, 13, -12, -0.625, 13, -12, -0.625, 13.25, 12, -0.625, 13, -12, -0.625, 13.25, 12, -0.625, 13.25, 12, 0.375, 13, 12, 0.375, 13.25, -12, 0.375, 13.25, 12, 0.375, 13, -12, 0.375, 13.25, -12, 0.375, 13, 12, 0.375, 13, 12, -0.625, 13, 12, -0.625, 13.25, 12, 0.375, 13, 12, -0.625, 13.25, 12, 0.375, 13.25, -12, 0.375, 13.25, 12, 0.375, 13.25, 12, -0.625, 13.25, -12, 0.375, 13.25, 12, -0.625, 13.25, -12, -0.625, 13.25, -12, 0.625, 13, -12, 0.375, 13, 12, 0.375, 13, -12, 0.625, 13, 12, 0.375, 13, 12, 0.625, 13, -12, 0.625, 13, -12, 0.625, 13.25, -12, 0.375, 13.25, -12, 0.625, 13, -12, 0.375, 13.25, -12, 0.375, 13, 12, 0.375, 13, -12, 0.375, 13, -12, 0.375, 13.25, 12, 0.375, 13, -12, 0.375, 13.25, 12, 0.375, 13.25, 12, 0.625, 13, 12, 0.625, 13.25, -12, 0.625, 13.25, 12, 0.625, 13, -12, 0.625, 13.25, -12, 0.625, 13, 12, 0.625, 13, 12, 0.375, 13, 12, 0.375, 13.25, 12, 0.625, 13, 12, 0.375, 13.25, 12, 0.625, 13.25, -12, 0.625, 13.25, 12, 0.625, 13.25, 12, 0.375, 13.25, -12, 0.625, 13.25, 12, 0.375, 13.25, -12, 0.375, 13.25, 12, 0.375, 13, 12, -0.625, 13, 12.25, -0.625, 13, 12, 0.375, 13, 12.25, -0.625, 13, 12.25, 0.375, 13, 12, 0.375, 13, 12, 0.375, 13.25, 12, -0.625, 13.25, 12, 0.375, 13, 12, -0.625, 13.25, 12, -0.625, 13, 12.25, -0.625, 13, 12, -0.625, 13, 12, -0.625, 13.25, 12.25, -0.625, 13, 12, -0.625, 13.25, 12.25, -0.625, 13.25, 12.25, 0.375, 13, 12.25, 0.375, 13.25, 12, 0.375, 13.25, 12.25, 0.375, 13, 12, 0.375, 13.25, 12, 0.375, 13, 12.25, 0.375, 13, 12.25, -0.625, 13, 12.25, -0.625, 13.25, 12.25, 0.375, 13, 12.25, -0.625, 13.25, 12.25, 0.375, 13.25, 12, 0.375, 13.25, 12.25, 0.375, 13.25, 12.25, -0.625, 13.25, 12, 0.375, 13.25, 12.25, -0.625, 13.25, 12, -0.625, 13.25)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_57at2"]
-height = 4.0
-radius = 4.0
+[node name="ip_library" type="Node3D"]
 
-[node name="ip_library" type="Node3D" groups=["persistent"]]
+[node name="Props" type="Node" parent="."]
 
-[node name="InteractiveDoor" parent="." instance=ExtResource("25_1tr0t")]
+[node name="PropRadio" parent="Props" instance=ExtResource("1_oadv0")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -141.9, 18.6, 25)
+
+[node name="PropLights" type="Node" parent="Props"]
+
+[node name="Prop_Light" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 39, 0)
+
+[node name="Prop_Light25" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 22, 0)
+
+[node name="Prop_Light27" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 22, 0)
+
+[node name="Prop_Light2" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 39, 22)
+
+[node name="Prop_Light3" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 39, 42)
+
+[node name="Prop_Light4" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -66, 39, 42)
+
+[node name="Prop_Light5" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -88, 39, 42)
+
+[node name="Prop_Light6" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -110, 39, 42)
+
+[node name="Prop_Light7" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -130, 39, 42)
+
+[node name="Prop_Light8" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130, 39, 22)
+
+[node name="Prop_Light9" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130, 39, 0)
+
+[node name="Prop_Light10" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130, 39, -22)
+
+[node name="Prop_Light11" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130, 39, -42)
+
+[node name="Prop_Light12" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -110, 39, -42)
+
+[node name="Prop_Light13" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -88, 39, -42)
+
+[node name="Prop_Light14" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -66, 39, -42)
+
+[node name="Prop_Light15" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -46, 39, -42)
+
+[node name="Prop_Light16" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 39, -22)
+
+[node name="Prop_Light17" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -81, 8, -93)
+
+[node name="Prop_Light18" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -95, 8, -93)
+
+[node name="Prop_Light19" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -102, 10, -110)
+
+[node name="Prop_Light20" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -102, 10, -122)
+
+[node name="Prop_Light21" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74, 10, -110)
+
+[node name="Prop_Light22" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74, 10, -122)
+
+[node name="Prop_Light23" parent="Props/PropLights" instance=ExtResource("2_eub83")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -88, 10, -131)
+
+[node name="candle_plate" parent="Props/PropLights" instance=ExtResource("27_d5gmc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -97, 0, -10)
+
+[node name="candle_plate2" parent="Props/PropLights" instance=ExtResource("27_d5gmc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -106, -16, -29)
+
+[node name="Entities" type="Node" parent="."]
+
+[node name="InteractiveDoor" parent="Entities" instance=ExtResource("25_1tr0t")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 24)
 overwrite_prompt_text = "Travel to Depths Hub"
 warp_door = true
 transfer_to_level = "hub_world"
+
+[node name="Checkpoint" parent="Entities" instance=ExtResource("7_k55gp")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -26.8, 8, 0)
+
+[node name="DialoguePrompter" type="Node" parent="Entities"]
+script = ExtResource("44_bqt2n")
+dialogue_to_prompt = "library_chair"
+
+[node name="InteractionArea" type="Area3D" parent="Entities/DialoguePrompter"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 8, 0)
+script = ExtResource("45_kyra7")
+prompt_text = "Contemplate"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/DialoguePrompter/InteractionArea"]
+shape = SubResource("CylinderShape3D_57at2")
+
+[node name="Coins" type="Node" parent="Entities"]
+
+[node name="Coin" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
+
+[node name="Coin2" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -4)
+
+[node name="Coin3" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -8)
+
+[node name="Coin4" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 4)
+
+[node name="Coin5" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 8)
+
+[node name="Coin6" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 9, 0)
+
+[node name="Coin7" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 1, 0)
+
+[node name="Coin8" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.5, 10, 0)
+
+[node name="Coin9" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.5, 10, -3)
+
+[node name="Coin10" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.5, 10, 3)
+
+[node name="Coin11" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.2, 14, -7)
+
+[node name="Coin12" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.2, 14, 7)
+
+[node name="Coin15" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.2, 11, -7)
+
+[node name="Coin16" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.2, 11, 7)
+
+[node name="Coin17" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.2, 8, -7)
+
+[node name="Coin18" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.2, 8, 7)
+
+[node name="Coin13" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.2, 12, 7)
+
+[node name="Coin14" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.2, 12, -7)
+
+[node name="Coin19" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.2, 3, -20)
+
+[node name="Coin20" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.2, 5, -20)
+
+[node name="Coin21" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.2, 7, -20)
+
+[node name="Coin22" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.2, 9, -20)
+
+[node name="Coin23" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.2, 9, -20)
+
+[node name="Coin24" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.2, 9, 12)
+
+[node name="Coin25" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68.2, 9, 12)
+
+[node name="Coin26" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72.2, 9, 12)
+
+[node name="Coin27" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.2, 9, 12)
+
+[node name="Coin28" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88.2, 9, 12)
+
+[node name="Coin29" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.2, 9, 12)
+
+[node name="Coin30" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -104.2, 9, 12)
+
+[node name="Coin31" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -139.2, 18, 25)
 
 [node name="Audio" type="Node" parent="."]
 
@@ -3596,113 +3797,6 @@ autoplay = true
 max_distance = 10.0
 panning_strength = 0.0
 bus = &"Radio"
-
-[node name="PropLights" type="Node" parent="."]
-
-[node name="Prop_Light" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 39, 0)
-
-[node name="Prop_Light24" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 22, 7)
-
-[node name="Prop_Light25" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 22, 7)
-
-[node name="Prop_Light26" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22, 7)
-
-[node name="Prop_Light27" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 22, 7)
-
-[node name="Prop_Light28" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 22, 7)
-
-[node name="Prop_Light29" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 22, -7)
-
-[node name="Prop_Light30" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 22, -7)
-
-[node name="Prop_Light31" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 22, -7)
-
-[node name="Prop_Light32" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 22, -7)
-
-[node name="Prop_Light33" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 22, -7)
-
-[node name="Prop_Light2" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 39, 22)
-
-[node name="Prop_Light3" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 39, 42)
-
-[node name="Prop_Light4" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -66, 39, 42)
-
-[node name="Prop_Light5" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -88, 39, 42)
-
-[node name="Prop_Light6" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -110, 39, 42)
-
-[node name="Prop_Light7" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -130, 39, 42)
-
-[node name="Prop_Light8" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130, 39, 22)
-
-[node name="Prop_Light9" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130, 39, 0)
-
-[node name="Prop_Light10" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130, 39, -22)
-
-[node name="Prop_Light11" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -130, 39, -42)
-
-[node name="Prop_Light12" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -110, 39, -42)
-
-[node name="Prop_Light13" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -88, 39, -42)
-
-[node name="Prop_Light14" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -66, 39, -42)
-
-[node name="Prop_Light15" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -46, 39, -42)
-
-[node name="Prop_Light16" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -46, 39, -22)
-
-[node name="Prop_Light17" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -81, 8, -93)
-
-[node name="Prop_Light18" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -95, 8, -93)
-
-[node name="Prop_Light19" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -102, 10, -110)
-
-[node name="Prop_Light20" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -102, 10, -122)
-
-[node name="Prop_Light21" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74, 10, -110)
-
-[node name="Prop_Light22" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -74, 10, -122)
-
-[node name="Prop_Light23" parent="PropLights" instance=ExtResource("2_eub83")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -88, 10, -131)
-
-[node name="candle_plate" parent="PropLights" instance=ExtResource("27_d5gmc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -97, 0, -10)
-
-[node name="candle_plate2" parent="PropLights" instance=ExtResource("27_d5gmc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -106, -16, -29)
 
 [node name="EnvLights" type="Node" parent="."]
 
@@ -3765,104 +3859,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52, 17, 36)
 light_color = Color(1, 1, 0.752941, 1)
 omni_range = 40.0
 omni_attenuation = 0.5
-
-[node name="Coins" type="Node" parent="."]
-
-[node name="Coin" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 0)
-
-[node name="Coin2" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -4)
-
-[node name="Coin3" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, -8)
-
-[node name="Coin4" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 4)
-
-[node name="Coin5" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7, 8)
-
-[node name="Coin6" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24, 9, 0)
-
-[node name="Coin7" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 62, 1, 0)
-
-[node name="Coin8" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.5, 10, 0)
-
-[node name="Coin9" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.5, 10, -3)
-
-[node name="Coin10" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32.5, 10, 3)
-
-[node name="Coin11" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.2, 14, -7)
-
-[node name="Coin12" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39.2, 14, 7)
-
-[node name="Coin15" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.2, 11, -7)
-
-[node name="Coin16" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.2, 11, 7)
-
-[node name="Coin17" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.2, 8, -7)
-
-[node name="Coin18" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.2, 8, 7)
-
-[node name="Coin13" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.2, 12, 7)
-
-[node name="Coin14" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.2, 12, -7)
-
-[node name="Coin19" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44.2, 3, -20)
-
-[node name="Coin20" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -48.2, 5, -20)
-
-[node name="Coin21" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -52.2, 7, -20)
-
-[node name="Coin22" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -56.2, 9, -20)
-
-[node name="Coin23" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.2, 9, -20)
-
-[node name="Coin24" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -61.2, 9, 12)
-
-[node name="Coin25" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -68.2, 9, 12)
-
-[node name="Coin26" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -72.2, 9, 12)
-
-[node name="Coin27" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -80.2, 9, 12)
-
-[node name="Coin28" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88.2, 9, 12)
-
-[node name="Coin29" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -96.2, 9, 12)
-
-[node name="Coin30" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -104.2, 9, 12)
-
-[node name="Coin31" parent="Coins" instance=ExtResource("26_c1w2h")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -139.2, 18, 25)
-
-[node name="Checkpoint" parent="." instance=ExtResource("7_k55gp")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -26.8, 8, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_dx3ji")
@@ -6427,16 +6423,4 @@ script = ExtResource("1_qoetn")
 lvl_title = "The Library"
 lvl_description = "Stacks of bookshelves contain undiscernable knowledge."
 
-[node name="DialoguePrompter" type="Node" parent="."]
-script = ExtResource("44_bqt2n")
-dialogue_to_prompt = "library_chair"
-
-[node name="InteractionArea" type="Area3D" parent="DialoguePrompter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 8, 0)
-script = ExtResource("45_kyra7")
-prompt_text = "Contemplate"
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="DialoguePrompter/InteractionArea"]
-shape = SubResource("CylinderShape3D_57at2")
-
-[connection signal="activation" from="DialoguePrompter/InteractionArea" to="DialoguePrompter" method="trigger_dialogue"]
+[connection signal="activation" from="Entities/DialoguePrompter/InteractionArea" to="Entities/DialoguePrompter" method="trigger_dialogue"]

@@ -4,9 +4,9 @@ class_name Android
 signal trigger_hurt(hurtme)
 signal trigger_attack(damage)
 signal health_changed(new_health)
-signal dead()
+signal died()
 
-@export_category("ANDROID 9001")
+@export_category("ANDROID 72")
 @export_group("Gameplay Values and Objects")
 @export var MAX_HEALTH: int = 8
 var HEALTH:int = 8:
@@ -16,12 +16,14 @@ var HEALTH:int = 8:
 	#get:
 		#return godmode
 @export var _attack_type: PackedScene
+@export var death_spectacle: PackedScene
 enum States {idle,
 			walking,
 			attack,
 			airborne,
 			dead}
 @export var current_state = States.idle
+@export var view_bob:bool = true
 
 @export_group("Acceleration Values")
 @export var MOVEMENT_STRENGTH: float = 1.0
@@ -66,6 +68,7 @@ var pos_dict = []
 @onready var _head: Marker3D = $CameraHead
 @onready var _ears: AudioListener3D = $CameraHead/AudioListener3D
 @onready var _rotation_root: Node3D = $RotationRoot
+@onready var player_model = $RotationRoot/PlayerModel
 @onready var _anim_tree: AnimationTree = $RotationRoot/PlayerModel/AnimationTree
 #@onready var _anim_player: AnimationPlayer = $RotationRoot/PlayerModel/AnimationPlayer
 @onready var _iFrames_timer: Timer = $iFrames
@@ -80,17 +83,19 @@ var pos_dict = []
 
 
 
+
+
 func _ready():
 	HUD.visible = true
 	#GameMaster.MainMenu
 	HEALTH = 8
 	set_as_top_level(true)
 
-
 func _physics_process(delta):
 	_apply_gravity(delta)
-	_apply_jumping()
-	_apply_movement()
+	if current_state != States.dead:
+		_apply_jumping()
+		_apply_movement()
 	_apply_animation()
 	_stair_check()
 
@@ -144,22 +149,22 @@ func _apply_movement():
 
 	# This determines how the player moves if on/off the floor, plus moving or not
 	if direction && is_on_floor():
-		velocity.x = lerpf(velocity.x, direction.x * SPEED, LERP_VAL)
-		velocity.z = lerpf(velocity.z, direction.z * SPEED, LERP_VAL)
+		velocity.x = lerpf(velocity.x, direction.x * (SPEED * MOVEMENT_STRENGTH), LERP_VAL)
+		velocity.z = lerpf(velocity.z, direction.z * (SPEED * MOVEMENT_STRENGTH), LERP_VAL)
 	elif !direction && !is_on_floor():
-		velocity.x = lerpf(velocity.x, velocity.x * AIR_FRICTION, LERP_VAL)
-		velocity.z = lerpf(velocity.z, velocity.z * AIR_FRICTION, LERP_VAL)
+		velocity.x = lerpf(velocity.x, velocity.x * (AIR_FRICTION * MOVEMENT_STRENGTH), LERP_VAL)
+		velocity.z = lerpf(velocity.z, velocity.z * (AIR_FRICTION * MOVEMENT_STRENGTH), LERP_VAL)
 	elif direction && !is_on_floor():
-		velocity.x = lerpf(velocity.x, (direction.x * SPEED), AIR_SPEED)
-		velocity.z = lerpf(velocity.z, (direction.z * SPEED), AIR_SPEED)
+		velocity.x = lerpf(velocity.x, (direction.x * (SPEED * MOVEMENT_STRENGTH)), AIR_SPEED)
+		velocity.z = lerpf(velocity.z, (direction.z * (SPEED * MOVEMENT_STRENGTH)), AIR_SPEED)
 	else:
 		velocity.x = lerpf(velocity.x, 0.0, FRICTION)
 		velocity.z = lerpf(velocity.z, 0.0, FRICTION)
 
 	if Input.is_action_pressed("sprint"):
-		SPEED = SPRINT_SPEED
+		SPEED = SPRINT_SPEED * MOVEMENT_STRENGTH
 	elif !Input.is_action_pressed("sprint"):
-		SPEED = RUN_SPEED
+		SPEED = RUN_SPEED * MOVEMENT_STRENGTH
 	
 	move_and_slide()
 
@@ -183,63 +188,57 @@ func _input(event):
 	# and jump slightly higher!
 	if event.is_action_released("jump") and velocity.y > MIN_JUMP_VELOCITY:
 		velocity.y = MIN_JUMP_VELOCITY
-	
-
 
 
 func _process(delta):
 	tweener()
 	_ears.rotation = _spring_arm.rotation
-	if global_transform.origin.y < -50000: # Respawns the player if falling below this boundary.
-		global_transform.origin = Vector3(0,3,0)
+	if position.y < -50000: # Respawns the player if falling below this boundary.
+		position = Vector3(0,3,0)
 
 	if Input.is_action_just_pressed("attack1"):
 		var b = _attack_type.instantiate()
 		b.rotation_degrees = _rotation_root.global_transform.basis.get_euler()
 		_rotation_root.add_child(b)
+	
+	# Prevent player from accumulating rotations
+	_rotation_root.rotation_degrees.y = wrapf(_rotation_root.rotation_degrees.y, 0, 360) 
 
 func tweener():
-	if GameMaster.ViewBob:
+	if view_bob:
 		if FOLLOW_TWEEN:
 			FOLLOW_TWEEN.kill()
 		FOLLOW_TWEEN = get_tree().create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_EXPO).set_parallel(true)
 		FOLLOW_TWEEN.tween_property(_spring_arm, "position", _head.global_position,0.5)
 		FOLLOW_TWEEN.tween_property(_spring_arm, "position:y", _head.global_position.y,0.5)
-	elif !GameMaster.ViewBob:
+	elif !view_bob:
 		_spring_arm.global_position = _head.global_position
 	#if GameMaster.teleport():
 		#_spring_arm.global_position = _head.global_position
 
-func damage(amount):
+func damage(hurtme):
 	if _iFrames_timer.is_stopped():
 		_iFrames_timer.start()
-		_set_health(HEALTH - amount)
-
-func kill():
-	queue_free()
-	print("Android has been destroyed!")
+		_set_health(hurtme)
 
 func _set_health(value):
 	var prev_health = HEALTH
-	HEALTH = clamp(value, 0, MAX_HEALTH)
+	HEALTH -= clamp(value, 0, MAX_HEALTH)
 	if HEALTH != prev_health:
 		emit_signal("health_changed", HEALTH)
 		if HEALTH == 0:
 			kill()
-			emit_signal("dead")
 
-func _hit_box(area):
-#	if ![area.is_in_group("attack_player")].has(area):
-#		print("Player collided!")
-	if area.is_in_group("area_hurt"):
-		damage(1)
-		HUD.display_health = HEALTH
-		print("Damage taken! ", HEALTH)
-	if area.is_in_group("enemy"):
-		damage(1)
-		HUD.display_health = HEALTH
-		print("Damage taken! ", HEALTH)
-
+func kill():
+	current_state = States.dead
+	SPEED = 0
+	var ds = death_spectacle.instantiate()
+	ds.position.y += 1.8
+	add_child(ds)
+	player_model.visible = false
+	
+	emit_signal("dead")
+	print("Android has been destroyed!")
 
 
 func save():
@@ -252,3 +251,7 @@ func save():
 		"current_health" : HEALTH,
 	}
 	return save_dict
+
+func save_cfg():
+	GameMaster.save_game_cfg.set_value("Android", "position", position)
+	GameMaster.save_game_cfg.set_value("Android", "rotation", _rotation_root.rotation_degrees.y)

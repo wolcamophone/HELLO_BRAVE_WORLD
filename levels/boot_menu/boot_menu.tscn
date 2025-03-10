@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://levels/boot_menu/boot_menu.gd" id="1_qf5ao"]
 [ext_resource type="AudioStream" uid="uid://dduf4c54rb553" path="res://audio/Music/Meat Wall.ogg" id="2_ebpd8"]
 [ext_resource type="Script" path="res://levels/RotateSkybox.gd" id="2_o7u8n"]
-[ext_resource type="PackedScene" uid="uid://bx87bbwldno2l" path="res://levels/boot_menu/intro_cutscene.tscn" id="5_r0xcm"]
+[ext_resource type="VideoStream" path="res://intro_cutscene.ogv" id="5_qoti3"]
 
 [sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_a600k"]
 dof_blur_far_distance = 110.55
@@ -67,6 +67,15 @@ text = "Press [Esc] or Start to continue...
  
  "
 
-[node name="IntroCutscene" parent="." instance=ExtResource("5_r0xcm")]
+[node name="IntroCutscene" type="VideoStreamPlayer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stream = ExtResource("5_qoti3")
+autoplay = true
+expand = true
+buffering_msec = 1000
 
 [connection signal="finished" from="IntroCutscene" to="." method="_on_intro_cutscene_finished"]

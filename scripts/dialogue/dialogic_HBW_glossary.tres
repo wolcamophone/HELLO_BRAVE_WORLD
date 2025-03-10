@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="DialogicGlossary" load_steps=2 format=3 uid="uid://ceveu2ii0p1h"]
+
+[ext_resource type="Script" path="res://addons/dialogic/Modules/Glossary/glossary_resource.gd" id="1_ylhh7"]
+
+[resource]
+script = ExtResource("1_ylhh7")
+entries = {
+"Magi": {
+"case_sensitive": true,
+"name": "Magi",
+"text": "Three Core AI personalities tasked with running the facility and keeping each other in check. The three AI personalities are named after once living humans.",
+"title": "Magi"
+}
+}
+enabled = true
+_translation_id = ""
+_translation_keys = {}

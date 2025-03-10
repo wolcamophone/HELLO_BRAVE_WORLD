@@ -6,6 +6,7 @@ extends SpringArm3D
 @export var cam_lower_limit:int = 60
 @export var zoom_level:int = 2
 
+
 @onready var FOV = $Camera3D
 
 # Called when the node enters the scene tree for the first time.
@@ -51,3 +52,6 @@ func _physics_process(delta):
 	
 #	zoom += Input.get_axis("zoom_in", "zoom_out") * zoom_speed * delta
 #	zoom = clamp(zoom, zoom_maximum, zoom_minimum)
+
+func save_cfg():
+	GameMaster.save_game_cfg.set_value("Android", "camera_rotation", rotation_degrees.y)

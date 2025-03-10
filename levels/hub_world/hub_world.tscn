@@ -1,4 +1,4 @@
-[gd_scene load_steps=3181 format=4 uid="uid://b7gyexm8bs2u2"]
+[gd_scene load_steps=3184 format=4 uid="uid://b7gyexm8bs2u2"]
 
 [ext_resource type="PackedScene" uid="uid://do6cmx571d3b3" path="res://entities/checkpoint.tscn" id="2_nf3jo"]
 [ext_resource type="Script" path="res://levels/toggle_light_group.gd" id="3_awbo5"]
@@ -27,6 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://bufp0msl1wmul" path="res://audio/Music/candidate_reverb.ogg" id="19_qfuwq"]
 [ext_resource type="AudioStream" uid="uid://csc0mp713l2ht" path="res://audio/Music/idol_of_time_forgotten.ogg" id="21_0lti7"]
 [ext_resource type="Material" uid="uid://3mukvgy2flqn" path="res://Graphics/textures/metal/Windows.material" id="21_ad03e"]
+[ext_resource type="AudioStream" uid="uid://du2fr4vhtcgu0" path="res://audio/Ambient/Sourced_s.ogg" id="21_n6abl"]
 [ext_resource type="AudioStream" uid="uid://c1d36phqu2yyw" path="res://audio/Radio/penopticon.wav" id="22_7srcj"]
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="23_h67t0"]
 [ext_resource type="Material" uid="uid://dnkawekffpt4s" path="res://Graphics/textures/metal/shutter_door.material" id="23_y8fyg"]
@@ -109,6 +110,7 @@
 [ext_resource type="Script" path="res://levels/world_space_info.gd" id="106_870eb"]
 [ext_resource type="Material" uid="uid://bcphaq7seq7sq" path="res://Graphics/textures/metal/fence_linked2.material" id="111_dpwg8"]
 [ext_resource type="Material" uid="uid://kjgh4u04rlik" path="res://Graphics/textures/dev/skip.material" id="112_p7k3w"]
+[ext_resource type="PackedScene" uid="uid://cld3ln8yx636k" path="res://models/Props/prop_radio.tscn" id="113_mbeh5"]
 [ext_resource type="Texture2D" uid="uid://dgge7lnrequwl" path="res://Graphics/textures/metal/trash.png" id="117_8gfsr"]
 [ext_resource type="Texture2D" uid="uid://bpfif3w2k0gyn" path="res://Graphics/textures/metal/manhole.png" id="117_iwcqa"]
 
@@ -156,9 +158,13 @@ _data = {
 "rotate": SubResource("Animation_xqsj5")
 }
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_oww76"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_14x81"]
 height = 4.0
 radius = 4.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_oww76"]
+height = 6.0
+radius = 6.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6tpyo"]
 size = Vector3(30, 28, 58)
@@ -12745,8 +12751,8 @@ omni_range = 28.0
 omni_attenuation = 0.0
 
 [node name="OmniLight3D10" type="OmniLight3D" parent="EnvLights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88, 16, -96)
-light_energy = 0.1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 88, 16, -91)
+light_energy = 0.15
 light_bake_mode = 1
 distance_fade_enabled = true
 distance_fade_begin = 60.0
@@ -12918,12 +12924,6 @@ distance_fade_enabled = true
 distance_fade_begin = 80.0
 omni_range = 50.0
 
-[node name="OmniLight3D26" type="OmniLight3D" parent="EnvLights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 108, 16, -88)
-light_bake_mode = 1
-distance_fade_enabled = true
-omni_range = 50.0
-
 [node name="OmniLight3D27" type="OmniLight3D" parent="EnvLights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 128, 26, -30)
 light_color = Color(0.752941, 0.882353, 1, 1)
@@ -13064,7 +13064,9 @@ light_energy = 16.0
 light_bake_mode = 1
 shadow_enabled = true
 distance_fade_enabled = true
-distance_fade_begin = 12.0
+distance_fade_begin = 8.0
+distance_fade_shadow = 20.0
+distance_fade_length = 16.0
 omni_range = 46.0
 omni_attenuation = 0.66
 
@@ -13092,6 +13094,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -49, 1
 
 [node name="AnomalyGravwell" parent="Props" instance=ExtResource("91_ryx0e")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 9, -186)
+
+[node name="PropRadio" parent="Props" instance=ExtResource("113_mbeh5")]
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 123.3, 32, -80.6)
 
 [node name="BoxesOfAndroid" type="Node" parent="Props"]
 
@@ -13294,13 +13299,10 @@ visible = false
 [node name="Group4" type="Node3D" parent="Props/PropLights/CeilingLights"]
 
 [node name="Prop_Light21" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57, 20, -12)
-
-[node name="Prop_Light22" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57, 20, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57, 20, -7)
 
 [node name="Prop_Light23" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -57, 20, 12)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -57, 20, 7)
 
 [node name="Prop_Light24" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
 transform = Transform3D(0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, 0.965926, -70, 20, -12)
@@ -13324,58 +13326,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 24, 8)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -32, 24, 24)
 
 [node name="Prop_Light14" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -43, 20, -12)
-
-[node name="Prop_Light15" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43, 20, 0)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -43, 20, -8)
 
 [node name="Prop_Light16" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -43, 20, 12)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -43, 20, 8)
 
 [node name="Prop_Light27" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -98, 12, 18)
-
-[node name="Prop_Light28" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -98, 12, -10)
 
 [node name="Prop_Light29" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -98, 12, -26)
 
 [node name="Prop_Light30" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -110, 12, 18)
-
-[node name="Prop_Light31" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -110, 12, -10)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -116, 12, 18)
 
 [node name="Prop_Light32" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -110, 12, -26)
-
-[node name="Prop_Light33" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -122, 12, 18)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -116, 12, -26)
 
 [node name="Prop_Light34" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -122, 12, -10)
-
-[node name="Prop_Light35" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -122, 12, -26)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -116, 12, -4)
 
 [node name="Prop_Light36" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -134, 12, 18)
 
-[node name="Prop_Light37" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -134, 12, -10)
-
 [node name="Prop_Light39" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -98, 12, 2)
-
-[node name="Prop_Light40" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -110, 12, 2)
-
-[node name="Prop_Light41" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -122, 12, 2)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -98, 12, -4)
 
 [node name="Prop_Light42" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -134, 12, 2)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -134, 12, -4)
 
 [node name="Prop_Light38" parent="Props/PropLights/CeilingLights/Group4" instance=ExtResource("4_m8jw3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -134, 12, -26)
@@ -13533,11 +13511,24 @@ script = ExtResource("7_d74jb")
 dialogue_to_prompt = "chk_intro"
 
 [node name="InteractionArea" type="Area3D" parent="Entities/Checkpoints/DialogicPrompter"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, -22)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 10, -21)
 script = ExtResource("8_dt56e")
 prompt_text = "Examine Self"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Checkpoints/DialogicPrompter/InteractionArea"]
+shape = SubResource("CylinderShape3D_14x81")
+
+[node name="DialogicPrompter2" type="Node" parent="Entities/Checkpoints"]
+script = ExtResource("7_d74jb")
+dialogue_to_prompt = "magi"
+
+[node name="InteractionArea" type="Area3D" parent="Entities/Checkpoints/DialogicPrompter2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 172, 22, -180)
+script = ExtResource("8_dt56e")
+prompt_text = "Examine"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Checkpoints/DialogicPrompter2/InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -1)
 shape = SubResource("CylinderShape3D_oww76")
 
 [node name="Coins" type="Node" parent="Entities"]
@@ -13671,14 +13662,21 @@ transfer_to_level = "ip_2fort"
 transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 43.8, 8, -73)
 overwrite_prompt_text = "Travel to "
 dynamic_to_save = true
+transfer_to_level = "ip_forboeding"
 
 [node name="Audio" type="Node" parent="."]
 
-[node name="AudioZone" type="Area3D" parent="Audio"]
+[node name="Sourced" type="AudioStreamPlayer" parent="Audio"]
+stream = ExtResource("21_n6abl")
+volume_db = -12.0
+autoplay = true
+bus = &"Ambience"
+
+[node name="SoundscapeArea" type="Area3D" parent="Audio"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 37, 0, -213)
 audio_bus_name = &"Music"
 
-[node name="LisaFrank420" type="AudioStreamPlayer3D" parent="Audio/AudioZone"]
+[node name="LisaFrank420" type="AudioStreamPlayer3D" parent="Audio/SoundscapeArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 21, 40)
 stream = ExtResource("26_4j8fq")
 attenuation_model = 2
@@ -13687,7 +13685,7 @@ max_distance = 16.0
 panning_strength = 0.0
 bus = &"Music"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Audio/AudioZone"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Audio/SoundscapeArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 22, 33)
 shape = SubResource("BoxShape3D_6tpyo")
 
@@ -13729,7 +13727,7 @@ emission_angle_degrees = 80.0
 attenuation_filter_db = -6.0
 
 [node name="Campaign" type="AudioStreamPlayer3D" parent="Audio"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48, 12, -4)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 12, -4)
 stream = ExtResource("19_qfuwq")
 attenuation_model = 2
 volume_db = -8.0
@@ -23446,4 +23444,6 @@ lvl_description = "Deep in the bowels of an abandoned facility."
 environment_type = 1
 
 [connection signal="button_activation" from="Entities/Switches/Button" to="Props/PropLights/CeilingLights/Group1" method="toggle_lights"]
+[connection signal="button_activation" from="Entities/Switches/Button" to="Audio/Campaign" method="_play_music"]
 [connection signal="activation" from="Entities/Checkpoints/DialogicPrompter/InteractionArea" to="Entities/Checkpoints/DialogicPrompter" method="trigger_dialogue"]
+[connection signal="activation" from="Entities/Checkpoints/DialogicPrompter2/InteractionArea" to="Entities/Checkpoints/DialogicPrompter2" method="trigger_dialogue"]

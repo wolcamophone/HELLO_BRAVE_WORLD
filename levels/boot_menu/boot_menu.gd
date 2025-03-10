@@ -10,7 +10,7 @@ func _ready():
 	if GameMaster.active_player:
 		GameMaster.active_player.queue_free()
 
-	if GameMaster.skip_intro_cutscene:
+	if SettingsConfig.skip_intro_cutscene:
 		end_intro_cutscene()
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=374 format=4 uid="uid://nvof62vec04o"]
+[gd_scene load_steps=375 format=4 uid="uid://nvof62vec04o"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_5pgo5"]
 [ext_resource type="PackedScene" uid="uid://d2elnxgsc6btx" path="res://models/Props/prop_light.tscn" id="2_2g75j"]
@@ -24,6 +24,7 @@
 [ext_resource type="Material" uid="uid://2njddyyk0s50" path="res://Graphics/textures/dev/devdark.material" id="22_cs8c2"]
 [ext_resource type="Material" uid="uid://bfom1cedyo4sc" path="res://Graphics/textures/env/skybox_2d.material" id="23_d61do"]
 [ext_resource type="Material" uid="uid://3rtsjvhswgb4" path="res://Graphics/textures/tech/Tech14.material" id="24_h34h2"]
+[ext_resource type="Script" path="res://levels/world_space_info.gd" id="25_kik8d"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ox3d8"]
 sky_top_color = Color(0.0196078, 0.0705882, 0.101961, 1)
@@ -2495,3 +2496,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 10, -102)
 cast_shadow = 2
 gi_mode = 0
 mesh = SubResource("ArrayMesh_1ukkm")
+
+[node name="WorldSpaceInfo" type="Node" parent="."]
+script = ExtResource("25_kik8d")
+lvl_description = "Nobody knew exactly who she was or how she died. But when they opened up her purse they found a snail inside."

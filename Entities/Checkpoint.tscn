@@ -8,9 +8,6 @@
 [ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="6_8pi41"]
 [ext_resource type="AudioStream" uid="uid://ctb7c0hq7of0n" path="res://audio/SFX/computer_fan.ogg" id="7_flvl6"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_0gim0"]
-size = Vector3(2.2, 3, 1.2)
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8s43"]
 albedo_color = Color(0, 0, 0, 1)
 emission_enabled = true
@@ -28,7 +25,7 @@ normal_scale = 0.5
 normal_texture = ExtResource("6_3ka63")
 
 [sub_resource type="QuadMesh" id="QuadMesh_cgowo"]
-size = Vector2(0.2, 0.2)
+size = Vector2(0.1, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ly083"]
 transparency = 1
@@ -60,12 +57,11 @@ particles_anim_loop = false
 [sub_resource type="BoxShape3D" id="BoxShape3D_wkdc8"]
 size = Vector3(2, 0.2, 2)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_0gim0"]
+size = Vector3(2.2, 3, 1.2)
+
 [node name="Checkpoint" type="StaticBody3D" groups=["checkpoint", "entities", "persistent"]]
 script = ExtResource("1_ieiay")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, 1.5, -1.5)
-shape = SubResource("BoxShape3D_0gim0")
 
 [node name="VendingMachine" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
@@ -89,8 +85,12 @@ light_color = Color(0, 1, 0, 1)
 distance_fade_begin = 120.0
 omni_attenuation = 0.5
 
+[node name="BlinkTimer" type="Timer" parent="."]
+wait_time = 0.2
+
 [node name="Marker3D" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+gizmo_extents = 1.0
 
 [node name="InteractionArea" type="Area3D" parent="."]
 monitorable = false
@@ -99,6 +99,10 @@ script = ExtResource("6_8pi41")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
 shape = SubResource("BoxShape3D_wkdc8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.19209e-07, 1.5, -1.5)
+shape = SubResource("BoxShape3D_0gim0")
 
 [node name="ComputerFan" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2, -1.5)
@@ -110,5 +114,6 @@ max_distance = 20.0
 bus = &"Sound Effects"
 doppler_tracking = 1
 
+[connection signal="timeout" from="BlinkTimer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="InteractionArea" to="." method="_on_area_3d_area_exited"]

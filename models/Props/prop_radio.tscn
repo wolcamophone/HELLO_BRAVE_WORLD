@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://cld3ln8yx636k"]
+
+[ext_resource type="ArrayMesh" uid="uid://bpuo6ih8jxwej" path="res://models/Props/radio.obj" id="1_r1iya"]
+[ext_resource type="Texture2D" uid="uid://buifxcjxtouna" path="res://models/Props/radio.png" id="2_wx3nf"]
+[ext_resource type="Texture2D" uid="uid://yecvtdp8b6fl" path="res://models/Props/radio_n.png" id="3_4awsp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_igdtp"]
+albedo_texture = ExtResource("2_wx3nf")
+roughness = 0.5
+normal_enabled = true
+normal_texture = ExtResource("3_4awsp")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g6mha"]
+size = Vector3(1, 0.48, 0.3)
+
+[node name="PropRadio" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_r1iya")
+surface_material_override/0 = SubResource("StandardMaterial3D_igdtp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
+shape = SubResource("BoxShape3D_g6mha")

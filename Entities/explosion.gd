@@ -13,6 +13,7 @@ func _ready() -> void:
 	sparks.emitting = true
 	fireball.emitting = true
 	smoke.emitting = true
+	hurtbox.damage = damage
 
 func _process(delta: float) -> void:
 	hurtbox_timer += 1

@@ -2,11 +2,16 @@ extends Node
 
 ### *AHEM* This node acts as one overarching manager to handle game events like player teleporting, saving/loading game data, and loading levels to drop the player into. To increase the modularity of OOP-scripting for other potential projects, and because singletons are not reached by get_tree(), this node should not hold too many important vars and instead should call to other children nodes in the scene for the data to pass into functions. -CD
 
+signal level_loaded
+signal game_loaded
+signal game_saved
+signal teleported
+signal warped
+
 @export_category("Game Master")
 @export_group("Game Variables")
 @export var NewGame:bool = false
 @export var skip_intro_cutscene:bool = false
-@export var ViewBob:bool = true # TODO: This should be moved to settings at some point...
 
 # Level Related Vars
 var level_instance:Node3D
@@ -33,13 +38,12 @@ var checkpoints_available:Array
 
 # Saving & Loading Vars
 var save_game_path = "user://savegame_hbw.json"
+var save_game_path_cfg = "user://savegame_hbw.cfg"
 var load_data_dict:Dictionary = {}
-
-@export_group("Cheats")
-@export var godmode:bool = false
+var save_game_cfg:ConfigFile = ConfigFile.new()
+var load_game_cfg:ConfigFile = ConfigFile.new()
 
 @export_group("Environmental Variables")
-@export var DayTime:bool = true
 @export var DefaultLerpVal: float = 0.2
 
 @export_group("Player Variables")
@@ -58,7 +62,7 @@ var active_player:CharacterBody3D
 
 func _ready():
 	DisplayServer.window_set_title("HELLO BRAVE WORLD!")
-	DisplayServer.window_set_min_size(Vector2(800,600))
+	DisplayServer.window_set_min_size(Vector2(600, 400))
 	#MainMenu.title_button.visible = false
 	print("HELLO BRAVE WORLD!")
 
@@ -76,7 +80,6 @@ func unload_level():
 
 
 func load_level(level_name: String):
-	
 	await unload_level() # do this first off so the world space is made empty as not to stack levels on top of each other.
 
 	var level_path = "res://levels/%s/%s.tscn" % [level_name, level_name]
@@ -85,7 +88,7 @@ func load_level(level_name: String):
 		level_instance = level_resource.instantiate()
 		get_tree().change_scene_to_file(level_path)
 	elif !level_resource:
-		print("ERROR! Could not find level instance named" % level_name)
+		printerr("Could not find level instance named" % level_name)
 
 	# Hide the HUD if viewing intro cutscene or on boot menu.
 	if level_name != "boot_menu" or level_name != "intro_cutscene":
@@ -99,7 +102,6 @@ func load_level(level_name: String):
 	if get_tree().get("WorldSpaceInfo"):
 		HUD.visible = true
 		MainMenu.title_button.visible = true
-		MainMenu
 
 	#_ready() ### To refresh any objects outside of the level but still in game's runtime
 	if level_instance: ### Printing a bunch of stuff to show scene tree for better debug
@@ -112,6 +114,9 @@ func load_level(level_name: String):
 		
 		### Once we are sure every bit of the level is prepped, then we
 		spawn_player()
+	
+	print("Level loaded.")
+	emit_signal("level_loaded")
 
 
 func spawn_player():
@@ -122,9 +127,8 @@ func spawn_player():
 	add_child(p)
 	p.top_level = true
 	p.global_position = warp_position
-	p._rotation_root.rotation.y
 	active_player = p
-	print("Player respawn called")
+	print("Player respawn called.")
 
 ### Teleport targets a specific entity and retrieves rotation/position data from said entity to apply to the player. -CD
 func teleport(tp_target):
@@ -134,12 +138,11 @@ func teleport(tp_target):
 		active_player._spring_arm.rotation.y = tp_target.rotation.y
 		active_player._spring_arm.global_position = active_player._head.global_position # Avoid camera awkwardly zooping super fast back to player across level.
 	else:
-		print("Error! Could not find tp target")
+		printerr("Could not find tp target!")
 		return
 
 
-### Warp takes in a Vector3 of coordinates for the input 
-### and places the player at those coordinates. -CD
+### Warp takes in a Vector3 of coordinates for the input and places the player at those coordinates. -CD
 func warp(wp_position:Vector3, wp_rotation:int):
 	if wp_position && wp_rotation:
 		active_player.global_position = wp_position
@@ -147,9 +150,10 @@ func warp(wp_position:Vector3, wp_rotation:int):
 		active_player._spring_arm.rotation.y = wp_rotation
 		active_player._spring_arm.global_position = active_player._head.global_position # Avoid camera awkwardly zooping super fast back to player across level.
 	else:
-		print("Error! Invalid warp coordinates given. Please provide a Vector3 for global position and ")
+		printerr("Invalid warp coordinates given. Please provide a Vector3 for global position and ")
 		return
 
+### This function should aim to handle taking in anything with viable 3D coordinates and place the player there.
 func teleport_new(target):
 	if target is Vector4: # First values of Vector 4 correlate to XYZ positional values while fourth value W is the rotation in degrees.
 		active_player.global_position.x = target.x
@@ -162,12 +166,12 @@ func teleport_new(target):
 		active_player._spring_arm.rotation.y = target.rotation
 		active_player._rotation_root.rotation.y = target.rotation
 	else:
-		print("Error! Invalid 'target' given for 'teleport_new()'")
+		printerr("Invalid target '%s' given for 'teleport_new()'. target should be a Vector4 or Node3D." % target)
 		return
 	
 	active_player._spring_arm.global_position = active_player._head.global_position # Avoid camera awkwardly zooping super fast back to player across level.
 
-###	SAVE FUNCTION COPIED FROM ENGINE DOCS. -CD
+#region SAVE FUNCTION COPIED FROM ENGINE DOCS. -CD
 func save_game():
 	print("Saving...")
 	var game_save = FileAccess.open(save_game_path, FileAccess.WRITE)
@@ -192,12 +196,23 @@ func save_game():
 
 	print("Saved game to ", save_game_path)
 
+func save_game_as_cfg():
+	print("Saving as cfg...")
+	var saved_nodes = get_tree().get_nodes_in_group("persistent")
+	for node in saved_nodes:
+		# Check the node has a save function.
+		if !node.has_method("save_cfg"):
+			print("persistent node '%s' is missing a save() function, skipped" % node.name)
+			continue
+		# Call the node's save function.
+		node.call("save_cfg")
+		save_game_cfg.save(save_game_path_cfg)
+	print("Saved game as cfg to ", save_game_path_cfg)
+#endregion
 
-### LOAD FUNCTIONS REWRITTEN FROM GROUND UP AFTER ENGINE DOCS. -CD
+#region LOAD FUNCTIONS REWRITTEN FROM GROUND UP AFTER ENGINE DOCS. -CD
 func load_game():
 	print("Loading...")
-	
-	var saved_nodes = get_tree().get_nodes_in_group("persistent")
 	
 	if not FileAccess.file_exists(save_game_path):
 		print("No save game file was found to load.")
@@ -216,7 +231,7 @@ func load_game():
 				json_inst.get_error_line())
 				continue
 			
-			var load_data_dict:Dictionary = json_inst.data
+			load_data_dict = json_inst.data
 			print(load_data_dict) # Debug
 			
 			### Now we set the variables in the current game to match what is in the save file by running an IF through the loop to match appropriate data. 'i' is each line stored into load_data_dict. -CD
@@ -249,7 +264,17 @@ func load_game_2():
 	
 	#GameMaster.active_player.global_position.x = load_data_dict.player_save_data.pos_x
 	print("Finished Loading!")
+
+func load_game_from_cfg():
+	var load_game_data = load_game_cfg.load(save_game_path_cfg)
 	
+	if load_game_data == OK:
+		load_level(load_game_cfg.get_value("Level", "level"))
+		warp(load_game_cfg.get_value("Android", "position"), load_game_cfg.get_value("Android", "rotation"))
+	
+
+#endregion
+
 ### This is a generic func to be placed in other nodes within the group "persistent." As it currently stands, the save_game func only reaches out to child nodes in the tree, so this dict below and any other save funcs as a scene don't get written to the save file. -CD
 func save(): 
 	var save_dict = {
@@ -261,6 +286,9 @@ func save():
 		"checkpoint_previous" : checkpoint_previous,
 	}
 	return save_dict
+
+func save_as_cfg():
+	GameMaster.save_game_cfg.set_value("Category", "example value", name)
 
 func quit_game():
 	get_tree().quit()

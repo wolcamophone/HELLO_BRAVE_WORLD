@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyiy4kk3uk154"]
+
+[ext_resource type="Texture2D" uid="uid://cnayjag6olaul" path="res://Graphics/particles/p_star5.png" id="1_5mdne"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a8plt"]
+blend_mode = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 0, 1)
+albedo_texture = ExtResource("1_5mdne")
+albedo_texture_force_srgb = true
+billboard_keep_scale = true
+
+[sub_resource type="Curve" id="Curve_kyeg4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_px20y"]
+curve = SubResource("Curve_kyeg4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_s2mwa"]
+particle_flag_align_y = true
+emission_shape = 1
+emission_sphere_radius = 0.1
+direction = Vector3(0, 1, 0)
+spread = 95.0
+initial_velocity_min = 16.0
+initial_velocity_max = 16.0
+scale_curve = SubResource("CurveTexture_px20y")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ph3p6"]
+size = Vector2(0.5, 2)
+
+[node name="sparks" type="GPUParticles3D"]
+material_override = SubResource("StandardMaterial3D_a8plt")
+emitting = false
+amount = 12
+amount_ratio = 0.6
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 48
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_s2mwa")
+draw_pass_1 = SubResource("QuadMesh_ph3p6")

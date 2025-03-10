@@ -1,5 +1,5 @@
-class_name NPC
 extends CharacterBody3D
+class_name NPC
 
 @export var npc_name:String = ""
 
@@ -9,10 +9,9 @@ extends CharacterBody3D
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
-# Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-
+enum states {Idle, Walk}
 
 func _physics_process(delta):
 	# Add the gravity.

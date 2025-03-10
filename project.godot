@@ -28,6 +28,7 @@ buses/default_bus_layout="res://audio/default_bus_layout.tres"
 [autoload]
 
 GameMaster="*res://GameMaster.tscn"
+SettingsConfig="*res://settings_config.gd"
 AudioManager="*res://audio/AudioManager.tscn"
 HUD="*res://scripts/UI/HUD.tscn"
 MainMenu="*res://scripts/UI/MainMenu.tscn"
@@ -36,6 +37,7 @@ QuestVars="*res://scripts/QuestVars.gd"
 KeyIndex="*res://scripts/KeyIndex.gd"
 Cheats="*res://scripts/Cheats.gd"
 Dialogic="*res://addons/dialogic/Core/DialogicGameHandler.gd"
+SpookySystem="*res://scripts/spooky_system.gd"
 
 [dialogic]
 
@@ -43,12 +45,17 @@ directories/dch_directory={
 "character": "res://scripts/dialogue/character.dch"
 }
 directories/dtl_directory={
+"by_my_lance": "res://scripts/dialogue/by_my_lance.dtl",
 "chk_intro": "res://scripts/dialogue/chk_intro.dtl",
+"games_machines": "res://scripts/dialogue/games_machines.dtl",
 "heaven": "res://scripts/dialogue/heaven.dtl",
 "library_chair": "res://scripts/dialogue/library_chair.dtl",
+"magi": "res://scripts/dialogue/magi.dtl",
 "main_dialogue": "res://scripts/dialogue/main_dialogue.dtl",
+"matrix_pinged": "res://scripts/dialogue/matrix_pinged.dtl",
 "shadow": "res://scripts/dialogue/shadow.dtl",
-"test_dialogue": "res://scripts/dialogue/test_dialogue.dtl"
+"test_dialogue": "res://scripts/dialogue/test_dialogue.dtl",
+"the_coins": "res://scripts/dialogue/the_coins.dtl"
 }
 layout/style_list=["res://scripts/dialogue/dialogic_HBW_style.tres"]
 layout/default_style="res://scripts/dialogue/dialogic_HBW_style.tres"
@@ -72,11 +79,18 @@ choices/reveal_delay=0
 choices/reveal_by_input=false
 save/autosave_delay=60.0
 save/encryption_on_exports_only=true
-text/input_action="dialogic_default_action"
+text/input_action="interact"
 text/autoadvance_fixed_delay=2.0
 text/autopauses={}
 variables={}
 audio/type_sound_bus="User Interface"
+translation/enabled=false
+translation/original_locale="en"
+translation/file_mode=1
+translation/translation_folder=""
+translation/save_mode=0
+translation/add_separator=false
+glossary/glossary_files=["res://scripts/dialogue/dialogic_HBW_glossary.tres"]
 
 [display]
 
@@ -246,7 +260,6 @@ cam_zoom={
 dialogic_default_action={
 "deadzone": 0.5,
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":4194309,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
-, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":88,"physical_keycode":0,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":0,"button_index":0,"pressure":0.0,"pressed":false,"script":null)
 , Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":69,"key_label":0,"unicode":101,"location":0,"echo":false,"script":null)

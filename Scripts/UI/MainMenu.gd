@@ -35,9 +35,9 @@ func _on_start_pressed():
 	GameMaster.load_level("hub_world")
 	unpause_game()
 func _on_save_pressed():
-	GameMaster.save_game()
+	GameMaster.save_game_as_cfg()
 func _on_load_pressed():
-	GameMaster.load_game()
+	GameMaster.load_game_from_cfg()
 func _on_title_pressed():
 	GameMaster.load_level("boot_menu")
 	unpause_game()

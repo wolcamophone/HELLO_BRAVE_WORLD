@@ -5,4 +5,3 @@
 [node name="Game Master" type="Node" groups=["system"]]
 process_mode = 3
 script = ExtResource("1_ofe50")
-skip_intro_cutscene = true

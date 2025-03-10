@@ -1,0 +1,49 @@
+[gd_scene load_steps=7 format=3 uid="uid://b3tdgssfedodi"]
+
+[ext_resource type="Texture2D" uid="uid://b25g1nbs7pyq4" path="res://Graphics/particles/p_star2.png" id="1_345gk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ilff3"]
+blend_mode = 1
+no_depth_test = true
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(3, 2, 1, 1)
+albedo_texture = ExtResource("1_345gk")
+albedo_texture_force_srgb = true
+texture_filter = 0
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_kyeg4"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.25, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_5v8fu"]
+curve = SubResource("Curve_kyeg4")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3q78t"]
+angle_min = -90.0
+angle_max = 90.0
+angular_velocity_min = -720.0
+angular_velocity_max = 720.0
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_5v8fu")
+
+[sub_resource type="QuadMesh" id="QuadMesh_ph3p6"]
+
+[node name="fireball" type="GPUParticles3D"]
+material_override = SubResource("StandardMaterial3D_ilff3")
+emitting = false
+amount = 2
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 48
+process_material = SubResource("ParticleProcessMaterial_3q78t")
+draw_pass_1 = SubResource("QuadMesh_ph3p6")

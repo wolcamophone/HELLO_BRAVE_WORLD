@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://cbo0xk3jms3ww"]
+[gd_scene load_steps=13 format=3 uid="uid://cbo0xk3jms3ww"]
 
 [ext_resource type="Script" path="res://Player/android_033023.gd" id="1_pds78"]
 [ext_resource type="PackedScene" uid="uid://dm5vmdqfgedfg" path="res://scripts/attack_box.tscn" id="2_jmy7u"]
 [ext_resource type="PackedScene" uid="uid://c2f2xn44h37mg" path="res://Player/PlayerModel.tscn" id="3_2dqd0"]
 [ext_resource type="Script" path="res://Player/camera_movement.gd" id="3_aj8b8"]
+[ext_resource type="PackedScene" uid="uid://bqxet0paa37vn" path="res://entities/explosion.tscn" id="3_vgw04"]
 [ext_resource type="Texture2D" uid="uid://bbvgdi64v0q4n" path="res://Graphics/particles/p_shadow.png" id="6_kk83b"]
 [ext_resource type="AudioStream" uid="uid://bq02rq7rurx20" path="res://audio/SFX/jump.wav" id="6_r36ni"]
 
@@ -33,7 +34,7 @@ height = 2.4
 process_mode = 1
 process_physics_priority = 1
 top_level = true
-collision_layer = 6
+collision_layer = 7
 collision_mask = 15
 axis_lock_angular_x = true
 axis_lock_angular_y = true
@@ -46,6 +47,7 @@ floor_snap_length = 0.25
 safe_margin = 0.01
 script = ExtResource("1_pds78")
 _attack_type = ExtResource("2_jmy7u")
+death_spectacle = ExtResource("3_vgw04")
 GRAVITY = 20.0
 
 [node name="AttackTimer" type="Timer" parent="."]
@@ -104,7 +106,6 @@ transform = Transform3D(1, 0, 0, 0, 0.997564, 0.0697565, 0, -0.0697565, 0.997564
 current = true
 
 [node name="HitBox" type="Area3D" parent="." groups=["player"]]
-visible = false
 collision_layer = 9
 collision_mask = 9
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=356 format=4 uid="uid://0v6hyb56fymm"]
+[gd_scene load_steps=357 format=4 uid="uid://0v6hyb56fymm"]
 
 [ext_resource type="Environment" uid="uid://bqg5op2kr1ffn" path="res://levels/env_stockholm_day.tres" id="1_ffdfh"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_5dq8u"]
@@ -17,6 +17,7 @@
 [ext_resource type="Material" uid="uid://dl4dxy75hml3r" path="res://Graphics/textures/walls/Brick4.material" id="14_yojx2"]
 [ext_resource type="Material" uid="uid://c7knrjiilnaow" path="res://Graphics/textures/natural/Water2.material" id="15_bf2fo"]
 [ext_resource type="PackedScene" uid="uid://xk228ixujfgk" path="res://entities/info_player_start.tscn" id="17_pgjev"]
+[ext_resource type="Script" path="res://levels/world_space_info.gd" id="18_l8dm2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jb3ai"]
 albedo_texture = ExtResource("8_kpat3")
@@ -2224,3 +2225,11 @@ mesh = SubResource("ArrayMesh_a8ew0")
 
 [node name="InfoPlayerStart" parent="." instance=ExtResource("17_pgjev")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -41, 10, -33)
+
+[node name="WorldSpaceInfo" type="Node" parent="."]
+script = ExtResource("18_l8dm2")
+lvl_description = "Welcome to 2Fort!
+Our map rotation is as follows:
+...
+...
+..."

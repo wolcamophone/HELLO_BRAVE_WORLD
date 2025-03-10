@@ -1,14 +1,15 @@
 extends Area3D
-class_name area_hurt
+class_name AreaHurt
 
-signal damage_to_deal(hurt_amount)
+signal damage_to_deal(damage)
 
+@export var damage:int = 1
+@export var blip:bool = 0
+var thyme = Timer.new()
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	thyme.start(0.1)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	if blip && thyme.timeout:
+		queue_free()

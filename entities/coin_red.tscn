@@ -39,6 +39,7 @@ radius = 0.4
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_asoqb"]
 transparency = 1
 blend_mode = 1
+no_depth_test = true
 shading_mode = 0
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true

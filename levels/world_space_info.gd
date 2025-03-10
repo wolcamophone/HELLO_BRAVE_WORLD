@@ -23,6 +23,7 @@ class_name WorldSpaceInfo
 func _ready() -> void:
 	# Redirect: There is also code in the GM to check to see if the current scene is titled "boot_menu" or contains a WorldSpaceInfo node.
 	HUD.visible = true
+	self.add_to_group("persistent")
 
 func save():
 	var save_dict = {
@@ -33,3 +34,6 @@ func save():
 			"checkpoint_previous" : GameMaster.checkpoint_previous,
 	}
 	return save_dict
+
+func save_cfg():
+	GameMaster.save_game_cfg.set_value("Level", "level", get_parent().name)

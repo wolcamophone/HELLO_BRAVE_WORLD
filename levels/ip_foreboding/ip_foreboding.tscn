@@ -6666,8 +6666,10 @@ mesh = SubResource("ArrayMesh_6owir")
 [node name="entity_108_collision_shape" type="CollisionShape3D" parent="FuncGodotMap/entity_108_func_detail"]
 shape = SubResource("ConcavePolygonShape3D_4ho4l")
 
-[node name="WorldSpaceInfo" type="Node" parent="."]
-script = ExtResource("13_me3gg")
-
 [node name="Node3D" parent="." instance=ExtResource("14_503h0")]
 transform = Transform3D(-1.31134e-07, 3, -1.31134e-07, 0, -1.31134e-07, -3, -3, -1.31134e-07, 5.73206e-15, -183.9, -508, 0)
+
+[node name="WorldSpaceInfo" type="Node" parent="."]
+script = ExtResource("13_me3gg")
+lvl_title = "The Spike Fields"
+lvl_description = "Something about this place shuns you away."
