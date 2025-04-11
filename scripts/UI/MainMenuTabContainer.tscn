@@ -1,0 +1,106 @@
+[gd_scene load_steps=4 format=3 uid="uid://bp3rfaahyv4x3"]
+
+[ext_resource type="Theme" uid="uid://24bml6th7hoi" path="res://Graphics/UI/Def_UI.theme" id="1_61mfa"]
+[ext_resource type="PackedScene" uid="uid://b63gj2ifboghy" path="res://scripts/UI/Console/console.tscn" id="1_qkco0"]
+[ext_resource type="PackedScene" uid="uid://b0e5eduwpbkep" path="res://scripts/UI/Settings_Menu4.tscn" id="2_1xwja"]
+
+[node name="TabContainer" type="TabContainer"]
+custom_minimum_size = Vector2(780, 580)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_61mfa")
+tab_alignment = 2
+current_tab = 0
+
+[node name="MainMenu" type="TabBar" parent="."]
+layout_mode = 2
+focus_neighbor_right = NodePath("../Settings")
+focus_next = NodePath("../Settings")
+metadata/_tab_index = 0
+
+[node name="HBox" type="HBoxContainer" parent="MainMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MainMenu/HBox"]
+layout_mode = 2
+
+[node name="VBox" type="VBoxContainer" parent="MainMenu/HBox/PanelContainer"]
+layout_mode = 2
+
+[node name="Resume" type="Button" parent="MainMenu/HBox/PanelContainer/VBox"]
+layout_mode = 2
+focus_next = NodePath("../Title")
+focus_previous = NodePath("../Load")
+text = "Resume"
+
+[node name="Start" type="Button" parent="MainMenu/HBox/PanelContainer/VBox"]
+layout_mode = 2
+focus_next = NodePath("../Load")
+focus_previous = NodePath("../Quit")
+text = "Start Game"
+
+[node name="Save" type="Button" parent="MainMenu/HBox/PanelContainer/VBox"]
+layout_mode = 2
+focus_next = NodePath("../Resume")
+focus_previous = NodePath("../Start")
+text = "Save Game"
+
+[node name="Load" type="Button" parent="MainMenu/HBox/PanelContainer/VBox"]
+layout_mode = 2
+focus_next = NodePath("../Resume")
+focus_previous = NodePath("../Start")
+text = "Load Game"
+
+[node name="ToMovementTest" type="Button" parent="MainMenu/HBox/PanelContainer/VBox"]
+custom_minimum_size = Vector2(200, 40)
+layout_mode = 2
+text = "To Movement Test"
+
+[node name="Title" type="Button" parent="MainMenu/HBox/PanelContainer/VBox"]
+layout_mode = 2
+text = "Exit to Title"
+
+[node name="Quit" type="Button" parent="MainMenu/HBox/PanelContainer/VBox"]
+layout_mode = 2
+focus_next = NodePath("../Start")
+focus_previous = NodePath("../Title")
+text = "Quit to Desktop"
+
+[node name="Console" parent="MainMenu/HBox" instance=ExtResource("1_qkco0")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Settings" type="TabBar" parent="."]
+visible = false
+layout_mode = 2
+focus_neighbor_left = NodePath("../MainMenu")
+focus_previous = NodePath("../MainMenu")
+metadata/_tab_index = 1
+
+[node name="SettingsMenu" parent="Settings" groups=["system", "user_interface"] instance=ExtResource("2_1xwja")]
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 760.0
+offset_bottom = 535.0
+grow_horizontal = 1
+grow_vertical = 1

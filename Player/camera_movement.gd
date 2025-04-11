@@ -7,7 +7,8 @@ extends SpringArm3D
 @export var zoom_level:int = 2
 
 
-@onready var FOV = $Camera3D
+@onready var camera = $Camera3D
+@onready var shutter = $CamZoom
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,17 +23,17 @@ func _unhandled_input(event):
 		zoom_level += 1
 		if zoom_level > 3:
 			zoom_level = 1
-		print("Zoom Level: ",zoom_level)
-
+		#print("Zoom Level: ",zoom_level)
 		if zoom_level == 1:
 			spring_length = 0
-			FOV.fov = 85
+			camera.fov = (SettingsConfig.fov_desired) + 2
 		elif zoom_level == 2:
 			spring_length = 4
-			FOV.fov = 80
+			camera.fov = SettingsConfig.fov_desired
 		elif zoom_level == 3:
-			spring_length = 8
-			FOV.fov = 76
+			spring_length = 6
+			camera.fov = (SettingsConfig.fov_desired) - 2
+		shutter.play()
 
 
 func _process(delta):

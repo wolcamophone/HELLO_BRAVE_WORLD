@@ -1,7 +1,9 @@
 extends CanvasLayer
 
 @export var paused = false
+@onready var main_menu: TabContainer = $Control/TabContainer
 @onready var main_menu_tab:Control = $Control/TabContainer/MainMenu
+@onready var resume_button: Button = $Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Resume
 @onready var start_button:Control = $Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Start
 @onready var title_button:Control = $Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Title
 @onready var save_button: Button = $Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Save
@@ -15,6 +17,15 @@ func _ready():
 	paused = false
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	self.visible = false
+	
+	main_menu.set_anchors_preset(Control.PRESET_CENTER)
+	
+	resume_button.pressed.connect(_on_resume_pressed)
+	start_button.pressed.connect(_on_start_pressed)
+	title_button.pressed.connect(_on_title_pressed)
+	save_button.pressed.connect(_on_save_pressed)
+	load_button.pressed.connect(_on_load_pressed)
+	to_movement_test_button.pressed.connect(_on_to_movement_test_pressed)
 
 
 func _unhandled_input(event):
@@ -27,9 +38,6 @@ func _unhandled_input(event):
 func _on_resume_pressed():
 	unpause_game()
 func _on_quit_pressed():
-#	get_tree().quit()
-#	get_tree().get_root().propagate_notification(NOTIFICATION_WM_CLOSE_REQUEST)
-#	SceneTree.quit()
 	GameMaster.quit_game()
 func _on_start_pressed():
 	GameMaster.load_level("hub_world")

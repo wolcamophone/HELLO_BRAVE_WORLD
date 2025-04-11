@@ -231,13 +231,12 @@ func _set_health(value):
 
 func kill():
 	current_state = States.dead
-	SPEED = 0
 	var ds = death_spectacle.instantiate()
 	ds.position.y += 1.8
 	add_child(ds)
 	player_model.visible = false
 	
-	emit_signal("dead")
+	emit_signal("died")
 	print("Android has been destroyed!")
 
 
@@ -254,4 +253,7 @@ func save():
 
 func save_cfg():
 	GameMaster.save_game_cfg.set_value("Android", "position", position)
+	GameMaster.save_game_cfg.set_value("Android", "position_x", position.x)
+	GameMaster.save_game_cfg.set_value("Android", "position_y", position.y)
+	GameMaster.save_game_cfg.set_value("Android", "position_z", position.z)
 	GameMaster.save_game_cfg.set_value("Android", "rotation", _rotation_root.rotation_degrees.y)

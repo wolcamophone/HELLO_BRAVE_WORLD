@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://04c6i0xynxd4"]
+
+[ext_resource type="Shader" path="res://Graphics/Shaders/lightweight_crt.gdshader" id="1_wgxix"]
+
+[resource]
+shader = ExtResource("1_wgxix")
+shader_parameter/resolution = Vector2(320, 180)
+shader_parameter/scan_line_amount = 0.5
+shader_parameter/warp_amount = 0.05
+shader_parameter/vignette_amount = 0.5
+shader_parameter/vignette_intensity = 1.0
+shader_parameter/grille_amount = 0.5
+shader_parameter/brightness_boost = 1.2

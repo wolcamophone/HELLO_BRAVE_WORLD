@@ -1,0 +1,7 @@
+TIPS FOR USING ENV_PRESETS
+
+1. When making a new Node3D derived Scene, you can click the 3 vertical dots to the right of the sun and globe icon to edit the placeholder WorldEnvironment nodes held in Config for the engine editor. Do this to test and create whole new environments at your leisure. Having no WorldEnvironment node in your Scene may give you very bad and funky looking lighting (that is to say none).
+
+2. To add these preset environment attributes to your scene, click the dropdown arrow to the right of the Environment property under the Inspector and select "Quick Load..." From here, you can select any other instance of environment you have used throughout the game as well as the presets in this directory!
+
+3. IT IS ADVISED NOT TO IMMEDIATELY START TWEAKING THESE ENVIRONMENT VALUES DIRECTLY. Instead, if you want to make new environment settings specific to your current Scene, click the dropdown menu again and hit "Make Unique," then name your new attributes preset after your level directory with "env_" prefix. If you do not do this, you will start editing the attributes for that instance directly which will affect every level using that preset.

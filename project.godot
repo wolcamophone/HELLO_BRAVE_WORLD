@@ -45,6 +45,7 @@ directories/dch_directory={
 "character": "res://scripts/dialogue/character.dch"
 }
 directories/dtl_directory={
+"broken_as_built": "res://scripts/dialogue/broken_as_built.dtl",
 "by_my_lance": "res://scripts/dialogue/by_my_lance.dtl",
 "chk_intro": "res://scripts/dialogue/chk_intro.dtl",
 "games_machines": "res://scripts/dialogue/games_machines.dtl",
@@ -126,10 +127,7 @@ prop_static="Props never meant to move, part of decore or world space."
 area_water="Brushes or areas of water that the player can swim through."
 area_music="Brushes or areas that trigger music to play."
 area_ambient="Brushes or areas that limit distance of ambient tracks."
-
-[gui]
-
-theme/custom="res://Graphics/UI/HBW.theme"
+WorldSpaceInfo="Contains info for the current level."
 
 [importer_defaults]
 

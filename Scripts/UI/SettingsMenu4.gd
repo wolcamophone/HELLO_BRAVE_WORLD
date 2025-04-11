@@ -24,9 +24,6 @@ var Resolutions: Dictionary = {
 }
 # Check this against save func later to see if .json supports Vector2
 var current_display_resolution:Vector2i
-var fullscreen_on:bool = false
-var view_bob:bool = true
-var vignette_enabled:bool = true
 #endregion
 
 #region Audio Menu Vars
@@ -62,21 +59,26 @@ func _on_skip_intro_cutscene_toggled(toggled_on: bool) -> void:
 func _on_player_color_changed(color_arg: Color) -> void:
 	SettingsConfig.player_color = color_arg
 	if GameMaster.active_player:
-		GameMaster.active_player.player_model.player_mesh.material_override.albedo_color = set_player_color
+		GameMaster.active_player.player_model.player_mesh.material_override.albedo_color = color_arg
 
 func _on_player_emission_changed(color_arg: Color) -> void:
 	SettingsConfig.emission_color = color_arg
 	if GameMaster.active_player:
-		GameMaster.active_player.player_model.player_mesh.material_override.emission = set_emission_color
+		GameMaster.active_player.player_model.player_mesh.material_override.emission = color_arg
 #endregion
 
 
 #region Video Settings Funcs
 func _on_fullscreen_toggled(toggled_on):
-	if toggled_on:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	else:
+	SettingsConfig.fullscreen_on = toggled_on
+	
+	if !toggled_on:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+	elif toggled_on:
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	
+	
+	
 
 func AddResolutions():
 	for r in Resolutions:
@@ -89,7 +91,7 @@ func _on_ResButton_item_selected(index):
 	current_display_resolution = Resolutions[size]
 
 func _on_VSync_toggled(button_pressed):
-	SettingsConfig
+	SettingsConfig.vsync_enabled = button_pressed
 	DisplayServer.window_set_vsync_mode(button_pressed)
 
 func _on_view_bob_toggled(toggled_on):
@@ -97,6 +99,7 @@ func _on_view_bob_toggled(toggled_on):
 	GameMaster.active_player.view_bob = SettingsConfig.view_bob
 
 func _on_AntiAlias_item_selected(index):
+	SettingsConfig.anti_alias_index = index
 	get_viewport().set_msaa(index)
 	if index == 5:
 		get_viewport().set_use_fxaa(true)
@@ -114,7 +117,7 @@ func _on_LargeCursor_toggled(button_pressed):
 
 func _on_vignette_toggled(toggled_on: bool) -> void:
 	SettingsConfig.vignette_enabled = toggled_on
-	HUD._vignette.visible = vignette_enabled
+	HUD._vignette.visible = SettingsConfig.vignette_enabled
 #endregion
 
 
@@ -181,53 +184,4 @@ func _on_Shell_pressed():
 
 func _on_Shell2_pressed():
 	OS.shell_open(ProjectSettings.globalize_path("res://"))
-#endregion
-
-
-#region Save/Load Config
-func save_settings():
-	save_settings_config.set_value("Gameplay", "skip_intro_cutscene", skip_intro_cutscene)
-	save_settings_config.set_value("Gameplay", "player_color", set_player_color)
-	save_settings_config.set_value("Gameplay", "emission_color", set_emission_color)
-	
-	save_settings_config.set_value("Video", "fullscreen_on", fullscreen_on)
-	save_settings_config.set_value("Video", "view_bob", view_bob)
-	save_settings_config.set_value("Video", "vignette_enabled", vignette_enabled)
-	save_settings_config.set_value("Video", "current_display_resolution", current_display_resolution)
-	
-	save_settings_config.set_value("Audio", "audio_vol_master", audio_vol_master)
-	save_settings_config.set_value("Audio", "audio_vol_music", audio_vol_music)
-	save_settings_config.set_value("Audio", "audio_vol_sfx", audio_vol_sfx)
-	save_settings_config.set_value("Audio", "audio_vol_ambience", audio_vol_ambience)
-	save_settings_config.set_value("Audio", "audio_vol_voice", audio_vol_voice)
-	save_settings_config.set_value("Audio", "audio_vol_radio", audio_vol_radio)
-	save_settings_config.set_value("Audio", "audio_vol_ui", audio_vol_ui)
-	
-	save_settings_config.save(save_settings_path)
-
-func load_settings():
-	var load_settings_data = load_settings_config.load(save_settings_path)
-	
-	if load_settings_data == OK:
-		skip_intro_cutscene = load_settings_config.get_value("Gameplay", "skip_intro_cutscene")
-		set_player_color = load_settings_config.get_value("Gameplay", "player_color")
-		set_emission_color = load_settings_config.get_value("Gameplay", "emission_color")
-		
-		fullscreen_on = load_settings_config.get_value("Video", "fullscreen_on")
-		view_bob = load_settings_config.get_value("Video", "view_bob")
-		vignette_enabled = load_settings_config.get_value("Video", "vignette_enabled")
-		current_display_resolution = load_settings_config.get_value("Video", "current_display_resolution")
-		
-		audio_vol_master = load_settings_config.get_value("Audio", "audio_vol_master")
-		audio_vol_music = load_settings_config.get_value("Audio", "audio_vol_music")
-		audio_vol_sfx = load_settings_config.get_value("Audio", "audio_vol_sfx")
-		audio_vol_ambience = load_settings_config.get_value("Audio", "audio_vol_ambience")
-		audio_vol_voice = load_settings_config.get_value("Audio", "audio_vol_voice")
-		audio_vol_radio = load_settings_config.get_value("Audio", "audio_vol_radio")
-		audio_vol_ui = load_settings_config.get_value("Audio", "audio_vol_ui")
-		
-		call("_on_player_color_changed")
-		call("_on_player_emission_changed")
-	else:
-		printerr("File provided was not a valid settings.cfg file!")
 #endregion

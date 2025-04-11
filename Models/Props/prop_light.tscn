@@ -14,6 +14,7 @@ size = Vector3(2, 0.2, 3)
 
 [node name="CeilingLight" type="StaticBody3D" groups=["prop_light"]]
 script = ExtResource("1_nbhv1")
+_range = 24
 
 [node name="Long" type="StaticBody3D" parent="."]
 visible = false
@@ -49,4 +50,5 @@ shadow_enabled = true
 distance_fade_enabled = true
 distance_fade_begin = 120.0
 distance_fade_shadow = 120.0
-omni_range = 20.0
+omni_range = 24.0
+omni_attenuation = 1.2

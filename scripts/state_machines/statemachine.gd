@@ -2,6 +2,7 @@ extends Node
 class_name StateMachine
 
 @export var initial_state:State
+var current_state
 
 var states:Dictionary={}
 
@@ -14,3 +15,6 @@ func _ready() -> void:
 	if initial_state:
 		initial_state.enter()
 		current_state = initial_state
+
+func change_state():
+	pass

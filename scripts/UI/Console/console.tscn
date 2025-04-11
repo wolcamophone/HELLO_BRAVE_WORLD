@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b63gj2ifboghy"]
+[gd_scene load_steps=3 format=3 uid="uid://b63gj2ifboghy"]
 
+[ext_resource type="Theme" uid="uid://24bml6th7hoi" path="res://Graphics/UI/Def_UI.theme" id="1_hw0ix"]
 [ext_resource type="Script" path="res://scripts/UI/Console.gd" id="1_mf3kt"]
 
 [node name="Console" type="Control"]
@@ -9,6 +10,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_hw0ix")
 script = ExtResource("1_mf3kt")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -22,10 +24,10 @@ grow_vertical = 2
 [node name="TextOutput" type="TextEdit" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-placeholder_text = "\"Hello Brave World!\"
-Indev
+placeholder_text = "\"Hello_Brave_World!\"
 
 Controls:
+Look Around = Mouse Move or Right Stick
 Move = WASD or Left Stick
 Sprint = Shift or RT
 Sneak = Ctrl or LT
@@ -34,9 +36,7 @@ Jump = Spacebar or A/X  -  (You can double jump and jump off of walls!)
 Interact = E or Y/△
 Attack = Left Click or X/⬜  -  (Currently doesn't do anything.)
 
-Toggle Zoom = Mouse Middle-Click or R3
-
-The goal is to explore and chill. There is no save functionality yet."
+Toggle Zoom = Mouse Middle-Click or R3"
 editable = false
 drag_and_drop_selection_enabled = false
 virtual_keyboard_enabled = false

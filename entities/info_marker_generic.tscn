@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://5u2jpl3pqgxq"]
+
+[ext_resource type="ArrayMesh" uid="uid://dchb44hn41a0l" path="res://models/Vitruvian2.obj" id="1_vcufn"]
+[ext_resource type="Material" uid="uid://d2eb8451sr6wj" path="res://Graphics/Materials/test_blue.material" id="2_skxy2"]
+[ext_resource type="Script" path="res://entities/info_marker_generic.gd" id="3_vgtbe"]
+
+[node name="InfoMarkerGeneric" type="MeshInstance3D" groups=["gizmo"]]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+mesh = ExtResource("1_vcufn")
+surface_material_override/0 = ExtResource("2_skxy2")
+script = ExtResource("3_vgtbe")

@@ -3,6 +3,8 @@ class_name State
 
 signal state_transition
 
+@export_enum("idle") var states_possible
+
 func enter():
 	print("Play an animation here, like a footslide to stop.")
 	pass

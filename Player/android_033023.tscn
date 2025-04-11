@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cbo0xk3jms3ww"]
+[gd_scene load_steps=14 format=3 uid="uid://cbo0xk3jms3ww"]
 
 [ext_resource type="Script" path="res://Player/android_033023.gd" id="1_pds78"]
 [ext_resource type="PackedScene" uid="uid://dm5vmdqfgedfg" path="res://scripts/attack_box.tscn" id="2_jmy7u"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bqxet0paa37vn" path="res://entities/explosion.tscn" id="3_vgw04"]
 [ext_resource type="Texture2D" uid="uid://bbvgdi64v0q4n" path="res://Graphics/particles/p_shadow.png" id="6_kk83b"]
 [ext_resource type="AudioStream" uid="uid://bq02rq7rurx20" path="res://audio/SFX/jump.wav" id="6_r36ni"]
+[ext_resource type="AudioStream" uid="uid://ti1mmrwjlviw" path="res://audio/SFX/camera_shutter.wav" id="6_vjwwm"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_utlkd"]
 radius = 0.35
@@ -105,6 +106,13 @@ cam_upper_limit = -75
 transform = Transform3D(1, 0, 0, 0, 0.997564, 0.0697565, 0, -0.0697565, 0.997564, 0, 0, 0)
 current = true
 
+[node name="CamZoom" type="AudioStreamPlayer" parent="CameraHead/SpringArm3D"]
+stream = ExtResource("6_vjwwm")
+volume_db = -20.0
+mix_target = 2
+max_polyphony = 2
+bus = &"Sound Effects"
+
 [node name="HitBox" type="Area3D" parent="." groups=["player"]]
 collision_layer = 9
 collision_mask = 9
@@ -127,11 +135,11 @@ normal_fade = 0.25
 upper_fade = 0.1
 
 [node name="Jump" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 stream = ExtResource("6_r36ni")
 attenuation_model = 3
-volume_db = -10.0
-max_distance = 20.0
-max_polyphony = 3
+volume_db = -8.0
+max_distance = 24.0
 bus = &"Sound Effects"
 attenuation_filter_db = 0.0
 doppler_tracking = 2

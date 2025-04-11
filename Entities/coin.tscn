@@ -1,35 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://3x5nioot53bp"]
+[gd_scene load_steps=12 format=3 uid="uid://3x5nioot53bp"]
 
 [ext_resource type="Script" path="res://entities/Coin.gd" id="1_wj3t6"]
-[ext_resource type="Texture2D" uid="uid://bobr1vvpxi61y" path="res://Graphics/textures/natural/sand_black.png" id="2_kfu11"]
 [ext_resource type="AudioStream" uid="uid://bmjtjjexghuwi" path="res://audio/SFX/hl2/flashlight1.wav" id="2_yf7d4"]
-[ext_resource type="Texture2D" uid="uid://b3i6ltsdtsc1c" path="res://Graphics/textures/metal/airduct_grate_02b.png" id="3_h0l7c"]
+[ext_resource type="Material" uid="uid://xkhmhujpvyc0" path="res://entities/coin.material" id="3_sdn00"]
 [ext_resource type="Texture2D" uid="uid://bl8tdhw7utsl5" path="res://Graphics/particles/p_star3.png" id="5_v7nf4"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrk60"]
-shading_mode = 2
-disable_ambient_light = true
-vertex_color_use_as_albedo = true
-vertex_color_is_srgb = true
-albedo_color = Color(1, 1, 0, 1)
-albedo_texture_force_srgb = true
-metallic = 1.0
-metallic_specular = 1.0
-metallic_texture_channel = 4
-roughness = 0.5
-emission_enabled = true
-emission = Color(1, 1, 0, 1)
-emission_operator = 1
-emission_texture = ExtResource("2_kfu11")
-rim_tint = 1.0
-rim_texture = ExtResource("3_h0l7c")
-refraction_scale = 1.0
-texture_filter = 0
-disable_receive_shadows = true
-proximity_fade_distance = 12.0
-
 [sub_resource type="CylinderMesh" id="CylinderMesh_6plj4"]
-material = SubResource("StandardMaterial3D_qrk60")
+material = ExtResource("3_sdn00")
 top_radius = 0.25
 bottom_radius = 0.25
 height = 0.1

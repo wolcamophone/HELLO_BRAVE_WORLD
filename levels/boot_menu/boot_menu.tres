@@ -1,16 +1,18 @@
 [gd_resource type="Environment" load_steps=4 format=3 uid="uid://5wulfb8tnebp"]
 
-[ext_resource type="Texture2D" uid="uid://blsq1m11mureo" path="res://Graphics/textures/env/sky4.jpg" id="1_r7bjd"]
+[ext_resource type="Texture2D" uid="uid://t6bt0spe7ua" path="res://levels/noise_texture_2d_stary_sky.tres" id="1_ia165"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_1j3k1"]
-panorama = ExtResource("1_r7bjd")
+panorama = ExtResource("1_ia165")
 
 [sub_resource type="Sky" id="Sky_mvlne"]
 sky_material = SubResource("PanoramaSkyMaterial_1j3k1")
+process_mode = 1
+radiance_size = 4
 
 [resource]
 background_mode = 2
 sky = SubResource("Sky_mvlne")
-sky_custom_fov = 60.0
+sky_custom_fov = 100.0
 sky_rotation = Vector3(0.575959, 0, 0)
 fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)

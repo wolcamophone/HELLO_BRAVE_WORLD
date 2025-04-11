@@ -1,17 +1,19 @@
-class_name InteractiveDoor
 extends StaticBody3D
+class_name InteractiveDoor
 
-@export var overwrite_prompt_text:String
-@export var dynamic_to_save:bool 
-@export var warp_door:bool
+@export var overwrite_prompt_text:String = "Open Door"
+@export var dynamic_to_save:bool = false
+@export var warp_door:bool = false
 @export var transfer_to_level:String
-@export var warp_to_position:Vector3
+@export var transfer_to_position:Vector4 ## XYZ coordinates followed by rotation
+#@export var model:MeshInstance3D
 
 #@onready var door_model = 
-@onready var trigger_zone = $InteractionArea
-@onready var animation_player = $AnimationPlayer
-@onready var sound = $AudioStreamPlayer3D
-#@export var model:MeshInstance3D
+@onready var trigger_zone:InteractionArea = $InteractionArea
+@onready var animation_player:AnimationPlayer = $AnimationPlayer
+@onready var sound:AudioStreamPlayer3D = $AudioStreamPlayer3D
+@onready var timer:Timer = $Timer
+
 
 var open:bool = false
 var player_detected:bool = false
@@ -19,8 +21,13 @@ var player_detected:bool = false
 func _ready():
 	if open:
 		animation_player.seek(0.6)
+		
 	if overwrite_prompt_text != null:
 		trigger_zone.prompt_text = overwrite_prompt_text
+	elif overwrite_prompt_text == null && !warp_door:
+		trigger_zone.prompt_text = "Open Door"
+	elif overwrite_prompt_text == null && warp_door:
+		trigger_zone.prompt_text = "Travel to %s" % transfer_to_level
 
 func _on_area_3d_area_entered(area):
 	if area.is_in_group("player"):
@@ -39,8 +46,8 @@ func _input(event):
 		if !warp_door:
 			open = !open
 		elif warp_door:
-			GameMaster.warp_position = warp_to_position
 			GameMaster.load_level(transfer_to_level)
+			GameMaster.level_transfer_destination = transfer_to_position
 
 func save():
 	if dynamic_to_save:

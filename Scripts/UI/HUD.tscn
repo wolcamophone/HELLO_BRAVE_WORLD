@@ -1,12 +1,16 @@
-[gd_scene load_steps=17 format=3 uid="uid://bb2hcbb3vaxyu"]
+[gd_scene load_steps=19 format=3 uid="uid://bb2hcbb3vaxyu"]
 
 [ext_resource type="Script" path="res://scripts/UI/HUD.gd" id="1_n7kud"]
 [ext_resource type="JSON" path="res://_deprec/Dialogue/Test_dialogue.json" id="2_o1v84"]
 [ext_resource type="Theme" uid="uid://24bml6th7hoi" path="res://Graphics/UI/Def_UI.theme" id="2_v80lq"]
 [ext_resource type="Texture2D" uid="uid://bqcok4y83au00" path="res://Graphics/UI/HUD/health_radial_0.png" id="3_v2uxw"]
 [ext_resource type="Texture2D" uid="uid://cugasf7g76vhn" path="res://Graphics/UI/vignette.png" id="4_cix3b"]
+[ext_resource type="Texture2D" uid="uid://d4fykdqigfar6" path="res://Graphics/UI/crt.png" id="4_esusg"]
 [ext_resource type="Texture2D" uid="uid://dvxf4do6lmw1h" path="res://Graphics/UI/HUD/health_radial_2.png" id="4_iclye"]
 [ext_resource type="Texture2D" uid="uid://ruijco38yggy" path="res://Graphics/UI/AtlasController.png" id="8_786k8"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_foj5r"]
+blend_mode = 3
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_67jke"]
 blend_mode = 3
@@ -99,6 +103,27 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 mouse_filter = 1
 theme = ExtResource("2_v80lq")
+
+[node name="Overlays" type="Control" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CRT" type="TextureRect" parent="Control/Overlays"]
+texture_filter = 6
+material = SubResource("CanvasItemMaterial_foj5r")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_esusg")
+flip_h = true
 
 [node name="Vignette" type="TextureRect" parent="Control"]
 modulate = Color(1, 1, 1, 0.25098)

@@ -1,15 +1,17 @@
-[gd_scene load_steps=137 format=4 uid="uid://bu06r5hylwxxx"]
+[gd_scene load_steps=139 format=4 uid="uid://bu06r5hylwxxx"]
 
 [ext_resource type="Script" path="res://levels/world_space_info.gd" id="1_fajpr"]
+[ext_resource type="PackedScene" uid="uid://xk228ixujfgk" path="res://entities/info_player_start.tscn" id="1_fl706"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_ibfb2"]
+[ext_resource type="PackedScene" uid="uid://gfaocvo7xcox" path="res://entities/anomaly_gravwell.tscn" id="2_c2p4d"]
 [ext_resource type="Script" path="res://scripts/trigger_kill.gd" id="5_sfa57"]
-[ext_resource type="Environment" uid="uid://bn5lbw6ng06y5" path="res://levels/env_mojave_day.tres" id="6_1mrwq"]
+[ext_resource type="Environment" uid="uid://bn5lbw6ng06y5" path="res://levels/env_presets/env_mojave_day.tres" id="6_1mrwq"]
 [ext_resource type="Material" uid="uid://ckrghhgkfyh6k" path="res://Graphics/Materials/test_red.material" id="6_kak01"]
 [ext_resource type="Material" uid="uid://c7knrjiilnaow" path="res://Graphics/textures/natural/Water2.material" id="8_ce4ej"]
 [ext_resource type="Texture2D" uid="uid://2dcur4jypo0m" path="res://Graphics/textures/dev/colortest.png" id="8_fm18e"]
 [ext_resource type="Material" uid="uid://kjgh4u04rlik" path="res://Graphics/textures/dev/skip.material" id="9_05djo"]
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="9_5wl4i"]
-[ext_resource type="PackedScene" uid="uid://d4ko1bybcv8mu" path="res://entities/doors/Door.tscn" id="9_cs2u8"]
+[ext_resource type="PackedScene" uid="uid://d4ko1bybcv8mu" path="res://entities/doors/sliding_door.tscn" id="9_cs2u8"]
 [ext_resource type="Material" uid="uid://2njddyyk0s50" path="res://Graphics/textures/dev/devdark.material" id="10_4vjan"]
 [ext_resource type="PackedScene" uid="uid://dhh28gadc62kf" path="res://scripts/test_tp_obj.tscn" id="11_aydrv"]
 [ext_resource type="Material" uid="uid://d0ah22lp2mlmy" path="res://Graphics/textures/dev/orange/texture_08.material" id="11_i7y3s"]
@@ -22,11 +24,11 @@
 [ext_resource type="Material" uid="uid://bqpgj6ynoqav" path="res://Graphics/textures/wood/wood_12.material" id="16_n1ppt"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lo6xu"]
-size = Vector3(5, 4, 5)
+size = Vector3(5, 4, 2)
 
 [sub_resource type="BoxMesh" id="BoxMesh_myir0"]
 material = ExtResource("6_kak01")
-size = Vector3(5, 4, 5)
+size = Vector3(5, 4, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_4kr4c"]
 size = Vector3(4, 6, 0.1)
@@ -748,6 +750,28 @@ data = PackedVector3Array(-2, 1, -2, -2, -1, -2, -1.5, -1, -2, -2, 1, -2, -1.5, 
 
 [node name="Entities" type="Node" parent="."]
 
+[node name="InfoPlayerStart" parent="Entities" instance=ExtResource("1_fl706")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0.1, 10)
+
+[node name="InfoPlayerStart2" parent="Entities" instance=ExtResource("1_fl706")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0.1, 10)
+
+[node name="InfoPlayerStart3" parent="Entities" instance=ExtResource("1_fl706")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.1, 10)
+
+[node name="InfoPlayerStart4" parent="Entities" instance=ExtResource("1_fl706")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.1, 10)
+
+[node name="InfoPlayerStart5" parent="Entities" instance=ExtResource("1_fl706")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0.1, 10)
+
+[node name="InfoPlayerStart6" parent="Entities" instance=ExtResource("1_fl706")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0.1, 10)
+
+[node name="AnomalyGravwell" parent="Entities" instance=ExtResource("2_c2p4d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 13, -46)
+force = 24.0
+
 [node name="TestTPObj" parent="Entities" node_paths=PackedStringArray("tp_target") instance=ExtResource("11_aydrv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 1, 8)
 tp_target = NodePath("../TestTPObj2")
@@ -762,13 +786,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 36, 0, 36)
 [node name="MrTestDialogue2" parent="Entities" instance=ExtResource("16_6s6pw")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 0, 36)
 
-[node name="InteractiveDoor" parent="Entities" instance=ExtResource("9_cs2u8")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 0, 6)
-warp_door = true
-transfer_to_level = "hub_world"
-
 [node name="KillPlane" type="Area3D" parent="Entities"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, 5, -36)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 14, -78)
 script = ExtResource("5_sfa57")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/KillPlane"]
@@ -776,6 +795,58 @@ shape = SubResource("BoxShape3D_lo6xu")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Entities/KillPlane"]
 mesh = SubResource("BoxMesh_myir0")
+
+[node name="Doors" type="Node" parent="Entities"]
+
+[node name="InteractiveDoor" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 0, 6)
+warp_door = true
+transfer_to_level = "hub_world"
+
+[node name="InteractiveDoor2" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, -38)
+warp_door = true
+transfer_to_level = "indev_complex"
+
+[node name="InteractiveDoor3" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, -32)
+warp_door = true
+transfer_to_level = "ip_2fort"
+
+[node name="InteractiveDoor4" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, -26)
+warp_door = true
+transfer_to_level = "ip_bigcity"
+
+[node name="InteractiveDoor5" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, -20)
+warp_door = true
+transfer_to_level = "ip_cherisher"
+
+[node name="InteractiveDoor6" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, -14)
+warp_door = true
+transfer_to_level = "ip_foreboding"
+
+[node name="InteractiveDoor7" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, -8)
+warp_door = true
+transfer_to_level = "ip_library"
+
+[node name="InteractiveDoor8" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, -2)
+warp_door = true
+transfer_to_level = "ip_locai"
+
+[node name="InteractiveDoor9" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, 4)
+warp_door = true
+transfer_to_level = "ip_music_ledge"
+
+[node name="InteractiveDoor10" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, 10)
+warp_door = true
+transfer_to_level = "movement_testing"
 
 [node name="Props" type="Node" parent="."]
 
@@ -792,6 +863,7 @@ surface_material_override/0 = ExtResource("12_55050")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="Props"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, 1, -32)
+metadata/_edit_group_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Props/RigidBody3D"]
 mesh = SubResource("BoxMesh_1fpn6")
@@ -816,6 +888,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50, 2, -30)
 light_color = Color(0, 1, 0, 1)
 omni_attenuation = 0.0
 
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 38, 4, 20)
+light_energy = 2.0
+shadow_enabled = true
+omni_range = 24.0
+omni_attenuation = 0.0
+
 [node name="Audio" type="Node" parent="."]
 
 [node name="TestingMusic" type="AudioStreamPlayer" parent="Audio"]
@@ -832,6 +911,7 @@ shadow_enabled = true
 environment = ExtResource("6_1mrwq")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="World"]
+visible = false
 navigation_mesh = SubResource("NavigationMesh_kjo52")
 
 [node name="FuncGodotMap" type="Node3D" parent="World"]
@@ -1209,7 +1289,7 @@ mesh = SubResource("ArrayMesh_rqov1")
 [node name="entity_11_collision_shape" type="CollisionShape3D" parent="World/FuncGodotMap/entity_11_func_detail"]
 shape = SubResource("ConcavePolygonShape3D_0f4hb")
 
-[node name="WorldSpaceInfo" type="Node3D" parent="World"]
+[node name="WorldSpaceInfo" type="Node3D" parent="."]
 script = ExtResource("1_fajpr")
 lvl_title = "Movement Testing"
 lvl_description = "An area for debugging player movement and test entities."

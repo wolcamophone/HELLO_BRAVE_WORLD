@@ -71,6 +71,9 @@ func _on_timer_timeout() -> void:
 	pin_light_blink_timer.start()
 	pin_light.visible = !pin_light.visible
 
+func register():
+	GameMaster.checkpoints_available[name] = self
+
 #func save():
 	#var save_dict = {
 		#"filename" : get_scene_file_path(),
