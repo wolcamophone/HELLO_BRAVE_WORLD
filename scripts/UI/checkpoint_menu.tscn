@@ -1,0 +1,98 @@
+[gd_scene load_steps=3 format=3 uid="uid://1c3dtl6kjtnj"]
+
+[ext_resource type="Theme" uid="uid://24bml6th7hoi" path="res://Graphics/UI/Def_UI.theme" id="1_leot0"]
+[ext_resource type="Script" path="res://scripts/UI/checkpoint_menu.gd" id="2_ie7ep"]
+
+[node name="CheckpointMenu" type="CanvasLayer"]
+script = ExtResource("2_ie7ep")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_leot0")
+
+[node name="MenuContainer" type="PanelContainer" parent="Control"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -101.0
+offset_right = 150.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MenuContainer"]
+layout_mode = 2
+
+[node name="LabelLevelName" type="Label" parent="Control/MenuContainer/VBoxContainer"]
+layout_mode = 2
+text = "level_name"
+clip_text = true
+
+[node name="LabelCheckpointName" type="Label" parent="Control/MenuContainer/VBoxContainer"]
+layout_mode = 2
+text = "- - checkpoint_name"
+clip_text = true
+
+[node name="Travel" type="Button" parent="Control/MenuContainer/VBoxContainer"]
+layout_mode = 2
+text = "Travel"
+
+[node name="Save" type="Button" parent="Control/MenuContainer/VBoxContainer"]
+layout_mode = 2
+text = "Save"
+
+[node name="StatusReport" type="Button" parent="Control/MenuContainer/VBoxContainer"]
+layout_mode = 2
+text = "Status Report"
+
+[node name="Close" type="Button" parent="Control/MenuContainer/VBoxContainer"]
+layout_mode = 2
+text = "Close"
+
+[node name="TravelContainer" type="PanelContainer" parent="Control"]
+visible = false
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -200.0
+offset_right = 300.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Control/TravelContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/TravelContainer/VBoxContainer2"]
+layout_mode = 2
+text = "Travel To..."
+
+[node name="ItemList" type="ItemList" parent="Control/TravelContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+item_count = 1
+
+[node name="Close" type="Button" parent="Control/TravelContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Close"
+
+[connection signal="pressed" from="Control/MenuContainer/VBoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Control/MenuContainer/VBoxContainer/StatusReport" to="." method="_prompt_status_report"]
+[connection signal="pressed" from="Control/MenuContainer/VBoxContainer/Close" to="." method="_close_menu"]
+[connection signal="pressed" from="Control/TravelContainer/VBoxContainer2/Close" to="." method="_close_travel_menu"]

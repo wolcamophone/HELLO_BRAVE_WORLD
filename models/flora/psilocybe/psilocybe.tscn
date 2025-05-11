@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://dftcjm61bw0c0"]
+
+[ext_resource type="Texture2D" uid="uid://bw33l4mrlwxcp" path="res://models/flora/psilocybe/psilocybe.png" id="1_g3pmw"]
+[ext_resource type="ArrayMesh" uid="uid://b0jhsht61qp0k" path="res://models/flora/psilocybe/psilocybe.obj" id="2_nnvxo"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_veofm"]
+albedo_texture = ExtResource("1_g3pmw")
+texture_filter = 0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_bhmw6"]
+height = 0.25
+radius = 0.1
+
+[node name="psilocybe" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_veofm")
+mesh = ExtResource("2_nnvxo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+shape = SubResource("CylinderShape3D_bhmw6")

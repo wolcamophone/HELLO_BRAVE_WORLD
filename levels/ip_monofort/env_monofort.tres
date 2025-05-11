@@ -1,0 +1,29 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://d2u2r61oh8jy3"]
+
+[ext_resource type="Texture2D" uid="uid://t6bt0spe7ua" path="res://levels/noise_texture_2d_stary_sky.tres" id="1_ihtmy"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_2fcyp"]
+sky_top_color = Color(0, 0, 0.0470588, 1)
+sky_horizon_color = Color(0.00392157, 0.305882, 0.67451, 1)
+sky_curve = 0.1
+sky_cover = ExtResource("1_ihtmy")
+ground_bottom_color = Color(0.2, 0.106667, 0, 1)
+ground_horizon_color = Color(0.00392157, 0.305882, 0.67451, 1)
+ground_curve = 0.05
+
+[sub_resource type="Sky" id="Sky_64m8d"]
+sky_material = SubResource("ProceduralSkyMaterial_2fcyp")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_64m8d")
+ambient_light_source = 2
+ambient_light_color = Color(0.335, 0.37625, 0.5, 1)
+ambient_light_energy = 2.0
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.0941176, 0.0313726, 0, 1)
+fog_density = 1.0
+fog_sky_affect = 0.5
+fog_depth_begin = 16.0
+fog_depth_end = 128.0

@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://crcmvtigof1v0"]
+
+[ext_resource type="Texture2D" uid="uid://dch7wd30oe5nv" path="res://models/flora/amantia_muscaria/amantia_muscaria.png" id="1_efa2s"]
+[ext_resource type="ArrayMesh" uid="uid://vy0a0lsh4q7v" path="res://models/flora/amantia_muscaria/amantia_muscaria_2.obj" id="2_ikguw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4htgd"]
+albedo_texture = ExtResource("1_efa2s")
+texture_filter = 0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ck08h"]
+height = 0.2
+radius = 0.08
+
+[node name="amantia_muscaria_2" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_4htgd")
+mesh = ExtResource("2_ikguw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+shape = SubResource("CylinderShape3D_ck08h")

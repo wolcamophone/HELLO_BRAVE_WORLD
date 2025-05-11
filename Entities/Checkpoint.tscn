@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://do6cmx571d3b3"]
+[gd_scene load_steps=17 format=3 uid="uid://do6cmx571d3b3"]
 
 [ext_resource type="Script" path="res://entities/checkpoint.gd" id="1_ieiay"]
 [ext_resource type="ArrayMesh" uid="uid://buccyf3jux5ms" path="res://models/Props/VendingMachine.obj" id="4_ig2xs"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://vwaxqoy4ypgr" path="res://models/Props/VendingMachine_n.png" id="6_3ka63"]
 [ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="6_8pi41"]
 [ext_resource type="AudioStream" uid="uid://ctb7c0hq7of0n" path="res://audio/SFX/computer_fan.ogg" id="7_flvl6"]
+[ext_resource type="AudioStream" uid="uid://dr1w57105xfw7" path="res://audio/SFX/hl2/suitchargeno1.wav" id="8_bog8o"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p8s43"]
 albedo_color = Color(0, 0, 0, 1)
@@ -62,6 +63,9 @@ size = Vector3(2.2, 3, 1.2)
 
 [node name="Checkpoint" type="StaticBody3D" groups=["checkpoint", "entities", "persistent"]]
 script = ExtResource("1_ieiay")
+status_report = null
+claimed = null
+active = null
 
 [node name="VendingMachine" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
@@ -83,6 +87,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_kggh1")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.3, 0.2)
 light_color = Color(0, 1, 0, 1)
 distance_fade_begin = 120.0
+omni_range = 6.0
 omni_attenuation = 0.5
 
 [node name="BlinkTimer" type="Timer" parent="."]
@@ -113,6 +118,11 @@ autoplay = true
 max_distance = 20.0
 bus = &"Sound Effects"
 doppler_tracking = 1
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -1)
+stream = ExtResource("8_bog8o")
+pitch_scale = 1.2
 
 [connection signal="timeout" from="BlinkTimer" to="." method="_on_timer_timeout"]
 [connection signal="area_entered" from="InteractionArea" to="." method="_on_area_3d_area_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=862 format=4 uid="uid://cmb1kn2p3w221"]
+[gd_scene load_steps=864 format=4 uid="uid://cmb1kn2p3w221"]
 
 [ext_resource type="Environment" uid="uid://beq60j21ecfcs" path="res://levels/env_presets/env_wyoming_night.tres" id="1_dx3ji"]
 [ext_resource type="PackedScene" uid="uid://cld3ln8yx636k" path="res://models/Props/prop_radio.tscn" id="1_oadv0"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://do6cmx571d3b3" path="res://entities/checkpoint.tscn" id="7_k55gp"]
 [ext_resource type="Texture2D" uid="uid://clo5i3oryrg1k" path="res://Graphics/textures/wood/Mahogany.png" id="8_n43xs"]
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="9_1cvsi"]
+[ext_resource type="Script" path="res://levels/trigger_level_transfer.gd" id="9_sfc8l"]
 [ext_resource type="Texture2D" uid="uid://h67me886xp0r" path="res://Graphics/textures/wood/Oak.png" id="10_poowb"]
 [ext_resource type="Material" uid="uid://bbysc055l1f0s" path="res://Graphics/textures/wood/Ghost.material" id="11_2md1w"]
 [ext_resource type="Texture2D" uid="uid://cc88c64i3mxkx" path="res://Graphics/textures/floors/CarpetPurple.png" id="12_0ju5w"]
@@ -50,6 +51,9 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_57at2"]
 height = 4.0
 radius = 4.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8l8wj"]
+size = Vector3(16, 6, 16)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lfb40"]
 albedo_texture = ExtResource("12_0ju5w")
@@ -3776,6 +3780,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -104.2, 9, 12)
 [node name="Coin31" parent="Entities/Coins" instance=ExtResource("26_c1w2h")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -139.2, 18, 25)
 
+[node name="Area3D" type="Area3D" parent="Entities"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 84, -133, 0)
+monitorable = false
+script = ExtResource("9_sfc8l")
+transfer_to_level = "hub_overgrown"
+transfer_to_position = Vector4(-8, 64, -21, -105)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/Area3D"]
+shape = SubResource("BoxShape3D_8l8wj")
+
 [node name="Audio" type="Node" parent="."]
 
 [node name="Ambient" type="AudioStreamPlayer3D" parent="Audio"]
@@ -6426,3 +6440,4 @@ lvl_title = "The Library"
 lvl_description = "Stacks of bookshelves contain undiscernable knowledge."
 
 [connection signal="activation" from="Entities/DialoguePrompter/InteractionArea" to="Entities/DialoguePrompter" method="trigger_dialogue"]
+[connection signal="area_entered" from="Entities/Area3D" to="Entities/Area3D" method="_on_area_entered"]

@@ -11,19 +11,19 @@
 [ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="6_yvgei"]
 [ext_resource type="PackedScene" uid="uid://dgtl1mooaeiqs" path="res://entities/npcs/mr_eyes/mr_eyes.tscn" id="7_itfbw"]
 [ext_resource type="Material" uid="uid://bk6ms3ic1l1gr" path="res://Graphics/textures/stone/concrete_panel.material" id="9_nhxhm"]
-[ext_resource type="Material" uid="uid://dlen5vhnflyp1" path="res://Graphics/textures/Metal/crosshatch_2.material" id="11_m4okg"]
+[ext_resource type="Material" uid="uid://dlen5vhnflyp1" path="res://Graphics/textures/metal/crosshatch_2.material" id="11_m4okg"]
 [ext_resource type="Material" uid="uid://b5ht36jtqrx7p" path="res://Graphics/textures/walls/bricks_metalbars_reenforced.material" id="13_xhg77"]
 [ext_resource type="Material" uid="uid://b7bmrxepcj1ne" path="res://Graphics/textures/stone/concrete_dark.material" id="13_xs85i"]
-[ext_resource type="Material" uid="uid://c3xg4fqsapg80" path="res://Graphics/textures/Floors/Tile1.material" id="15_cybtl"]
+[ext_resource type="Material" uid="uid://c3xg4fqsapg80" path="res://Graphics/textures/floors/Tile1.material" id="15_cybtl"]
 [ext_resource type="Material" uid="uid://jpuqoghxkk6e" path="res://Graphics/textures/stone/stone_rough.material" id="16_280nl"]
-[ext_resource type="Material" uid="uid://dovj60yolvcin" path="res://Graphics/textures/Metal/metal_brick_chiseled.material" id="16_efgqc"]
+[ext_resource type="Material" uid="uid://dovj60yolvcin" path="res://Graphics/textures/metal/metal_brick_chiseled.material" id="16_efgqc"]
 [ext_resource type="Material" uid="uid://bjweat0yjfx25" path="res://Graphics/textures/stone/concrete_rebar.material" id="18_2hqjm"]
 [ext_resource type="PackedScene" uid="uid://d4ko1bybcv8mu" path="res://entities/doors/sliding_door.tscn" id="18_7co5l"]
-[ext_resource type="Material" uid="uid://bs4bkt32yaywm" path="res://Graphics/textures/Metal/metal_blush.material" id="18_nk8ib"]
+[ext_resource type="Material" uid="uid://bs4bkt32yaywm" path="res://Graphics/textures/metal/metal_blush.material" id="18_nk8ib"]
 [ext_resource type="AudioStream" uid="uid://c5u57m5gtk4jo" path="res://audio/Music/macho.ogg" id="21_dctyx"]
-[ext_resource type="Material" uid="uid://dywuyr2iug15i" path="res://Graphics/textures/Walls/Brick8.material" id="22_mo7mx"]
-[ext_resource type="Material" uid="uid://c7j5exh7wdkvq" path="res://Graphics/textures/Walls/brick_moss.material" id="23_wiu86"]
-[ext_resource type="Material" uid="uid://evg3g1v3t1yj" path="res://Graphics/textures/Walls/Brick6.material" id="24_17mwf"]
+[ext_resource type="Material" uid="uid://dywuyr2iug15i" path="res://Graphics/textures/walls/Brick8.material" id="22_mo7mx"]
+[ext_resource type="Material" uid="uid://c7j5exh7wdkvq" path="res://Graphics/textures/walls/brick_moss.material" id="23_wiu86"]
+[ext_resource type="Material" uid="uid://evg3g1v3t1yj" path="res://Graphics/textures/walls/Brick6.material" id="24_17mwf"]
 [ext_resource type="Material" uid="uid://c7knrjiilnaow" path="res://Graphics/textures/natural/Water2.material" id="24_d8yah"]
 [ext_resource type="Material" uid="uid://dmie2ihw2mdjf" path="res://Graphics/textures/paintings/o_canada.material" id="25_36hqd"]
 [ext_resource type="Material" uid="uid://8kxh6nbpkgum" path="res://Graphics/textures/metal/metal_brushed.material" id="25_gjoa1"]
@@ -43,8 +43,8 @@
 [ext_resource type="Material" uid="uid://jc1y3x18ispf" path="res://Graphics/textures/paintings/alter_man_ape.material" id="42_8n14b"]
 [ext_resource type="Material" uid="uid://d2ttl1ppewalr" path="res://Graphics/textures/paintings/the_nightmare.material" id="43_47suk"]
 [ext_resource type="Material" uid="uid://ceq04ywa7pt1y" path="res://Graphics/textures/paintings/justlikewitchesatblackmasses.material" id="44_h7wus"]
-[ext_resource type="Material" uid="uid://3rtsjvhswgb4" path="res://Graphics/textures/Tech/Tech14.material" id="44_tx7mn"]
-[ext_resource type="Material" uid="uid://dwygjcex07oof" path="res://Graphics/textures/Metal/FenceCrooked.material" id="45_flim7"]
+[ext_resource type="Material" uid="uid://3rtsjvhswgb4" path="res://Graphics/textures/tech/Tech14.material" id="44_tx7mn"]
+[ext_resource type="Material" uid="uid://dwygjcex07oof" path="res://Graphics/textures/metal/FenceCrooked.material" id="45_flim7"]
 [ext_resource type="Material" uid="uid://bggrhydv2x2q8" path="res://Graphics/textures/paintings/medusa.material" id="45_ogv66"]
 [ext_resource type="Material" uid="uid://eesaq8s0mem" path="res://Graphics/textures/paintings/face_of_war.material" id="46_yk7j6"]
 [ext_resource type="Material" uid="uid://dm320rjcnwss4" path="res://Graphics/textures/paintings/blackdog.material" id="47_qth71"]
@@ -2125,11 +2125,17 @@ omni_shadow_mode = 0
 
 [node name="Doors" type="Node" parent="Entities"]
 
-[node name="InteractiveDoor" parent="Entities/Doors" instance=ExtResource("18_7co5l")]
+[node name="DoorDepthsHub" parent="Entities/Doors" instance=ExtResource("18_7co5l")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -18, 0, -12)
 overwrite_prompt_text = "Travel to Depths Hub"
 warp_door = true
 transfer_to_level = "hub_world"
+
+[node name="DoorGridhalls" parent="Entities/Doors" instance=ExtResource("18_7co5l")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -66, 32, -248)
+overwrite_prompt_text = "Travel to Gridhalls"
+warp_door = true
+transfer_to_level = "ip_gridhalls"
 
 [node name="DialogicPrompter" type="Node" parent="Entities"]
 script = ExtResource("5_tfjvd")
@@ -3399,6 +3405,11 @@ mesh = SubResource("ArrayMesh_jbd0l")
 
 [node name="entity_34_collision_shape" type="CollisionShape3D" parent="World/FuncGodotMap/entity_34_func_detail"]
 shape = SubResource("ConcavePolygonShape3D_icn64")
+
+[node name="DEBUG_LIGHT" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.866023, -0.453156, 0.211312, 0, 0.422622, 0.906306, -0.500003, 0.784882, -0.366001, 0, 0, 0)
+visible = false
+editor_only = true
 
 [node name="WorldSpaceInfo" type="Node" parent="."]
 script = ExtResource("25_kik8d")

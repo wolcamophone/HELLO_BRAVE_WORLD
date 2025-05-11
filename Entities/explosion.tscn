@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://entities/explosion.gd" id="1_34h73"]
 [ext_resource type="AudioStream" uid="uid://b8nkg2su40rmj" path="res://audio/SFX/explode5.wav" id="1_vy38i"]
-[ext_resource type="PackedScene" uid="uid://dyiy4kk3uk154" path="res://Graphics/particles/sparks.tscn" id="3_43bo1"]
-[ext_resource type="PackedScene" uid="uid://b3tdgssfedodi" path="res://Graphics/particles/fireball.tscn" id="4_7po8t"]
-[ext_resource type="Script" path="res://scripts/area_hurt.gd" id="5_ed2as"]
-[ext_resource type="PackedScene" uid="uid://dhlfr6kf4c5fe" path="res://Graphics/particles/smoke.tscn" id="5_ehqpy"]
+[ext_resource type="PackedScene" uid="uid://dyiy4kk3uk154" path="res://Graphics/particles/particles_sparks.tscn" id="3_43bo1"]
+[ext_resource type="PackedScene" uid="uid://b3tdgssfedodi" path="res://Graphics/particles/particles_fireball.tscn" id="4_7po8t"]
+[ext_resource type="Script" path="res://levels/trigger_hurt.gd" id="5_ed2as"]
+[ext_resource type="PackedScene" uid="uid://dhlfr6kf4c5fe" path="res://Graphics/particles/particles_smoke.tscn" id="5_ehqpy"]
 [ext_resource type="Animation" uid="uid://cxwrj6amtse7f" path="res://entities/explode.anim" id="6_1epo2"]
 
 [sub_resource type="SphereMesh" id="SphereMesh_un6to"]
@@ -57,6 +57,17 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OmniLight3D:omni_range")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(6, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_66yu8"]
 _data = {
@@ -73,6 +84,11 @@ autoplay = true
 max_distance = 48.0
 bus = &"Sound Effects"
 doppler_tracking = 2
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(1, 0.501961, 0, 1)
+light_energy = 12.0
+omni_range = 6.0
 
 [node name="sparks" parent="." instance=ExtResource("3_43bo1")]
 

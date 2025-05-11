@@ -1,7 +1,8 @@
-[gd_scene load_steps=691 format=4 uid="uid://bbwa0eo8kc0pm"]
+[gd_scene load_steps=692 format=4 uid="uid://bbwa0eo8kc0pm"]
 
 [ext_resource type="Environment" uid="uid://bxb5bp23426tt" path="res://levels/ip_foreboding/env_ip_foreboding.tres" id="1_elcqn"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_3a5cb"]
+[ext_resource type="AudioStream" uid="uid://chb4cuu116fwa" path="res://audio/Ambient/shepards_tone_double.ogg" id="2_ltm7x"]
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="3_0lpkc"]
 [ext_resource type="Material" uid="uid://cvqto2kirpj81" path="res://Graphics/textures/stone/concrete_gold.material" id="4_m1qvs"]
 [ext_resource type="Texture2D" uid="uid://jscq63swbf3e" path="res://Graphics/textures/walls/fort_wall.png" id="5_oxnc1"]
@@ -4204,6 +4205,10 @@ data = PackedVector3Array(-7.00003, -3.99996, 77, -7.00003, -3.99996, 77, -7.000
 
 [node name="Node3D" parent="." instance=ExtResource("14_503h0")]
 transform = Transform3D(-1.31134e-07, 3, -1.31134e-07, 0, -1.31134e-07, -3, -3, -1.31134e-07, 5.73206e-15, -183.9, -508, 0)
+
+[node name="AmbShepard" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ltm7x")
+autoplay = true
 
 [node name="World" type="Node" parent="."]
 

@@ -10,6 +10,7 @@ signal spawnpoints_registered
 
 @export var lvl_title:String = ""
 @export_multiline var lvl_description:String = "This is a description for a level for HELLO BRAVE WORLD."
+@export var default_spawn_position:Vector4 = Vector4(0,0,0,0) ## XYZ coordinates, followed by rotation in degrees.
 
 @export_enum("Both", "Inside", "Outside") var environment_type = 0 # You can eventually hook environmental details into a check for this, such as default lighting or soundscape behavior.
 
@@ -36,7 +37,7 @@ func _ready() -> void:
 
 func register_spawnpoints():
 	InfoPlayerStart
-	var checkpoints_possible = get_tree().get_nodes_in_group("checkpoint")
+	var checkpoints_possible = get_tree().get_nodes_in_group("InfoPlayerStart")
 	for candidate in checkpoints_possible:
 		if !candidate.has_method("register"):
 			print("Node '%s' was not identified as proper Checkpoint." % candidate.name)
@@ -49,7 +50,7 @@ func register_spawnpoints():
 
 func register_checkpoints():
 	Checkpoint
-	var checkpoints_possible = get_tree().get_nodes_in_group("InfoPlayerStart")
+	var checkpoints_possible = get_tree().get_nodes_in_group("checkpoint")
 	for candidate in checkpoints_possible:
 		if !candidate.has_method("register"):
 			print("Node '%s' was not identified as proper InfoPlayerStart." % candidate.name)

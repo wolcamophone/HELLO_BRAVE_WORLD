@@ -10,6 +10,7 @@ extends CanvasLayer
 @onready var load_button: Button = $Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Load
 @onready var to_movement_test_button: Button = $Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/ToMovementTest
 
+var submenues_active:bool = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -29,7 +30,7 @@ func _ready():
 
 
 func _unhandled_input(event):
-	if !paused && event.is_action_pressed("Pause"): 
+	if !paused && event.is_action_pressed("Pause") && CheckpointMenu.visible==false: 
 		pause_game()
 	elif paused && event.is_action_pressed("Pause") or event.is_action_pressed("ui_cancel"):
 		unpause_game()
@@ -40,6 +41,8 @@ func _on_resume_pressed():
 func _on_quit_pressed():
 	GameMaster.quit_game()
 func _on_start_pressed():
+	#GameMaster.level_transfer_destination = null
+	GameMaster.level_transfer_destination = Vector4(-8,8.6,-21,-105) # TODO: This is a temporary fix to insure the player doesn't spawn in the void when transferring from a level with far away coordinates.
 	GameMaster.load_level("hub_world")
 	unpause_game()
 func _on_save_pressed():
@@ -50,6 +53,7 @@ func _on_title_pressed():
 	GameMaster.load_level("boot_menu")
 	unpause_game()
 func _on_to_movement_test_pressed():
+	GameMaster.level_transfer_destination = Vector4(0,0.1,0,0) # TODO: This is a temporary fix
 	GameMaster.load_level("movement_testing")
 	unpause_game()
 
@@ -58,7 +62,8 @@ func pause_game():
 	paused = true
 	get_tree().paused = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-#	$Cont/VBox/Resume.grab_focus()
+	main_menu.current_tab = 0
+	resume_button.grab_focus()
 	self.visible = true
 	print("Paused")
 

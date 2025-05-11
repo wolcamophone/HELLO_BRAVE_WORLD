@@ -1,10 +1,11 @@
-[gd_scene load_steps=508 format=4 uid="uid://t5lphsjdkqbl"]
+[gd_scene load_steps=509 format=4 uid="uid://t5lphsjdkqbl"]
 
 [ext_resource type="PackedScene" uid="uid://d4ko1bybcv8mu" path="res://entities/doors/sliding_door.tscn" id="1_a1lo3"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_ocwil"]
-[ext_resource type="Environment" uid="uid://mlrls1sht6w" path="res://levels/env_presets/env_vietnam_day.tres" id="2_8ssge"]
+[ext_resource type="AudioStream" uid="uid://d05503n5n1r4s" path="res://audio/Ambient/wood_chimes.ogg" id="2_kerf8"]
 [ext_resource type="Texture2D" uid="uid://bo5mc4ihw0qt7" path="res://Graphics/textures/floors/Shining5.png" id="3_wn1mg"]
 [ext_resource type="Material" uid="uid://cvqto2kirpj81" path="res://Graphics/textures/stone/concrete_gold.material" id="5_22ej6"]
+[ext_resource type="Environment" uid="uid://0564njjevrh5" path="res://levels/ip_music_ledge/env_music_ledge.tres" id="5_83cqo"]
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="6_6urgw"]
 [ext_resource type="Texture2D" uid="uid://bfh5dak447mxx" path="res://Graphics/textures/floors/Tile4.png" id="6_f24ih"]
 [ext_resource type="Texture2D" uid="uid://6pi71gs763xd" path="res://Graphics/textures/metal/trailer_orange.png" id="6_qjf1d"]
@@ -2043,14 +2044,38 @@ data = PackedVector3Array(-4.28125, -8, -17, -3.71875, -8, -17, -3.71875, 8, -17
 
 [node name="Entities" type="Node" parent="."]
 
-[node name="InteractiveDoor" parent="Entities" instance=ExtResource("1_a1lo3")]
+[node name="Doors" type="Node" parent="Entities"]
+
+[node name="DoorDepthsHUB" parent="Entities/Doors" instance=ExtResource("1_a1lo3")]
 transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 4, 0, -16)
+overwrite_prompt_text = "Travel to Depths HUB"
 warp_door = true
 transfer_to_level = "hub_world"
+
+[node name="DoorGridhalls" parent="Entities/Doors" instance=ExtResource("1_a1lo3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 17, 44)
+overwrite_prompt_text = "Travel to Grid Adnauseum"
+warp_door = true
+transfer_to_level = "ip_gridhalls"
+transfer_to_position = Vector4(0, 0, 0, 55)
+
+[node name="DoorMonofort" parent="Entities/Doors" instance=ExtResource("1_a1lo3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13, 26, 9)
+overwrite_prompt_text = "Travel to Grid Adnauseum"
+warp_door = true
+transfer_to_level = "ip_monofort"
+transfer_to_position = Vector4(0, 0, 0, 55)
 
 [node name="Audio" type="Node" parent="."]
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Audio"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 8, 40)
+stream = ExtResource("2_kerf8")
+pitch_scale = 0.2
+autoplay = true
+max_distance = 48.0
+panning_strength = 0.0
+bus = &"Ambience"
 
 [node name="LightsProp" type="Node" parent="."]
 
@@ -2172,7 +2197,7 @@ transform = Transform3D(-0.866024, -0.453156, 0.211312, 0, 0.422622, 0.906306, -
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
-environment = ExtResource("2_8ssge")
+environment = ExtResource("5_83cqo")
 
 [node name="FuncGodotMap" type="Node3D" parent="World"]
 script = ExtResource("1_ocwil")

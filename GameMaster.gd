@@ -11,7 +11,7 @@ signal game_saved
 @export_category("Game Master")
 @export_group("Game Variables")
 @export var NewGame:bool = false
-@export var skip_intro_cutscene:bool = false
+## DEPREC: skip_intro_cutscene has been moved to SettingsConfig singleton.
 
 # Level Related Vars
 var level_instance:Node3D
@@ -67,19 +67,16 @@ func unload_level():
 		active_player.queue_free()
 	checkpoints_available.clear()
 	spawnpoints_available.clear()
-	
 
 
 func load_level(travel_to: String):
 	await unload_level() # do this first so the world space is made empty as not to stack levels on top of each other.
-
 	var level_path = "res://levels/%s/%s.tscn" % [travel_to, travel_to]
 	var level_resource = load(level_path)
 	if level_resource:
 		level_instance = level_resource.instantiate()
 		get_tree().change_scene_to_file(level_path)
 		level_name_current = travel_to
-		
 	elif !level_resource:
 		printerr("Could not find level instance named " + travel_to)
 	
@@ -128,7 +125,8 @@ func spawn_player():
 		p.global_position.z = level_transfer_destination.z
 		p._spring_arm.rotation_degrees.y = level_transfer_destination.w
 		p._rotation_root.rotation_degrees.y = level_transfer_destination.w
-	elif !level_transfer_destination && spawnpoints_available.size() > 0: # Player is loading into the level directly from a menu or level picker or such and is not intended to arrive at a specific destination. This will place them at a randomly selected InfoPlayerStart node gathered onready into dict spawnpoints_available.
+		
+	elif !level_transfer_destination && spawnpoints_available.size() > 0: # Player is loading into the level directly from a menu or level picker and is not intended to arrive at a specific destination. This will place them at a randomly selected InfoPlayerStart node gathered onready into dict spawnpoints_available.
 		var rand_pick:int = randi_range(1, spawnpoints_available.size())
 		p.global_position = spawnpoints_available.values().pick_random().global_position
 	else:

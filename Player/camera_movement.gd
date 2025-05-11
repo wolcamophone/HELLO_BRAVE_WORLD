@@ -6,6 +6,7 @@ extends SpringArm3D
 @export var cam_lower_limit:int = 60
 @export var zoom_level:int = 2
 
+var ui_active:bool = false
 
 @onready var camera = $Camera3D
 @onready var shutter = $CamZoom
@@ -14,8 +15,8 @@ extends SpringArm3D
 func _ready():
 	add_excluded_object(self.get_parent().get_parent())
 
-func _unhandled_input(event):
-	if event is InputEventMouseMotion:
+func _input(event):
+	if event is InputEventMouseMotion && ui_active == false:
 		rotation_degrees.x -= event.relative.y * mouse_sensitivity * 0.05
 		rotation_degrees.y -= event.relative.x * mouse_sensitivity * 0.05
 
@@ -39,6 +40,11 @@ func _unhandled_input(event):
 func _process(delta):
 	rotation_degrees.x = clamp(rotation_degrees.x, cam_upper_limit, cam_lower_limit)
 	rotation_degrees.y = wrapf(rotation_degrees.y, 0, 360)
+	
+	if MainMenu.visible == false and CheckpointMenu.visible == false:
+		ui_active = false
+	else:
+		ui_active = true
 
 func _physics_process(delta):
 	if Input.is_action_pressed("look_up"):

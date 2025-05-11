@@ -34,11 +34,6 @@ func _ready():
 	elif active:
 		pin_light.visible = true
 
-func register_checkpoint():
-	# TODO: GameMaster should have an Array or Dictionary of all checkpoint entities found in current level.
-	#GameMaster.checkpoints_available[checkpoint_name] += self
-	return checkpoint_name
-
 
 func _on_area_3d_area_entered(area):
 	if area.is_in_group("player"):
@@ -49,23 +44,30 @@ func _on_area_3d_area_exited(area):
 		player_detected = false
 		print("Player left checkpoint.")
 
-func _input(event):
-	#if GameMaster.checkpoint_current != self:
-		#pin_light.visible = false
-	#elif GameMaster.checkpoint_current == self:
-		#pin_light.visible = true
-	
-	if player_detected && event.is_action_pressed("interact") && !active:
-		active = true
-		mesh_vendingmachine.get_active_material(0).emission = "00ff00" #Green
-		screen_glow.visible = true
-		pin_light.visible = true
-		pin_light_blink_timer.stop()
-		GameMaster.checkpoint_current = self
-		GameMaster.checkpoint_current_name = checkpoint_name
+
+func _input(event):	
+	if player_detected && event.is_action_pressed("interact"):
+		if !claimed:
+			claimed = true
+			print("Checkpoint clamed!")
+			emit_signal("checkpoint_claimed")
+			
+		if !active:
+			active = true
+			GameMaster.checkpoint_current = self
+			GameMaster.checkpoint_current_name = checkpoint_name
+			change_mesh()
+			print("Checkpoint activated!")
+			emit_signal("checkpoint_activated")
 		
-		print("Checkpoint activated!")
-		emit_signal("checkpoint_activated")
+		CheckpointMenu._show_menu()
+		CheckpointMenu.status_report = status_report
+
+func change_mesh():
+	mesh_vendingmachine.get_active_material(0).emission = "00ff00" # Green
+	screen_glow.visible = true
+	pin_light.visible = true
+	pin_light_blink_timer.stop()
 
 func _on_timer_timeout() -> void:
 	pin_light_blink_timer.start()

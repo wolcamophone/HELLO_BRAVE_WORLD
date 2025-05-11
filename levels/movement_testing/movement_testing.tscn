@@ -805,11 +805,13 @@ transfer_to_level = "hub_world"
 
 [node name="InteractiveDoor2" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, -38)
+overwrite_prompt_text = "Travel to Indev Complex"
 warp_door = true
 transfer_to_level = "indev_complex"
 
 [node name="InteractiveDoor3" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, -32)
+overwrite_prompt_text = "Travel to 2Fort"
 warp_door = true
 transfer_to_level = "ip_2fort"
 
@@ -820,33 +822,45 @@ transfer_to_level = "ip_bigcity"
 
 [node name="InteractiveDoor5" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, -20)
+overwrite_prompt_text = "Travel to The Cherisher Phenomenon"
 warp_door = true
 transfer_to_level = "ip_cherisher"
 
 [node name="InteractiveDoor6" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, -14)
+overwrite_prompt_text = "Travel to Nuclear Semiotics"
 warp_door = true
 transfer_to_level = "ip_foreboding"
 
 [node name="InteractiveDoor7" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, -8)
+overwrite_prompt_text = "Travel to Library"
 warp_door = true
 transfer_to_level = "ip_library"
 
 [node name="InteractiveDoor8" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, -2)
+overwrite_prompt_text = "Travel to Land of Cake and Icecreams"
 warp_door = true
 transfer_to_level = "ip_locai"
 
 [node name="InteractiveDoor9" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, 4)
+overwrite_prompt_text = "Travel to Music Ledge"
 warp_door = true
 transfer_to_level = "ip_music_ledge"
 
 [node name="InteractiveDoor10" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, 10)
+overwrite_prompt_text = "Travel to Movement Testing"
 warp_door = true
 transfer_to_level = "movement_testing"
+
+[node name="InteractiveDoor11" parent="Entities/Doors" instance=ExtResource("9_cs2u8")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 52, 12, 16)
+overwrite_prompt_text = "Travel to Monofort"
+warp_door = true
+transfer_to_level = "ip_monofort"
 
 [node name="Props" type="Node" parent="."]
 

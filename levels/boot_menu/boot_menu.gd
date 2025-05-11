@@ -27,5 +27,5 @@ func end_intro_cutscene():
 	if !music.playing:
 		music.play()
 	# Toggle bool now so cutscene does not play again when returning to the main menu. -CD 
-	GameMaster.skip_intro_cutscene = true
+	SettingsConfig.skip_intro_cutscene = true
 	

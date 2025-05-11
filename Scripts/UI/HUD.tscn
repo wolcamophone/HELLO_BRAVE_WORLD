@@ -88,6 +88,7 @@ _data = {
 
 [node name="HUD" type="CanvasLayer" groups=["system", "user_interface"]]
 process_mode = 3
+layer = 0
 script = ExtResource("1_n7kud")
 dialogue_json = ExtResource("2_o1v84")
 

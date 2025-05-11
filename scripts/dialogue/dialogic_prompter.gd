@@ -22,11 +22,11 @@ func trigger_dialogue():
 	elif Dialogic.current_timeline != null:
 		dialogue_active = true
 		
-	# Check first to not restart the dialogue box if there's already one active, dumbass. -CD
+	# Check first to not restart the dialogue box if there's already one active. -CD
 	if dialogue_active == false:
 		if dialogue_to_prompt != "" or dialogue_to_prompt != null:
 			Dialogic.start(dialogue_to_prompt)
-		elif dialogue_to_prompt == "" or dialogue_to_prompt == null:
+		elif dialogue_to_prompt == "" or dialogue_to_prompt == null: # Dialogue should default to  "test_dialogue" placeholder to not throw an error.
 			Dialogic.start("test_dialogue")
 
 	# TODO: this currently doesn't work as it pauses Dialogic. Can't find a way to set it to PROCESS_MODE_ALWAYS. Even if I did, I suspect it would somehow trip the dialogue restarting bug again.

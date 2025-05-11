@@ -2,7 +2,7 @@ extends Node
 
 #region Vars (There's a lot of em!)
 # Gameplay
-@export var skip_intro_cutscene:bool = true
+@export var skip_intro_cutscene:bool = false
 @export var player_color:Color = "ffffff"
 @export var emission_color:Color = "000000"
 

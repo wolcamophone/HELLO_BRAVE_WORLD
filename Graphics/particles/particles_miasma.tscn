@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://befc3p4jjcwq2"]
+
+[ext_resource type="Material" uid="uid://b73sjsdbuxfrr" path="res://Graphics/textures/dev/void.material" id="1_h4r20"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rglfm"]
+emission_shape = 1
+emission_sphere_radius = 6.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 1.2
+
+[sub_resource type="QuadMesh" id="QuadMesh_nxf5c"]
+
+[node name="ParticlesMiasma" type="GPUParticles3D"]
+material_override = ExtResource("1_h4r20")
+amount = 128
+amount_ratio = 0.2
+lifetime = 6.0
+randomness = 1.0
+fixed_fps = 12
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_rglfm")
+draw_pass_1 = SubResource("QuadMesh_nxf5c")
