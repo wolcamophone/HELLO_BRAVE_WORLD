@@ -1,17 +1,15 @@
 @icon("res://Graphics/UI/worldspaceinfo.png")
 extends Node
-class_name WorldSpaceInfo
+class_name WorldSpaceInfo ## This class exists to house variables and other info for levels. It should be placed at the very bottom of the Scene Tree as a direct child so that it gets read first and saves the level name properly. Godot reads the Scene Tree from the bottom up. -CD
 
-### This class exists to house variables and other info for levels. 
-### This class should be placed at the very bottom of the Scene Tree as a direct child so that it gets read first and saves the level name properly. Godot reads the Scene Tree from the bottom up. -CD
 
 signal checkpoints_registered
 signal spawnpoints_registered
 
-@export var lvl_title:String = ""
+@export var lvl_title:String = "" ## This string should be fetched or referenced for creating display texts for the level, given that the scene root name itself is often harder to read and inappropriate due to formatting.
 @export_multiline var lvl_description:String = "This is a description for a level for HELLO BRAVE WORLD."
 @export var default_spawn_position:Vector4 = Vector4(0,0,0,0) ## XYZ coordinates, followed by rotation in degrees.
-
+@export var lvl_death_warp:String = "" ## String name for the next level that the player will load into upon dying in this level.
 @export_enum("Both", "Inside", "Outside") var environment_type = 0 # You can eventually hook environmental details into a check for this, such as default lighting or soundscape behavior.
 
 #@onready var lvl_env:WorldEnvironment = $WorldEnvironment
@@ -31,25 +29,31 @@ func _ready() -> void:
 	self.add_to_group("WorldSpaceInfo")
 	register_spawnpoints()
 	register_checkpoints()
-	print("WSI, spawnpoints_available SIZE: ", GameMaster.spawnpoints_available.size())
-	print("WSI, spawnpoints_available ", GameMaster.spawnpoints_available)
+	CheckpointMenu.label_level_name.text = "Lvl: %s" % lvl_title
+	ScoreCounter.red_coins = 0
+	print("WorldSpaceInfo: spawnpoints_available SIZE = ", GameMaster.spawnpoints_available.size())
+	print("WorldSpaceInfo: spawnpoints_available = ", GameMaster.spawnpoints_available)
+	print("WorldSpaceInfo: checkpoints_available SIZE = ", GameMaster.checkpoints_available.size())
+	print("WorldSpaceInfo: checkpoints_available = ", GameMaster.checkpoints_available)
 
+func _process(delta: float) -> void:
+	pass
 
-func register_spawnpoints():
-	InfoPlayerStart
-	var checkpoints_possible = get_tree().get_nodes_in_group("InfoPlayerStart")
-	for candidate in checkpoints_possible:
+func register_spawnpoints(): ## Finds all nodes in group "InfoPlayerStart" and tells them to execute their function which adds them to the GameMaster's spawnpoints_available array.
+	InfoPlayerStart # small inline ref
+	var spawnpoints_possible = get_tree().get_nodes_in_group("InfoPlayerStart")
+	for candidate in spawnpoints_possible:
 		if !candidate.has_method("register"):
-			print("Node '%s' was not identified as proper Checkpoint." % candidate.name)
+			print("Node '%s' was not identified as proper InfoPlayerStart." % candidate.name)
 			continue
 		
 		candidate.call("register")
 	
-	print("WSI has called to register checkpoints.")
+	print("WorldSpaceInfo: finished call to register spawnpoints.")
 	emit_signal("spawnpoints_registered")
 
-func register_checkpoints():
-	Checkpoint
+func register_checkpoints(): ## Finds all nodes in group "checkpoint" and tells them to execute their function which adds them to the GameMaster's checkpoints_available array.
+	Checkpoint # small inline ref
 	var checkpoints_possible = get_tree().get_nodes_in_group("checkpoint")
 	for candidate in checkpoints_possible:
 		if !candidate.has_method("register"):
@@ -58,7 +62,7 @@ func register_checkpoints():
 		
 		candidate.call("register")
 	
-	print("WSI has called to register spawnpoints.")
+	print("WorldSpaceInfo: finished call to register checkpoints.")
 	emit_signal("checkpoints_registered")
 
 

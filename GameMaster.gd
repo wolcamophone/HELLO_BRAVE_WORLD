@@ -20,6 +20,7 @@ var level_name_current:String
 
 # Player Transporting Vars
 var level_transfer_destination:Vector4 ## XYZ coordinates plus rotation in degrees
+var level_transfer_method:Array = ["direct load", "level to level", "team play"] ## TODO: "direct load" indicates that a level is loaded into from a main menu or level selector and thus the player is placed at the first InfoPlayerStart found from the scene root down. "level to level" indicates that the player is moving from one level to another and thus the player should be placed at specified coordinates. "team play" indicates that the level loaded into supports multiple players or spawnpoints and thus a random InfoPlayerStart is selected from the scene tree to place the player at.
 
 # Player Spawning Vars
 var default_spawn_point:Node3D
@@ -30,22 +31,26 @@ var checkpoint_current: Checkpoint
 var checkpoint_current_name: String
 var checkpoint_previous: Checkpoint
 var checkpoint_previous_name: String
-var checkpoints_available:Dictionary = {}
+var checkpoints_available:Array[Checkpoint]
 
 # Saving & Loading Vars
+var current_save_slot:int = 1
 var save_game_path = "user://savegame_hbw.json"
-var save_game_path_cfg = "user://savegame_hbw.cfg"
+var save_game_path_cfg = "user://savegame_hbw_%s.cfg" % current_save_slot
 var load_data_dict:Dictionary = {}
 var save_game_cfg:ConfigFile = ConfigFile.new()
 var load_game_cfg:ConfigFile = ConfigFile.new()
 
 @export_group("Environmental Variables")
 @export var DefaultLerpVal: float = 0.2 ## A default value for Linear Interpolations. 
+@export var ui_is_active:bool = false
 
 @export_group("Player Variables")
-@export var selected_player:PackedScene = preload("res://Player/android_033023.tscn")
+@export var selected_player:PackedScene = preload("res://Player/android_250629.tscn")
 var active_player:CharacterBody3D ## Current player object within the scene. In a game with broader scope, this var could be expanded to a dictionary for multiplayer slots.
-@export var ATTACK_POWER:float = 1
+#@export var attack_power:float = 1
+@export var respawn_time:float = 6.0 ## Time in seconds before spawn_player() is called again after the player has emitted signal "died."
+var death_timer:Timer
 
 
 
@@ -53,8 +58,19 @@ func _ready():
 	DisplayServer.window_set_title("HELLO BRAVE WORLD!")
 	DisplayServer.window_set_min_size(Vector2(600, 400))
 	#MainMenu.title_button.visible = false
+	death_timer = Timer.new()
+	death_timer.timeout.connect(spawn_player)
 	print("HELLO BRAVE WORLD!")
 
+func _process(delta: float) -> void:
+	if MainMenu.visible || CheckpointMenu.visible:
+		ui_is_active = true
+	else:
+		ui_is_active = false
+	
+	#if active_player && active_player.died:
+		#death_timer.start(respawn_time)
+		
 
 func unload_level():
 	# TODO: Remember to add a scene transition animation here -CD
@@ -70,6 +86,7 @@ func unload_level():
 
 
 func load_level(travel_to: String):
+	HUD._loading_label.visible = true
 	await unload_level() # do this first so the world space is made empty as not to stack levels on top of each other.
 	var level_path = "res://levels/%s/%s.tscn" % [travel_to, travel_to]
 	var level_resource = load(level_path)
@@ -105,6 +122,7 @@ func load_level(travel_to: String):
 
 	
 	print("Level loaded.")
+	HUD._loading_label.visible = false
 	emit_signal("level_loaded")
 
 
@@ -136,24 +154,28 @@ func spawn_player():
 	print("Player respawn called.")
 
 
-func teleport(target):
-	if target is Vector3: # manual XYZ coordinates.
+func teleport(target, target_rotation_degrees:int = 0):
+	if target is Vector3: ## manual XYZ coordinates.
 		active_player.global_position.x = target.x
 		active_player.global_position.y = target.y
 		active_player.global_position.z = target.z
-	elif target is Vector4: # First values of Vector 4 correlate to XYZ positional values while fourth value W is the rotation in degrees.
+	elif target is Vector4 and target_rotation_degrees == 0: ## First values of Vector 4 correlate to XYZ positional values while fourth value W is the rotation in degrees.
 		active_player.global_position.x = target.x
 		active_player.global_position.y = target.y
 		active_player.global_position.z = target.z
 		active_player._spring_arm.rotation_degrees.y = target.w
 		active_player._rotation_root.rotation_degrees.y = target.w
-	elif target.global_position: # Target is some Node3D with global_position
+	elif target.global_position: ## Target is some Node3D with global_position
 		active_player.global_position = target.global_position
 		active_player._spring_arm.rotation.y = target.rotation.y
 		active_player._rotation_root.rotation.y = target.rotation.y
 	else:
 		printerr("Invalid target '%s' given for 'teleport()'. target should be at least a Vector3 or contain global_position property." % target)
 		return
+	
+	if target_rotation_degrees != 0:
+		active_player._spring_arm.rotation.y = target_rotation_degrees
+		active_player._rotation_root.rotation.y = target_rotation_degrees
 	
 	active_player._spring_arm.global_position = active_player._head.global_position # Avoid camera awkwardly zooping super fast back to player across level.
 	emit_signal("teleported")
@@ -197,6 +219,8 @@ func save_game_as_cfg():
 		save_game_cfg.save(save_game_path_cfg)
 	
 	emit_signal("game_saved")
+	MainMenu.unpause_game()
+	SaveGameIndicator.show_indicator("save")
 	print("Saved game as cfg to ", save_game_path_cfg)
 
 #LOAD FUNCTION REWRITTEN FROM GROUND UP AFTER ENGINE DOCS. -CD
@@ -263,9 +287,14 @@ func load_game_from_cfg():
 		await player_spawned
 		teleport(load_game_global_pos)
 
+	emit_signal("game_loaded")
 	MainMenu.unpause_game()
+	SaveGameIndicator.show_indicator("load")
+	print("Loaded game as cfg from ", save_game_path_cfg)
+#endregion
 
-### This is a generic func to be placed in other nodes within the group "persistent." As it currently stands, the save_game func only reaches out to child nodes in the tree, so this dict below and any other save funcs as a scene don't get written to the save file. -CD
+#region Example Save Call Methods
+### Below are generic func to be placed in other nodes within the group "persistent." As it currently stands, the save_game func only reaches out to child nodes in the tree, so this dict below and any other save funcs as a scene don't get written to the save file. -CD
 func save(): 
 	var save_dict = {
 		"filename" : get_scene_file_path(),

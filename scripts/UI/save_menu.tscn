@@ -1,0 +1,153 @@
+[gd_scene load_steps=4 format=3 uid="uid://b7yshewtp450"]
+
+[ext_resource type="Theme" uid="uid://24bml6th7hoi" path="res://Graphics/UI/Def_UI.theme" id="1_b26w6"]
+[ext_resource type="Script" path="res://scripts/UI/save_menu.gd" id="1_t3h24"]
+[ext_resource type="Texture2D" uid="uid://d2sk0sg5cd7ju" path="res://Graphics/UI/save_slot_empty.png" id="2_27ymx"]
+
+[node name="SaveMenu" type="PanelContainer"]
+custom_minimum_size = Vector2(900, 600)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_b26w6")
+script = ExtResource("1_t3h24")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="HBoxTop" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxFile1" type="VBoxContainer" parent="VBox/HBoxTop"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SlotLabel" type="Label" parent="VBox/HBoxTop/VBoxFile1"]
+layout_mode = 2
+text = "File 1"
+
+[node name="SaveThumbnail" type="TextureRect" parent="VBox/HBoxTop/VBoxFile1"]
+custom_minimum_size = Vector2(300, 170)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_27ymx")
+
+[node name="LevelNameLabel" type="Label" parent="VBox/HBoxTop/VBoxFile1"]
+layout_mode = 2
+text = "level_name"
+horizontal_alignment = 1
+
+[node name="SaveFile1" type="Button" parent="VBox/HBoxTop/VBoxFile1"]
+layout_mode = 2
+text = "Save"
+
+[node name="LoadFile1" type="Button" parent="VBox/HBoxTop/VBoxFile1"]
+layout_mode = 2
+text = "Load"
+
+[node name="VBoxFile2" type="VBoxContainer" parent="VBox/HBoxTop"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SlotLabel" type="Label" parent="VBox/HBoxTop/VBoxFile2"]
+layout_mode = 2
+text = "File 2"
+
+[node name="SaveThumbnail" type="TextureRect" parent="VBox/HBoxTop/VBoxFile2"]
+custom_minimum_size = Vector2(300, 170)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_27ymx")
+
+[node name="LevelNameLabel" type="Label" parent="VBox/HBoxTop/VBoxFile2"]
+layout_mode = 2
+text = "level_name"
+horizontal_alignment = 1
+
+[node name="SaveFile2" type="Button" parent="VBox/HBoxTop/VBoxFile2"]
+layout_mode = 2
+text = "Save"
+
+[node name="LoadFile2" type="Button" parent="VBox/HBoxTop/VBoxFile2"]
+layout_mode = 2
+text = "Load"
+
+[node name="HBoxBottom" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxFile1" type="VBoxContainer" parent="VBox/HBoxBottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SlotLabel" type="Label" parent="VBox/HBoxBottom/VBoxFile1"]
+layout_mode = 2
+text = "File 3"
+
+[node name="SaveThumbnail" type="TextureRect" parent="VBox/HBoxBottom/VBoxFile1"]
+custom_minimum_size = Vector2(300, 170)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_27ymx")
+
+[node name="LevelNameLabel" type="Label" parent="VBox/HBoxBottom/VBoxFile1"]
+layout_mode = 2
+text = "level_name"
+horizontal_alignment = 1
+
+[node name="SaveFile3" type="Button" parent="VBox/HBoxBottom/VBoxFile1"]
+layout_mode = 2
+text = "Save"
+
+[node name="LoadFile3" type="Button" parent="VBox/HBoxBottom/VBoxFile1"]
+layout_mode = 2
+text = "Load"
+
+[node name="VBoxFile2" type="VBoxContainer" parent="VBox/HBoxBottom"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="SlotLabel" type="Label" parent="VBox/HBoxBottom/VBoxFile2"]
+layout_mode = 2
+text = "File 4"
+
+[node name="SaveThumbnail" type="TextureRect" parent="VBox/HBoxBottom/VBoxFile2"]
+custom_minimum_size = Vector2(300, 170)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("2_27ymx")
+
+[node name="LevelNameLabel" type="Label" parent="VBox/HBoxBottom/VBoxFile2"]
+layout_mode = 2
+text = "level_name"
+horizontal_alignment = 1
+
+[node name="SaveFile4" type="Button" parent="VBox/HBoxBottom/VBoxFile2"]
+layout_mode = 2
+text = "Save"
+
+[node name="LoadFile4" type="Button" parent="VBox/HBoxBottom/VBoxFile2"]
+layout_mode = 2
+text = "Load"
+
+[connection signal="pressed" from="VBox/HBoxTop/VBoxFile1/SaveFile1" to="." method="_on_save_file_1_pressed"]
+[connection signal="pressed" from="VBox/HBoxTop/VBoxFile2/SaveFile2" to="." method="_on_save_file_2_pressed"]
+[connection signal="pressed" from="VBox/HBoxBottom/VBoxFile1/SaveFile3" to="." method="_on_save_file_3_pressed"]
+[connection signal="pressed" from="VBox/HBoxBottom/VBoxFile2/SaveFile4" to="." method="_on_save_file_4_pressed"]

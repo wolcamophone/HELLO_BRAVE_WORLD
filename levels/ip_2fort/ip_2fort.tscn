@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="3_vjxhh"]
 [ext_resource type="Material" uid="uid://ch2xot7kjiklo" path="res://Graphics/textures/wood/wood_3.material" id="4_t3non"]
 [ext_resource type="Material" uid="uid://dofnlrpv6vdru" path="res://Graphics/textures/stone/concrete_light.material" id="5_pnqq4"]
-[ext_resource type="Material" uid="uid://b0wpr285ljdkb" path="res://Graphics/textures/stone/Pathing.material" id="6_v5e4h"]
+[ext_resource type="Material" uid="uid://b0wpr285ljdkb" path="res://Graphics/textures/stone/pathing.material" id="6_v5e4h"]
 [ext_resource type="Material" uid="uid://diriknwdj3u47" path="res://Graphics/textures/stone/teal4.material" id="7_y0eu6"]
 [ext_resource type="Texture2D" uid="uid://dpooj5oyqrdbf" path="res://Graphics/textures/wood/wood_1.png" id="8_kpat3"]
 [ext_resource type="Material" uid="uid://dywuyr2iug15i" path="res://Graphics/textures/walls/Brick8.material" id="9_0rkkl"]
@@ -15,7 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://db4s2mtx1hujr" path="res://Graphics/textures/wood/Cardboard.png" id="13_u2xkr"]
 [ext_resource type="Material" uid="uid://bcphaq7seq7sq" path="res://Graphics/textures/metal/fence_linked2.material" id="14_p0p1g"]
 [ext_resource type="Material" uid="uid://dl4dxy75hml3r" path="res://Graphics/textures/walls/Brick4.material" id="14_yojx2"]
-[ext_resource type="Material" uid="uid://c7knrjiilnaow" path="res://Graphics/textures/natural/Water2.material" id="15_bf2fo"]
+[ext_resource type="Material" uid="uid://c7knrjiilnaow" path="res://Graphics/textures/natural/water2.material" id="15_bf2fo"]
 [ext_resource type="PackedScene" uid="uid://5u2jpl3pqgxq" path="res://entities/info_marker_generic.tscn" id="18_6xhvn"]
 [ext_resource type="Script" path="res://levels/world_space_info.gd" id="18_l8dm2"]
 

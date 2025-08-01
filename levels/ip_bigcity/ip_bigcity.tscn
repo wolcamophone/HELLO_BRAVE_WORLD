@@ -5,7 +5,7 @@
 [ext_resource type="FastNoiseLite" uid="uid://dfmkq5gc64kpm" path="res://levels/env_stars_named.tres" id="1_qvgb6"]
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="3_1rsm0"]
 [ext_resource type="Script" path="res://levels/world_space_info.gd" id="3_w6hra"]
-[ext_resource type="Texture2D" uid="uid://c54s6nssspuo" path="res://Graphics/textures/stone/Hexag2.png" id="4_b5pdo"]
+[ext_resource type="Texture2D" uid="uid://c54s6nssspuo" path="res://Graphics/textures/stone/hexag2.png" id="4_b5pdo"]
 [ext_resource type="Texture2D" uid="uid://buywu0yimmysh" path="res://Graphics/textures/natural/grass_1.png" id="5_j13dd"]
 [ext_resource type="Texture2D" uid="uid://bsfii12fj6tv1" path="res://Graphics/textures/stone/teal_0.png" id="6_wf5d3"]
 [ext_resource type="Texture2D" uid="uid://dopme2sujtf64" path="res://Graphics/textures/natural/grass_night.png" id="7_7noou"]

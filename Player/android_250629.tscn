@@ -1,0 +1,397 @@
+[gd_scene load_steps=55 format=3 uid="uid://dx1cojf26li2h"]
+
+[ext_resource type="Script" path="res://Player/android_250629.gd" id="1_5u217"]
+[ext_resource type="PackedScene" uid="uid://dm5vmdqfgedfg" path="res://scripts/attack_box.tscn" id="2_nrdm1"]
+[ext_resource type="PackedScene" uid="uid://bqxet0paa37vn" path="res://entities/explosion.tscn" id="3_507hy"]
+[ext_resource type="PackedScene" uid="uid://bxxdq1i2lbr1p" path="res://Player/playermodels/Android_pm.glb" id="4_w24b8"]
+[ext_resource type="Script" path="res://Player/camera_movement.gd" id="5_3ox1k"]
+[ext_resource type="Material" uid="uid://5qtwtidwc4sd" path="res://Player/android.material" id="5_hay6g"]
+[ext_resource type="Animation" uid="uid://bqluvauuvqa0d" path="res://Player/playermodels/anim/Airborne.res" id="6_b8ghy"]
+[ext_resource type="AudioStream" uid="uid://ti1mmrwjlviw" path="res://audio/SFX/camera_shutter.wav" id="6_r4kj3"]
+[ext_resource type="Animation" uid="uid://dea7vmvg40jr1" path="res://Player/playermodels/anim/Crawling.res" id="7_3jmmh"]
+[ext_resource type="Texture2D" uid="uid://cjf04dm6ciad2" path="res://Graphics/particles/p_smoke.png" id="7_j2bcd"]
+[ext_resource type="Texture2D" uid="uid://bbvgdi64v0q4n" path="res://Graphics/particles/p_shadow.png" id="8_h11wh"]
+[ext_resource type="Animation" uid="uid://bsgg20sxmc5mw" path="res://Player/playermodels/anim/Crouching.res" id="8_rpn4m"]
+[ext_resource type="Animation" uid="uid://641w3dvylgc4" path="res://Player/playermodels/anim/DeathTwitch.res" id="9_ibi3d"]
+[ext_resource type="AudioStream" uid="uid://bq02rq7rurx20" path="res://audio/SFX/jump.wav" id="9_nt8vv"]
+[ext_resource type="Animation" uid="uid://clnrou348rskb" path="res://Player/playermodels/anim/Idle.res" id="10_84hdg"]
+[ext_resource type="Animation" uid="uid://cm83axw6aijwo" path="res://Player/playermodels/anim/JumpStart.res" id="11_wb6g7"]
+[ext_resource type="Animation" uid="uid://cpl0iru0ucc3l" path="res://Player/playermodels/anim/Landing.res" id="12_ddsp4"]
+[ext_resource type="AudioStream" uid="uid://bplwsqmckwyc0" path="res://audio/SFX/footstep-04.wav" id="12_ppprk"]
+[ext_resource type="Animation" uid="uid://87vv3ydg3uay" path="res://Player/playermodels/anim/Running.res" id="13_jeqg5"]
+[ext_resource type="Animation" uid="uid://bisiiq1e5e27" path="res://Player/playermodels/anim/T-Pose.res" id="14_el3ht"]
+[ext_resource type="Animation" uid="uid://cf7edfd6jatul" path="res://Player/playermodels/anim/Walking.res" id="15_pw23d"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_utlkd"]
+radius = 0.35
+height = 2.3
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_lef8y"]
+radius = 0.35
+height = 1.5
+
+[sub_resource type="Animation" id="Animation_cerf6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../Footstep:playing")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_82v7c"]
+_data = {
+"RESET": SubResource("Animation_cerf6")
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mvjuc"]
+_data = {
+"Airborne": ExtResource("6_b8ghy"),
+"Crawling": ExtResource("7_3jmmh"),
+"Crouching": ExtResource("8_rpn4m"),
+"DeathTwitch": ExtResource("9_ibi3d"),
+"Idle": ExtResource("10_84hdg"),
+"JumpStart": ExtResource("11_wb6g7"),
+"Landing": ExtResource("12_ddsp4"),
+"Running": ExtResource("13_jeqg5"),
+"T-Pose": ExtResource("14_el3ht"),
+"Walking": ExtResource("15_pw23d")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qogwl"]
+animation = &"panim/Airborne"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_bfyjx"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_g2243"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_v1va5"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_jmey4"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mhlim"]
+animation = &"panim/Crawling"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_n5phg"]
+animation = &"panim/Crouching"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_bwpoo"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_mhlim")
+blend_point_0/pos = 0.8
+blend_point_1/node = SubResource("AnimationNodeAnimation_n5phg")
+blend_point_1/pos = 0.2
+min_space = 0.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tr3wg"]
+animation = &"panim/DeathTwitch"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_twxk7"]
+animation = &"panim/Walking"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mwvdp"]
+animation = &"panim/Running"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_rwfxv"]
+animation = &"panim/Idle"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_kmm5r"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_twxk7")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_mwvdp")
+blend_point_1/pos = 1.8
+blend_point_2/node = SubResource("AnimationNodeAnimation_rwfxv")
+blend_point_2/pos = 0.2
+min_space = 0.0
+max_space = 2.0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_uqk04"]
+animation = &"panim/JumpStart"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_3wnld"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_kugij"]
+graph_offset = Vector2(-806.712, 56.845)
+nodes/Airborne/node = SubResource("AnimationNodeAnimation_qogwl")
+nodes/Airborne/position = Vector2(-940, 500)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_bfyjx")
+"nodes/Animation 2/position" = Vector2(1056.65, 371.599)
+nodes/BlendAir/node = SubResource("AnimationNodeBlend2_g2243")
+nodes/BlendAir/position = Vector2(-240, 160)
+nodes/BlendCrouch/node = SubResource("AnimationNodeBlend2_v1va5")
+nodes/BlendCrouch/position = Vector2(-580, 160)
+nodes/BlendDeath/node = SubResource("AnimationNodeBlend2_jmey4")
+nodes/BlendDeath/position = Vector2(480, 160)
+nodes/CrouchCrawl/node = SubResource("AnimationNodeBlendSpace1D_bwpoo")
+nodes/CrouchCrawl/position = Vector2(-940, 320)
+nodes/DeathTwitch/node = SubResource("AnimationNodeAnimation_tr3wg")
+nodes/DeathTwitch/position = Vector2(140, 500)
+nodes/IdleWalkRun/node = SubResource("AnimationNodeBlendSpace1D_kmm5r")
+nodes/IdleWalkRun/position = Vector2(-940, 160)
+nodes/Jump/node = SubResource("AnimationNodeAnimation_uqk04")
+nodes/Jump/position = Vector2(-940, 640)
+nodes/JumpShot/node = SubResource("AnimationNodeOneShot_3wnld")
+nodes/JumpShot/position = Vector2(-400, 320)
+nodes/output/position = Vector2(640, 160)
+node_connections = [&"BlendAir", 0, &"BlendCrouch", &"BlendAir", 1, &"JumpShot", &"BlendCrouch", 0, &"IdleWalkRun", &"BlendCrouch", 1, &"CrouchCrawl", &"BlendDeath", 0, &"BlendAir", &"BlendDeath", 1, &"DeathTwitch", &"JumpShot", 0, &"Airborne", &"JumpShot", 1, &"Jump", &"output", 0, &"BlendDeath"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_45e3n"]
+margin = 0.1
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ryo0o"]
+margin = 0.1
+radius = 0.25
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8jnu4"]
+radius = 0.4
+height = 2.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dg4qi"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 0.129412)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4a04s"]
+material = SubResource("StandardMaterial3D_dg4qi")
+radius = 0.4
+height = 2.4
+
+[sub_resource type="Curve" id="Curve_ns5x1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_153xt"]
+curve = SubResource("Curve_ns5x1")
+
+[sub_resource type="Curve" id="Curve_xhwrj"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ealdv"]
+curve = SubResource("Curve_xhwrj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rlxut"]
+particle_flag_align_y = true
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_ealdv")
+alpha_curve = SubResource("CurveTexture_153xt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7wheh"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(0.9, 0.9, 0.9, 0.501961)
+albedo_texture = ExtResource("7_j2bcd")
+albedo_texture_force_srgb = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_w3l4s"]
+material = SubResource("StandardMaterial3D_7wheh")
+size = Vector2(2, 2)
+
+[node name="Android290625" type="CharacterBody3D" groups=["persistent", "player"]]
+process_mode = 1
+process_physics_priority = 1
+top_level = true
+collision_layer = 7
+collision_mask = 15
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+slide_on_ceiling = false
+wall_min_slide_angle = 0.174533
+floor_constant_speed = true
+floor_max_angle = 0.802851
+floor_snap_length = 0.25
+safe_margin = 0.01
+script = ExtResource("1_5u217")
+_attack_type = ExtResource("2_nrdm1")
+death_spectacle = ExtResource("3_507hy")
+wall_jump_force = 6.0
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="WallSlideCooldown" type="Timer" parent="."]
+
+[node name="iFrames" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 6.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+shape = SubResource("CapsuleShape3D_utlkd")
+
+[node name="CollisionShapeCrouch" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+visible = false
+shape = SubResource("CapsuleShape3D_lef8y")
+
+[node name="RotationRoot" type="Node3D" parent="."]
+
+[node name="PlayerModel" parent="RotationRoot" instance=ExtResource("4_w24b8")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="Skeleton3D" parent="RotationRoot/PlayerModel/metarig_Android" index="0"]
+bones/0/position = Vector3(6.15728e-10, 0.999232, -0.0199767)
+bones/1/rotation = Quaternion(-0.0016225, -1.19209e-07, -1.93417e-10, 0.999999)
+bones/2/rotation = Quaternion(-0.0235271, 2.06517e-24, 1.13405e-24, 0.999723)
+bones/3/position = Vector3(0.25, 0.308444, -0.0146136)
+bones/3/rotation = Quaternion(0.709953, 0.0173928, 0.696147, -0.105088)
+bones/4/rotation = Quaternion(-0.0278918, 0.206359, -0.145883, 0.967138)
+bones/5/rotation = Quaternion(-9.31323e-10, -2.32831e-10, -6.51926e-09, 1)
+bones/6/rotation = Quaternion(2.5037e-08, -1.61442e-08, -0.135177, 0.990821)
+bones/7/rotation = Quaternion(-0.130526, 2.39537e-08, 4.6968e-09, 0.991445)
+bones/8/rotation = Quaternion(-0.130526, 2.39537e-08, 4.6968e-09, 0.991445)
+bones/9/rotation = Quaternion(-0.130526, 2.39537e-08, 4.6968e-09, 0.991445)
+bones/10/position = Vector3(-0.25, 0.298859, -0.0141344)
+bones/10/rotation = Quaternion(-0.709953, 0.0173928, 0.696147, 0.105088)
+bones/11/rotation = Quaternion(-0.0278918, -0.206359, 0.145883, 0.967138)
+bones/12/rotation = Quaternion(1.02446e-08, -1.16415e-10, 5.58794e-09, 1)
+bones/13/rotation = Quaternion(-8.40396e-09, 6.88599e-08, 0.135177, 0.990821)
+bones/14/rotation = Quaternion(-0.130526, 1.40904e-08, -7.51487e-09, 0.991445)
+bones/15/rotation = Quaternion(-0.130526, 1.40904e-08, -7.51487e-09, 0.991445)
+bones/16/rotation = Quaternion(-0.130526, 1.40904e-08, -7.51487e-09, 0.991445)
+bones/17/rotation = Quaternion(0.998677, 0.011625, -0.0439336, 0.024051)
+bones/18/rotation = Quaternion(0.0247928, -0.0868589, 0.00892222, 0.995872)
+bones/19/rotation = Quaternion(-0.529687, -0.110731, -0.0690491, 0.838095)
+bones/20/rotation = Quaternion(0.998677, -0.011625, 0.0439338, 0.024051)
+bones/21/rotation = Quaternion(0.0249588, 0.0868257, -0.00891203, 0.995871)
+bones/22/rotation = Quaternion(-0.533417, 0.0373704, 0.0229295, 0.844716)
+
+[node name="Android" parent="RotationRoot/PlayerModel/metarig_Android/Skeleton3D" index="0"]
+material_override = ExtResource("5_hay6g")
+cast_shadow = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="RotationRoot/PlayerModel"]
+audio_max_polyphony = 3
+libraries = {
+"": SubResource("AnimationLibrary_82v7c"),
+"panim": SubResource("AnimationLibrary_mvjuc")
+}
+playback_auto_capture = false
+
+[node name="AnimationTree" type="AnimationTree" parent="RotationRoot/PlayerModel"]
+audio_max_polyphony = 3
+callback_mode_discrete = 0
+tree_root = SubResource("AnimationNodeBlendTree_kugij")
+anim_player = NodePath("../AnimationPlayer")
+parameters/BlendAir/blend_amount = 0.0
+parameters/BlendCrouch/blend_amount = 0.0
+parameters/BlendDeath/blend_amount = 0.0
+parameters/CrouchCrawl/blend_position = 0.0
+parameters/IdleWalkRun/blend_position = 0.0
+parameters/JumpShot/active = false
+parameters/JumpShot/internal_active = false
+parameters/JumpShot/request = 0
+
+[node name="StairStepper" type="RayCast3D" parent="RotationRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -0.5)
+visible = false
+target_position = Vector3(0, -0.4, 0)
+collision_mask = 5
+hit_back_faces = false
+debug_shape_custom_color = Color(0.501961, 0, 1, 1)
+debug_shape_thickness = 5
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+light_color = Color(0.75, 0.75, 1, 1)
+light_energy = 0.25
+light_indirect_energy = 0.0
+light_specular = 0.0
+omni_range = 16.0
+omni_attenuation = 0.5
+
+[node name="SpringCamHead" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 1.7, 0)
+shape = SubResource("SphereShape3D_45e3n")
+spring_length = 0.9
+
+[node name="CameraHead" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
+
+[node name="AudioListener3D" type="AudioListener3D" parent="CameraHead"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -3.55271e-15)
+current = true
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraHead"]
+process_priority = -1
+process_physics_priority = -1
+top_level = true
+shape = SubResource("SphereShape3D_ryo0o")
+spring_length = 4.0
+script = ExtResource("5_3ox1k")
+
+[node name="Camera3D" type="Camera3D" parent="CameraHead/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.997564, 0.0697565, 0, -0.0697565, 0.997564, 0, 0, 0)
+current = true
+
+[node name="CamZoom" type="AudioStreamPlayer" parent="CameraHead/SpringArm3D"]
+stream = ExtResource("6_r4kj3")
+volume_db = -20.0
+mix_target = 2
+max_polyphony = 2
+bus = &"Sound Effects"
+
+[node name="HitBox" type="Area3D" parent="." groups=["player"]]
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+shape = SubResource("CapsuleShape3D_8jnu4")
+
+[node name="ColMeshDebug" type="MeshInstance3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_4a04s")
+
+[node name="WallSlideParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+emitting = false
+amount = 12
+lifetime = 0.4
+one_shot = true
+speed_scale = 2.0
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_rlxut")
+draw_pass_1 = SubResource("QuadMesh_w3l4s")
+
+[node name="LandingShadow" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
+size = Vector3(1.5, 24, 1.5)
+texture_albedo = ExtResource("8_h11wh")
+emission_energy = 2.0
+normal_fade = 0.25
+upper_fade = 0.1
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 0)
+stream = ExtResource("9_nt8vv")
+attenuation_model = 3
+volume_db = -8.0
+max_distance = 6.0
+bus = &"Sound Effects"
+
+[node name="Footstep" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("12_ppprk")
+attenuation_model = 3
+volume_db = -8.0
+max_distance = 16.0
+max_polyphony = 3
+bus = &"Sound Effects"
+playback_type = 1
+
+[connection signal="area_entered" from="HitBox" to="." method="_hit_box"]
+
+[editable path="RotationRoot/PlayerModel"]

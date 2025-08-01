@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://entities/Coin.gd" id="1_kd3e6"]
 [ext_resource type="Texture2D" uid="uid://bobr1vvpxi61y" path="res://Graphics/textures/natural/sand_black.png" id="2_fcinl"]
 [ext_resource type="Texture2D" uid="uid://b3i6ltsdtsc1c" path="res://Graphics/textures/metal/airduct_grate_02b.png" id="3_bjlqa"]
-[ext_resource type="AudioStream" uid="uid://bmjtjjexghuwi" path="res://audio/SFX/hl2/flashlight1.wav" id="4_2rq5h"]
+[ext_resource type="AudioStream" uid="uid://c6cjyd2h3a3kw" path="res://audio/SFX/bike_bell.wav" id="4_awsov"]
 [ext_resource type="Texture2D" uid="uid://bl8tdhw7utsl5" path="res://Graphics/particles/p_star3.png" id="5_bs6g4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrk60"]
@@ -19,6 +19,7 @@ metallic_texture_channel = 4
 roughness = 0.5
 emission_enabled = true
 emission = Color(1, 0, 0, 1)
+emission_energy_multiplier = 2.0
 emission_operator = 1
 emission_texture = ExtResource("2_fcinl")
 rim_tint = 1.0
@@ -41,6 +42,8 @@ transparency = 1
 blend_mode = 1
 no_depth_test = true
 shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_color = Color(1, 0.752941, 0.752941, 0.25098)
@@ -85,7 +88,8 @@ mesh = SubResource("CylinderMesh_xaitc")
 shape = SubResource("SphereShape3D_k1uuv")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("4_2rq5h")
+stream = ExtResource("4_awsov")
+pitch_scale = 0.6
 bus = &"Sound Effects"
 
 [node name="Sparkle" type="GPUParticles3D" parent="."]

@@ -12,3 +12,4 @@ sky_material = SubResource("ProceduralSkyMaterial_xwb1n")
 [resource]
 background_mode = 2
 sky = SubResource("Sky_cvawi")
+fog_density = 0.001

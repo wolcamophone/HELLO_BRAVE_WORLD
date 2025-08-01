@@ -21,14 +21,14 @@
 [ext_resource type="Texture2D" uid="uid://bc7rj8ksvhms4" path="res://Graphics/textures/floors/CarpetFine.png" id="21_1wyf7"]
 [ext_resource type="Material" uid="uid://btdp4631smpa0" path="res://Graphics/textures/metal/trak.material" id="22_d3rdq"]
 [ext_resource type="Material" uid="uid://b0y3fgos8q2s1" path="res://Graphics/textures/metal/trailer_light.material" id="23_xo8pd"]
-[ext_resource type="Texture2D" uid="uid://c54s6nssspuo" path="res://Graphics/textures/stone/Hexag2.png" id="24_mtm3w"]
+[ext_resource type="Texture2D" uid="uid://c54s6nssspuo" path="res://Graphics/textures/stone/hexag2.png" id="24_mtm3w"]
 [ext_resource type="Texture2D" uid="uid://dri3ua21j6mbm" path="res://Graphics/textures/walls/backrooms_1.png" id="24_xcdrq"]
 [ext_resource type="Material" uid="uid://c8scurrhk74w1" path="res://Graphics/textures/glass/glass_3.material" id="25_ucliq"]
 [ext_resource type="Texture2D" uid="uid://dpooj5oyqrdbf" path="res://Graphics/textures/wood/wood_1.png" id="26_3uri7"]
-[ext_resource type="PackedScene" uid="uid://dp5lywrjh6jmp" path="res://models/Props/string_light.tscn" id="26_wi4vg"]
+[ext_resource type="PackedScene" uid="uid://dp5lywrjh6jmp" path="res://models/Props/lights/string_light.tscn" id="26_wi4vg"]
 [ext_resource type="Script" path="res://levels/world_space_info.gd" id="27_fys75"]
 [ext_resource type="Material" uid="uid://422y2scf4r6b" path="res://Graphics/textures/walls/Brick5.material" id="27_n4860"]
-[ext_resource type="PackedScene" uid="uid://d2elnxgsc6btx" path="res://models/Props/prop_light.tscn" id="27_xn6wd"]
+[ext_resource type="PackedScene" uid="uid://d2elnxgsc6btx" path="res://models/Props/lights/prop_light_ceil_rect.tscn" id="27_xn6wd"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j5fwq"]
 albedo_texture = ExtResource("3_wn1mg")
@@ -2054,17 +2054,17 @@ transfer_to_level = "hub_world"
 
 [node name="DoorGridhalls" parent="Entities/Doors" instance=ExtResource("1_a1lo3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1, 17, 44)
-overwrite_prompt_text = "Travel to Grid Adnauseum"
+overwrite_prompt_text = "Travel to Gridhalls"
 warp_door = true
 transfer_to_level = "ip_gridhalls"
 transfer_to_position = Vector4(0, 0, 0, 55)
 
 [node name="DoorMonofort" parent="Entities/Doors" instance=ExtResource("1_a1lo3")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -13, 26, 9)
-overwrite_prompt_text = "Travel to Grid Adnauseum"
+overwrite_prompt_text = "Travel to Monolithic Fortress"
 warp_door = true
 transfer_to_level = "ip_monofort"
-transfer_to_position = Vector4(0, 0, 0, 55)
+transfer_to_position = Vector4(0, 16, 0, 0)
 
 [node name="Audio" type="Node" parent="."]
 

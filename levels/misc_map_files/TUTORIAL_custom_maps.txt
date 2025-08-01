@@ -1,0 +1,38 @@
+You will need to install (or have slight background knowledge on):
+
+* Godot Engine v4.3.stable.official [77dcf97d8] (https://godotengine.org/)
+--- Godot is the main game engine used to develop HELLO_BRAVE_WORLD!
+
+* Trenchbroom v2024.1 (https://github.com/TrenchBroom/TrenchBroom/releases/tag/v2024.1)
+--- Trenchbroom is a 3rd party software designed for easily creating Quake maps. For our purposes, we just need the .map files
+
+* Cloned repository for HBW Game Project (https://github.com/wolcamophone/HELLO_BRAVE_WORLD)
+--- HELLO_BRAVE_WORLD! in uncompiled state. Development and mods for game are made and saved here.
+
+* func_godot (This is already installed in the game project addons for HBW but it still helps to know what it does.)
+--- func_godot is an addon for the Godot Engine that allows for reading and interpreting .map files to construct them into meshes and level geometry for a scene.
+
+After all prerequisites are installed, we can begin setting up the directories for Trenchbroom to find the textures in the game's project folder by utilizing the func_godot addon in the editor to generate .fgd files. These files determine the directories for mapping textures and brush/entity definitions.
+
+1) Open the Game Project
+2) Navigate to addons/func_godot/fgd/func_godot_fgd.tres
+3) Click the Export File checkbox to create the appropriate .fgd files for Trenchbroom. 
+
+Once .fgd files and directories are set up for Trenchbroom, we can get into the flow of creating our custom levels finally.
+
+1) Open Trenchbroom
+2) Click New Map...
+3) Create your level geometry
+4) Save file to res://levels/ip_[level_name_here]
+-- Level naming convention for HBW levels is that they start with ip_[level_name_here]. "ip" stands for "internal plexus." it is advised that all files stored in the file system of folders be in snake case, or all lower case with underscores for spaces. With the curent code structure of HBW, levels are selected to load by a string argument matching both the level's folder and scene file name.
+5) Create a new scene in Godot, preferably a Node3D scene, and name the root node following the .map file name of the previous naming convention.
+6) Create appropriate base nodes for the scene: a WorldSpaceInfo to be placed at the bottom of the scene tree, and a "World" Node to organize the level's nodes holding level specific attributes, most importantly here is the FuncGodotMap node to load in your level geometry.
+7) Click either the Local Map File or Global Map File fields and navigate to find your .map file in your level's directory.
+-) Change the Map Settings to func_godot_HBW_map_settings or the textures won't load properly.
+-) Save your level's scene into the appropriate folder.
+-) Create a sliding_door entity and type the name of your level's directory and scene file name into the "Transfer to Level" field.
+
+Credit:
+I initially followed this guide on youtube to set up my own project to set func_godot up for Trenchbroom
+
+--->  https://www.youtube.com/watch?v=_FFYBkMka60

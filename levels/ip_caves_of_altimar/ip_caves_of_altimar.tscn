@@ -1,14 +1,15 @@
-[gd_scene load_steps=480 format=4 uid="uid://dkrqt3jjn2w6q"]
+[gd_scene load_steps=481 format=4 uid="uid://dkrqt3jjn2w6q"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_6nqv1"]
+[ext_resource type="PackedScene" uid="uid://do6cmx571d3b3" path="res://entities/checkpoints/checkpoint.tscn" id="1_6uv04"]
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="2_74xse"]
 [ext_resource type="PackedScene" uid="uid://5u2jpl3pqgxq" path="res://entities/info_marker_generic.tscn" id="2_lcpdi"]
-[ext_resource type="Texture2D" uid="uid://dircxy1n3mjin" path="res://Graphics/textures/supernatural/Amala3.png" id="3_jl16n"]
+[ext_resource type="Texture2D" uid="uid://dircxy1n3mjin" path="res://Graphics/textures/supernatural/amala3.png" id="3_jl16n"]
 [ext_resource type="Material" uid="uid://dofnlrpv6vdru" path="res://Graphics/textures/stone/concrete_light.material" id="4_ylsdm"]
-[ext_resource type="Texture2D" uid="uid://btkahp3co5s2u" path="res://Graphics/textures/supernatural/RedCells1.png" id="5_op8ws"]
+[ext_resource type="Texture2D" uid="uid://btkahp3co5s2u" path="res://Graphics/textures/supernatural/red_cells1.png" id="5_op8ws"]
 [ext_resource type="Material" uid="uid://jpuqoghxkk6e" path="res://Graphics/textures/stone/stone_rough.material" id="6_lsakp"]
 [ext_resource type="Material" uid="uid://cvqto2kirpj81" path="res://Graphics/textures/stone/concrete_gold.material" id="7_g37kw"]
-[ext_resource type="Material" uid="uid://c1qr1bou0fvv5" path="res://Graphics/textures/stone/PathingGray.material" id="8_2ynbt"]
+[ext_resource type="Material" uid="uid://c1qr1bou0fvv5" path="res://Graphics/textures/stone/pathing_gray.material" id="8_2ynbt"]
 [ext_resource type="Texture2D" uid="uid://becr06701nof6" path="res://Graphics/textures/stone/clay.png" id="9_3e0ru"]
 [ext_resource type="Material" uid="uid://ch2xot7kjiklo" path="res://Graphics/textures/wood/wood_3.material" id="10_d4ksp"]
 [ext_resource type="Texture2D" uid="uid://dos5naqhgq484" path="res://Graphics/textures/stone/cavehands.png" id="11_fw3o3"]
@@ -1961,13 +1962,18 @@ data = PackedVector3Array(-12, -2, -8, -12, -6, -8, 12, -6, -8, -12, -2, -8, 12,
 
 [node name="Entities" type="Node" parent="."]
 
+[node name="Cave Lab" parent="Entities" instance=ExtResource("1_6uv04")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -150, 0, -26)
+status_report = "androids_learning"
+
 [node name="InteractiveDoor" parent="Entities" instance=ExtResource("25_eo5xe")]
 transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, -100, 8, 138)
 overwrite_prompt_text = "Travel to Depths Hub"
 transfer_to_level = "hub_world"
 
 [node name="InfoMarkerGeneric" parent="Entities" instance=ExtResource("2_lcpdi")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -100, 8, 123)
+transform = Transform3D(1, 8.74228e-08, 0, -8.74228e-08, 1, 0, 0, 0, -1, -100, 8, 123)
+visible = false
 
 [node name="World" type="Node" parent="."]
 

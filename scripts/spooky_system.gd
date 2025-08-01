@@ -1,5 +1,7 @@
 extends Node
 
+## You never saw this...
+
 var fun_score:int = -1
 var thyme:Timer
 
@@ -42,4 +44,6 @@ func holidays():
 	if occasion.month == 12 && occasion.day == 16:
 		print("Born!")
 	
+func mute_all():
+	AudioServer.set_bus_mute(0, true)
 	

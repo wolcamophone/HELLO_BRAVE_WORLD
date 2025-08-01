@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://baxbphpwmc3c5"]
+
+[ext_resource type="Script" path="res://models/Props/lights/prop_light.gd" id="1_8xxy2"]
+[ext_resource type="ArrayMesh" uid="uid://vdwh666jrvts" path="res://models/Props/lights/lamppost.obj" id="2_xjva4"]
+[ext_resource type="Material" uid="uid://chh811fagfyxb" path="res://models/Props/lights/lamppost.material" id="3_l22kt"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_78s5e"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3b3mu"]
+height = 3.8
+radius = 0.2
+
+[node name="PropLightLampPost" type="StaticBody3D"]
+script = ExtResource("1_8xxy2")
+energy = 2
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_xjva4")
+surface_material_override/0 = ExtResource("3_l22kt")
+surface_material_override/1 = ExtResource("3_l22kt")
+surface_material_override/2 = ExtResource("3_l22kt")
+surface_material_override/3 = ExtResource("3_l22kt")
+surface_material_override/4 = SubResource("StandardMaterial3D_78s5e")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.6, 0)
+light_color = Color(1, 0.984, 0.92, 1)
+light_energy = 2.0
+distance_fade_enabled = true
+distance_fade_begin = 96.0
+distance_fade_shadow = 160.0
+distance_fade_length = 32.0
+omni_range = 24.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+shape = SubResource("CylinderShape3D_3b3mu")

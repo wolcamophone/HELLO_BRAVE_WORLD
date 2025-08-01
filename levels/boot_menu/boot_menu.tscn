@@ -2,7 +2,7 @@
 
 [ext_resource type="Environment" uid="uid://5wulfb8tnebp" path="res://levels/boot_menu/boot_menu.tres" id="1_1f1ws"]
 [ext_resource type="Script" path="res://levels/boot_menu/boot_menu.gd" id="1_qf5ao"]
-[ext_resource type="AudioStream" uid="uid://dduf4c54rb553" path="res://audio/Music/Meat Wall.ogg" id="2_ebpd8"]
+[ext_resource type="AudioStream" uid="uid://dduf4c54rb553" path="res://audio/Music/meatwall.ogg" id="2_ebpd8"]
 [ext_resource type="Script" path="res://levels/RotateSkybox.gd" id="2_o7u8n"]
 [ext_resource type="VideoStream" path="res://intro_cutscene.ogv" id="5_qoti3"]
 

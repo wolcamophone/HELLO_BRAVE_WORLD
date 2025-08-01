@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://3x5nioot53bp"]
 
 [ext_resource type="Script" path="res://entities/Coin.gd" id="1_wj3t6"]
-[ext_resource type="AudioStream" uid="uid://bmjtjjexghuwi" path="res://audio/SFX/hl2/flashlight1.wav" id="2_yf7d4"]
+[ext_resource type="AudioStream" uid="uid://c6cjyd2h3a3kw" path="res://audio/SFX/bike_bell.wav" id="3_ff21n"]
 [ext_resource type="Material" uid="uid://xkhmhujpvyc0" path="res://entities/coin.material" id="3_sdn00"]
 [ext_resource type="Texture2D" uid="uid://bl8tdhw7utsl5" path="res://Graphics/particles/p_star3.png" id="5_v7nf4"]
 
@@ -20,6 +20,8 @@ transparency = 1
 blend_mode = 1
 no_depth_test = true
 shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
 albedo_color = Color(2, 2, 1, 0.12549)
@@ -69,7 +71,7 @@ mesh = SubResource("CylinderMesh_6plj4")
 shape = SubResource("SphereShape3D_k1uuv")
 
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("2_yf7d4")
+stream = ExtResource("3_ff21n")
 bus = &"Sound Effects"
 
 [node name="Sparkle" type="GPUParticles3D" parent="."]

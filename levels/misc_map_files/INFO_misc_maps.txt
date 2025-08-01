@@ -1,0 +1,1 @@
+These are short snippets of geometry I whipped up from loose ideas. Occasionally I come back to take the snippets and put them into their own levels. Each individual map file may be its own contained room concepts or still just as bare as a few brushes. For completely stand-out bits of map geometry, look in ip_misc_geometry_journal.map

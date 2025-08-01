@@ -1,6 +1,7 @@
 shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
-//geg-fairbear8974
+// geg-fairbear8974
+// some edits to add emissions by -CD
 uniform vec3 albedo : source_color;
 uniform sampler2D water_texture1;
 uniform sampler2D water_texture2;
@@ -18,6 +19,12 @@ uniform sampler2D DepthTexture : hint_depth_texture;
 uniform float WaterOpacity = 1.0;
 uniform float FoamGlowIntensity = 0.5;
 
+uniform sampler2D texture_emission1; 
+uniform sampler2D texture_emission2; 
+uniform vec4 emission1 : source_color;
+uniform vec4 emission2 : source_color;
+uniform float emission_energy : hint_range(0.0, 100.0, 0.01);
+
 void vertex() {
     vec2 global_position = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xz;
     float noise_value = texture(noise_texture, global_position * wave_scale).r;
@@ -34,9 +41,17 @@ void fragment() {
     scrolledUV2 = mod(scrolledUV2, vec2(1.0, 1.0));
     scrolledUV1 = floor(scrolledUV1 * float(pixelation_level)) / float(pixelation_level);
     scrolledUV2 = floor(scrolledUV2 * float(pixelation_level)) / float(pixelation_level);
-
+	
+	vec2 base_uv = UV;
+	// Emission: Enabled
+	vec3 emission_tex1 = texture(texture_emission1, scrolledUV1).rgb;
+	vec3 emission_tex2 = texture(texture_emission2, scrolledUV2).rgb;
+	
+	
     vec4 water_color1 = texture(water_texture1, scrolledUV1);
     vec4 water_color2 = texture(water_texture2, scrolledUV2);
+	//vec4 emission1 = texture(emission_tex1, scrolledUV1);
+    //vec4 emission2 = texture(emission_tex2, scrolledUV2);
     vec4 blended_water_color = mix(water_color1, water_color2, blend_factor);
 
     float depthValue = texture(DepthTexture, SCREEN_UV).r;
@@ -46,10 +61,13 @@ void fragment() {
     float foamOpacity = 1.0 - foamEffect;
     float foamEffectRounded = round(foamOpacity);
     float finalOpacity = foamEffectRounded + WaterOpacity;
-
+	
     ALBEDO = blended_water_color.rgb * albedo;
     ALPHA = finalOpacity;
     EMISSION = vec3(foamEffectRounded) * FoamGlowIntensity;
     METALLIC = 0.0;
     ROUGHNESS = 1.0;
+	
+	// Emission Operator: Multiply
+	EMISSION = ((emission1.rgb + emission2.rgb) * (emission_tex1 * emission_tex2)) * emission_energy;
 }

@@ -1,0 +1,194 @@
+[gd_scene load_steps=22 format=3 uid="uid://cbo0xk3jms3ww"]
+
+[ext_resource type="Script" path="res://_deprec/android_033023.gd" id="1_pds78"]
+[ext_resource type="PackedScene" uid="uid://dm5vmdqfgedfg" path="res://scripts/attack_box.tscn" id="2_jmy7u"]
+[ext_resource type="PackedScene" uid="uid://c2f2xn44h37mg" path="res://Player/PlayerModel.tscn" id="3_2dqd0"]
+[ext_resource type="Script" path="res://Player/camera_movement.gd" id="3_aj8b8"]
+[ext_resource type="PackedScene" uid="uid://bqxet0paa37vn" path="res://entities/explosion.tscn" id="3_vgw04"]
+[ext_resource type="Texture2D" uid="uid://bbvgdi64v0q4n" path="res://Graphics/particles/p_shadow.png" id="6_kk83b"]
+[ext_resource type="AudioStream" uid="uid://bq02rq7rurx20" path="res://audio/SFX/jump.wav" id="6_r36ni"]
+[ext_resource type="AudioStream" uid="uid://ti1mmrwjlviw" path="res://audio/SFX/camera_shutter.wav" id="6_vjwwm"]
+[ext_resource type="Texture2D" uid="uid://cjf04dm6ciad2" path="res://Graphics/particles/p_smoke.png" id="7_vh7xj"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_utlkd"]
+radius = 0.35
+height = 2.3
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ryo0o"]
+margin = 0.1
+radius = 0.25
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8jnu4"]
+radius = 0.4
+height = 2.3
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dg4qi"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 0.129412)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_4a04s"]
+material = SubResource("StandardMaterial3D_dg4qi")
+radius = 0.4
+height = 2.4
+
+[sub_resource type="Curve" id="Curve_ns5x1"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_153xt"]
+curve = SubResource("Curve_ns5x1")
+
+[sub_resource type="Curve" id="Curve_xhwrj"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ealdv"]
+curve = SubResource("Curve_xhwrj")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rlxut"]
+particle_flag_align_y = true
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_ealdv")
+alpha_curve = SubResource("CurveTexture_153xt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7wheh"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(0.9, 0.9, 0.9, 0.501961)
+albedo_texture = ExtResource("7_vh7xj")
+albedo_texture_force_srgb = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_w3l4s"]
+material = SubResource("StandardMaterial3D_7wheh")
+size = Vector2(2, 2)
+
+[node name="Android033023" type="CharacterBody3D" groups=["persistent", "player"]]
+process_mode = 1
+process_physics_priority = 1
+top_level = true
+collision_layer = 7
+collision_mask = 15
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+slide_on_ceiling = false
+wall_min_slide_angle = 0.174533
+floor_constant_speed = true
+floor_max_angle = 0.802851
+floor_snap_length = 0.25
+safe_margin = 0.01
+script = ExtResource("1_pds78")
+_attack_type = ExtResource("2_jmy7u")
+death_spectacle = ExtResource("3_vgw04")
+GRAVITY = 20.0
+
+[node name="AttackTimer" type="Timer" parent="."]
+wait_time = 0.2
+
+[node name="WallSlideCooldown" type="Timer" parent="."]
+
+[node name="iFrames" type="Timer" parent="."]
+wait_time = 0.8
+one_shot = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+shape = SubResource("CapsuleShape3D_utlkd")
+
+[node name="RotationRoot" type="Node3D" parent="."]
+
+[node name="PlayerModel" parent="RotationRoot" instance=ExtResource("3_2dqd0")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="StairStepper" type="RayCast3D" parent="RotationRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4, -0.5)
+visible = false
+target_position = Vector3(0, -0.4, 0)
+collision_mask = 5
+hit_back_faces = false
+debug_shape_custom_color = Color(0.501961, 0, 1, 1)
+debug_shape_thickness = 5
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+light_color = Color(0.75, 0.75, 1, 1)
+light_energy = 0.25
+light_indirect_energy = 0.0
+light_specular = 0.0
+omni_range = 16.0
+omni_attenuation = 0.5
+
+[node name="SpringCamHead" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2, 0)
+spring_length = 0.6
+
+[node name="CameraHead" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
+
+[node name="AudioListener3D" type="AudioListener3D" parent="CameraHead"]
+current = true
+
+[node name="SpringArm3D" type="SpringArm3D" parent="CameraHead"]
+process_priority = -1
+process_physics_priority = -1
+top_level = true
+shape = SubResource("SphereShape3D_ryo0o")
+spring_length = 4.0
+script = ExtResource("3_aj8b8")
+
+[node name="Camera3D" type="Camera3D" parent="CameraHead/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.997564, 0.0697565, 0, -0.0697565, 0.997564, 0, 0, 0)
+current = true
+
+[node name="CamZoom" type="AudioStreamPlayer" parent="CameraHead/SpringArm3D"]
+stream = ExtResource("6_vjwwm")
+volume_db = -20.0
+mix_target = 2
+max_polyphony = 2
+bus = &"Sound Effects"
+
+[node name="HitBox" type="Area3D" parent="." groups=["player"]]
+collision_layer = 9
+collision_mask = 9
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
+shape = SubResource("CapsuleShape3D_8jnu4")
+
+[node name="ColMeshDebug" type="MeshInstance3D" parent="HitBox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+visible = false
+mesh = SubResource("CapsuleMesh_4a04s")
+
+[node name="WallSlideParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+emitting = false
+amount = 12
+lifetime = 0.4
+one_shot = true
+speed_scale = 2.0
+transform_align = 3
+process_material = SubResource("ParticleProcessMaterial_rlxut")
+draw_pass_1 = SubResource("QuadMesh_w3l4s")
+
+[node name="LandingShadow" type="Decal" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -11, 0)
+size = Vector3(1.5, 24, 1.5)
+texture_albedo = ExtResource("6_kk83b")
+emission_energy = 2.0
+normal_fade = 0.25
+upper_fade = 0.1
+
+[node name="Jump" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+stream = ExtResource("6_r36ni")
+attenuation_model = 3
+volume_db = -8.0
+max_distance = 24.0
+bus = &"Sound Effects"
+
+[connection signal="area_entered" from="HitBox" to="." method="_hit_box"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bb2hcbb3vaxyu"]
+[gd_scene load_steps=22 format=3 uid="uid://bb2hcbb3vaxyu"]
 
 [ext_resource type="Script" path="res://scripts/UI/HUD.gd" id="1_n7kud"]
 [ext_resource type="JSON" path="res://_deprec/Dialogue/Test_dialogue.json" id="2_o1v84"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://cugasf7g76vhn" path="res://Graphics/UI/vignette.png" id="4_cix3b"]
 [ext_resource type="Texture2D" uid="uid://d4fykdqigfar6" path="res://Graphics/UI/crt.png" id="4_esusg"]
 [ext_resource type="Texture2D" uid="uid://dvxf4do6lmw1h" path="res://Graphics/UI/HUD/health_radial_2.png" id="4_iclye"]
+[ext_resource type="LabelSettings" uid="uid://bldwplqgwyyd4" path="res://scripts/UI/HUD_label.tres" id="7_ksx4b"]
 [ext_resource type="Texture2D" uid="uid://ruijco38yggy" path="res://Graphics/UI/AtlasController.png" id="8_786k8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_foj5r"]
@@ -26,14 +27,6 @@ bg_color = Color(0, 0, 0, 0.501961)
 atlas = ExtResource("8_786k8")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="LabelSettings" id="LabelSettings_ku1is"]
-font_size = 18
-outline_size = 2
-outline_color = Color(0, 0, 0, 0.501961)
-shadow_size = 2
-shadow_color = Color(0, 0, 0, 0.501961)
-shadow_offset = Vector2(2, 2)
-
 [sub_resource type="LabelSettings" id="LabelSettings_3bwea"]
 font_size = 18
 font_color = Color(1, 1, 0, 1)
@@ -45,6 +38,22 @@ shadow_color = Color(0, 0, 0, 0.501961)
 [sub_resource type="LabelSettings" id="LabelSettings_otgro"]
 font_size = 18
 font_color = Color(1, 0, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.501961)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_elhiu"]
+font_size = 18
+font_color = Color(0, 0.983334, 1, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.501961)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nfj2h"]
+font_size = 18
+font_color = Color(1, 0, 1, 1)
 outline_size = 2
 outline_color = Color(0, 0, 0, 0.501961)
 shadow_size = 2
@@ -85,6 +94,14 @@ _data = {
 "Fade": SubResource("Animation_iu6pd"),
 "RESET": SubResource("Animation_i7dvw")
 }
+
+[sub_resource type="LabelSettings" id="LabelSettings_l8kc6"]
+font_size = 24
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.501961)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.501961)
+shadow_offset = Vector2(2, 2)
 
 [node name="HUD" type="CanvasLayer" groups=["system", "user_interface"]]
 process_mode = 3
@@ -211,7 +228,7 @@ layout_mode = 2
 size_flags_horizontal = 4
 mouse_filter = 1
 text = "Activate"
-label_settings = SubResource("LabelSettings_ku1is")
+label_settings = ExtResource("7_ksx4b")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -287,6 +304,35 @@ offset_bottom = 69.0
 text = "Red Coins: 0"
 label_settings = SubResource("LabelSettings_otgro")
 
+[node name="LivesCounter" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1304.0
+offset_top = 12.0
+offset_right = -24.0
+offset_bottom = 49.0
+grow_horizontal = 0
+text = "Lives: 0"
+label_settings = SubResource("LabelSettings_elhiu")
+horizontal_alignment = 2
+
+[node name="KeysCounter" type="Label" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1304.0
+offset_top = 32.0
+offset_right = -24.0
+offset_bottom = 69.0
+grow_horizontal = 0
+text = "Keys: 0"
+label_settings = SubResource("LabelSettings_nfj2h")
+horizontal_alignment = 2
+
 [node name="FadeTransition" type="AnimationPlayer" parent="Control"]
 root_node = NodePath("../..")
 libraries = {
@@ -303,3 +349,35 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 color = Color(0, 0, 0, 1)
+
+[node name="LoadingLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.5
+offset_top = -53.0
+offset_right = 72.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Loading ...
+ "
+label_settings = SubResource("LabelSettings_l8kc6")
+
+[node name="SavingLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.5
+offset_top = -53.0
+offset_right = 72.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Saving ...
+ "
+label_settings = SubResource("LabelSettings_l8kc6")

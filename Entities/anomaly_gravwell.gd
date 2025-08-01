@@ -8,7 +8,7 @@ extends Node3D
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
 	if  body.is_in_group("player"):
-		body.velocity = (body.global_position - global_position) * force # TODO: Place a formula here that pushes the player away like an explosion rather than just send them upward.
+		body.velocity = (body.global_position - global_position) * force
 		gleam.play()
 		
 		#print("anomaly detected!")

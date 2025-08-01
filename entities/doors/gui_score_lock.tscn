@@ -1,0 +1,118 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0rgashfp2mkh"]
+
+[ext_resource type="Script" path="res://entities/doors/gui_score_lock.gd" id="1_4rxbp"]
+[ext_resource type="Texture2D" uid="uid://datsirgvkj2yi" path="res://Graphics/UI/score_lock_sign.png" id="2_epsxn"]
+[ext_resource type="FontFile" uid="uid://b1iur3lls3rrp" path="res://Graphics/UI/Font/consola.ttf" id="3_quyb3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_thys2"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 2
+border_color = Color(0.36, 0.36, 0.36, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_41qoi"]
+font = ExtResource("3_quyb3")
+font_size = 36
+
+[node name="gui_score_lock" type="Control"]
+custom_minimum_size = Vector2(256, 256)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4rxbp")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_epsxn")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxIcons" type="VBoxContainer" parent="TextureRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="Panel1" type="Panel" parent="TextureRect/HBoxContainer/VBoxIcons"]
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_thys2")
+
+[node name="Panel2" type="Panel" parent="TextureRect/HBoxContainer/VBoxIcons"]
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_thys2")
+
+[node name="Panel3" type="Panel" parent="TextureRect/HBoxContainer/VBoxIcons"]
+custom_minimum_size = Vector2(84, 84)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_thys2")
+
+[node name="VBoxOpperands" type="VBoxContainer" parent="TextureRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="LabelOperand1" type="Label" parent="TextureRect/HBoxContainer/VBoxOpperands"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "-"
+label_settings = SubResource("LabelSettings_41qoi")
+horizontal_alignment = 1
+
+[node name="LabelOperand2" type="Label" parent="TextureRect/HBoxContainer/VBoxOpperands"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "="
+label_settings = SubResource("LabelSettings_41qoi")
+horizontal_alignment = 1
+
+[node name="LabelOperand3" type="Label" parent="TextureRect/HBoxContainer/VBoxOpperands"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "="
+label_settings = SubResource("LabelSettings_41qoi")
+horizontal_alignment = 1
+
+[node name="VBoxValues" type="VBoxContainer" parent="TextureRect/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelValue1" type="Label" parent="TextureRect/HBoxContainer/VBoxValues"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "12"
+label_settings = SubResource("LabelSettings_41qoi")
+horizontal_alignment = 1
+
+[node name="LabelValue2" type="Label" parent="TextureRect/HBoxContainer/VBoxValues"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "0"
+label_settings = SubResource("LabelSettings_41qoi")
+horizontal_alignment = 1
+
+[node name="LabelValue3" type="Label" parent="TextureRect/HBoxContainer/VBoxValues"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "-8"
+label_settings = SubResource("LabelSettings_41qoi")
+horizontal_alignment = 1

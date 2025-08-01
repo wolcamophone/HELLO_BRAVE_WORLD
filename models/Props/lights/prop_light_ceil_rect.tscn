@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2elnxgsc6btx"]
+
+[ext_resource type="Script" path="res://models/Props/lights/prop_light.gd" id="1_nbhv1"]
+[ext_resource type="Material" uid="uid://dpnrevrbhtqvm" path="res://models/Props/lights/prop_light_ceil.material" id="3_3g2ts"]
+[ext_resource type="ArrayMesh" uid="uid://cw7c4f2pckqoe" path="res://models/Props/lights/light_ceil_short.obj" id="4_7n35b"]
+[ext_resource type="Material" uid="uid://dkkf7er17jlh" path="res://models/Props/lights/prop_light_emission.material" id="4_hl564"]
+
+[node name="CeilingLight" type="StaticBody3D" groups=["prop_light"]]
+script = ExtResource("1_nbhv1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+cast_shadow = 0
+mesh = ExtResource("4_7n35b")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("3_3g2ts")
+surface_material_override/1 = ExtResource("4_hl564")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+light_energy = 6.0
+shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 128.0
+distance_fade_shadow = 152.0
+distance_fade_length = 16.0
+omni_range = 24.0
+omni_attenuation = 1.2

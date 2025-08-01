@@ -2,7 +2,7 @@ extends SpringArm3D
 
 @export var mouse_sensitivity:int = 5
 @export var controller_sensitivity:int = 5
-@export var cam_upper_limit:int = -65
+@export var cam_upper_limit:int = -75
 @export var cam_lower_limit:int = 60
 @export var zoom_level:int = 2
 
@@ -35,6 +35,15 @@ func _input(event):
 			spring_length = 6
 			camera.fov = (SettingsConfig.fov_desired) - 2
 		shutter.play()
+	
+	if event.is_action_pressed("look_up"):
+		rotation_degrees.x += controller_sensitivity * 0.5
+	if event.is_action_pressed("look_down"):
+		rotation_degrees.x -= controller_sensitivity * 0.5
+	if event.is_action_pressed("look_left"):
+		rotation_degrees.y += controller_sensitivity * 0.5
+	if event.is_action_pressed("look_right"):
+		rotation_degrees.y -= controller_sensitivity * 0.5
 
 
 func _process(delta):
@@ -47,14 +56,7 @@ func _process(delta):
 		ui_active = true
 
 func _physics_process(delta):
-	if Input.is_action_pressed("look_up"):
-		rotation_degrees.x += controller_sensitivity * 0.5
-	if Input.is_action_pressed("look_down"):
-		rotation_degrees.x -= controller_sensitivity * 0.5
-	if Input.is_action_pressed("look_left"):
-		rotation_degrees.y += controller_sensitivity * 0.5
-	if Input.is_action_pressed("look_right"):
-		rotation_degrees.y -= controller_sensitivity * 0.5
+	pass
 
 	
 #	zoom += Input.get_axis("zoom_in", "zoom_out") * zoom_speed * delta

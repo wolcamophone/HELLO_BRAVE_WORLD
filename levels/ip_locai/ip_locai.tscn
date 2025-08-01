@@ -1,11 +1,11 @@
-[gd_scene load_steps=241 format=4 uid="uid://cbsl2ly6whgwv"]
+[gd_scene load_steps=244 format=4 uid="uid://cbsl2ly6whgwv"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_bvn45"]
 [ext_resource type="Material" uid="uid://cvex6toty8yn7" path="res://addons/func_godot/textures/default_material.tres" id="2_g0sjc"]
 [ext_resource type="Resource" uid="uid://crgpdahjaj" path="res://addons/func_godot/fgd/func_godot_fgd.tres" id="3_s8jvu"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map_settings.gd" id="4_rvycn"]
 [ext_resource type="Texture2D" uid="uid://bc4nssp3om1ao" path="res://Graphics/textures/natural/sand_pink.png" id="5_kpa2a"]
-[ext_resource type="Material" uid="uid://c7knrjiilnaow" path="res://Graphics/textures/natural/Water2.material" id="6_be2jr"]
+[ext_resource type="Material" uid="uid://c7knrjiilnaow" path="res://Graphics/textures/natural/water2.material" id="6_be2jr"]
 [ext_resource type="Texture2D" uid="uid://bkfbsyfa0qbu0" path="res://Graphics/textures/stone/concrete_plates_gray_staggered.png" id="7_76kte"]
 [ext_resource type="Texture2D" uid="uid://i85l7erqr78g" path="res://Graphics/textures/natural/grass_tiled.png" id="8_few7b"]
 [ext_resource type="Texture2D" uid="uid://cnhq4xujdac70" path="res://Graphics/textures/natural/sand_blue.png" id="9_p2wj8"]
@@ -14,6 +14,18 @@
 [ext_resource type="Material" uid="uid://ch2xot7kjiklo" path="res://Graphics/textures/wood/wood_3.material" id="12_rk5jv"]
 [ext_resource type="PackedScene" uid="uid://d4ko1bybcv8mu" path="res://entities/doors/sliding_door.tscn" id="13_a1uad"]
 [ext_resource type="Script" path="res://levels/world_space_info.gd" id="14_ufn50"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bhmvd"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_dsfr6"]
+sky_material = SubResource("ProceduralSkyMaterial_bhmvd")
+
+[sub_resource type="Environment" id="Environment_e64f4"]
+background_mode = 2
+sky = SubResource("Sky_dsfr6")
+tonemap_mode = 2
 
 [sub_resource type="Resource" id="Resource_v8q2c"]
 script = ExtResource("4_rvycn")
@@ -851,13 +863,21 @@ _surfaces = [{
 
 [node name="ip_landofcakeandicecreams" type="Node3D"]
 
-[node name="InteractiveDoor" parent="." instance=ExtResource("13_a1uad")]
+[node name="Entities" type="Node" parent="."]
+
+[node name="InteractiveDoor" parent="Entities" instance=ExtResource("13_a1uad")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 178, 7.5, -178)
 warp_door = true
 transfer_to_level = "hub_world"
-warp_to_position = Vector3(-2, -21, -192)
 
 [node name="World" type="Node" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = SubResource("Environment_e64f4")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(-0.866023, -0.453156, 0.211312, 0, 0.422622, 0.906306, -0.500003, 0.784882, -0.366001, 0, 0, 0)
+shadow_enabled = true
 
 [node name="FuncGodotMap" type="Node3D" parent="World"]
 script = ExtResource("1_bvn45")

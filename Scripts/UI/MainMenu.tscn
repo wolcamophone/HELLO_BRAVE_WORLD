@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dpdrl5c7pe1op"]
+[gd_scene load_steps=9 format=3 uid="uid://dpdrl5c7pe1op"]
 
 [ext_resource type="Theme" uid="uid://24bml6th7hoi" path="res://Graphics/UI/Def_UI.theme" id="1_5qcna"]
 [ext_resource type="Script" path="res://scripts/UI/MainMenu.gd" id="2_cb50o"]
@@ -6,13 +6,14 @@
 [ext_resource type="PackedScene" uid="uid://b63gj2ifboghy" path="res://scripts/UI/Console/console.tscn" id="3_8oeox"]
 [ext_resource type="Material" uid="uid://04c6i0xynxd4" path="res://Graphics/Shaders/lightweight_crt.tres" id="3_d75hi"]
 [ext_resource type="PackedScene" uid="uid://b0e5eduwpbkep" path="res://scripts/UI/Settings_Menu4.tscn" id="3_n6s02"]
+[ext_resource type="PackedScene" uid="uid://b7yshewtp450" path="res://scripts/UI/save_menu.tscn" id="7_kgyd3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_mthho"]
 blend_mode = 3
 
 [node name="MainMenu" type="CanvasLayer"]
 process_mode = 3
-layer = 99
+layer = 80
 script = ExtResource("2_cb50o")
 
 [node name="Control" type="Control" parent="."]
@@ -66,10 +67,9 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_5qcna")
 tab_alignment = 2
-current_tab = 1
+current_tab = 0
 
 [node name="MainMenu" type="TabBar" parent="Control/TabContainer"]
-visible = false
 layout_mode = 2
 focus_neighbor_right = NodePath("../Settings")
 focus_next = NodePath("../Settings")
@@ -133,6 +133,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Settings" type="TabBar" parent="Control/TabContainer"]
+visible = false
 layout_mode = 2
 focus_neighbor_left = NodePath("../MainMenu")
 focus_previous = NodePath("../MainMenu")
@@ -151,6 +152,14 @@ offset_right = 760.0
 offset_bottom = 535.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="SaveMenu" parent="Control" instance=ExtResource("7_kgyd3")]
+visible = false
+layout_mode = 1
+offset_left = -450.0
+offset_top = -300.0
+offset_right = 450.0
+offset_bottom = 300.0
 
 [connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Control/TabContainer/MainMenu/HBox/PanelContainer/VBox/Start" to="." method="_on_start_pressed"]

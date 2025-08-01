@@ -54,7 +54,6 @@ func _ready():
 #region Gameplay Settings Funcs
 func _on_skip_intro_cutscene_toggled(toggled_on: bool) -> void:
 	SettingsConfig.skip_intro_cutscene = toggled_on
-	GameMaster.skip_intro_cutscene = skip_intro_cutscene
 
 func _on_player_color_changed(color_arg: Color) -> void:
 	SettingsConfig.player_color = color_arg
@@ -76,9 +75,7 @@ func _on_fullscreen_toggled(toggled_on):
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 	elif toggled_on:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	
-	
-	
+
 
 func AddResolutions():
 	for r in Resolutions:

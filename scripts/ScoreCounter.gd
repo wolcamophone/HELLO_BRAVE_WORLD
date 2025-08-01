@@ -1,16 +1,8 @@
 extends Node
 
 @export_category("Scores")
-@export var LIVES:int = 5
-@export var KEYS:int = 0
-@export var COINS:int = 0
-@export var RED_COINS:int = 0
-@export var RED_COINS_MAX:int = 8
-
-func save():
-	var save_dict = {
-		"lives" : LIVES,
-		"keys" : KEYS,
-		"coins" : COINS,
-	}
-	return save_dict
+@export var lives:int = 5
+@export var keys:int = 0
+@export var coins:int = 0
+@export var red_coins:int = 0
+@export var red_coins_max:int = 8

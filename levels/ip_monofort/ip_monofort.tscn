@@ -9,12 +9,12 @@
 [ext_resource type="Material" uid="uid://b7bmrxepcj1ne" path="res://Graphics/textures/stone/concrete_dark.material" id="7_qq48p"]
 [ext_resource type="Material" uid="uid://n4134m3xs5ja" path="res://Graphics/textures/natural/branches_1.material" id="8_afir0"]
 [ext_resource type="Texture2D" uid="uid://cyg2snr1w5xw5" path="res://addons/func_godot/textures/default_texture.png" id="9_150pt"]
-[ext_resource type="Material" uid="uid://f8qvvaunmcv7" path="res://Graphics/textures/stone/Teal3.material" id="10_7x53k"]
+[ext_resource type="Material" uid="uid://c71j4hd46afqu" path="res://Graphics/textures/stone/teal_3.material" id="10_7x53k"]
 [ext_resource type="Material" uid="uid://dofnlrpv6vdru" path="res://Graphics/textures/stone/concrete_light.material" id="11_132i7"]
-[ext_resource type="Material" uid="uid://bn62gtk514yn0" path="res://Graphics/textures/stone/Street.material" id="12_bsodp"]
+[ext_resource type="Material" uid="uid://bn62gtk514yn0" path="res://Graphics/textures/stone/street.material" id="12_bsodp"]
 [ext_resource type="Material" uid="uid://c7knrjiilnaow" path="res://Graphics/textures/natural/Water2.material" id="13_eif3e"]
-[ext_resource type="Texture2D" uid="uid://bnih7o5lwcedi" path="res://Graphics/textures/Floors/CarpetRed.png" id="14_cgkmb"]
-[ext_resource type="Material" uid="uid://ccgs0iddjm5th" path="res://Graphics/textures/natural/Dirt.material" id="15_aueeu"]
+[ext_resource type="Texture2D" uid="uid://bnih7o5lwcedi" path="res://Graphics/textures/floors/CarpetRed.png" id="14_cgkmb"]
+[ext_resource type="Material" uid="uid://ccgs0iddjm5th" path="res://Graphics/textures/natural/dirt.material" id="15_aueeu"]
 [ext_resource type="Script" path="res://levels/world_space_info.gd" id="16_iubjo"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ut8rr"]
@@ -32,15 +32,18 @@ curve = SubResource("Curve_lrf7t")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_rjbvx"]
 emission_shape = 2
 emission_sphere_radius = 128.0
-orbit_velocity_min = 200.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = -1.60933e-05
+orbit_velocity_min = -20.0
 orbit_velocity_max = 200.0
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = 48.0
 gravity = Vector3(0, 0, 0)
 radial_accel_min = -24.0
 radial_accel_max = -24.0
 tangential_accel_min = -50.0
 tangential_accel_max = 50.0
 scale_curve = SubResource("CurveTexture_au07l")
-turbulence_enabled = true
 turbulence_noise_strength = 12.0
 turbulence_noise_scale = 2.0
 

@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cld3ln8yx636k"]
+[gd_scene load_steps=7 format=3 uid="uid://cld3ln8yx636k"]
 
 [ext_resource type="ArrayMesh" uid="uid://bpuo6ih8jxwej" path="res://models/Props/radio.obj" id="1_r1iya"]
+[ext_resource type="Script" path="res://models/Props/prop_radio.gd" id="1_xt8gx"]
 [ext_resource type="Texture2D" uid="uid://buifxcjxtouna" path="res://models/Props/radio.png" id="2_wx3nf"]
 [ext_resource type="Texture2D" uid="uid://yecvtdp8b6fl" path="res://models/Props/radio_n.png" id="3_4awsp"]
 
@@ -14,6 +15,7 @@ normal_texture = ExtResource("3_4awsp")
 size = Vector3(1, 0.48, 0.3)
 
 [node name="PropRadio" type="StaticBody3D"]
+script = ExtResource("1_xt8gx")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("1_r1iya")
@@ -22,3 +24,8 @@ surface_material_override/0 = SubResource("StandardMaterial3D_igdtp")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.24, 0)
 shape = SubResource("BoxShape3D_g6mha")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+max_distance = 8.0
+bus = &"Radio"

@@ -11,6 +11,7 @@ Map Importer for Quake .map files - FuncGodot
 
 https://github.com/func-godot/func_godot_plugin 
 
+
 Dialogic by Emi and Jowan: https://dialogic.pro/ 
 
 https://github.com/dialogic-godot/dialogic/releases 
@@ -58,7 +59,10 @@ Sounds used in SCP Containment Breach
 
 
 ##	Music:
-OST by Skull Krackers
+
+OST by Skull Krackers.
+
+Assisting Music Production by FyrusFear: https://www.youtube.com/@fyrus_fear
 
 
 ##	Special Thanks and Guides: 

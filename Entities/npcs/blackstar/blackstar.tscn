@@ -2,7 +2,7 @@
 
 [ext_resource type="ArrayMesh" uid="uid://poob7tfmet2e" path="res://models/NPCs/blackstar.obj" id="1_ann4g"]
 [ext_resource type="Shader" path="res://Graphics/Shaders/uv_front.gdshader" id="2_cuvom"]
-[ext_resource type="Texture2D" uid="uid://by5738lael1gk" path="res://Graphics/textures/supernatural/Eyes.png" id="3_es7xs"]
+[ext_resource type="Texture2D" uid="uid://by5738lael1gk" path="res://Graphics/textures/supernatural/eyes.png" id="3_es7xs"]
 [ext_resource type="Shader" path="res://Graphics/Shaders/wavy_ps1_water_unshaded.gdshader" id="4_fneso"]
 [ext_resource type="AudioStream" uid="uid://c6ntsj2fqc4cd" path="res://audio/Music/choir synth.ogg" id="5_nykgh"]
 [ext_resource type="Script" path="res://scripts/animation_autoplayer.gd" id="6_hyihh"]

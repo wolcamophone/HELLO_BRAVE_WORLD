@@ -14,21 +14,21 @@ var collected:bool
 func _ready() -> void:
 	self.area_entered.connect(_on_area_entered)
 	mesh.rotation.y -= randf_range(0, TAU)
-	sparkle.finished.connect(queue_free)
+	sound.finished.connect(queue_free)
 
 func _process(delta: float) -> void:
 	mesh.rotation.y += wrapf(rotation_speed * delta, 0, TAU)
 
 func _on_area_entered(area):
 	if area.is_in_group("player"):
-		ScoreCounter.COINS += coin_value
+		ScoreCounter.coins += coin_value
 		mesh.visible = false
-		AudioManager.UI_SELECT.play()
+		sound.play()
 		sparkle.emitting = true
 	
 	# Important: A name and value must be assigned to a collectible to match to the ScoreCounter.
 	if red_coin:
-		ScoreCounter.RED_COINS += 1
+		ScoreCounter.red_coins += 1
 
 func save():
 	var save_dict = {
