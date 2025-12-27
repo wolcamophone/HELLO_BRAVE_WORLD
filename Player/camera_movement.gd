@@ -20,6 +20,8 @@ func _input(event):
 		rotation_degrees.x -= event.relative.y * mouse_sensitivity * 0.05
 		rotation_degrees.y -= event.relative.x * mouse_sensitivity * 0.05
 
+
+
 	if event.is_action_pressed("cam_zoom"):
 		zoom_level += 1
 		if zoom_level > 3:
@@ -35,15 +37,9 @@ func _input(event):
 			spring_length = 6
 			camera.fov = (SettingsConfig.fov_desired) - 2
 		shutter.play()
+
+
 	
-	if event.is_action_pressed("look_up"):
-		rotation_degrees.x += controller_sensitivity * 0.5
-	if event.is_action_pressed("look_down"):
-		rotation_degrees.x -= controller_sensitivity * 0.5
-	if event.is_action_pressed("look_left"):
-		rotation_degrees.y += controller_sensitivity * 0.5
-	if event.is_action_pressed("look_right"):
-		rotation_degrees.y -= controller_sensitivity * 0.5
 
 
 func _process(delta):
@@ -56,7 +52,14 @@ func _process(delta):
 		ui_active = true
 
 func _physics_process(delta):
-	pass
+	if Input.is_action_pressed("look_up"):
+		rotation_degrees.x += controller_sensitivity * 0.5
+	if Input.is_action_pressed("look_down"):
+		rotation_degrees.x -= controller_sensitivity * 0.5
+	if Input.is_action_pressed("look_left"):
+		rotation_degrees.y += controller_sensitivity * 0.5
+	if Input.is_action_pressed("look_right"):
+		rotation_degrees.y -= controller_sensitivity * 0.5
 
 	
 #	zoom += Input.get_axis("zoom_in", "zoom_out") * zoom_speed * delta

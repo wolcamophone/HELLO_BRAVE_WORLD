@@ -1,5 +1,5 @@
-class_name InteractionArea
 extends Area3D
+class_name AreaInteraction ## Area3D node with functionality for player interaction, HUD button prompt and text alteration. Requires a Collision3D like any other Area Node. Under Node tab above the Inspector, select "activation" signal and connect to an existing function in another node in the scene tree.
 
 signal activation
 

@@ -1,12 +1,12 @@
-[gd_scene load_steps=357 format=4 uid="uid://0v6hyb56fymm"]
+[gd_scene load_steps=360 format=4 uid="uid://0v6hyb56fymm"]
 
-[ext_resource type="Environment" uid="uid://bqg5op2kr1ffn" path="res://levels/env_presets/env_stockholm_day.tres" id="1_ffdfh"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_5dq8u"]
+[ext_resource type="Texture2D" uid="uid://d1q6hgrxrhp8g" path="res://Graphics/textures/env/skybox_spain.png" id="2_12u7n"]
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="3_vjxhh"]
 [ext_resource type="Material" uid="uid://ch2xot7kjiklo" path="res://Graphics/textures/wood/wood_3.material" id="4_t3non"]
 [ext_resource type="Material" uid="uid://dofnlrpv6vdru" path="res://Graphics/textures/stone/concrete_light.material" id="5_pnqq4"]
 [ext_resource type="Material" uid="uid://b0wpr285ljdkb" path="res://Graphics/textures/stone/pathing.material" id="6_v5e4h"]
-[ext_resource type="Material" uid="uid://diriknwdj3u47" path="res://Graphics/textures/stone/teal4.material" id="7_y0eu6"]
+[ext_resource type="Material" uid="uid://b2gu8mnqt16k3" path="res://Graphics/textures/stone/teal_4.material" id="7_y0eu6"]
 [ext_resource type="Texture2D" uid="uid://dpooj5oyqrdbf" path="res://Graphics/textures/wood/wood_1.png" id="8_kpat3"]
 [ext_resource type="Material" uid="uid://dywuyr2iug15i" path="res://Graphics/textures/walls/Brick8.material" id="9_0rkkl"]
 [ext_resource type="Material" uid="uid://cytxq26o7roir" path="res://Graphics/textures/walls/Brick9.material" id="10_2l7mq"]
@@ -15,9 +15,27 @@
 [ext_resource type="Texture2D" uid="uid://db4s2mtx1hujr" path="res://Graphics/textures/wood/Cardboard.png" id="13_u2xkr"]
 [ext_resource type="Material" uid="uid://bcphaq7seq7sq" path="res://Graphics/textures/metal/fence_linked2.material" id="14_p0p1g"]
 [ext_resource type="Material" uid="uid://dl4dxy75hml3r" path="res://Graphics/textures/walls/Brick4.material" id="14_yojx2"]
-[ext_resource type="Material" uid="uid://c7knrjiilnaow" path="res://Graphics/textures/natural/water2.material" id="15_bf2fo"]
+[ext_resource type="Material" uid="uid://c7knrjiilnaow" path="res://Graphics/textures/natural/Water2.material" id="15_bf2fo"]
 [ext_resource type="PackedScene" uid="uid://5u2jpl3pqgxq" path="res://entities/info_marker_generic.tscn" id="18_6xhvn"]
 [ext_resource type="Script" path="res://levels/world_space_info.gd" id="18_l8dm2"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fc1df"]
+panorama = ExtResource("2_12u7n")
+
+[sub_resource type="Sky" id="Sky_l3qp4"]
+sky_material = SubResource("PanoramaSkyMaterial_fc1df")
+radiance_size = 1
+
+[sub_resource type="Environment" id="Environment_2sjub"]
+background_mode = 2
+sky = SubResource("Sky_l3qp4")
+fog_enabled = true
+fog_light_color = Color(0.16, 0, 0.16, 1)
+fog_sky_affect = 0.0
+fog_height = -5.0
+fog_height_density = 1.0
+fog_depth_begin = 32.0
+fog_depth_end = 256.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jb3ai"]
 albedo_texture = ExtResource("8_kpat3")
@@ -1212,7 +1230,7 @@ transform = Transform3D(0.707107, 0.664463, -0.241845, 0, 0.34202, 0.939693, 0.7
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
-environment = ExtResource("1_ffdfh")
+environment = SubResource("Environment_2sjub")
 
 [node name="FuncGodotMap" type="Node3D" parent="World"]
 script = ExtResource("2_5dq8u")

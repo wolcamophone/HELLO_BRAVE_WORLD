@@ -1,0 +1,35 @@
+[gd_scene load_steps=2 format=3 uid="uid://nv0e5gm438dj"]
+
+[ext_resource type="Script" path="res://scripts/UI/level_selector.gd" id="1_tojur"]
+
+[node name="VBox" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tojur")
+
+[node name="ItemListLevels" type="ItemList" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+max_columns = 4
+same_column_width = true
+fixed_column_width = 180
+icon_mode = 0
+
+[node name="HBox" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="LineEdit" type="LineEdit" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonPlayLevel" type="Button" parent="HBox"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Load Level"
+
+[connection signal="item_selected" from="ItemListLevels" to="." method="_on_item_list_level_selected"]
+[connection signal="pressed" from="HBox/ButtonPlayLevel" to="." method="_on_button_play_level_pressed"]

@@ -13,7 +13,6 @@ height = 0.1
 radial_segments = 12
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k1uuv"]
-radius = 0.4
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwkoc"]
 transparency = 1

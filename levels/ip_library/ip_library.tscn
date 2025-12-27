@@ -3666,7 +3666,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -106, -16, -29)
 
 [node name="InteractiveDoor" parent="Entities" instance=ExtResource("25_1tr0t")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 24)
-overwrite_prompt_text = "Travel to Depths Hub"
+overwrite_prompt_text = "Travel to Recycling Plant"
 warp_door = true
 transfer_to_level = "hub_world"
 

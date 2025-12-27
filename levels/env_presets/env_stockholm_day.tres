@@ -1,13 +1,13 @@
-[gd_resource type="Environment" load_steps=3 format=3 uid="uid://bqg5op2kr1ffn"]
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://bqg5op2kr1ffn"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jmjh4"]
-sky_top_color = Color(0.462745, 0.588235, 0.74902, 1)
-sky_horizon_color = Color(0.752941, 0.776471, 0.776471, 1)
-ground_bottom_color = Color(0.172549, 0.0627451, 0.0823529, 1)
-ground_horizon_color = Color(0.752941, 0.776471, 0.776471, 1)
+[ext_resource type="Texture2D" uid="uid://d1q6hgrxrhp8g" path="res://Graphics/textures/env/skybox_spain.png" id="1_ngoc4"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_fc1df"]
+panorama = ExtResource("1_ngoc4")
 
 [sub_resource type="Sky" id="Sky_l3qp4"]
-sky_material = SubResource("ProceduralSkyMaterial_jmjh4")
+sky_material = SubResource("PanoramaSkyMaterial_fc1df")
+radiance_size = 1
 
 [resource]
 background_mode = 2

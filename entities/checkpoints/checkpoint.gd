@@ -39,6 +39,7 @@ func _on_area_3d_area_exited(area):
 	if area.is_in_group("player"):
 		player_detected = false
 		CheckpointMenu._close_menu() # We don't want the player interacting with the menu while they're long gone from the checkpoints interactive range.
+		change_mesh()
 		
 		emit_signal("checkpoint_left")
 		print("Player left checkpoint.")
@@ -46,27 +47,31 @@ func _on_area_3d_area_exited(area):
 
 func _input(event): ## Many and all checkpoints in a level can be claimed, but only one should be active and current.
 	if player_detected && event.is_action_pressed("interact"):
-		if !claimed:
-			claimed = true
-			
-			emit_signal("checkpoint_claimed")
-			print("Player claimed checkpoint: %s" % name) 
-			
-		if !active:
-			active = true
-			update_checkpoints()
-			
-			# Update meshes of both to meet conditionals for claimed/activity.
-			change_mesh()
-			if GameMaster.checkpoint_current != null:
-				GameMaster.checkpoint_previous.change_mesh()
-			
-			emit_signal("checkpoint_activated")
-			print("Checkpoint activated: %s" % GameMaster.checkpoint_current_name)
-			print("Checkpoint previous: %s" % GameMaster.checkpoint_previous_name)
-		
+		claim_checkpoint()
+		activate_checkpoint()
+		change_mesh()
+		if GameMaster.checkpoint_current != null:
+			GameMaster.checkpoint_previous.change_mesh()
 		CheckpointMenu.status_report = status_report
 		CheckpointMenu._show_menu()
+#endregion
+
+#region Checkpoint Claiming and Activation Status
+func claim_checkpoint():
+	if !claimed:
+		claimed = true
+		
+		emit_signal("checkpoint_claimed")
+		print("Player claimed checkpoint: %s" % name) 
+
+func activate_checkpoint():
+	if !active:
+		active = true
+		update_checkpoints()
+		
+		emit_signal("checkpoint_activated")
+		print("Checkpoint activated: %s" % GameMaster.checkpoint_current_name)
+		print("Checkpoint previous: %s" % GameMaster.checkpoint_previous_name)
 #endregion
 
 
@@ -92,7 +97,7 @@ func register(): ## This func is called from class WorldSpaceInfo
 
 
 #region Altering Appearance of Mesh
-func _on_timer_timeout() -> void: ## Animation to toggle blinking pinlight.
+func _on_timer_timeout() -> void: ## Animation to toggle blinking pinlight. This might be replaced with a shader if that proves more efficient.
 	if !claimed:
 		pin_light.visible = !pin_light.visible
 
@@ -121,5 +126,6 @@ func change_mesh(): ## Refresh the appearance of Checkpoint to reflect it's curr
 
 
 func save_cfg():
-	GameMaster.save_game_cfg.set_value("Checkpoint", "current_checkpoint", GameMaster.checkpoint_current.name)
-	GameMaster.save_game_cfg.set_value("Checkpoint", "previous_checkpoint", GameMaster.checkpoint_previous.name)
+	if GameMaster.checkpoint_current != null or GameMaster.checkpoint_previous != null:
+		GameMaster.save_game_cfg.set_value("Checkpoint", "current_checkpoint", GameMaster.checkpoint_current.name)
+		GameMaster.save_game_cfg.set_value("Checkpoint", "previous_checkpoint", GameMaster.checkpoint_previous.name)

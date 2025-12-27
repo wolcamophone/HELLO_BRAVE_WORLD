@@ -96,19 +96,19 @@ surface_material_override/0 = ExtResource("3_nujrm")
 [node name="SFXOpen" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = ExtResource("4_eycqy")
-max_distance = 100.0
+max_distance = 96.0
 bus = &"Sound Effects"
 
 [node name="SFXLocked" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = ExtResource("5_bomcj")
-max_distance = 100.0
+max_distance = 96.0
 bus = &"Sound Effects"
 
 [node name="SFXBroken" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 stream = ExtResource("6_d7te5")
-max_distance = 100.0
+max_distance = 96.0
 bus = &"Sound Effects"
 
 [node name="DoorslideL" type="AnimatableBody3D" parent="."]

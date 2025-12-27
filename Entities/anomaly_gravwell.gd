@@ -1,7 +1,7 @@
 extends Node3D
 
-@export var force:float
-@export var lethality:int
+@export var force:float = 24
+@export var lethality:int = 0
 
 @onready var area_3d: Area3D = $Area3D
 @onready var gleam: AudioStreamPlayer3D = $Gleam

@@ -4,6 +4,9 @@ Made in Godot Engine v4.3 stable
 
 By Skull Kracker Studios 
 
+This repository contains the project files and source code for HELLO_BRAVE_WORLD, set up to encourage other game developers to mod and learn about the Godot engine. You can open the project and run the game from the editor, or export your own build after any modifications you've made.
+
+# Credits:
 
 ##	Addons used in Godot Engine: 
 
@@ -35,6 +38,12 @@ https://archive.org/details/RepeatableBackgroundsWoodBrickTileStoneTextures
 
 https://crus.cc/
 
+https://textures.neocities.org/
+
+https://mebiusbox.github.io/contents/EffectTextureMaker/
+
+https://cpetry.github.io/NormalMap-Online/
+
 
 ##	Shader Sources: 
 
@@ -45,6 +54,12 @@ PSX Style Water Surface by geg-fairbear8974: https://godotshaders.com/shader/psx
 Lightweight CRT Effect by pxlforge: https://godotshaders.com/shader/lightweight-crt-effect/
 
 (All textures have been remade from scratch in Paint.NET with aid of plugins, but pattern designs and colors have come from these sources.)
+
+
+##  Level Geometry Resources:
+
+
+Brush primitives for Trenchbroom: https://www.slipseer.com/index.php?resources/brush-primitives-for-trenchbroom.207/
 
 
 ##	Audio and Sound Effects Sources: 
@@ -74,6 +89,8 @@ Brackeys: https://www.youtube.com/@Brackeys
 Game Endeavor: https://www.youtube.com/@GameEndeavor 
 
 This Godot Forum post for helping to clarify Save Load functionality: https://forum.godotengine.org/t/how-to-load-and-save-things-with-godot-a-complete-tutorial-about-serialization/44515
+
+Doom, Quake, and Valve's Source Engine games for aesthetic, workflow practice, and game structure.
 
 Ville Kallio
 

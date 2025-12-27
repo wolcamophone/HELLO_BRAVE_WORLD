@@ -2048,7 +2048,7 @@ data = PackedVector3Array(-4.28125, -8, -17, -3.71875, -8, -17, -3.71875, 8, -17
 
 [node name="DoorDepthsHUB" parent="Entities/Doors" instance=ExtResource("1_a1lo3")]
 transform = Transform3D(1, 0, -1.06581e-14, 0, 1, 0, 1.06581e-14, 0, 1, 4, 0, -16)
-overwrite_prompt_text = "Travel to Depths HUB"
+overwrite_prompt_text = "Travel to Recycling Plant"
 warp_door = true
 transfer_to_level = "hub_world"
 

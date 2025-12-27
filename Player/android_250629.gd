@@ -16,16 +16,19 @@ var health_current:int = 8:
 	#get:
 		#return godmode
 @export var _attack_type: PackedScene
-@export var death_spectacle: PackedScene ## Particle or Entity prefab to spawn on the player upon dying. Could be an explosion, confetti, or another NPC.
+@export var gibs_effect: PackedScene ## Particle or Entity prefab to spawn on the player upon dying. Could be an explosion, confetti, or another NPC.
 enum states {idle,
 			crouched,
 			sneaking,
 			walking,
+			sprinting,
 			attack,
 			airborne,
 			dead} 
 @export var current_state = states.idle ## State that player is in to control flow of contextual action and conditions.
 @export var view_bob:bool = true ## When true, the camera smoothly floats to follow the player. When false, the camera stays fixed to the position of the player.
+@export var crouch_toggle:bool = true
+@export var jump_buffer:bool = true
 
 @export_group("Movement Acceleration Values")
 @export var movement_strength: float = 1.0 ## General value that weighs into most movement scale calculations. 
@@ -81,9 +84,12 @@ const LERP_VAL:float = 0.2
 @onready var _ears: AudioListener3D = $CameraHead/AudioListener3D
 #@onready var _ears: AudioListener3D = $SpringCamHead/AudioListener3D
 @onready var _iFrames_timer: Timer = $iFrames
+@onready var jump_buffer_timer: Timer = $JumpBuffer
+
 @onready var _sfx_jump:AudioStreamPlayer3D = $Jump
 @onready var _sfx_footstep: AudioStreamPlayer3D = $Footstep
 @onready var _wall_slide_particles: GPUParticles3D = $WallSlideParticles
+@onready var omni_light_3d_tattoo: OmniLight3D = $OmniLight3DTattoo
 
 
 
@@ -101,17 +107,23 @@ func _ready():
 	HUD.visible = true
 	#GameMaster.MainMenu
 	health_current = 8
-	
-	
-	
-#region Physics/Animation Handling
+	current_state = states.idle
+
+
+#region Constant Process
+func _process(delta):
+	pass
+
+
+
 func _physics_process(delta):
 	#_state_machine()
 	_apply_gravity(delta)
 	if current_state != states.dead:
 		_apply_jumping()
 		_apply_movement()
-	_stair_check()
+		#_stair_check()
+	move_and_slide()
 	_apply_animation()
 	_camera_follow()
 	
@@ -125,24 +137,49 @@ func _physics_process(delta):
 		var b = _attack_type.instantiate()
 		b.rotation_degrees = _rotation_root.global_transform.basis.get_euler()
 		_rotation_root.add_child(b)
+		current_state = states.attack
 
-func _state_machine():
+func _state_machine(): # TODO: set up states to contain functionality for movement calculations instead of processing them under the if statements. 
 	match states:
-		pass
+		states.idle:
+			velocity.x = lerpf(velocity.x, 0.0, friction)
+			velocity.z = lerpf(velocity.z, 0.0, friction)
+			
+		states.crouched:
+			speed *= sneak_speed_coef
+		
+		states.walking:
+			speed = run_speed
+			
+		states.sprinting:
+			speed = sprint_speed
+		
+		states.dead:
+			velocity.x = lerpf(velocity.x, 0.0, friction)
+			velocity.z = lerpf(velocity.z, 0.0, friction)
+#endregion
 
+
+
+#region Physics/Movement Handling
 func _apply_gravity(delta):
 	if !is_on_floor():
-		velocity.y -= gravity * gravity_direction * delta
+		velocity -= (gravity * up_direction) * delta
 
 
 func _apply_jumping():
 	if is_on_floor(): # Normal jump from floor
-		if Input.is_action_pressed("jump"):
+		if Input.is_action_just_pressed("jump"): #TODO: Work in a proper callback for jump_buffer.
 			velocity.y = max_jump_force
 			_sfx_jump.play()
-	 
+	
+	if is_on_floor_only(): # Resets Jump Counters
+		air_jump_count = max_jump_count
+		wall_jump_count = max_jump_count 
+	
 	if !is_on_floor() and !is_on_wall()  && air_jump_count > 0: # Double jumping with variable counter
 		if Input.is_action_just_pressed("jump"):
+			jump_buffer_timer.start()
 			velocity.y = max_jump_force
 			air_jump_count -= 1
 			_sfx_jump.play()
@@ -158,49 +195,57 @@ func _apply_jumping():
 	else:
 		_wall_slide_particles.emitting = false
 	
-	if is_on_floor_only(): # Resets Jump Counters
-		air_jump_count = max_jump_count
-		wall_jump_count = max_jump_count
+
+func _input(event):
+	if event.is_action_released("jump") and velocity.y > min_jump_force: # Gives the player a weaker jump when releasing the jump button early.
+		velocity.y = min_jump_force
+
 
 func _apply_movement():
 	var input_dir = Input.get_vector("move_lft", "move_rgt", "move_fwd", "move_bwd")
 	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	direction = direction.rotated(Vector3.UP, _spring_arm.rotation.y).normalized()
-	current_state = states.walking
 	
-	# For logic flow reasons, the crouch has to be called before direction calc and sprint called after direction calc for the changes in speed to apply.
-	if Input.is_action_pressed("sneak"):
+# For logic flow reasons, the crouch has to be called before direction calc and sprint called after direction calc for the changes in speed to apply.
+	if Input.is_action_pressed("sneak"): 
 		speed *= sneak_speed_coef
 		current_state = states.crouched
 	
+	
 	# This determines the appropriate methods for player model's rotation
-	if direction && velocity && is_on_floor(): ### Player rotates in direction of input movement
+	if direction && velocity && is_on_floor(): ## Player rotates in direction of input movement.
 		_rotation_root.rotation.y = lerp_angle(_rotation_root.rotation.y, atan2(-direction.x, -direction.z), 
 		LERP_VAL)
-	elif direction && velocity && !is_on_floor(): ### Player rotates toward their headed velocity
+	elif direction && velocity && !is_on_floor(): ## Player rotates toward their headed velocity.
 		_rotation_root.rotation.y = lerp_angle(_rotation_root.rotation.y, atan2(-velocity.x, -velocity.z), 
 		LERP_VAL)
+		current_state = states.airborne
 
 	# This determines how the player moves if on/off the floor, plus moving or not
-	if direction && is_on_floor():
+	if direction && is_on_floor(): # Move attempt, and is on floor.
 		velocity.x = lerpf(velocity.x, direction.x * (speed * movement_strength), LERP_VAL)
 		velocity.z = lerpf(velocity.z, direction.z * (speed * movement_strength), LERP_VAL)
-	elif !direction && !is_on_floor():
+		current_state = states.walking
+	elif !direction && !is_on_floor(): # NO Move attempt, and is NOT on floor.
 		velocity.x = lerpf(velocity.x, velocity.x * (air_friction * movement_strength), LERP_VAL)
 		velocity.z = lerpf(velocity.z, velocity.z * (air_friction * movement_strength), LERP_VAL)
-	elif direction && !is_on_floor():
+		current_state = states.airborne
+	elif direction && !is_on_floor(): # Move attempt, and is NOT on floor.
 		velocity.x = lerpf(velocity.x, (direction.x * (speed * movement_strength)), air_speed_coef)
 		velocity.z = lerpf(velocity.z, (direction.z * (speed * movement_strength)), air_speed_coef)
+		current_state = states.airborne
 	else:
 		velocity.x = lerpf(velocity.x, 0.0, friction)
 		velocity.z = lerpf(velocity.z, 0.0, friction)
+		current_state = states.idle
 
-	if Input.is_action_pressed("sprint"):
-		speed = sprint_speed * movement_strength
-	elif !Input.is_action_pressed("sprint"):
+
+
+	if !Input.is_action_pressed("sprint"):
 		speed = run_speed * movement_strength
-	
-	move_and_slide()
+	elif Input.is_action_pressed("sprint"):
+		speed = sprint_speed * movement_strength
+		current_state = states.sprinting
 
 
 
@@ -209,7 +254,11 @@ func _stair_check(): # TODO: Move the player up by a max stair height so they do
 	#if _stair_stepper.collide_with_bodies && is_on_wall():
 		#global_position.y += 0.1
 	#test_move()
+#endregion
 
+
+
+#region Animation Handling
 func _apply_animation():
 	# NOTE FOR AUDIO: In order for any AudioStreamPlayer3D to play their sound by trigger keyframes within animation playback, 
 	# The AnimationTree node should have property Callback Mode/Discrete set to "Dominant" instead of default "Force Continuous",
@@ -222,13 +271,7 @@ func _apply_animation():
 	_anim_tree.set("parameters/CrouchCrawl/blend_position", velocity.length() / speed*2) # Blends velocity value into crawling animations.
 	_anim_tree.set("parameters/BlendDeath/blend_amount", current_state == states.dead)
 
-func _input(event):
-	if event.is_action_released("jump") and velocity.y > min_jump_force: # Gives the player a weaker jump when releasing the jump button early.
-		velocity.y = min_jump_force
 
-
-func _process(delta):
-	pass
 	
 	
 
@@ -246,6 +289,8 @@ func _camera_follow():
 		#_spring_arm.global_position = _head.global_position
 #endregion
 
+
+
 #region Game Values
 func damage(hurtme):
 	if _iFrames_timer.is_stopped():
@@ -262,8 +307,8 @@ func _set_health(value):
 
 func kill():
 	current_state = states.dead
-	if death_spectacle:
-		var ds = death_spectacle.instantiate()
+	if gibs_effect:
+		var ds = gibs_effect.instantiate()
 		ds.position.y += 1.8
 		add_child(ds)
 	

@@ -8201,6 +8201,7 @@ _surfaces = [{
 
 [node name="InteractiveDoor" parent="Entities" instance=ExtResource("49_34o5p")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -26, 0, -8)
+overwrite_prompt_text = "Travel to Recycling Plant"
 warp_door = true
 transfer_to_level = "hub_world"
 

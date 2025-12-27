@@ -9,7 +9,7 @@ signal button_activation
 @export var broken:bool = false
 
 @onready var button_model: Node3D = $ButtonModel
-@onready var interaction_area: InteractionArea = $InteractionArea
+@onready var interaction_area: AreaInteraction = $InteractionArea
 @onready var push_sound: AudioStreamPlayer3D = $PushSound
 @onready var broken_sound: AudioStreamPlayer3D = $BrokenSound
 

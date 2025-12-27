@@ -43,17 +43,17 @@ outline_color = Color(0, 0, 0, 0.501961)
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 0.501961)
 
-[sub_resource type="LabelSettings" id="LabelSettings_elhiu"]
+[sub_resource type="LabelSettings" id="LabelSettings_nfj2h"]
 font_size = 18
-font_color = Color(0, 0.983334, 1, 1)
+font_color = Color(1, 0, 1, 1)
 outline_size = 2
 outline_color = Color(0, 0, 0, 0.501961)
 shadow_size = 2
 shadow_color = Color(0, 0, 0, 0.501961)
 
-[sub_resource type="LabelSettings" id="LabelSettings_nfj2h"]
+[sub_resource type="LabelSettings" id="LabelSettings_elhiu"]
 font_size = 18
-font_color = Color(1, 0, 1, 1)
+font_color = Color(0, 0.983334, 1, 1)
 outline_size = 2
 outline_color = Color(0, 0, 0, 0.501961)
 shadow_size = 2
@@ -286,52 +286,50 @@ texture_under = ExtResource("3_v2uxw")
 texture_progress = ExtResource("4_iclye")
 tint_progress = Color(0, 1, 0, 1)
 
-[node name="CoinCounter" type="Label" parent="Control"]
+[node name="HBoxScores" type="HBoxContainer" parent="Control"]
+modulate = Color(1, 1, 1, 0.501961)
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 1
-offset_left = 24.0
-offset_top = 12.0
-offset_right = 1304.0
-offset_bottom = 49.0
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.5
+offset_right = 180.5
+offset_bottom = 32.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="CoinCounter" type="Label" parent="Control/HBoxScores"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Coins: 0"
 label_settings = SubResource("LabelSettings_3bwea")
+horizontal_alignment = 1
 
-[node name="CoinCounterRed" type="Label" parent="Control"]
-layout_mode = 1
-offset_left = 24.0
-offset_top = 32.0
-offset_right = 1304.0
-offset_bottom = 69.0
+[node name="CoinCounterRed" type="Label" parent="Control/HBoxScores"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Red Coins: 0"
 label_settings = SubResource("LabelSettings_otgro")
+horizontal_alignment = 1
 
-[node name="LivesCounter" type="Label" parent="Control"]
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -1304.0
-offset_top = 12.0
-offset_right = -24.0
-offset_bottom = 49.0
-grow_horizontal = 0
+[node name="KeysCounter" type="Label" parent="Control/HBoxScores"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Keygen: 0"
+label_settings = SubResource("LabelSettings_nfj2h")
+horizontal_alignment = 1
+
+[node name="LivesCounter" type="Label" parent="Control/HBoxScores"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Lives: 0"
 label_settings = SubResource("LabelSettings_elhiu")
-horizontal_alignment = 2
-
-[node name="KeysCounter" type="Label" parent="Control"]
-visible = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -1304.0
-offset_top = 32.0
-offset_right = -24.0
-offset_bottom = 69.0
-grow_horizontal = 0
-text = "Keys: 0"
-label_settings = SubResource("LabelSettings_nfj2h")
-horizontal_alignment = 2
+horizontal_alignment = 1
 
 [node name="FadeTransition" type="AnimationPlayer" parent="Control"]
 root_node = NodePath("../..")
@@ -381,3 +379,15 @@ grow_vertical = 0
 text = "Saving ...
  "
 label_settings = SubResource("LabelSettings_l8kc6")
+
+[node name="VBoxDebug" type="VBoxContainer" parent="Control"]
+visible = false
+modulate = Color(1, 1, 1, 0.643137)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="PlayerState" type="Label" parent="Control/VBoxDebug"]
+layout_mode = 2
+text = "GameMaster.active_player.state = "

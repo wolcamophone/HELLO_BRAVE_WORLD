@@ -14,8 +14,9 @@ signal game_saved
 ## DEPREC: skip_intro_cutscene has been moved to SettingsConfig singleton.
 
 # Level Related Vars
+var levels_folder = "res://levels/"
 var level_instance:Node3D
-var level_name_previous
+var level_name_previous:String
 var level_name_current:String
 
 # Player Transporting Vars
@@ -85,9 +86,9 @@ func unload_level():
 	spawnpoints_available.clear()
 
 
-func load_level(travel_to: String):
+func load_level(travel_to: String, ):
 	HUD._loading_label.visible = true
-	await unload_level() # do this first so the world space is made empty as not to stack levels on top of each other.
+	unload_level() # do this first so the world space is made empty as not to stack levels on top of each other.
 	var level_path = "res://levels/%s/%s.tscn" % [travel_to, travel_to]
 	var level_resource = load(level_path)
 	if level_resource:
@@ -112,21 +113,22 @@ func load_level(travel_to: String):
 	if get_tree().get("WorldSpaceInfo"):
 		HUD.visible = true
 		MainMenu.title_button.visible = true
-		
+
 
 	# Debug printing
 	if level_instance: ### Printing a bunch of stuff to show scene tree for better debug
 		print_tree_pretty()
 		#print_orphan_nodes()
 		spawn_player()
+		MainMenu.unpause_game()
 
-	
+
 	print("Level loaded.")
 	HUD._loading_label.visible = false
 	emit_signal("level_loaded")
 
 
-func spawn_player():
+func spawn_player(at_pos = Vector4.ZERO):
 	#await get_tree().process_frame
 ### A player should always spawn in after a level loads to ensure there is a player. (Would be cool to hook around this so that loading into a new scene/level knows to spawn either a default player obj or a special player for minigame sections). If the func is called again while a player is already in the scene tree, they will be erased and recreated. -CD
 	if active_player != null:

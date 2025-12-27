@@ -59,6 +59,9 @@ directories/dtl_directory={
 "magi": "res://scripts/dialogue/magi.dtl",
 "main_dialogue": "res://scripts/dialogue/main_dialogue.dtl",
 "matrix_pinged": "res://scripts/dialogue/matrix_pinged.dtl",
+"meet_dozer": "res://scripts/dialogue/meet_dozer.dtl",
+"return_to_the_real_world": "res://scripts/dialogue/return_to_the_real_world.dtl",
+"salute_android": "res://scripts/dialogue/salute_android.dtl",
 "shadow": "res://scripts/dialogue/shadow.dtl",
 "test_dialogue": "res://scripts/dialogue/test_dialogue.dtl",
 "the_coins": "res://scripts/dialogue/the_coins.dtl"

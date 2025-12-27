@@ -23,10 +23,11 @@ theme = ExtResource("1_wfoid")
 script = ExtResource("1_1jo3n")
 
 [node name="VBox" type="VBoxContainer" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+layout_mode = 2
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 752.0
+offset_bottom = 527.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -316,7 +317,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Cheats:"
 
-[node name="CheckBox" type="CheckBox" parent="VBox/Tabs/Debug/HBox/VBoxL"]
+[node name="CheckBoxSlowmo" type="CheckBox" parent="VBox/Tabs/Debug/HBox/VBoxL"]
 layout_mode = 2
 text = "Enable Slowmo"
 
@@ -328,6 +329,10 @@ size_flags_horizontal = 3
 layout_mode = 2
 text = "Debug:"
 
+[node name="DisplayDebug" type="CheckBox" parent="VBox/Tabs/Debug/HBox/VBoxR"]
+layout_mode = 2
+text = "Enable Debug Display"
+
 [node name="OpenUserFile" type="Button" parent="VBox/Tabs/Debug/HBox/VBoxR"]
 layout_mode = 2
 text = "Open User File Directory"
@@ -338,6 +343,7 @@ layout_mode = 2
 tooltip_text = "Alternative Method for getting input 
 strength for movement. May produce 
 unwanted movement deadzones."
+disabled = true
 text = "Joystick Movement Method (experimental)"
 
 [node name="SaveSettings" type="Button" parent="VBox"]
@@ -360,6 +366,6 @@ text = "Save Settings"
 [connection signal="value_changed" from="VBox/Tabs/Audio/VBoxContainer/VolVoice" to="." method="_on_VolVoice_value_changed"]
 [connection signal="value_changed" from="VBox/Tabs/Audio/VBoxContainer/VolRadio" to="." method="_on_VolRadio_value_changed"]
 [connection signal="value_changed" from="VBox/Tabs/Audio/VBoxContainer/VolUI" to="." method="_on_VolUI_value_changed"]
-[connection signal="toggled" from="VBox/Tabs/Debug/HBox/VBoxL/CheckBox" to="." method="_on_check_box_toggled"]
+[connection signal="toggled" from="VBox/Tabs/Debug/HBox/VBoxL/CheckBoxSlowmo" to="." method="_on_slowmo_toggled"]
+[connection signal="toggled" from="VBox/Tabs/Debug/HBox/VBoxR/DisplayDebug" to="." method="_on_display_debug_toggled"]
 [connection signal="pressed" from="VBox/Tabs/Debug/HBox/VBoxR/OpenUserFile" to="." method="_on_Shell_pressed"]
-[connection signal="pressed" from="VBox/SaveSettings" to="." method="save_settings"]

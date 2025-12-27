@@ -3,6 +3,8 @@ class_name ScoreLock ## Class of advanced Lock and conditional checks that allow
 
 signal lock_passed
 
+@export var persistent_lock:bool = false ## Determine
+
 # These could probably be set up as a dict if you ever wanted to create more values in ScoreCounter to make comparisons against
 @export_category("Coins")
 @export var coin_locked:bool
@@ -34,6 +36,6 @@ func query_lock():
 	
 	if coin_locked == false && red_coin_locked == false && lives_locked == false:
 		emit_signal("lock_passed")
-		return true
-	else:
 		return false
+	else:
+		return true

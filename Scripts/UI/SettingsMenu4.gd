@@ -37,6 +37,8 @@ var audio_vol_ui:int = 0
 #endregion
 
 #region Debug Menu Vars
+
+@export var debug_mode:bool = false
 #endregion
 
 #region Save Settings Config Vars
@@ -58,12 +60,14 @@ func _on_skip_intro_cutscene_toggled(toggled_on: bool) -> void:
 func _on_player_color_changed(color_arg: Color) -> void:
 	SettingsConfig.player_color = color_arg
 	if GameMaster.active_player:
-		GameMaster.active_player.player_model.player_mesh.material_override.albedo_color = color_arg
+		GameMaster.active_player._player_mesh.material_override.albedo_color = color_arg
 
 func _on_player_emission_changed(color_arg: Color) -> void:
 	SettingsConfig.emission_color = color_arg
 	if GameMaster.active_player:
-		GameMaster.active_player.player_model.player_mesh.material_override.emission = color_arg
+		GameMaster.active_player._player_mesh.material_override.emission = color_arg 
+		GameMaster.active_player.omni_light_3d_tattoo.light_color = color_arg
+		
 #endregion
 
 
@@ -172,13 +176,20 @@ func _on_VolUI_value_changed(value):
 
 
 #region Debug Settings Funcs
-func _on_check_box_toggled(toggled_on):
+
+
+func _on_slowmo_toggled(toggled_on: bool) -> void:
 	Cheats.slowmo_enabled = toggled_on
 	Cheats.slowmo()
+
+func _on_display_debug_toggled(toggled_on: bool) -> void:
+	HUD.show_debug_hud = toggled_on
+	HUD.update_debug_vis()
 
 func _on_Shell_pressed():
 	OS.shell_open(ProjectSettings.globalize_path("user://"))
 
 func _on_Shell2_pressed():
 	OS.shell_open(ProjectSettings.globalize_path("res://"))
+
 #endregion

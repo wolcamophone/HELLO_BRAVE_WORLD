@@ -13,7 +13,7 @@ signal prompt_for_lock_entity ## Connect this signal to a lock entity so that it
 #@export var model:MeshInstance3D
 
 #@onready var door_model = 
-@onready var trigger_zone:InteractionArea = $InteractionArea
+@onready var trigger_zone:AreaInteraction = $InteractionArea
 @onready var animation_player:AnimationPlayer = $AnimationPlayer
 @onready var sfx_open:AudioStreamPlayer3D = $SFXOpen
 @onready var sfx_locked: AudioStreamPlayer3D = $SFXLocked
@@ -24,15 +24,14 @@ signal prompt_for_lock_entity ## Connect this signal to a lock entity so that it
 var player_detected:bool = false
 
 func _ready():
-	if open && door_state != "broken":
+	if open && door_state != 2:
 		animation_player.seek(0.6)
-		
-	if overwrite_prompt_text != null:
-		trigger_zone.prompt_text = overwrite_prompt_text
-	elif overwrite_prompt_text == null && !warp_door:
-		trigger_zone.prompt_text = "Open Door"
-	elif overwrite_prompt_text == null && warp_door:
-		trigger_zone.prompt_text = "Travel to %s" % transfer_to_level
+	if door_state == 0:  ## "unlocked"
+		update_prompt()
+	elif door_state == 1:  ## "locked"
+		trigger_zone.prompt_text = "Door Locked"
+	elif door_state == 2:  ## "broken"
+		trigger_zone.prompt_text = "Door Broken"
 
 func _on_area_3d_area_entered(area):
 	if area.is_in_group("player"):
@@ -57,14 +56,19 @@ func _input(event):
 		if door_state == 1: ## "locked"
 			emit_signal("prompt_for_lock_entity") 
 			sfx_locked.play()
+			
 		if door_state == 2: ## "broken"
 			sfx_broken.play()
 
-func save():
+func update_prompt():
+	if overwrite_prompt_text != null:
+		trigger_zone.prompt_text = overwrite_prompt_text
+	elif overwrite_prompt_text == null && !warp_door:
+		trigger_zone.prompt_text = "Open Door"
+	elif overwrite_prompt_text == null && warp_door:
+		trigger_zone.prompt_text = "Travel to %s" % transfer_to_level
+
+func save_cfg():
 	if dynamic_to_save:
-		var save_dict = {
-			"filename" : get_scene_file_path(),
-			"parent" : get_parent().get_path(),
-			"open" : open
-		}
-		return save_dict
+		GameMaster.save_game_cfg.set_value("Doors", "%s door_state" % [name], door_state)
+		GameMaster.save_game_cfg.set_value("Doors", "%s open" % [name], open)
