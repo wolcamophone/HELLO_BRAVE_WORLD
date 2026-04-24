@@ -1,38 +1,35 @@
-[gd_scene load_steps=14 format=3 uid="uid://bkoq7xkplxnu2"]
+[gd_scene load_steps=15 format=3 uid="uid://bkoq7xkplxnu2"]
 
 [ext_resource type="Script" path="res://entities/Coin.gd" id="1_kd3e6"]
-[ext_resource type="Texture2D" uid="uid://bobr1vvpxi61y" path="res://Graphics/textures/natural/sand_black.png" id="2_fcinl"]
+[ext_resource type="Texture2D" uid="uid://vi66l70qc3vd" path="res://models/collectible_usb.png" id="2_kkxnh"]
 [ext_resource type="Texture2D" uid="uid://b3i6ltsdtsc1c" path="res://Graphics/textures/metal/airduct_grate_02b.png" id="3_bjlqa"]
+[ext_resource type="Texture2D" uid="uid://bpmpcym7s0a4g" path="res://models/collectible_usb_n.png" id="3_ombae"]
+[ext_resource type="ArrayMesh" uid="uid://dpv8ggfwh5kxm" path="res://models/collectible_usb.obj" id="3_tdcoo"]
 [ext_resource type="AudioStream" uid="uid://c6cjyd2h3a3kw" path="res://audio/SFX/bike_bell.wav" id="4_awsov"]
 [ext_resource type="Texture2D" uid="uid://bl8tdhw7utsl5" path="res://Graphics/particles/p_star3.png" id="5_bs6g4"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qrk60"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j6k7v"]
 shading_mode = 2
 disable_ambient_light = true
 vertex_color_use_as_albedo = true
 vertex_color_is_srgb = true
-albedo_color = Color(1, 0, 0, 1)
+albedo_texture = ExtResource("2_kkxnh")
 albedo_texture_force_srgb = true
 metallic = 1.0
 metallic_specular = 1.0
 metallic_texture_channel = 4
-roughness = 0.5
+roughness_texture = ExtResource("3_ombae")
 emission_enabled = true
 emission = Color(1, 0, 0, 1)
-emission_energy_multiplier = 2.0
+emission_energy_multiplier = 0.32
 emission_operator = 1
-emission_texture = ExtResource("2_fcinl")
+emission_texture = ExtResource("3_ombae")
 rim_tint = 1.0
 rim_texture = ExtResource("3_bjlqa")
 refraction_scale = 1.0
+texture_filter = 0
 disable_receive_shadows = true
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_xaitc"]
-material = SubResource("StandardMaterial3D_qrk60")
-top_radius = 0.25
-bottom_radius = 0.25
-height = 0.1
-radial_segments = 12
+proximity_fade_distance = 12.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k1uuv"]
 radius = 0.4
@@ -80,9 +77,10 @@ red_coin = true
 rotation_speed = 2.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+transform = Transform3D(0.994522, 0.104528, 0, -0.102244, 0.972789, 0.207912, 0.0217327, -0.206773, 0.978148, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_j6k7v")
 cast_shadow = 0
-mesh = SubResource("CylinderMesh_xaitc")
+mesh = ExtResource("3_tdcoo")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_k1uuv")

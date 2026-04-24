@@ -1,4 +1,4 @@
-[gd_scene load_steps=264 format=4 uid="uid://bu06r5hylwxxx"]
+[gd_scene load_steps=267 format=4 uid="uid://bu06r5hylwxxx"]
 
 [ext_resource type="Script" path="res://levels/world_space_info.gd" id="1_fajpr"]
 [ext_resource type="PackedScene" uid="uid://xk228ixujfgk" path="res://entities/info_player_start.tscn" id="1_fl706"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://scripts/trigger_kill.gd" id="5_sfa57"]
 [ext_resource type="Environment" uid="uid://bn5lbw6ng06y5" path="res://levels/env_presets/env_mojave_day.tres" id="6_1mrwq"]
 [ext_resource type="Material" uid="uid://ckrghhgkfyh6k" path="res://Graphics/Materials/test_red.material" id="6_kak01"]
+[ext_resource type="PackedScene" uid="uid://c2vewuyvybqw4" path="res://entities/npcs/father_time/father_time.tscn" id="6_myibc"]
+[ext_resource type="PackedScene" uid="uid://b1f6ffxhu2j2p" path="res://entities/npcs/the_residents/the_residents.tscn" id="7_cpykr"]
 [ext_resource type="Material" uid="uid://c7knrjiilnaow" path="res://Graphics/textures/natural/Water2.material" id="8_ce4ej"]
 [ext_resource type="Script" path="res://levels/trigger_breakable.gd" id="8_dgxkp"]
 [ext_resource type="Texture2D" uid="uid://2dcur4jypo0m" path="res://Graphics/textures/dev/colortest.png" id="8_fm18e"]
@@ -35,7 +37,6 @@
 [ext_resource type="Material" uid="uid://ch2xot7kjiklo" path="res://Graphics/textures/wood/wood_3.material" id="32_7cxas"]
 [ext_resource type="Material" uid="uid://jkquatuygon3" path="res://Graphics/textures/natural/magma.material" id="32_n3fhh"]
 [ext_resource type="Material" uid="uid://bqpgj6ynoqav" path="res://Graphics/textures/wood/wood_12.material" id="33_n7g0k"]
-[ext_resource type="Material" uid="uid://c3ap450mp6ata" path="res://Graphics/textures/glass/emission_window_glow.tres" id="34_f3qld"]
 [ext_resource type="Texture2D" uid="uid://b5tu3gdxsi0jk" path="res://Graphics/textures/supernatural/fireblue.png" id="34_u121v"]
 [ext_resource type="Texture2D" uid="uid://btkahp3co5s2u" path="res://Graphics/textures/supernatural/red_cells1.png" id="35_lgblq"]
 [ext_resource type="Material" uid="uid://bky80tv2ig8d0" path="res://Graphics/textures/env/sky_fake.material" id="35_ylelk"]
@@ -44,6 +45,8 @@
 [ext_resource type="Material" uid="uid://ddhmwyrmp52co" path="res://Graphics/textures/natural/slime.material" id="40_w22tx"]
 [ext_resource type="Material" uid="uid://ck0u5dd8nuesy" path="res://Graphics/textures/metal/damascus_5.material" id="41_vh1bj"]
 [ext_resource type="Material" uid="uid://b73sjsdbuxfrr" path="res://Graphics/textures/dev/void.material" id="44_ya655"]
+[ext_resource type="Material" uid="uid://qi34sp5hkg0u" path="res://Graphics/textures/glass/emission_window_glow.material" id="45_37mli"]
+[ext_resource type="Material" uid="uid://b26bs27g720h8" path="res://Graphics/textures/env/skyboxf_corner_shadows.material" id="46_j7uha"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_so4t4"]
 size = Vector3(0.7, 1.2, 0.4)
@@ -1052,10 +1055,11 @@ shader_parameter/albedo = null
 shader_parameter/scroll_speed1 = Vector2(0.02, 0.01)
 shader_parameter/scroll_speed2 = Vector2(-0.01, -0.02)
 shader_parameter/blend_factor = 0.5
-shader_parameter/scale1 = Vector2(0.7, 1)
-shader_parameter/scale2 = Vector2(1, 0.7)
+shader_parameter/scale1 = Vector2(0.1, 0.5)
+shader_parameter/scale2 = Vector2(0.5, 0.1)
 shader_parameter/wave_strength = 0.0
 shader_parameter/wave_scale = 0.02
+shader_parameter/wave_speed = 1.0
 shader_parameter/pixelation_level = 512
 shader_parameter/FoamSize = 0.5
 shader_parameter/WaterOpacity = 1.0
@@ -1203,6 +1207,7 @@ shader_parameter/scale1 = Vector2(0.5, 0.5)
 shader_parameter/scale2 = Vector2(2, 2)
 shader_parameter/wave_strength = 0.0
 shader_parameter/wave_scale = 0.02
+shader_parameter/wave_speed = 1.0
 shader_parameter/pixelation_level = 256
 shader_parameter/FoamSize = 0.5
 shader_parameter/WaterOpacity = 1.0
@@ -1258,7 +1263,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 72,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8A"),
-"material": ExtResource("34_f3qld"),
+"material": ExtResource("45_37mli"),
 "name": "dev/void",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -1276,7 +1281,7 @@ _surfaces = [{
 "format": 34359742487,
 "index_count": 72,
 "index_data": PackedByteArray("AAABAAIAAAACAAMABAAFAAYABAAGAAcACAAJAAoACAAKAAsADAANAA4ADAAOAA8AEAARABIAEAASABMAFAAVABYAFAAWABcAGAAZABoAGAAaABsAHAAdAB4AHAAeAB8AIAAhACIAIAAiACMAJAAlACYAJAAmACcAKAApACoAKAAqACsALAAtAC4ALAAuAC8A"),
-"material": ExtResource("44_ya655"),
+"material": ExtResource("46_j7uha"),
 "name": "dev/void",
 "primitive": 3,
 "uv_scale": Vector4(0, 0, 0, 0),
@@ -1319,6 +1324,12 @@ script = ExtResource("5_qf55c")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/NPCs/DozerBot/InteractionArea"]
 shape = SubResource("CylinderShape3D_rcxwk")
+
+[node name="FatherTime" parent="Entities/NPCs" instance=ExtResource("6_myibc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 40, 0, 36)
+
+[node name="TheResidents" parent="Entities/NPCs" instance=ExtResource("7_cpykr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 20, 48)
 
 [node name="AnomalyGravwell" parent="Entities" instance=ExtResource("2_c2p4d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 13, -46)

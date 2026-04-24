@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bb2hcbb3vaxyu"]
+[gd_scene load_steps=24 format=3 uid="uid://bb2hcbb3vaxyu"]
 
 [ext_resource type="Script" path="res://scripts/UI/HUD.gd" id="1_n7kud"]
 [ext_resource type="JSON" path="res://_deprec/Dialogue/Test_dialogue.json" id="2_o1v84"]
@@ -7,7 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://cugasf7g76vhn" path="res://Graphics/UI/vignette.png" id="4_cix3b"]
 [ext_resource type="Texture2D" uid="uid://d4fykdqigfar6" path="res://Graphics/UI/crt.png" id="4_esusg"]
 [ext_resource type="Texture2D" uid="uid://dvxf4do6lmw1h" path="res://Graphics/UI/HUD/health_radial_2.png" id="4_iclye"]
+[ext_resource type="Texture2D" uid="uid://ye62btw5owd8" path="res://Graphics/UI/HUD/clock_fancy_back.png" id="6_1hxwb"]
 [ext_resource type="LabelSettings" uid="uid://bldwplqgwyyd4" path="res://scripts/UI/HUD_label.tres" id="7_ksx4b"]
+[ext_resource type="Texture2D" uid="uid://dox6wlx02i6m1" path="res://Graphics/UI/HUD/clock_fancy_progress.png" id="7_ns5r4"]
 [ext_resource type="Texture2D" uid="uid://ruijco38yggy" path="res://Graphics/UI/AtlasController.png" id="8_786k8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_foj5r"]
@@ -195,6 +197,25 @@ layout_mode = 2
 mouse_filter = 1
 theme_override_font_sizes/normal_font_size = 22
 text = "Mollitia consequatur iusto consequatur. Totam autem aut corporis libero id. Rem eum sequi sit est rerum. Vel vitae et porro repellendus dignissimos voluptatem voluptatem exercitationem. Iste tenetur id magni molestias qui excepturi. Velit quis deleniti ipsum reprehenderit quod ut doloribus rerum."
+
+[node name="ProgressBarTimeTrial" type="TextureProgressBar" parent="Control/Diaract/TopHalf"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 75.0
+fill_mode = 4
+texture_under = ExtResource("6_1hxwb")
+texture_progress = ExtResource("7_ns5r4")
 
 [node name="BottomHalf" type="Control" parent="Control/Diaract"]
 layout_mode = 2

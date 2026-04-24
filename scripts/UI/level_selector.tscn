@@ -16,7 +16,6 @@ size_flags_vertical = 3
 allow_reselect = true
 max_columns = 4
 same_column_width = true
-fixed_column_width = 180
 icon_mode = 0
 
 [node name="HBox" type="HBoxContainer" parent="."]

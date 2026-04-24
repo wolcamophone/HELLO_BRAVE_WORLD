@@ -68,8 +68,10 @@ surface_material_override/0 = SubResource("StandardMaterial3D_kggh1")
 [node name="ScreenGlow" type="OmniLight3D" parent="VendingMachine"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2.3, 0.2)
 light_color = Color(0, 1, 0, 1)
+light_bake_mode = 1
+shadow_enabled = true
 distance_fade_begin = 120.0
-omni_range = 6.0
+omni_range = 8.0
 omni_attenuation = 0.5
 
 [node name="BlinkTimer" type="Timer" parent="."]

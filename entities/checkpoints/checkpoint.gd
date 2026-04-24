@@ -31,6 +31,7 @@ func _on_area_3d_area_entered(area):
 	if area.is_in_group("player"):
 		player_detected = true
 		CheckpointMenu.label_checkpoint_name.text = "Chk: %s" % name
+		change_mesh()
 		
 		emit_signal("checkpoint_found")
 		print("Player found checkpoint: %s" % name)
@@ -65,6 +66,10 @@ func claim_checkpoint():
 		print("Player claimed checkpoint: %s" % name) 
 
 func activate_checkpoint():
+	for candidate in GameMaster.checkpoints_available:
+		candidate.active = false
+		candidate.change_mesh()
+
 	if !active:
 		active = true
 		update_checkpoints()
@@ -117,10 +122,10 @@ func change_mesh(): ## Refresh the appearance of Checkpoint to reflect it's curr
 	# Solid pin light on/off indicates active/inactive respectively.
 	# TODO: bug occurs where pinlight disappears upon claiming a checkpoint where claiming a checkpoint should also make it active. Apparently this func is being called twice in a row because print(active) below returns same result (2) false or (2) true
 	if !active:
-		print(active)
+		#print(active)
 		pin_light.visible = false
 	elif active:
-		print(active) 
+		#print(active) 
 		pin_light.visible = true
 #endregion
 

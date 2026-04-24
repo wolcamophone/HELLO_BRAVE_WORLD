@@ -23,6 +23,7 @@ enum states {idle,
 			walking,
 			sprinting,
 			attack,
+			jumping,
 			airborne,
 			dead} 
 @export var current_state = states.idle ## State that player is in to control flow of contextual action and conditions.
@@ -37,6 +38,8 @@ var speed: float = 10 ## Current value for player's movement speed.
 @export var sprint_speed: float = 16 ## How fast the player moves when holding sprint.
 @export var sneak_speed_coef: float = 0.4 ## Weight to multiply movement speed by while crouched.
 @export var air_speed_coef: float = 0.05 ## Weight to multiply movement speed by while in air.
+@export var enable_stair_stepper:bool = false ## Adds a small upward momentum to the player so they don't get stuck on a 2 pixel high twig or piece of ramp geometry.
+
 @export_group("Jump Values")
 @export var max_jump_force: float = 12 ## Greatest force to be applied to jump. Applies upon pressing and holding jump button.
 @export var min_jump_force: float = 6 ## Least force to be applied to jump. Applies upon releasing jump button.
@@ -72,6 +75,8 @@ const LERP_VAL:float = 0.2
 #@onready var _wall_slide_cooldown: Timer = $WallSlideCooldown
 #@onready var _LedgeGrabberY: RayCast3D = $RotationRoot/LedgeGrabberY
 #@onready var _LedgeGrabberZ: RayCast3D = $RotationRoot/LedgeGrabberZ
+@onready var _stair_stepper: RayCast3D = $RotationRoot/StairStepper
+@onready var _stair_movable: Area3D = $RotationRoot/StairMovable
 
 # Mesh Handlers
 @onready var _rotation_root: Node3D = $RotationRoot
@@ -90,13 +95,17 @@ const LERP_VAL:float = 0.2
 @onready var _sfx_footstep: AudioStreamPlayer3D = $Footstep
 @onready var _wall_slide_particles: GPUParticles3D = $WallSlideParticles
 @onready var omni_light_3d_tattoo: OmniLight3D = $OmniLight3DTattoo
+@onready var _death_timer: Timer = $DeathTimer
 
 
 
 func _ready():
 	set_as_top_level(true)
 	
+	_death_timer.timeout.connect(GameMaster.respawn_player)
+	
 	_spring_arm.add_excluded_object(self)
+	_stair_stepper.add_exception(self)
 	#_spring_arm.add_excluded_object(_collision)
 	#_spring_head.add_excluded_object(self)
 	#_spring_head.add_excluded_object(_collision)
@@ -114,16 +123,17 @@ func _ready():
 func _process(delta):
 	pass
 
-
-
 func _physics_process(delta):
 	#_state_machine()
 	_apply_gravity(delta)
 	if current_state != states.dead:
 		_apply_jumping()
 		_apply_movement()
-		#_stair_check()
+		_apply_attacking()
+		_apply_misc_actions()
+	
 	move_and_slide()
+	
 	_apply_animation()
 	_camera_follow()
 	
@@ -132,31 +142,83 @@ func _physics_process(delta):
 	
 	_ears.rotation = _spring_arm.rotation
 	_rotation_root.rotation_degrees.y = wrapf(_rotation_root.rotation_degrees.y, 0, 360) # Prevent player from accumulating needlessly high rotation values.
-	
-	if Input.is_action_just_pressed("attack1"): # TODO: This should go under the attacking state once the state_machine() match is set up.
+
+func _apply_attacking():
+	if Input.is_action_just_pressed("attack1") && current_state != states.dead: # TODO: This should go under the attacking state once the state_machine() match is set up.
 		var b = _attack_type.instantiate()
 		b.rotation_degrees = _rotation_root.global_transform.basis.get_euler()
 		_rotation_root.add_child(b)
 		current_state = states.attack
 
-func _state_machine(): # TODO: set up states to contain functionality for movement calculations instead of processing them under the if statements. 
-	match states:
+func _state_machine(): # This function runs constantly under _physics_process(delta). See _switch_state() for calling one-shot animations.
+	# TODO: set up states to contain functionality for movement calculations instead of processing them under the if statements. 
+	match current_state:
 		states.idle:
 			velocity.x = lerpf(velocity.x, 0.0, friction)
 			velocity.z = lerpf(velocity.z, 0.0, friction)
 			
 		states.crouched:
 			speed *= sneak_speed_coef
+			_apply_movement()
 		
 		states.walking:
 			speed = run_speed
+			_apply_movement()
 			
 		states.sprinting:
 			speed = sprint_speed
+			_apply_movement()
 		
+		states.airborne:
+			_apply_movement()
+			if !direction && !is_on_floor(): # NO Move attempt, and is NOT on floor.
+				velocity.x = lerpf(velocity.x, velocity.x * (air_friction * movement_strength), LERP_VAL)
+				velocity.z = lerpf(velocity.z, velocity.z * (air_friction * movement_strength), LERP_VAL)
+			elif direction && !is_on_floor(): # Move attempt, and is NOT on floor.
+				velocity.x = lerpf(velocity.x, (direction.x * (speed * movement_strength)), air_speed_coef)
+				velocity.z = lerpf(velocity.z, (direction.z * (speed * movement_strength)), air_speed_coef)
+			
+			if is_on_floor():
+				_switch_state("idle")
+			
 		states.dead:
 			velocity.x = lerpf(velocity.x, 0.0, friction)
 			velocity.z = lerpf(velocity.z, 0.0, friction)
+		
+		#_: # if nothing else...
+			#pass
+		#var state_machine_result:
+			#print(state_machine_result)
+			#pass
+		
+		#states.new_state_example:
+			#   set physics parameters
+			#speed = 
+			#_apply_movement() #   This takes in player's input for movement
+			#velocity.x = #   These set player's velocity manually.
+			#velocity.z =
+			#   handle transition out of state
+			#if Input.is_action_just_pressed("jump"):
+				#pass
+
+func _switch_state(to_state): # Called once instead of continuously, used for one-shot ainimations or throwing attacks
+	current_state = to_state
+	
+	match current_state:
+		states.idle:
+			pass
+		
+		states.crouched:
+			pass
+		
+		states.walking:
+			pass
+			
+		states.sprinting:
+			pass
+		
+		states.airborne:
+			pass
 #endregion
 
 
@@ -170,7 +232,7 @@ func _apply_gravity(delta):
 func _apply_jumping():
 	if is_on_floor(): # Normal jump from floor
 		if Input.is_action_just_pressed("jump"): #TODO: Work in a proper callback for jump_buffer.
-			velocity.y = max_jump_force
+			velocity += max_jump_force * up_direction
 			_sfx_jump.play()
 	
 	if is_on_floor_only(): # Resets Jump Counters
@@ -206,6 +268,8 @@ func _apply_movement():
 	direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	direction = direction.rotated(Vector3.UP, _spring_arm.rotation.y).normalized()
 	
+	
+	
 # For logic flow reasons, the crouch has to be called before direction calc and sprint called after direction calc for the changes in speed to apply.
 	if Input.is_action_pressed("sneak"): 
 		speed *= sneak_speed_coef
@@ -225,6 +289,7 @@ func _apply_movement():
 	if direction && is_on_floor(): # Move attempt, and is on floor.
 		velocity.x = lerpf(velocity.x, direction.x * (speed * movement_strength), LERP_VAL)
 		velocity.z = lerpf(velocity.z, direction.z * (speed * movement_strength), LERP_VAL)
+		#_stair_check()
 		current_state = states.walking
 	elif !direction && !is_on_floor(): # NO Move attempt, and is NOT on floor.
 		velocity.x = lerpf(velocity.x, velocity.x * (air_friction * movement_strength), LERP_VAL)
@@ -249,11 +314,24 @@ func _apply_movement():
 
 
 
-func _stair_check(): # TODO: Move the player up by a max stair height so they don't get stuck on a 2 pixel high twig or piece of ramp geometry.
-	pass
-	#if _stair_stepper.collide_with_bodies && is_on_wall():
-		#global_position.y += 0.1
+func _stair_check() -> void: # Extends from _apply_movement(). Adds a small upward momentum to the player so they don't get stuck on a 2 pixel high twig or piece of ramp geometry.
+	var going_up:bool = false
+	if enable_stair_stepper == false:
+		return
+	elif enable_stair_stepper == true:
+		if _stair_stepper.collide_with_bodies && is_on_wall():
+			going_up = true
+		for f in _stair_movable.get_overlapping_bodies(): # Area3D has no .add_excluded_object(self) so I have to set up the nasty for loop that runs at delta. 
+			if f != self:
+				going_up = false
+	
+		if going_up: # this bool-flow condition is probably not the most optimal but works for now.
+			global_position.y += 0.5
 	#test_move()
+
+func _apply_misc_actions():
+	if Input.is_action_just_pressed("killbind"):
+		kill()
 #endregion
 
 
@@ -269,7 +347,7 @@ func _apply_animation():
 	_anim_tree.set("parameters/JumpShot/request", is_on_floor()) # Triggers the Jump one-shot animation.
 	_anim_tree.set("parameters/BlendCrouch/blend_amount", current_state == states.crouched) # Toggles crouching animation with the crouching state.
 	_anim_tree.set("parameters/CrouchCrawl/blend_position", velocity.length() / speed*2) # Blends velocity value into crawling animations.
-	_anim_tree.set("parameters/BlendDeath/blend_amount", current_state == states.dead)
+	_anim_tree.set("parameters/BlendDeath/blend_amount", current_state == states.dead) # Blends twitchy death animation over all others if the death state is tripped.
 
 
 	
@@ -312,9 +390,9 @@ func kill():
 		ds.position.y += 1.8
 		add_child(ds)
 	
+	_death_timer.start(5)
 	emit_signal("died")
 	print("Android has been destroyed!")
-
 
 func save():
 	var save_dict = {

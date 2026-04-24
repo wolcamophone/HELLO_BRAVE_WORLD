@@ -1,10 +1,10 @@
 [gd_scene load_steps=29 format=4 uid="uid://c2f2xn44h37mg"]
 
 [ext_resource type="Curve" uid="uid://vxanmxb2nnjv" path="res://scripts/quickcurve.tres" id="1_ld3bj"]
-[ext_resource type="Texture2D" uid="uid://dx3ppph2jwa7i" path="res://Player/Android.png" id="1_sxygi"]
+[ext_resource type="Texture2D" uid="uid://dx3ppph2jwa7i" path="res://Player/player_skins/Android.png" id="1_sxygi"]
 [ext_resource type="Script" path="res://Player/player_model.gd" id="1_vl1pq"]
-[ext_resource type="Texture2D" uid="uid://dlm612fo82nfb" path="res://Player/Android_n.png" id="2_13ujk"]
-[ext_resource type="Texture2D" uid="uid://oi1mqfue1sfh" path="res://Player/Android_e.png" id="3_aseao"]
+[ext_resource type="Texture2D" uid="uid://dlm612fo82nfb" path="res://Player/player_skins/Android_n.png" id="2_13ujk"]
+[ext_resource type="Texture2D" uid="uid://oi1mqfue1sfh" path="res://Player/player_skins/Android_e.png" id="3_aseao"]
 [ext_resource type="AudioStream" uid="uid://bplwsqmckwyc0" path="res://audio/SFX/footstep-04.wav" id="4_kjolg"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rc33x"]

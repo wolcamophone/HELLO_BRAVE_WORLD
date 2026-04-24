@@ -16,10 +16,10 @@ var status_report
 
 
 # Travel Menu
-@onready var travel_container: PanelContainer = $Control/TravelContainer
-@onready var travel_locations_list: ItemList = $Control/TravelContainer/VBoxContainer2/ItemList
+@onready var travel_container: TabContainer = $Control/TravelContainer
+@onready var travel_locations_list: ItemList = $Control/TravelContainer/Checkpoint/ItemList
 # Buttons
-@onready var close2: Button = $Control/TravelContainer/VBoxContainer2/Close
+@onready var close2: Button = $Control/TravelContainer/Checkpoint/Close
 
 
 
@@ -54,6 +54,9 @@ func _show_travel_menu():
 func _on_travel_menu_item_clicked(index: int, at_position: Vector2, mouse_button_index: int) -> void:
 	var index_pos_rot:Vector4
 	GameMaster.teleport(GameMaster.checkpoints_available[index])
+	for candidate in GameMaster.checkpoints_available:
+		candidate.change_mesh()
+	ScoreCounter.coins -= 1
 	_close_menu()
 
 func _close_travel_menu():
@@ -61,7 +64,8 @@ func _close_travel_menu():
 #endregion
 
 func _on_save_pressed() -> void:
-	GameMaster.save_as_cfg()
+	GameMaster.save_game_as_cfg()
+	_close_menu()
 
 func _prompt_status_report(): ## Displays a text box file specified by status_report to give the player updates.
 	Dialogic.start(status_report)

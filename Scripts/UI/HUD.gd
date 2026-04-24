@@ -5,32 +5,36 @@ extends CanvasLayer
 
 @export var show_debug_hud:bool = false
 
-## Score Labels
+# Score Labels
 @onready var _health_bar = $Control/HealthBar
 @onready var _coin_counter: Label = $Control/HBoxScores/CoinCounter
 @onready var _coin_counter_red: Label = $Control/HBoxScores/CoinCounterRed
 @onready var _lives_counter: Label = $Control/HBoxScores/LivesCounter
 @onready var _keys_counter: Label = $Control/HBoxScores/KeysCounter
+@onready var _progress_bar_time_trial: TextureProgressBar = $Control/Diaract/TopHalf/ProgressBarTimeTrial
 
+# Interaction Block
 @onready var _interact_text:Control = $Control/Diaract/BottomHalf/HBoxContainer/InteractText
 @onready var _interact_prompt:Control = $Control/Diaract/BottomHalf/HBoxContainer
 
+# TODO: Fade animation nodes for the loading screen
 @onready var _fade_transitioner:AnimationPlayer = $Control/FadeTransition
 @onready var _fade_block:ColorRect = $Control/ShaderRect
-
-@onready var _dialogue_container:Control = $Control/Diaract/TopHalf/MarginContainer
-@onready var _dialogue_text: RichTextLabel = $Control/Diaract/TopHalf/MarginContainer/RichTextLabel
-
-@onready var _vignette: TextureRect = $Control/Vignette
-
 @onready var _loading_label: Label = $Control/LoadingLabel
 @onready var _saving_label: Label = $Control/SavingLabel
 
-## Debug
+# deprec, Dialogic is used for dialogue instead: Dialogue Nodes 
+@onready var _dialogue_container:Control = $Control/Diaract/TopHalf/MarginContainer
+@onready var _dialogue_text: RichTextLabel = $Control/Diaract/TopHalf/MarginContainer/RichTextLabel
+
+# Visual Effects and Overlays
+@onready var _vignette: TextureRect = $Control/Vignette
+
+# Debug
 @onready var v_box_debug: VBoxContainer = $Control/VBoxDebug
 @onready var _player_state: Label = $Control/VBoxDebug/PlayerState
 
-
+# Health Bar
 #@onready var display_health = get_node("Android033023").HEALTH
 
 func _ready():

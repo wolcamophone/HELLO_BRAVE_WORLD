@@ -1,4 +1,4 @@
-[gd_scene load_steps=470 format=4 uid="uid://dkrqt3jjn2w6q"]
+[gd_scene load_steps=471 format=4 uid="uid://dkrqt3jjn2w6q"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_6nqv1"]
 [ext_resource type="PackedScene" uid="uid://do6cmx571d3b3" path="res://entities/checkpoints/checkpoint.tscn" id="1_6uv04"]
@@ -29,6 +29,7 @@
 [ext_resource type="Material" uid="uid://cf3edn1munq20" path="res://Graphics/textures/stone/gravel.material" id="26_kpgq1"]
 [ext_resource type="Material" uid="uid://bbydwx8pdut1v" path="res://Graphics/textures/supernatural/bones_2.material" id="27_oug1l"]
 [ext_resource type="Material" uid="uid://drkx6umegtg2e" path="res://Graphics/textures/supernatural/bones_1.material" id="28_yigtk"]
+[ext_resource type="PackedScene" uid="uid://dts0k51pbnimr" path="res://entities/npcs/mictlantecuhtli/mictlantecuhtli.tscn" id="30_yog4b"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_7dsur"]
 lightmap_size_hint = Vector2i(18394, 18402)
@@ -2037,6 +2038,9 @@ door_state = 2
 [node name="FatherTime" parent="NPCs" instance=ExtResource("4_pn7bo")]
 transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -90, 0, -42)
 
+[node name="Mictlantecuhtli" parent="NPCs" instance=ExtResource("30_yog4b")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 267, -12, -16)
+
 [node name="World" type="Node" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
@@ -3469,3 +3473,4 @@ shape = SubResource("ConcavePolygonShape3D_m028d")
 [node name="WorldSpaceInfo" type="Node" parent="."]
 script = ExtResource("24_ghel4")
 lvl_description = "Before the fall, when they wrote it on the wall and there wasn't even any Hollywood."
+default_spawn_position = Vector4(-100, 8, 123, 0)

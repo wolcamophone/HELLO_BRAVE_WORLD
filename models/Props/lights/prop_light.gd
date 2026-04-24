@@ -7,6 +7,7 @@ class_name PropLight
 @export var energy:int = 6
 @export var color:Color = "ffffff" # White
 
+#@onready var _audio_ambient_sfx: AudioAmbientSFX = $AudioAmbientSFX
 @onready var _mesh: MeshInstance3D = $MeshInstance3D
 @onready var _light: OmniLight3D = $OmniLight3D
 

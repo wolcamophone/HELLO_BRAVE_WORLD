@@ -16,9 +16,15 @@ func _ready() -> void:
 	timer.timeout.connect(chance_playback)
 	add_child(timer)
 	
+	start_audio()
+
+func start_audio() -> void:
 	timer.start(timer_interval)
 
-func chance_playback(): ## Picks a random value to determine if playback happens, then starts the timer over. 
+func stop_audio() -> void:
+	timer.stop()
+
+func chance_playback() -> void: ## Picks a random value to determine if playback happens, then starts the timer over. 
 	#print(name + ": chance called")
 	var chance:int = 0
 	chance = randi_range(0,100)

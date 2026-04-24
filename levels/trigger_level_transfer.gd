@@ -9,5 +9,5 @@ func _ready() -> void:
 
 func _on_area_entered(area:Area3D):
 	if area.is_in_group("player"):
-		GameMaster.load_level(transfer_to_level)
+		GameMaster.load_level(transfer_to_level, 1)
 		GameMaster.level_transfer_destination = transfer_to_position

@@ -24,9 +24,7 @@ grow_vertical = 2
 [node name="TextOutput" type="TextEdit" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-placeholder_text = "\"Hello_Brave_World!\"
-
-Controls:
+placeholder_text = "Controls:
 Look Around = Mouse Move or Right Stick
 Move = WASD or Left Stick
 Sprint = Shift or RT
@@ -35,8 +33,12 @@ Jump = Spacebar or A/X  -  (You can double jump and jump off of walls!)
 
 Interact = E or Y/△
 Attack = Left Click or X/⬜  -  (Currently doesn't do anything.)
+Toggle Zoom = Mouse Middle-Click or R3
 
-Toggle Zoom = Mouse Middle-Click or R3"
+Explode = U
+
+=====
+"
 editable = false
 drag_and_drop_selection_enabled = false
 virtual_keyboard_enabled = false

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dts0k51pbnimr"]
+
+[ext_resource type="ArrayMesh" uid="uid://btxjbdx7kw7ae" path="res://entities/npcs/mictlantecuhtli/mictlantecuhtli.obj" id="1_i04j0"]
+[ext_resource type="Material" uid="uid://c3sgls32pn2pa" path="res://entities/npcs/mictlantecuhtli/mictlantecuhtli.material" id="2_gyyh5"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mhpap"]
+height = 1.4
+radius = 0.4
+
+[node name="Mictlantecuhtli" type="StaticBody3D" groups=["npcs"]]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_i04j0")
+surface_material_override/0 = ExtResource("2_gyyh5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0.2)
+shape = SubResource("CylinderShape3D_mhpap")

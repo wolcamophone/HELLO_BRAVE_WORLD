@@ -12,6 +12,8 @@ signal spawnpoints_registered
 @export var lvl_death_warp:String = "" ## String name for the next level that the player will load into upon dying in this level.
 @export_enum("Both", "Inside", "Outside") var environment_type = 0 # You can eventually hook environmental details into a check for this, such as default lighting or soundscape behavior.
 
+@onready var spawn_nodes_available:Array[Node] = get_tree().get_nodes_in_group("InfoPlayerStart")
+
 #@onready var lvl_env:WorldEnvironment = $WorldEnvironment
 #@onready var lvl_sun:DirectionalLight3D = $DirectionalLight3D
 #@onready var lvl_map:FuncGodotMap = $FuncGodotMap
@@ -31,6 +33,16 @@ func _ready() -> void:
 	register_checkpoints()
 	CheckpointMenu.label_level_name.text = "Lvl: %s" % lvl_title
 	ScoreCounter.red_coins = 0
+	
+	if spawn_nodes_available.size() < 1 and GameMaster.level_transfer_method == 0:
+		GameMaster.teleport(default_spawn_position)
+	elif spawn_nodes_available.size() >= 1:
+		var spawn_node_selected = randi_range(0, spawn_nodes_available.size() - 1)
+		GameMaster.teleport(spawn_nodes_available[spawn_node_selected])
+	
+	GameMaster.level_info_current = self
+	
+	# Debug
 	print("WorldSpaceInfo: spawnpoints_available SIZE = ", GameMaster.spawnpoints_available.size())
 	print("WorldSpaceInfo: spawnpoints_available = ", GameMaster.spawnpoints_available)
 	print("WorldSpaceInfo: checkpoints_available SIZE = ", GameMaster.checkpoints_available.size())

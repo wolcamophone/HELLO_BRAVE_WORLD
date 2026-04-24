@@ -1,7 +1,8 @@
-[gd_scene load_steps=399 format=4 uid="uid://bope1k0ayqpj8"]
+[gd_scene load_steps=400 format=4 uid="uid://bope1k0ayqpj8"]
 
 [ext_resource type="AudioStream" uid="uid://cnyrxf0u8camk" path="res://audio/Music/subterranean.ogg" id="1_76uet"]
 [ext_resource type="PackedScene" uid="uid://xk228ixujfgk" path="res://entities/info_player_start.tscn" id="2_no2fv"]
+[ext_resource type="PackedScene" uid="uid://6buac2d4js6w" path="res://entities/npcs/dream_statuette/dream_statuette.tscn" id="2_v7eew"]
 [ext_resource type="Environment" uid="uid://d2u2r61oh8jy3" path="res://levels/ip_monofort/env_monofort.tres" id="3_jdq8t"]
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="4_x4jop"]
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="5_bepp7"]
@@ -1324,10 +1325,15 @@ max_distance = 256.0
 panning_strength = 0.0
 bus = &"Music"
 
+[node name="NPCs" type="Node" parent="."]
+
+[node name="Statuette" parent="NPCs" instance=ExtResource("2_v7eew")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38, 8, 98)
+
 [node name="Entities" type="Node" parent="."]
 
 [node name="InfoPlayerStart" parent="Entities" instance=ExtResource("2_no2fv")]
-transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -73, 8, 133)
+transform = Transform3D(0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, 0.866025, -152, 0, 152)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="Entities"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 93, 0)
@@ -2483,3 +2489,4 @@ shape = SubResource("ConvexPolygonShape3D_t0tel")
 [node name="WorldSpaceInfo" type="Node" parent="."]
 script = ExtResource("16_iubjo")
 lvl_title = "Monolithic Fort"
+default_spawn_position = Vector4(-152, 0, 152, -30)

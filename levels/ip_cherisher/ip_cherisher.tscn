@@ -1,4 +1,4 @@
-[gd_scene load_steps=574 format=4 uid="uid://nvof62vec04o"]
+[gd_scene load_steps=577 format=4 uid="uid://nvof62vec04o"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_5pgo5"]
 [ext_resource type="AudioStream" uid="uid://uda7paaomq0b" path="res://audio/SFX/hl2/outdoor.wav" id="2_1rmwn"]
@@ -13,10 +13,13 @@
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="6_n676b"]
 [ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="6_yvgei"]
 [ext_resource type="PackedScene" uid="uid://dgtl1mooaeiqs" path="res://entities/npcs/mr_eyes/mr_eyes.tscn" id="7_itfbw"]
+[ext_resource type="Script" path="res://scripts/random_chance_spawner.gd" id="8_4bw6o"]
+[ext_resource type="PackedScene" uid="uid://dts0k51pbnimr" path="res://entities/npcs/mictlantecuhtli/mictlantecuhtli.tscn" id="9_1y4sb"]
 [ext_resource type="Material" uid="uid://bk6ms3ic1l1gr" path="res://Graphics/textures/stone/concrete_panel.material" id="9_nhxhm"]
 [ext_resource type="PackedScene" uid="uid://do6cmx571d3b3" path="res://entities/checkpoints/checkpoint.tscn" id="10_ycb4a"]
 [ext_resource type="Material" uid="uid://b5ht36jtqrx7p" path="res://Graphics/textures/walls/bricks_metalbars_reenforced.material" id="13_xhg77"]
 [ext_resource type="Material" uid="uid://b7bmrxepcj1ne" path="res://Graphics/textures/stone/concrete_dark.material" id="13_xs85i"]
+[ext_resource type="PackedScene" uid="uid://b7ht7db4shrx6" path="res://entities/extra_life.tscn" id="14_h3h3x"]
 [ext_resource type="Material" uid="uid://dlen5vhnflyp1" path="res://Graphics/textures/metal/crosshatch_2.material" id="15_te14v"]
 [ext_resource type="Material" uid="uid://jpuqoghxkk6e" path="res://Graphics/textures/stone/stone_rough.material" id="16_280nl"]
 [ext_resource type="Material" uid="uid://bjweat0yjfx25" path="res://Graphics/textures/stone/concrete_rebar.material" id="18_2hqjm"]
@@ -2936,6 +2939,62 @@ energy = 1
 transform = Transform3D(-4.2222e-08, -0.258819, -0.965926, -1.13133e-08, 0.965926, -0.258819, 1, 0, -4.37114e-08, 23, 20, -286)
 energy = 1
 
+[node name="NPCs" type="Node" parent="."]
+
+[node name="mr_eyes" parent="NPCs" instance=ExtResource("7_itfbw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 36, -11)
+
+[node name="RandomChanceSpawner" type="Node3D" parent="NPCs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -44, 12, -201)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 16
+
+[node name="Mictlantecuhtli" parent="NPCs/RandomChanceSpawner" instance=ExtResource("9_1y4sb")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="RandomChanceSpawner2" type="Node3D" parent="NPCs"]
+transform = Transform3D(-0.866025, 0, -0.5, 0, 1, 0, 0.5, 0, -0.866025, 44.3, 12, 12.3)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 16
+
+[node name="Mictlantecuhtli" parent="NPCs/RandomChanceSpawner2" instance=ExtResource("9_1y4sb")]
+
+[node name="RandomChanceSpawner3" type="Node3D" parent="NPCs"]
+transform = Transform3D(-0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, -0.258819, -29, -16, -3)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 16
+
+[node name="Mictlantecuhtli" parent="NPCs/RandomChanceSpawner3" instance=ExtResource("9_1y4sb")]
+
+[node name="RandomChanceSpawner4" type="Node3D" parent="NPCs"]
+transform = Transform3D(-0.965926, 0, 0.258819, 0, 1, 0, -0.258819, 0, -0.965926, -13, 0, -75)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 16
+
+[node name="Mictlantecuhtli" parent="NPCs/RandomChanceSpawner4" instance=ExtResource("9_1y4sb")]
+
+[node name="RandomChanceSpawner5" type="Node3D" parent="NPCs"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 52, 4, 6)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 16
+
+[node name="Mictlantecuhtli" parent="NPCs/RandomChanceSpawner5" instance=ExtResource("9_1y4sb")]
+
+[node name="RandomChanceSpawner6" type="Node3D" parent="NPCs"]
+transform = Transform3D(-0.5, 0, -0.866026, 0, 1, 0, 0.866026, 0, -0.5, -7, 24, -7)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 16
+
+[node name="Mictlantecuhtli" parent="NPCs/RandomChanceSpawner6" instance=ExtResource("9_1y4sb")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="RandomChanceSpawner7" type="Node3D" parent="NPCs"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -82, 16, -250)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 16
+
+[node name="Mictlantecuhtli" parent="NPCs/RandomChanceSpawner7" instance=ExtResource("9_1y4sb")]
+
 [node name="Entities" type="Node" parent="."]
 
 [node name="Doors" type="Node" parent="Entities"]
@@ -2952,6 +3011,12 @@ overwrite_prompt_text = "Travel to Gridhalls"
 warp_door = true
 transfer_to_level = "ip_gridhalls"
 
+[node name="DoorWarehouse" parent="Entities/Doors" instance=ExtResource("18_7co5l")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -88, 28, -222)
+overwrite_prompt_text = "Travel to Warehouse"
+warp_door = true
+transfer_to_level = "ip_warehouse"
+
 [node name="DialogicPrompter" type="Node" parent="Entities"]
 script = ExtResource("5_tfjvd")
 dialogue_to_prompt = "broken_as_built"
@@ -2964,11 +3029,6 @@ metadata/_edit_group_ = true
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Entities/DialogicPrompter/InteractionArea"]
 shape = SubResource("CylinderShape3D_y7i3k")
 
-[node name="NPCs" type="Node" parent="Entities"]
-
-[node name="mr_eyes" parent="Entities/NPCs" instance=ExtResource("7_itfbw")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 34, 36, -11)
-
 [node name="Checkpoints" type="Node" parent="Entities"]
 
 [node name="Sound of Electricity" parent="Entities/Checkpoints" instance=ExtResource("10_ycb4a")]
@@ -2976,6 +3036,88 @@ transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 26, 0, 20)
 
 [node name="Sequestered Cafe" parent="Entities/Checkpoints" instance=ExtResource("10_ycb4a")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -16, 8, -262)
+
+[node name="Collectibles" type="Node" parent="Entities"]
+
+[node name="ExtraLife" parent="Entities/Collectibles" instance=ExtResource("14_h3h3x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75, 9, -102)
+
+[node name="RandomChanceSpawner" type="Node3D" parent="Entities/Collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 1, -14)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 50
+
+[node name="ExtraLife" parent="Entities/Collectibles/RandomChanceSpawner" instance=ExtResource("14_h3h3x")]
+
+[node name="RandomChanceSpawner2" type="Node3D" parent="Entities/Collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 44, 37, 8)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 50
+
+[node name="ExtraLife" parent="Entities/Collectibles/RandomChanceSpawner2" instance=ExtResource("14_h3h3x")]
+
+[node name="RandomChanceSpawner3" type="Node3D" parent="Entities/Collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 25, -56)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 50
+
+[node name="ExtraLife" parent="Entities/Collectibles/RandomChanceSpawner3" instance=ExtResource("14_h3h3x")]
+
+[node name="RandomChanceSpawner4" type="Node3D" parent="Entities/Collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 66, 9, -178)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 50
+
+[node name="ExtraLife" parent="Entities/Collectibles/RandomChanceSpawner4" instance=ExtResource("14_h3h3x")]
+
+[node name="RandomChanceSpawner5" type="Node3D" parent="Entities/Collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 14, -272)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 50
+
+[node name="ExtraLife" parent="Entities/Collectibles/RandomChanceSpawner5" instance=ExtResource("14_h3h3x")]
+
+[node name="RandomChanceSpawner6" type="Node3D" parent="Entities/Collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24, 9, -194)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 50
+
+[node name="ExtraLife" parent="Entities/Collectibles/RandomChanceSpawner6" instance=ExtResource("14_h3h3x")]
+
+[node name="RandomChanceSpawner7" type="Node3D" parent="Entities/Collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -39, 33, -207)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 50
+
+[node name="ExtraLife" parent="Entities/Collectibles/RandomChanceSpawner7" instance=ExtResource("14_h3h3x")]
+
+[node name="RandomChanceSpawner8" type="Node3D" parent="Entities/Collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -65, 33, -253)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 50
+
+[node name="ExtraLife" parent="Entities/Collectibles/RandomChanceSpawner8" instance=ExtResource("14_h3h3x")]
+
+[node name="RandomChanceSpawner9" type="Node3D" parent="Entities/Collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 14, -316)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 50
+
+[node name="ExtraLife" parent="Entities/Collectibles/RandomChanceSpawner9" instance=ExtResource("14_h3h3x")]
+
+[node name="RandomChanceSpawner10" type="Node3D" parent="Entities/Collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 12, -316)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 50
+
+[node name="ExtraLife" parent="Entities/Collectibles/RandomChanceSpawner10" instance=ExtResource("14_h3h3x")]
+
+[node name="RandomChanceSpawner11" type="Node3D" parent="Entities/Collectibles"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 17, -287)
+script = ExtResource("8_4bw6o")
+percent_chance_to_spawn = 50
+
+[node name="ExtraLife" parent="Entities/Collectibles/RandomChanceSpawner11" instance=ExtResource("14_h3h3x")]
 
 [node name="World" type="Node" parent="."]
 
@@ -4738,7 +4880,6 @@ shape = SubResource("ConcavePolygonShape3D_g03yu")
 
 [node name="DEBUG_LIGHT" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(-0.866023, -0.453156, 0.211312, 0, 0.422622, 0.906306, -0.500003, 0.784882, -0.366001, 0, 0, 0)
-visible = false
 editor_only = true
 
 [node name="WorldSpaceInfo" type="Node" parent="."]

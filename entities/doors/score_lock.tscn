@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://dtwhm8br8wdp"]
+[gd_scene load_steps=10 format=3 uid="uid://dtwhm8br8wdp"]
 
 [ext_resource type="Texture2D" uid="uid://d4fykdqigfar6" path="res://Graphics/UI/crt.png" id="1_encqo"]
 [ext_resource type="Script" path="res://entities/doors/score_lock.gd" id="1_wh1im"]
 [ext_resource type="ArrayMesh" uid="uid://dp2tcnwn27vox" path="res://entities/doors/score_lock_frame.obj" id="2_nb5ir"]
 [ext_resource type="PackedScene" uid="uid://b0rgashfp2mkh" path="res://entities/doors/gui_score_lock.tscn" id="2_oop03"]
+[ext_resource type="AudioStream" uid="uid://c2mbnbma3713q" path="res://audio/SFX/minke_whale.wav" id="2_tuvoj"]
 [ext_resource type="Texture2D" uid="uid://rnx2twoepkbm" path="res://entities/doors/score_lock_frame.png" id="3_fj8j0"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1iswp"]
@@ -22,6 +23,10 @@ emission_texture = SubResource("ViewportTexture_xg5jq")
 
 [node name="score_lock" type="Node3D"]
 script = ExtResource("1_wh1im")
+
+[node name="correct_bell" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_tuvoj")
+pitch_scale = 2.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)

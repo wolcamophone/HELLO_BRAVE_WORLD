@@ -319,7 +319,31 @@ text = "Cheats:"
 
 [node name="CheckBoxSlowmo" type="CheckBox" parent="VBox/Tabs/Debug/HBox/VBoxL"]
 layout_mode = 2
-text = "Enable Slowmo"
+text = "Enable Timescale"
+
+[node name="SliderSlowmo" type="HSlider" parent="VBox/Tabs/Debug/HBox/VBoxL"]
+layout_mode = 2
+tooltip_text = "Timescale of Slowmo:
+x 0.1
+x 1
+x 2
+x 3
+x 4"
+min_value = 0.1
+max_value = 4.0
+step = 0.1
+value = 1.0
+tick_count = 5
+ticks_on_borders = true
+
+[node name="CheckBoxInfJumps" type="CheckBox" parent="VBox/Tabs/Debug/HBox/VBoxL"]
+layout_mode = 2
+text = "Infinite Double Jumps"
+
+[node name="CheckBoxInfKarma" type="CheckBox" parent="VBox/Tabs/Debug/HBox/VBoxL"]
+layout_mode = 2
+tooltip_text = "Running out of Lives and dying does not send you to hell."
+text = "Infinite Karma"
 
 [node name="VBoxR" type="VBoxContainer" parent="VBox/Tabs/Debug/HBox"]
 layout_mode = 2
@@ -337,14 +361,6 @@ text = "Enable Debug Display"
 layout_mode = 2
 text = "Open User File Directory"
 alignment = 0
-
-[node name="Joysticks" type="CheckBox" parent="VBox/Tabs/Debug/HBox/VBoxR"]
-layout_mode = 2
-tooltip_text = "Alternative Method for getting input 
-strength for movement. May produce 
-unwanted movement deadzones."
-disabled = true
-text = "Joystick Movement Method (experimental)"
 
 [node name="SaveSettings" type="Button" parent="VBox"]
 layout_mode = 2
@@ -367,5 +383,8 @@ text = "Save Settings"
 [connection signal="value_changed" from="VBox/Tabs/Audio/VBoxContainer/VolRadio" to="." method="_on_VolRadio_value_changed"]
 [connection signal="value_changed" from="VBox/Tabs/Audio/VBoxContainer/VolUI" to="." method="_on_VolUI_value_changed"]
 [connection signal="toggled" from="VBox/Tabs/Debug/HBox/VBoxL/CheckBoxSlowmo" to="." method="_on_slowmo_toggled"]
+[connection signal="value_changed" from="VBox/Tabs/Debug/HBox/VBoxL/SliderSlowmo" to="." method="_on_slider_slowmo_value_changed"]
+[connection signal="toggled" from="VBox/Tabs/Debug/HBox/VBoxL/CheckBoxInfJumps" to="." method="_on_check_box_inf_jumps_toggled"]
+[connection signal="toggled" from="VBox/Tabs/Debug/HBox/VBoxL/CheckBoxInfKarma" to="." method="_on_check_box_inf_karma_toggled"]
 [connection signal="toggled" from="VBox/Tabs/Debug/HBox/VBoxR/DisplayDebug" to="." method="_on_display_debug_toggled"]
 [connection signal="pressed" from="VBox/Tabs/Debug/HBox/VBoxR/OpenUserFile" to="." method="_on_Shell_pressed"]

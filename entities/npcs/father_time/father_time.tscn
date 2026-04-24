@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://c2vewuyvybqw4"]
+[gd_scene load_steps=8 format=3 uid="uid://c2vewuyvybqw4"]
 
 [ext_resource type="ArrayMesh" uid="uid://d10ndsra5y1qd" path="res://models/NPCs/father_time.obj" id="1_75qk4"]
-[ext_resource type="Script" path="res://entities/npcs/father_time/father_time.gd" id="1_b81r0"]
 [ext_resource type="Texture2D" uid="uid://sjjlqahlcuvx" path="res://models/NPCs/father_time_face.png" id="2_4h6wb"]
 [ext_resource type="Script" path="res://scripts/dialogue/dialogic_prompter.gd" id="3_4c12b"]
 [ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="4_ds84g"]
@@ -68,8 +67,7 @@ shader_parameter/texture_albedo = ExtResource("2_4h6wb")
 height = 3.0
 radius = 3.0
 
-[node name="FatherTime" type="StaticBody3D"]
-script = ExtResource("1_b81r0")
+[node name="FatherTime" type="StaticBody3D" groups=["npcs"]]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0.1, 0)

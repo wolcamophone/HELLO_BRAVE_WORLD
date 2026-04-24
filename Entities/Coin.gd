@@ -3,6 +3,7 @@ class_name Collectible
 
 @export var coin_value:int = 1
 @export var red_coin:bool = false
+@export var extra_life:bool = false
 @export var rotation_speed:float = 1
 @export var persistent:bool
 var collected:bool = false
@@ -35,6 +36,9 @@ func _on_area_entered(area):
 	# Important: A name and value must be assigned to a collectible to match to the ScoreCounter.
 	if red_coin:
 		ScoreCounter.red_coins += 1
+	
+	if extra_life:
+		ScoreCounter.lives +=1
 
 func save_cfg():
 	GameMaster.save_game_cfg.set_value("Coins", "%s collected" % [name], collected)

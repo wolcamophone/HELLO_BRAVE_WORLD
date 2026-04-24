@@ -25,5 +25,6 @@ func _on_item_list_level_selected(index: int) -> void:
 
 
 func _on_button_play_level_pressed() -> void:
-	GameMaster.level_transfer_destination = Vector4.ZERO
+	GameMaster.level_transfer_method = 0
 	GameMaster.load_level(line_edit.text)
+	ScoreCounter.coins -= 10

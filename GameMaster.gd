@@ -21,11 +21,13 @@ var level_name_current:String
 
 # Player Transporting Vars
 var level_transfer_destination:Vector4 ## XYZ coordinates plus rotation in degrees
-var level_transfer_method:Array = ["direct load", "level to level", "team play"] ## TODO: "direct load" indicates that a level is loaded into from a main menu or level selector and thus the player is placed at the first InfoPlayerStart found from the scene root down. "level to level" indicates that the player is moving from one level to another and thus the player should be placed at specified coordinates. "team play" indicates that the level loaded into supports multiple players or spawnpoints and thus a random InfoPlayerStart is selected from the scene tree to place the player at.
+var level_transfer_method:int = 0 #["direct_load", "level_to_level", "team_play"] ## TODO: "direct load" indicates that a level is loaded into from a main menu or level selector and thus the player is placed at the first InfoPlayerStart found from the scene root down. "level to level" indicates that the player is moving from one level to another and thus the player should be placed at specified coordinates. "team play" indicates that the level loaded into supports multiple players or spawnpoints and thus a random InfoPlayerStart is selected from the scene tree to place the player at.
 
 # Player Spawning Vars
 var default_spawn_point:Node3D
 var spawnpoints_available:Dictionary = {}
+
+var level_info_current:WorldSpaceInfo
 
 # Checkpoint Vars
 var checkpoint_current: Checkpoint
@@ -50,7 +52,7 @@ var load_game_cfg:ConfigFile = ConfigFile.new()
 @export var selected_player:PackedScene = preload("res://Player/android_250629.tscn")
 var active_player:CharacterBody3D ## Current player object within the scene. In a game with broader scope, this var could be expanded to a dictionary for multiplayer slots.
 #@export var attack_power:float = 1
-@export var respawn_time:float = 6.0 ## Time in seconds before spawn_player() is called again after the player has emitted signal "died."
+@export var respawn_time:float = 5.0 ## Time in seconds before spawn_player() is called again after the player has emitted signal "died."
 var death_timer:Timer
 
 
@@ -86,9 +88,17 @@ func unload_level():
 	spawnpoints_available.clear()
 
 
-func load_level(travel_to: String, ):
+func load_level(travel_to: String, transfer_method = 0):
 	HUD._loading_label.visible = true
+	#await get_tree().process_frame
+	despawn_player()
 	unload_level() # do this first so the world space is made empty as not to stack levels on top of each other.
+	
+	if transfer_method == 0:
+		level_transfer_method = 0
+	elif transfer_method == 1:
+		level_transfer_method = 1
+	
 	var level_path = "res://levels/%s/%s.tscn" % [travel_to, travel_to]
 	var level_resource = load(level_path)
 	if level_resource:
@@ -96,7 +106,7 @@ func load_level(travel_to: String, ):
 		get_tree().change_scene_to_file(level_path)
 		level_name_current = travel_to
 	elif !level_resource:
-		printerr("Could not find level instance named " + travel_to)
+		printerr("GameMaster: Could not find level instance named " + travel_to)
 	
 	await get_tree().process_frame
 	
@@ -114,16 +124,17 @@ func load_level(travel_to: String, ):
 		HUD.visible = true
 		MainMenu.title_button.visible = true
 
-
-	# Debug printing
-	if level_instance: ### Printing a bunch of stuff to show scene tree for better debug
+	if level_instance: 
+		# Printing a bunch of stuff to show scene tree for better debug
 		print_tree_pretty()
 		#print_orphan_nodes()
+		#await get_tree().process_frame
 		spawn_player()
 		MainMenu.unpause_game()
 
 
-	print("Level loaded.")
+
+	print("GameMaster: Level loaded.")
 	HUD._loading_label.visible = false
 	emit_signal("level_loaded")
 
@@ -131,36 +142,63 @@ func load_level(travel_to: String, ):
 func spawn_player(at_pos = Vector4.ZERO):
 	#await get_tree().process_frame
 ### A player should always spawn in after a level loads to ensure there is a player. (Would be cool to hook around this so that loading into a new scene/level knows to spawn either a default player obj or a special player for minigame sections). If the func is called again while a player is already in the scene tree, they will be erased and recreated. -CD
-	if active_player != null:
-		active_player.queue_free()
+	despawn_player()
 	var p = selected_player.instantiate()
 	p.top_level = true
 	
 	add_child(p)
 	active_player = p
 	
-	if level_transfer_destination: # Player is loading into the level from a previous one and needs to arrive at specified coordinates for travel continuity.
-		p.global_position.x = level_transfer_destination.x
-		p.global_position.y = level_transfer_destination.y
-		p.global_position.z = level_transfer_destination.z
-		p._spring_arm.rotation_degrees.y = level_transfer_destination.w
-		p._rotation_root.rotation_degrees.y = level_transfer_destination.w
+	print("GameMaster: %s is the Active Player." % active_player)
+	
+	if at_pos == Vector4.ZERO:
+		at_pos = level_transfer_destination
+	
+	if at_pos is Vector3: # Player is loading into the level from a previous one and needs to arrive at specified coordinates for travel continuity.
+		p.global_position.x = at_pos.x
+		p.global_position.y = at_pos.y
+		p.global_position.z = at_pos.z
+	elif at_pos is Vector4:
+		p.global_position.x = at_pos.x
+		p.global_position.y = at_pos.y
+		p.global_position.z = at_pos.z
+		p._spring_arm.rotation_degrees.y = at_pos.w
+		p._rotation_root.rotation_degrees.y = at_pos.w
 		
-	elif !level_transfer_destination && spawnpoints_available.size() > 0: # Player is loading into the level directly from a menu or level picker and is not intended to arrive at a specific destination. This will place them at a randomly selected InfoPlayerStart node gathered onready into dict spawnpoints_available.
+	elif !at_pos && spawnpoints_available.size() > 0: # Player is loading into the level directly from a menu or level picker and is not intended to arrive at a specific destination. This will place them at a randomly selected InfoPlayerStart node gathered onready into dict spawnpoints_available.
 		var rand_pick:int = randi_range(1, spawnpoints_available.size())
 		p.global_position = spawnpoints_available.values().pick_random().global_position
 	else:
 		p.global_position = Vector3(0,0,0)
 		
 	emit_signal("player_spawned")
-	print("Player respawn called.")
+	print("GameMaster: Player respawn called.")
 
+func despawn_player():
+	if active_player != null:
+		active_player.queue_free()
+
+func respawn_player():
+	ScoreCounter.lives -= 1
+	
+	if ScoreCounter.lives < 0 && Cheats.infinite_karma != true:
+		level_transfer_destination = Vector4.ZERO
+		load_level("ip_hell", 1)
+		return
+	
+	if checkpoint_current != null:
+		var checkpoint_pos_rot = Vector4(checkpoint_current.global_position.x,checkpoint_current.global_position.y,checkpoint_current.global_position.z,checkpoint_current.rotation_degrees.y) # Boo-hoo Godot can't just stick a Vector3 into a Vector4 with an extra zero so I gotta hack this into another var or the game crashes.  :(
+		spawn_player(checkpoint_pos_rot)
+	else:
+		spawn_player(level_info_current.default_spawn_position)
 
 func teleport(target, target_rotation_degrees:int = 0):
 	if target is Vector3: ## manual XYZ coordinates.
 		active_player.global_position.x = target.x
 		active_player.global_position.y = target.y
 		active_player.global_position.z = target.z
+		active_player._spring_arm.rotation_degrees.y = target_rotation_degrees
+		active_player._rotation_root.rotation_degrees.y = target_rotation_degrees
 	elif target is Vector4 and target_rotation_degrees == 0: ## First values of Vector 4 correlate to XYZ positional values while fourth value W is the rotation in degrees.
 		active_player.global_position.x = target.x
 		active_player.global_position.y = target.y
@@ -172,12 +210,12 @@ func teleport(target, target_rotation_degrees:int = 0):
 		active_player._spring_arm.rotation.y = target.rotation.y
 		active_player._rotation_root.rotation.y = target.rotation.y
 	else:
-		printerr("Invalid target '%s' given for 'teleport()'. target should be at least a Vector3 or contain global_position property." % target)
+		printerr("GameMaster: Invalid target '%s' given for 'teleport()'. target should be at least a Vector3 or contain global_position property." % target)
 		return
 	
 	if target_rotation_degrees != 0:
-		active_player._spring_arm.rotation.y = target_rotation_degrees
-		active_player._rotation_root.rotation.y = target_rotation_degrees
+		active_player._spring_arm.rotation_degrees.y = target_rotation_degrees
+		active_player._rotation_root.rotation_degrees.y = target_rotation_degrees
 	
 	active_player._spring_arm.global_position = active_player._head.global_position # Avoid camera awkwardly zooping super fast back to player across level.
 	emit_signal("teleported")
@@ -185,18 +223,18 @@ func teleport(target, target_rotation_degrees:int = 0):
 #region Save/Load Funcs
 #SAVE FUNCTION COPIED FROM ENGINE DOCS. -CD
 func save_game():
-	print("Saving...")
+	print("GameMaster: Saving...")
 	var game_save = FileAccess.open(save_game_path, FileAccess.WRITE)
 	var saved_nodes = get_tree().get_nodes_in_group("persistent") + get_tree().get("WorldSpaceInfo")
 	for node in saved_nodes:
 		# Check the node is an instanced scene so it can be instanced again during load.
 		if node.scene_file_path.is_empty():
-			print("Persistent node '%s' is not an instanced scene, skipped" % node.name)
+			print("GameMaster: Persistent node '%s' is not an instanced scene, skipped" % node.name)
 			continue
 
 		# Check the node has a save function.
 		if !node.has_method("save"):
-			print("Persistent node '%s' is missing a save() function, skipped" % node.name)
+			print("GameMaster: Persistent node '%s' is missing a save() function, skipped" % node.name)
 			continue
 
 		# Call the node's save function.
@@ -206,31 +244,32 @@ func save_game():
 		# Store the save dictionary as a new line in the save file.
 		game_save.store_line(json_string)
 
-	print("Saved game to ", save_game_path)
+	print("GameMaster: Saved game to ", save_game_path)
 
 func save_game_as_cfg():
-	print("Saving as cfg...")
+	print("GameMaster: Saving as cfg...")
 	var saved_nodes = get_tree().get_nodes_in_group("persistent")
-	for node in saved_nodes:
+	for node in saved_nodes: # NOTE: This code was reassembled by me, CD, from the example in the official docs. A much easier method for this exists now as get_tree().call_group(group_name, func_name). You don't have to use this for loop anymore, but I'm not changing it for this game cause I already did the work once and don't wanna bug something.
 		# Check the node has a save function.
 		if !node.has_method("save_cfg"):
-			print("persistent node '%s' is missing a save() function, skipped" % node.name)
+			print("GameMaster: persistent node '%s' is missing a save() function, skipped" % node.name)
 			continue
 		# Call the node's save function.
 		node.call("save_cfg")
 		save_game_cfg.save(save_game_path_cfg)
+		
 	
 	emit_signal("game_saved")
 	MainMenu.unpause_game()
 	SaveGameIndicator.show_indicator("save")
-	print("Saved game as cfg to ", save_game_path_cfg)
+	print("GameMaster: Saved game as cfg to ", save_game_path_cfg)
 
 #LOAD FUNCTION REWRITTEN FROM GROUND UP AFTER ENGINE DOCS. -CD
 func load_game():
-	print("Loading...")
+	print("GameMaster: Loading...")
 	
 	if not FileAccess.file_exists(save_game_path):
-		print("No save game file was found to load.")
+		print("GameMaster: No save game file was found to load.")
 		return
 	
 	### Open the file to read and store path in a var, convert path to text var, convert the text var back into JSON data, close file and use that JSON var to retrieve data from. -CD
@@ -257,7 +296,7 @@ func load_game():
 			
 		### Close the file to save on space.
 		save_file_for_loading.close()
-	print("Finished Loading!")
+	print("GameMaster: Finished Loading!")
 
 func load_game_2():
 	print("Loading...")
@@ -274,17 +313,17 @@ func load_game_2():
 	var json_inst = JSON.new() # Create an instance of JSON cause you can't call non-static parse() on JSON directly aside from parse_string(). Still with me?
 	var error = json_inst.parse(json_string)
 	if error:
-		print("JSON Parse Error: ", json_inst.get_error_message(), " in ", json_string, " at line ", json_inst.get_error_line())
+		print("GameMaster: JSON Parse Error: ", json_inst.get_error_message(), " in ", json_string, " at line ", json_inst.get_error_line())
 		return
 	
 	#GameMaster.active_player.global_position.x = load_data_dict.player_save_data.pos_x
-	print("Finished Loading!")
+	print("GameMaster: Finished Loading!")
 
 func load_game_from_cfg():
 	var load_game_data = load_game_cfg.load(save_game_path_cfg)
 	
 	if load_game_data == OK:
-		load_level(load_game_cfg.get_value("Level", "level"))
+		load_level(load_game_cfg.get_value("Level", "level"),1) # Called as "level_to_level" transfer otherwise player appears at default spawn set by WorldSpaceInfo.
 		var load_game_global_pos:Vector4 = Vector4(load_game_cfg.get_value("Android", "position_x"), load_game_cfg.get_value("Android", "position_y"), load_game_cfg.get_value("Android", "position_z"), load_game_cfg.get_value("Android", "rotation"))
 		await player_spawned
 		teleport(load_game_global_pos)
@@ -292,24 +331,24 @@ func load_game_from_cfg():
 	emit_signal("game_loaded")
 	MainMenu.unpause_game()
 	SaveGameIndicator.show_indicator("load")
-	print("Loaded game as cfg from ", save_game_path_cfg)
+	print("GameMaster: Loaded game as cfg from ", save_game_path_cfg)
 #endregion
 
 #region Example Save Call Methods
-### Below are generic func to be placed in other nodes within the group "persistent." As it currently stands, the save_game func only reaches out to child nodes in the tree, so this dict below and any other save funcs as a scene don't get written to the save file. -CD
-func save(): 
-	var save_dict = {
-		"filename" : get_scene_file_path(),
-		"parent" : get_parent().get_path(),
-		"level_instance" : level_instance,
-		"level_previous" : level_name_previous,
-		"checkpoint_current" : checkpoint_current,
-		"checkpoint_previous" : checkpoint_previous,
-	}
-	return save_dict
-
-func save_as_cfg():
-	GameMaster.save_game_cfg.set_value("Category", "example value", name)
+### Below are generic funcs to be placed in other nodes within the group "persistent." As it currently stands, the save_game func only reaches out to child nodes in the tree, so this dict below and any other save funcs as a scene don't get written to the save file. -CD
+#func save(): 
+	#var save_dict = {
+		#"filename" : get_scene_file_path(),
+		#"parent" : get_parent().get_path(),
+		#"level_instance" : level_instance,
+		#"level_previous" : level_name_previous,
+		#"checkpoint_current" : checkpoint_current,
+		#"checkpoint_previous" : checkpoint_previous,
+	#}
+	#return save_dict
+#
+#func save_as_cfg():
+	#GameMaster.save_game_cfg.set_value("Category", "example value", name)
 #endregion
 
 func quit_game():

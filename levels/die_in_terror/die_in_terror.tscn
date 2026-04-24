@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwbeuawc03fkf"]
+
+[ext_resource type="Script" path="res://scripts/rotator_generic.gd" id="1_ty6o5"]
+[ext_resource type="PackedScene" uid="uid://cfvr47yajrmbh" path="res://entities/npcs/mictlantecuhtli/mictlantecuhtli_clown.tscn" id="2_uw3i5"]
+[ext_resource type="Environment" uid="uid://cfvdlewkpwvgw" path="res://levels/env_presets/env_stockholm_night.tres" id="3_hsjjw"]
+[ext_resource type="Script" path="res://levels/world_space_cutscene.gd" id="4_nmg36"]
+
+[node name="die_in_terror" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.286788, 0.409576, 0, 0.819152, 0.573576, -0.5, 0.496732, -0.709406, 0, 0, 0)
+light_color = Color(1, 0.501961, 0.501961, 1)
+shadow_enabled = true
+script = ExtResource("1_ty6o5")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 2)
+current = true
+fov = 100.0
+
+[node name="MictlantecuhtliClown" parent="." instance=ExtResource("2_uw3i5")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource("3_hsjjw")
+
+[node name="WorldSpaceCutscene" type="Node" parent="." node_paths=PackedStringArray("main_camera")]
+script = ExtResource("4_nmg36")
+main_camera = NodePath("../Camera3D")

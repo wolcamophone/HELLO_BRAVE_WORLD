@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://1c3dtl6kjtnj"]
+[gd_scene load_steps=6 format=3 uid="uid://1c3dtl6kjtnj"]
 
 [ext_resource type="Theme" uid="uid://24bml6th7hoi" path="res://Graphics/UI/Def_UI.theme" id="1_leot0"]
 [ext_resource type="Script" path="res://scripts/UI/checkpoint_menu.gd" id="2_ie7ep"]
 [ext_resource type="FontFile" uid="uid://b1iur3lls3rrp" path="res://Graphics/UI/Font/consola.ttf" id="3_a7v3h"]
+[ext_resource type="PackedScene" uid="uid://nv0e5gm438dj" path="res://scripts/UI/level_selector.tscn" id="3_ykxqa"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ech1x"]
 font = ExtResource("3_a7v3h")
@@ -69,8 +70,8 @@ text = "Status Report"
 layout_mode = 2
 text = "Close"
 
-[node name="TravelContainer" type="PanelContainer" parent="Control"]
-custom_minimum_size = Vector2(600, 400)
+[node name="TravelContainer" type="TabContainer" parent="Control"]
+custom_minimum_size = Vector2(700, 500)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -83,19 +84,34 @@ offset_right = 300.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
+current_tab = 0
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Control/TravelContainer"]
+[node name="Checkpoint" type="VBoxContainer" parent="Control/TravelContainer"]
 layout_mode = 2
+metadata/_tab_index = 0
 
-[node name="Label" type="Label" parent="Control/TravelContainer/VBoxContainer2"]
+[node name="Label" type="Label" parent="Control/TravelContainer/Checkpoint"]
 layout_mode = 2
 text = "Travel To..."
 
-[node name="ItemList" type="ItemList" parent="Control/TravelContainer/VBoxContainer2"]
+[node name="ItemList" type="ItemList" parent="Control/TravelContainer/Checkpoint"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Close" type="Button" parent="Control/TravelContainer/VBoxContainer2"]
+[node name="Close" type="Button" parent="Control/TravelContainer/Checkpoint"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Close"
+
+[node name="LevelSelector" type="Control" parent="Control/TravelContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBox" parent="Control/TravelContainer/LevelSelector" instance=ExtResource("3_ykxqa")]
+layout_mode = 1
+
+[node name="Close" type="Button" parent="Control/TravelContainer/LevelSelector/VBox"]
 layout_mode = 2
 size_flags_vertical = 8
 text = "Close"
@@ -128,5 +144,6 @@ one_shot = true
 [connection signal="pressed" from="Control/MenuContainer/VBoxContainer/Save" to="." method="_on_save_pressed"]
 [connection signal="pressed" from="Control/MenuContainer/VBoxContainer/StatusReport" to="." method="_prompt_status_report"]
 [connection signal="pressed" from="Control/MenuContainer/VBoxContainer/Close" to="." method="_close_menu"]
-[connection signal="item_clicked" from="Control/TravelContainer/VBoxContainer2/ItemList" to="." method="_on_travel_menu_item_clicked"]
-[connection signal="pressed" from="Control/TravelContainer/VBoxContainer2/Close" to="." method="_close_travel_menu"]
+[connection signal="item_clicked" from="Control/TravelContainer/Checkpoint/ItemList" to="." method="_on_travel_menu_item_clicked"]
+[connection signal="pressed" from="Control/TravelContainer/Checkpoint/Close" to="." method="_close_travel_menu"]
+[connection signal="pressed" from="Control/TravelContainer/LevelSelector/VBox/Close" to="." method="_close_travel_menu"]

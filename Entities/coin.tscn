@@ -1,16 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://3x5nioot53bp"]
 
 [ext_resource type="Script" path="res://entities/Coin.gd" id="1_wj3t6"]
+[ext_resource type="Material" uid="uid://cbrgmeyb1h0fr" path="res://entities/coin_symbol.material" id="2_5lr2w"]
+[ext_resource type="ArrayMesh" uid="uid://8qbugd3b50rp" path="res://models/coin.obj" id="3_b0ri2"]
 [ext_resource type="AudioStream" uid="uid://c6cjyd2h3a3kw" path="res://audio/SFX/bike_bell.wav" id="3_ff21n"]
-[ext_resource type="Material" uid="uid://xkhmhujpvyc0" path="res://entities/coin.material" id="3_sdn00"]
 [ext_resource type="Texture2D" uid="uid://bl8tdhw7utsl5" path="res://Graphics/particles/p_star3.png" id="5_v7nf4"]
-
-[sub_resource type="CylinderMesh" id="CylinderMesh_6plj4"]
-material = ExtResource("3_sdn00")
-top_radius = 0.25
-bottom_radius = 0.25
-height = 0.1
-radial_segments = 12
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k1uuv"]
 
@@ -62,9 +56,9 @@ script = ExtResource("1_wj3t6")
 rotation_speed = 2.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+material_override = ExtResource("2_5lr2w")
 cast_shadow = 0
-mesh = SubResource("CylinderMesh_6plj4")
+mesh = ExtResource("3_b0ri2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_k1uuv")

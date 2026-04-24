@@ -29,14 +29,18 @@ offset_right = 300.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
+current_tab = 0
 
 [node name="Gameplay" type="TabBar" parent="Control/Tabs"]
 layout_mode = 2
+metadata/_tab_index = 0
 
 [node name="Video" type="TabBar" parent="Control/Tabs"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 1
 
 [node name="Audio" type="TabBar" parent="Control/Tabs"]
 visible = false
 layout_mode = 2
+metadata/_tab_index = 2

@@ -16,7 +16,7 @@ func _ready():
 	add_excluded_object(self.get_parent().get_parent())
 
 func _input(event):
-	if event is InputEventMouseMotion && ui_active == false:
+	if event is InputEventMouseMotion && Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotation_degrees.x -= event.relative.y * mouse_sensitivity * 0.05
 		rotation_degrees.y -= event.relative.x * mouse_sensitivity * 0.05
 

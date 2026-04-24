@@ -19,4 +19,5 @@ void fragment() {
 			lessThan(albedo_tex.rgb, vec3(0.04045)));
 
     ALBEDO = albedo.rgb * albedo_tex.rgb * tex.rgb;
+	ALPHA = albedo_tex.a;
 }

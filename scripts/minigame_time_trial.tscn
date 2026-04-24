@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cv2oyir6qhsci"]
+
+[ext_resource type="Script" path="res://scripts/minigame_time_trial.gd" id="1_fpdvc"]
+[ext_resource type="AudioStream" uid="uid://cmsturebfas8x" path="res://audio/SFX/electronic_shock.wav" id="2_ah0d7"]
+[ext_resource type="AudioStream" uid="uid://d3hu8pemu8jl3" path="res://audio/SFX/cowbell.wav" id="3_vge6q"]
+[ext_resource type="AudioStream" uid="uid://vve4sc37vfao" path="res://audio/SFX/clock_ticking.ogg" id="4_pr1ut"]
+
+[node name="MinigameTimeTrial" type="Node"]
+script = ExtResource("1_fpdvc")
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="sfx_buzzer" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("2_ah0d7")
+volume_db = 8.0
+pitch_scale = 0.9
+bus = &"User Interface"
+
+[node name="sfx_ding" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vge6q")
+bus = &"User Interface"
+
+[node name="sfx_ticking" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_pr1ut")

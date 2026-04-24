@@ -1,6 +1,9 @@
 extends Control
 
 #region Gameplay Menu Vars ###
+var player_skins_folder = "res://Player/player_skins/"
+var player_skin_default:StandardMaterial3D = preload("res://Player/player_skins/android.material")
+
 var skip_intro_cutscene:bool = false
 var set_player_color:Color = "ffffff"
 var set_emission_color:Color = "000000"
@@ -57,17 +60,21 @@ func _ready():
 func _on_skip_intro_cutscene_toggled(toggled_on: bool) -> void:
 	SettingsConfig.skip_intro_cutscene = toggled_on
 
+func _on_change_player_skin() -> void:
+	if GameMaster.active_player != null:
+		GameMaster.active_player._player_mesh.material_override = player_skin_default
+
 func _on_player_color_changed(color_arg: Color) -> void:
+	# NOTE: The code here is adjusting the material_override property of the GeometryInstance3D of the player, NOT the material assigned to the mesh's inherent surface_0 or surface_material_override/0! I do not know how to access the other two properties.
 	SettingsConfig.player_color = color_arg
-	if GameMaster.active_player:
+	if GameMaster.active_player != null:
 		GameMaster.active_player._player_mesh.material_override.albedo_color = color_arg
 
 func _on_player_emission_changed(color_arg: Color) -> void:
 	SettingsConfig.emission_color = color_arg
-	if GameMaster.active_player:
+	if GameMaster.active_player != null:
 		GameMaster.active_player._player_mesh.material_override.emission = color_arg 
 		GameMaster.active_player.omni_light_3d_tattoo.light_color = color_arg
-		
 #endregion
 
 
@@ -181,6 +188,17 @@ func _on_VolUI_value_changed(value):
 func _on_slowmo_toggled(toggled_on: bool) -> void:
 	Cheats.slowmo_enabled = toggled_on
 	Cheats.slowmo()
+
+func _on_slider_slowmo_value_changed(value: float) -> void:
+	Cheats.slowmo_timescale = value
+	Cheats.slowmo()
+
+func _on_check_box_inf_jumps_toggled(toggled_on: bool) -> void:
+	Cheats.infinite_double_jumps = toggled_on
+	Cheats.inf_double_jumps()
+
+func _on_check_box_inf_karma_toggled(toggled_on: bool) -> void:
+	Cheats.infinite_karma = toggled_on
 
 func _on_display_debug_toggled(toggled_on: bool) -> void:
 	HUD.show_debug_hud = toggled_on

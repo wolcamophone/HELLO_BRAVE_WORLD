@@ -51,14 +51,19 @@ func _input(event):
 			if !warp_door:
 				open = !open
 			elif warp_door:
-				GameMaster.load_level(transfer_to_level)
+				GameMaster.load_level(transfer_to_level,1)
 				GameMaster.level_transfer_destination = transfer_to_position
+		
 		if door_state == 1: ## "locked"
 			emit_signal("prompt_for_lock_entity") 
 			sfx_locked.play()
 			
 		if door_state == 2: ## "broken"
 			sfx_broken.play()
+
+func unlock_door():
+	door_state = 0
+	update_prompt()
 
 func update_prompt():
 	if overwrite_prompt_text != null:

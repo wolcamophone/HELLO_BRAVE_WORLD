@@ -17,5 +17,5 @@ func _on_area_3d_activation() -> void:
 	music.stop()
 	meow.play()
 	
-	meshwell.rotate(Vector3.UP,randi_range(0,360))
+	rotate(Vector3.UP,randi_range(0,360))
 	print("You found Maxwell!")

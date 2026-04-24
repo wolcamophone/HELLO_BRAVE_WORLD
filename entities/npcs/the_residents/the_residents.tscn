@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://b1f6ffxhu2j2p"]
+
+[ext_resource type="ArrayMesh" uid="uid://5wgnyye84kuw" path="res://entities/npcs/spheroid/spheroid.obj" id="1_m3nd0"]
+[ext_resource type="Script" path="res://entities/npcs/the_residents/the_residents.gd" id="1_x5q57"]
+[ext_resource type="Texture2D" uid="uid://bk7yhd05v7kko" path="res://entities/npcs/spheroid/spheroid_webeyes.png" id="2_0fh7o"]
+[ext_resource type="Shader" path="res://Graphics/Shaders/wavy_ps1_water.gdshader" id="3_j8atd"]
+[ext_resource type="Script" path="res://scripts/trigger_kill.gd" id="5_5i3go"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_voyxw"]
+render_priority = 0
+shader = ExtResource("3_j8atd")
+shader_parameter/albedo = Color(0, 0, 0, 1)
+shader_parameter/scroll_speed1 = Vector2(0, 0)
+shader_parameter/scroll_speed2 = Vector2(0, 0)
+shader_parameter/blend_factor = 1.0
+shader_parameter/scale1 = Vector2(1, 1)
+shader_parameter/scale2 = Vector2(1, 1)
+shader_parameter/wave_strength = 0.2
+shader_parameter/wave_scale = 0.02
+shader_parameter/wave_speed = 1.5
+shader_parameter/pixelation_level = 256
+shader_parameter/FoamSize = 1.0
+shader_parameter/WaterOpacity = 1.0
+shader_parameter/FoamGlowIntensity = 0.5
+shader_parameter/emission1 = Color(0, 0, 0, 1)
+shader_parameter/emission2 = Color(1, 1, 1, 1)
+shader_parameter/emission_energy = 0.5
+shader_parameter/water_texture1 = ExtResource("2_0fh7o")
+shader_parameter/texture_emission2 = ExtResource("2_0fh7o")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d074s"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hsdg2"]
+radius = 16.0
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_1jfd5"]
+radius = 0.6
+
+[node name="TheResidents" type="CharacterBody3D" groups=["npcs"]]
+collision_layer = 0
+motion_mode = 1
+wall_min_slide_angle = 0.785398
+script = ExtResource("1_x5q57")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+mesh = ExtResource("1_m3nd0")
+surface_material_override/0 = SubResource("ShaderMaterial_voyxw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_d074s")
+
+[node name="AwarenessArea3D" type="Area3D" parent="."]
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AwarenessArea3D"]
+shape = SubResource("SphereShape3D_hsdg2")
+
+[node name="AreaKill" type="Area3D" parent="."]
+monitorable = false
+script = ExtResource("5_5i3go")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AreaKill"]
+shape = SubResource("SphereShape3D_1jfd5")
