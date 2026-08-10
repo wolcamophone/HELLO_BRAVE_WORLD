@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dtwhm8br8wdp"]
+[gd_scene load_steps=11 format=3 uid="uid://dtwhm8br8wdp"]
 
 [ext_resource type="Texture2D" uid="uid://d4fykdqigfar6" path="res://Graphics/UI/crt.png" id="1_encqo"]
 [ext_resource type="Script" path="res://entities/doors/score_lock.gd" id="1_wh1im"]
@@ -21,7 +21,10 @@ albedo_texture_force_srgb = true
 emission_enabled = true
 emission_texture = SubResource("ViewportTexture_xg5jq")
 
-[node name="score_lock" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_a0d83"]
+size = Vector3(1, 1, 0.12)
+
+[node name="score_lock" type="StaticBody3D"]
 script = ExtResource("1_wh1im")
 
 [node name="correct_bell" type="AudioStreamPlayer3D" parent="."]
@@ -33,6 +36,10 @@ transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = ExtResource("2_nb5ir")
 surface_material_override/0 = SubResource("StandardMaterial3D_1iswp")
 surface_material_override/1 = SubResource("StandardMaterial3D_3linf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.012)
+shape = SubResource("BoxShape3D_a0d83")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(256, 256)

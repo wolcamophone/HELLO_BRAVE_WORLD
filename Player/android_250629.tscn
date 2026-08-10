@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=4 uid="uid://cxyyd31ofqs7g"]
+[gd_scene load_steps=58 format=4 uid="uid://cxyyd31ofqs7g"]
 
 [ext_resource type="Script" path="res://Player/android_250629.gd" id="1_5u217"]
 [ext_resource type="PackedScene" uid="uid://dm5vmdqfgedfg" path="res://scripts/attack_box.tscn" id="2_nrdm1"]
@@ -20,6 +20,7 @@
 [ext_resource type="Animation" uid="uid://87vv3ydg3uay" path="res://Player/playermodels/anim/Running.res" id="13_jeqg5"]
 [ext_resource type="Animation" uid="uid://bisiiq1e5e27" path="res://Player/playermodels/anim/T-Pose.res" id="14_el3ht"]
 [ext_resource type="Animation" uid="uid://cf7edfd6jatul" path="res://Player/playermodels/anim/Walking.res" id="15_pw23d"]
+[ext_resource type="AudioStream" uid="uid://culi1v8wnt837" path="res://audio/SFX/electro_long.ogg" id="21_jymf5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_utlkd"]
 radius = 0.35
@@ -333,7 +334,7 @@ bones/0/name = "spine"
 bones/0/parent = -1
 bones/0/rest = Transform3D(1, 0, 2.38419e-07, 0, 1, 0, -2.38419e-07, 0, 1, 6.10177e-10, 1, -0.02)
 bones/0/enabled = true
-bones/0/position = Vector3(6.22179e-10, 0.998339, -0.0199497)
+bones/0/position = Vector3(6.7337e-10, 0.991253, -0.0197349)
 bones/0/rotation = Quaternion(0, 1.19209e-07, 0, 1)
 bones/0/scale = Vector3(1, 1, 1)
 bones/1/name = "spine.001"
@@ -341,20 +342,20 @@ bones/1/parent = 0
 bones/1/rest = Transform3D(1, -1.19061e-08, -2.38121e-07, -4.44089e-16, 0.998752, -0.0499376, 2.38419e-07, 0.0499376, 0.998752, 1.11022e-16, 0.26, 1.45717e-16)
 bones/1/enabled = true
 bones/1/position = Vector3(1.11022e-16, 0.26, 1.45717e-16)
-bones/1/rotation = Quaternion(0.028928, -1.19159e-07, 3.44848e-09, 0.999582)
+bones/1/rotation = Quaternion(0.00831725, -1.19205e-07, 9.91494e-10, 0.999965)
 bones/1/scale = Vector3(1, 1, 1)
 bones/2/name = "spine.004"
 bones/2/parent = 1
 bones/2/rest = Transform3D(1, 0, 0, 0, 0.998752, 0.0499376, 0, -0.0499376, 0.998752, 0, 0.4005, 9.3109e-09)
 bones/2/enabled = true
 bones/2/position = Vector3(0, 0.4005, 9.3109e-09)
-bones/2/rotation = Quaternion(-0.0177274, 2.89552e-24, -6.01007e-25, 0.999843)
+bones/2/rotation = Quaternion(0.00846041, 3.01848e-24, 2.44734e-25, 0.999964)
 bones/2/scale = Vector3(1, 1, 1)
 bones/3/name = "upper_arm.L"
 bones/3/parent = 1
 bones/3/rest = Transform3D(0, 1, -2.98023e-08, 0.0499375, 0, 0.998752, 0.998752, -2.98023e-08, -0.0499375, 0.25, 0.280649, 0.00599253)
 bones/3/enabled = true
-bones/3/position = Vector3(0.25, 0.304799, -0.0119117)
+bones/3/position = Vector3(0.25, 0.28734, 0.00103198)
 bones/3/rotation = Quaternion(0.709953, 0.0173928, 0.696147, -0.105088)
 bones/3/scale = Vector3(1, 1, 1)
 bones/4/name = "forearm.L"
@@ -403,7 +404,7 @@ bones/10/name = "upper_arm.R"
 bones/10/parent = 1
 bones/10/rest = Transform3D(0, -1, 2.98023e-08, -0.0499375, 0, 0.998752, -0.998752, -2.98023e-08, -0.0499375, -0.25, 0.280649, 0.00599253)
 bones/10/enabled = true
-bones/10/position = Vector3(-0.25, 0.296472, -0.0114954)
+bones/10/position = Vector3(-0.25, 0.284669, 0.00154941)
 bones/10/rotation = Quaternion(-0.709953, 0.0173928, 0.696147, 0.105088)
 bones/10/scale = Vector3(1, 1, 1)
 bones/11/name = "forearm.R"
@@ -453,42 +454,42 @@ bones/17/parent = 0
 bones/17/rest = Transform3D(0.999754, 0.0221948, -3.92611e-07, 0.0221729, -0.998768, -0.0444006, -0.000985856, 0.0443896, -0.999015, 0.14, 0, 3.33786e-08)
 bones/17/enabled = true
 bones/17/position = Vector3(0.14, 0, 3.33786e-08)
-bones/17/rotation = Quaternion(0.998426, 0.0176621, -0.0442569, 0.0295873)
+bones/17/rotation = Quaternion(0.99645, 0.0449417, -0.0456814, 0.0545932)
 bones/17/scale = Vector3(1, 1, 1)
 bones/18/name = "shin.L"
 bones/18/parent = 17
 bones/18/rest = Transform3D(0.999754, -0.0221729, 0.000985492, 0.0221948, 0.998768, -0.0443896, -2.90456e-08, 0.0444006, 0.999014, -1.11759e-08, 0.450555, -1.0445e-10)
 bones/18/enabled = true
 bones/18/position = Vector3(-1.11759e-08, 0.450555, -1.0445e-10)
-bones/18/rotation = Quaternion(0.0370175, -0.0866766, 0.00751892, 0.99552)
+bones/18/rotation = Quaternion(0.0875106, -0.0857831, 0.00170371, 0.992462)
 bones/18/scale = Vector3(1, 1, 1)
 bones/19/name = "foot.L"
 bones/19/parent = 18
 bones/19/rest = Transform3D(1, -7.34623e-10, 2.38161e-07, -2.1439e-07, 0.432732, 0.901523, -1.03722e-07, -0.901523, 0.432732, -1.48242e-08, 0.41, 6.10623e-16)
 bones/19/enabled = true
 bones/19/position = Vector3(-1.48242e-08, 0.41, 6.10623e-16)
-bones/19/rotation = Quaternion(-0.53358, -0.111349, -0.0678878, 0.835635)
+bones/19/rotation = Quaternion(-0.552141, -0.114284, -0.0622783, 0.82353)
 bones/19/scale = Vector3(1, 1, 1)
 bones/20/name = "thigh.R"
 bones/20/parent = 0
 bones/20/rest = Transform3D(0.999754, -0.0221948, 7.6549e-07, -0.0221729, -0.998768, -0.0444006, 0.000986228, 0.0443896, -0.999015, -0.14, 0, -3.33786e-08)
 bones/20/enabled = true
 bones/20/position = Vector3(-0.14, 0, -3.33786e-08)
-bones/20/rotation = Quaternion(0.998426, -0.0176621, 0.0442571, 0.0295874)
+bones/20/rotation = Quaternion(0.99645, -0.0449417, 0.0456816, 0.0545932)
 bones/20/scale = Vector3(1, 1, 1)
 bones/21/name = "shin.R"
 bones/21/parent = 20
 bones/21/rest = Transform3D(0.999754, 0.0221729, -0.000985432, -0.0221948, 0.998768, -0.0443896, -3.01516e-08, 0.0444006, 0.999014, -5.58794e-09, 0.450555, -3.31539e-10)
 bones/21/enabled = true
 bones/21/position = Vector3(-5.58794e-09, 0.450555, -3.31539e-10)
-bones/21/rotation = Quaternion(0.0377666, 0.086423, -0.00750226, 0.995514)
+bones/21/rotation = Quaternion(0.0909733, 0.0845938, -0.00162496, 0.992253)
 bones/21/scale = Vector3(1, 1, 1)
 bones/22/name = "foot.R"
 bones/22/parent = 21
 bones/22/rest = Transform3D(1, -1.50704e-09, -2.42437e-07, 2.19215e-07, 0.432731, 0.901523, 1.03552e-07, -0.901523, 0.432731, 5.98517e-10, 0.41, 1.4988e-15)
 bones/22/enabled = true
 bones/22/position = Vector3(5.98517e-10, 0.41, 1.4988e-15)
-bones/22/rotation = Quaternion(-0.538391, 0.0391517, 0.0218169, 0.841502)
+bones/22/rotation = Quaternion(-0.56074, 0.0472308, 0.016748, 0.826474)
 bones/22/scale = Vector3(1, 1, 1)
 
 [node name="Android" type="MeshInstance3D" parent="RotationRoot/PlayerModel/metarig_Android/Skeleton3D"]
@@ -638,5 +639,12 @@ max_distance = 16.0
 max_polyphony = 3
 bus = &"Sound Effects"
 playback_type = 1
+
+[node name="DeathTwitch" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("21_jymf5")
+volume_db = -14.0
+pitch_scale = 0.4
+max_distance = 12.0
+bus = &"Sound Effects"
 
 [connection signal="area_entered" from="HitBox" to="." method="_hit_box"]

@@ -30,6 +30,8 @@ grow_vertical = 2
 script = ExtResource("1_4rxbp")
 
 [node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
+texture_repeat = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

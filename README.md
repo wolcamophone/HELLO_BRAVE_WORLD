@@ -6,6 +6,10 @@ By Skull Kracker Studios
 
 This repository contains the project files and source code for HELLO_BRAVE_WORLD, set up to encourage other game developers to mod and learn about the Godot engine. You can open the project and run the game from the editor, or export your own build after any modifications you've made.
 
+# Tutorial for Implementing Custom Levels:
+
+https://www.youtube.com/watch?v=bh-Ksa7mTNk
+
 # Credits:
 
 ##	Addons used in Godot Engine: 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=577 format=4 uid="uid://nvof62vec04o"]
+[gd_scene load_steps=578 format=4 uid="uid://nvof62vec04o"]
 
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="1_5pgo5"]
 [ext_resource type="AudioStream" uid="uid://uda7paaomq0b" path="res://audio/SFX/hl2/outdoor.wav" id="2_1rmwn"]
@@ -12,6 +12,7 @@
 [ext_resource type="Material" uid="uid://cbsnulm3xy0ll" path="res://Graphics/textures/stone/teal_2.material" id="6_kynqp"]
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="6_n676b"]
 [ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="6_yvgei"]
+[ext_resource type="PackedScene" uid="uid://d4ekgkl13upmb" path="res://models/Props/whimsigoth_sun.tscn" id="7_8ba0t"]
 [ext_resource type="PackedScene" uid="uid://dgtl1mooaeiqs" path="res://entities/npcs/mr_eyes/mr_eyes.tscn" id="7_itfbw"]
 [ext_resource type="Script" path="res://scripts/random_chance_spawner.gd" id="8_4bw6o"]
 [ext_resource type="PackedScene" uid="uid://dts0k51pbnimr" path="res://entities/npcs/mictlantecuhtli/mictlantecuhtli.tscn" id="9_1y4sb"]
@@ -2938,6 +2939,10 @@ energy = 1
 [node name="StringLight5" parent="Props/Lights/StringLights" instance=ExtResource("5_00uv5")]
 transform = Transform3D(-4.2222e-08, -0.258819, -0.965926, -1.13133e-08, 0.965926, -0.258819, 1, 0, -4.37114e-08, 23, 20, -286)
 energy = 1
+
+[node name="WhimsigothSun" parent="Props" instance=ExtResource("7_8ba0t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 16, -260)
+skeleton = NodePath("../..")
 
 [node name="NPCs" type="Node" parent="."]
 

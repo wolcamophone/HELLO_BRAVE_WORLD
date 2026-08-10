@@ -30,6 +30,8 @@ func end_time_trial(with_success:bool = false):
 		sfx_ding.play()
 	elif with_success == false:
 		sfx_buzzer.play()
+		if GameMaster.active_player.has_method("kill"):
+			GameMaster.active_player.kill()
 	
 	HUD._progress_bar_time_trial.visible = false
 	#_update_event()

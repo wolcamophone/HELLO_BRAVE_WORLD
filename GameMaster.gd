@@ -52,6 +52,9 @@ var load_game_cfg:ConfigFile = ConfigFile.new()
 @export var selected_player:PackedScene = preload("res://Player/android_250629.tscn")
 var active_player:CharacterBody3D ## Current player object within the scene. In a game with broader scope, this var could be expanded to a dictionary for multiplayer slots.
 #@export var attack_power:float = 1
+#@onready var player_accessed_color = active_player._player_mesh.material_override.albedo_color
+#@onready var player_accessed_emission = active_player._player_mesh.material_override.emission
+#@onready var player_accessed_lamp_color = active_player.omni_light_3d_tattoo.light_color
 @export var respawn_time:float = 5.0 ## Time in seconds before spawn_player() is called again after the player has emitted signal "died."
 var death_timer:Timer
 

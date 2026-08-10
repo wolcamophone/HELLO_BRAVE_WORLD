@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4ekgkl13upmb"]
+
+[ext_resource type="ArrayMesh" uid="uid://dyl8p61knyv7v" path="res://models/Props/whimsigoth_sun.obj" id="1_dmeue"]
+
+[node name="WhimsigothSun" type="MeshInstance3D"]
+mesh = ExtResource("1_dmeue")

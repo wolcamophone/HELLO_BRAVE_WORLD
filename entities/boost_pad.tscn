@@ -45,6 +45,7 @@ bus = &"Sound Effects"
 stream = ExtResource("4_3h24g")
 
 [node name="LODArea3D" type="Area3D" parent="."]
+visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="LODArea3D"]
 shape = SubResource("SphereShape3D_oxffr")

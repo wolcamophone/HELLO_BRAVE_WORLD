@@ -64,7 +64,7 @@ func save_settings():
 	
 	save_settings_config.save(save_settings_path)
 
-func load_settings():
+func load_settings(): # Sets all vars in this config script to the vars read from settings.cfg
 	var load_settings_data = load_settings_config.load(save_settings_path)
 	
 	if load_settings_data == OK:
@@ -95,7 +95,15 @@ func load_settings():
 		printerr("settings.cfg file not provided! Saving settings as default to cfg")
 #endregion
 
-func update_to_current_settings():
+func update_to_current_settings(): # Applies changes of all vars loaded in this script to their proper game features.
+	## GAMEPLAY
+	# Functionality for skip_intro_cutscene read directly from SettingsConfig in boot_menu.tscn
+	if GameMaster.active_player != null:
+		GameMaster.active_player._player_mesh.material_override.albedo_color = player_color
+	if GameMaster.active_player != null:
+		GameMaster.active_player._player_mesh.material_override.emission = emission_color 
+		GameMaster.active_player.omni_light_3d_tattoo.light_color = emission_color
+	## VIDEO
 	# Fullscreen
 	if fullscreen_on:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)

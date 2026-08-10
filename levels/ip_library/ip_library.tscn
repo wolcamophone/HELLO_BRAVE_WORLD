@@ -1,4 +1,4 @@
-[gd_scene load_steps=895 format=4 uid="uid://cmb1kn2p3w221"]
+[gd_scene load_steps=896 format=4 uid="uid://cmb1kn2p3w221"]
 
 [ext_resource type="Environment" uid="uid://beq60j21ecfcs" path="res://levels/env_presets/env_wyoming_night.tres" id="1_dx3ji"]
 [ext_resource type="PackedScene" uid="uid://cld3ln8yx636k" path="res://models/Props/prop_radio.tscn" id="1_oadv0"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://addons/func_godot/src/map/func_godot_map.gd" id="2_brpcs"]
 [ext_resource type="PackedScene" uid="uid://d2elnxgsc6btx" path="res://models/Props/lights/prop_light_ceil_rect.tscn" id="2_eub83"]
 [ext_resource type="AudioStream" uid="uid://cviekgb3np5ij" path="res://audio/Music/those_who_exist.ogg" id="2_wc66w"]
+[ext_resource type="PackedScene" uid="uid://d4ekgkl13upmb" path="res://models/Props/whimsigoth_sun.tscn" id="4_fxtqt"]
 [ext_resource type="Material" uid="uid://dywuyr2iug15i" path="res://Graphics/textures/walls/Brick8.material" id="6_piwdn"]
 [ext_resource type="PackedScene" uid="uid://do6cmx571d3b3" path="res://entities/checkpoints/checkpoint.tscn" id="7_k55gp"]
 [ext_resource type="Resource" uid="uid://sskbf7pdbbcy" path="res://addons/func_godot/func_godot_HBW_map_settings.tres" id="9_1cvsi"]
@@ -3919,6 +3920,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -97, 0, -10)
 
 [node name="candle_plate2" parent="Props/PropLights" instance=ExtResource("27_d5gmc")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -106, -16, -29)
+
+[node name="WhimsigothSun" parent="Props" instance=ExtResource("4_fxtqt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -32, 13, 0)
+skeleton = NodePath("../..")
+
+[node name="WhimsigothSun2" parent="Props" instance=ExtResource("4_fxtqt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -88, 13, -56)
+skeleton = NodePath("../..")
+
+[node name="WhimsigothSun3" parent="Props" instance=ExtResource("4_fxtqt")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -134, -5, 0)
+skeleton = NodePath("../..")
 
 [node name="Entities" type="Node" parent="."]
 

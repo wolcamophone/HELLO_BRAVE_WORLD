@@ -17,9 +17,11 @@ surface_material_override/1 = ExtResource("4_kbofo")
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4, 0)
 light_energy = 6.0
+light_bake_mode = 1
 shadow_enabled = true
 distance_fade_enabled = true
 distance_fade_begin = 128.0
 distance_fade_shadow = 152.0
 distance_fade_length = 16.0
 omni_range = 24.0
+omni_shadow_mode = 0

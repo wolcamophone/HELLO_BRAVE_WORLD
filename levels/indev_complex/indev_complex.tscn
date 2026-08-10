@@ -45,7 +45,7 @@
 [ext_resource type="Texture2D" uid="uid://bc7fhojr2vyyj" path="res://Graphics/textures/stone/teal.png" id="44_sbla4"]
 [ext_resource type="Texture2D" uid="uid://dgkyu0eghj8vm" path="res://Graphics/textures/walls/Brick6.png" id="45_00u5u"]
 [ext_resource type="Texture2D" uid="uid://b152c475p2h55" path="res://Graphics/textures/natural/snow_0.png" id="46_5umdr"]
-[ext_resource type="Texture2D" uid="uid://bpcq1y671tsj6" path="res://Graphics/textures/wood/cardboard-texture-1188460.jpg" id="47_d5n6w"]
+[ext_resource type="Texture2D" uid="uid://d3tngacaln1yr" path="res://Graphics/textures/wood/Cardboard2.png" id="47_d5n6w"]
 [ext_resource type="Material" uid="uid://c8scurrhk74w1" path="res://Graphics/textures/glass/glass_3.material" id="48_duii1"]
 [ext_resource type="Script" path="res://levels/world_space_info.gd" id="49_3venv"]
 [ext_resource type="PackedScene" uid="uid://d4ko1bybcv8mu" path="res://entities/doors/sliding_door.tscn" id="49_34o5p"]

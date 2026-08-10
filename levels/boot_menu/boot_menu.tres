@@ -15,4 +15,6 @@ background_mode = 2
 sky = SubResource("Sky_mvlne")
 sky_custom_fov = 100.0
 sky_rotation = Vector3(0.575959, 0, 0)
+ambient_light_color = Color(0, 0, 0.0941176, 1)
+ambient_light_sky_contribution = 0.0
 fog_light_color = Color(0.517647, 0.552941, 0.607843, 1)

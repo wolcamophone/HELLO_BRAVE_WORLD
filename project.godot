@@ -56,20 +56,28 @@ directories/dtl_directory={
 "chk_intro": "res://scripts/dialogue/chk_intro.dtl",
 "chk_toy_abundance": "res://scripts/dialogue/chk_toy_abundance.dtl",
 "games_machines": "res://scripts/dialogue/games_machines.dtl",
+"ghost_employees": "res://scripts/dialogue/ghost_employees.dtl",
 "heaven": "res://scripts/dialogue/heaven.dtl",
+"it_department": "res://scripts/dialogue/it_department.dtl",
 "key_life_trader": "res://scripts/dialogue/key_life_trader.dtl",
 "library_chair": "res://scripts/dialogue/library_chair.dtl",
 "magi": "res://scripts/dialogue/magi.dtl",
 "main_dialogue": "res://scripts/dialogue/main_dialogue.dtl",
 "matrix_pinged": "res://scripts/dialogue/matrix_pinged.dtl",
 "meet_dozer": "res://scripts/dialogue/meet_dozer.dtl",
+"nobody_home": "res://scripts/dialogue/nobody_home.dtl",
+"npc_skelly_0": "res://scripts/dialogue/npc_skelly_0.dtl",
+"npc_skelly_1": "res://scripts/dialogue/npc_skelly_1.dtl",
+"npc_skelly_2": "res://scripts/dialogue/npc_skelly_2.dtl",
+"npc_skelly_3": "res://scripts/dialogue/npc_skelly_3.dtl",
 "npc_statuette": "res://scripts/dialogue/npc_statuette.dtl",
 "quiz_isotope": "res://scripts/dialogue/quiz_isotope.dtl",
 "return_to_the_real_world": "res://scripts/dialogue/return_to_the_real_world.dtl",
 "salute_android": "res://scripts/dialogue/salute_android.dtl",
 "shadow": "res://scripts/dialogue/shadow.dtl",
 "test_dialogue": "res://scripts/dialogue/test_dialogue.dtl",
-"the_coins": "res://scripts/dialogue/the_coins.dtl"
+"the_coins": "res://scripts/dialogue/the_coins.dtl",
+"we_forgot_why": "res://scripts/dialogue/we_forgot_why.dtl"
 }
 layout/style_list=["res://scripts/dialogue/dialogic_HBW_style.tres"]
 layout/default_style="res://scripts/dialogue/dialogic_HBW_style.tres"

@@ -28,7 +28,9 @@ func begin_race():
 func checkpoint_reached():
 	if MinigameTimeTrial.timer.time_left > 0:
 		MinigameTimeTrial.timer.wait_time += time_to_add
-		queue_free()
+		visible = false
+		set_process(false)
+		set_physics_process(false)
 
 func end_race() -> void:
 	if MinigameTimeTrial.timer.time_left > 0:
@@ -36,3 +38,7 @@ func end_race() -> void:
 		emit_signal("race_has_ended")
 	else:
 		MinigameTimeTrial.end_time_trial(false)
+	
+	visible = true
+	set_process(true)
+	set_physics_process(true)

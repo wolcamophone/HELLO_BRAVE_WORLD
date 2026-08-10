@@ -13,17 +13,17 @@ signal lock_passed
 @export_category("Coins")
 @export var coin_locked:bool
 @export var coin_sentinel:int
-@export_enum("==", "-", "+", ">", "<",) var coin_operand:String = "==" ## Operand used to compare against value in ScoreCounter or determine what action to take against the existing value.
+@export_enum("==", "-", "+", ">=", "<=",) var coin_operand:String = "==" ## Operand used to compare against value in ScoreCounter or determine what action to take against the existing value.
 
 @export_category("Red Coins")
 @export var red_coin_locked:bool
 @export var red_coin_sentinel:int
-@export_enum("==", "-", "+", ">", "<",) var red_coin_operand:String = "==" ## Operand used to compare against value in ScoreCounter or determine what action to take against the existing value.
+@export_enum("==", "-", "+", ">=", "<=",) var red_coin_operand:String = "==" ## Operand used to compare against value in ScoreCounter or determine what action to take against the existing value.
 
 @export_category("Lives")
 @export var lives_locked:bool
 @export var lives_sentinel:int
-@export_enum("==", "-", "+", ">", "<",) var lives_operand:String = "==" ## Operand used to compare against value in ScoreCounter or determine what action to take against the existing value.
+@export_enum("==", "-", "+", ">=", "<=",) var lives_operand:String = "==" ## Operand used to compare against value in ScoreCounter or determine what action to take against the existing value.
 
 @onready var gui_score_lock: Control = $SubViewport/gui_score_lock
 @onready var correct_bell: AudioStreamPlayer3D = $correct_bell
@@ -43,45 +43,45 @@ func query_lock() -> bool:
 		if coin_operand == "+":
 			ScoreCounter.coins += coin_sentinel
 			coin_locked = false
-		if coin_operand == ">":
-			if ScoreCounter.coins > coin_sentinel:
+		if coin_operand == ">=":
+			if ScoreCounter.coins >= coin_sentinel:
 				coin_locked = false
-		if coin_operand == "<":
-			if ScoreCounter.coins < coin_sentinel:
+		if coin_operand == "<=":
+			if ScoreCounter.coins <= coin_sentinel:
 				coin_locked = false
 		
 	if red_coin_locked == true:
 		if red_coin_operand == "==":
-			if ScoreCounter.coins == red_coin_sentinel:
+			if ScoreCounter.red_coins == red_coin_sentinel:
 				red_coin_locked = false
 		if red_coin_operand == "-":
-			ScoreCounter.coins -= red_coin_sentinel
+			ScoreCounter.red_coins -= red_coin_sentinel
 			red_coin_locked = false
 		if red_coin_operand == "+":
-			ScoreCounter.coins += red_coin_sentinel
+			ScoreCounter.red_coins += red_coin_sentinel
 			red_coin_locked = false
-		if red_coin_operand == ">":
-			if ScoreCounter.coins > red_coin_sentinel:
+		if red_coin_operand == ">=":
+			if ScoreCounter.red_coins >= red_coin_sentinel:
 				red_coin_locked = false
-		if red_coin_operand == "<":
-			if ScoreCounter.coins < red_coin_sentinel:
+		if red_coin_operand == "<=":
+			if ScoreCounter.red_coins <= red_coin_sentinel:
 				red_coin_locked = false
 	
 	if lives_locked == true:
 		if lives_operand == "==":
-			if ScoreCounter.coins == lives_sentinel:
+			if ScoreCounter.lives == lives_sentinel:
 				lives_locked = false
 		if lives_operand == "-":
-			ScoreCounter.coins -= lives_sentinel
+			ScoreCounter.lives -= lives_sentinel
 			lives_locked = false
 		if lives_operand == "+":
-			ScoreCounter.coins += lives_sentinel
+			ScoreCounter.lives += lives_sentinel
 			lives_locked = false
-		if lives_operand == ">":
-			if ScoreCounter.coins > lives_sentinel:
+		if lives_operand == ">=":
+			if ScoreCounter.lives >= lives_sentinel:
 				lives_locked = false
-		if lives_operand == "<":
-			if ScoreCounter.coins < lives_sentinel:
+		if lives_operand == "<=":
+			if ScoreCounter.lives <= lives_sentinel:
 				lives_locked = false
 
 	# Final Check to see if locks pass.

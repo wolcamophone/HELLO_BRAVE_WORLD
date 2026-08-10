@@ -1,11 +1,11 @@
 extends Control
 
 var coin_locked:bool #= get_parent().get_parent().coin_locked
-var coin_operand:Array = ["==", "-", "+", ">", "<",]
+var coin_operand:Array = ["==", "-", "+", ">=", "<=",]
 var red_coin_locked:bool #= get_parent().get_parent().red_coin_locked
-var red_coin_operand:Array = ["==", "-", "+", ">", "<",]
+var red_coin_operand:Array = ["==", "-", "+", ">=", "<=",]
 var lives_locked:bool #= get_parent().get_parent().lives_locked
-var lives_operand:Array = ["==", "-", "+", ">", "<",]
+var lives_operand:Array = ["==", "-", "+", ">=", "<=",]
 
 @onready var lock:Node3D = get_parent().get_parent()
 
