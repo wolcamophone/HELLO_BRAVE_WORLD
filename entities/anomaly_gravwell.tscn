@@ -1,0 +1,54 @@
+[gd_scene load_steps=8 format=3 uid="uid://gfaocvo7xcox"]
+
+[ext_resource type="AudioStream" uid="uid://bmpmdloiisrj8" path="res://audio/SFX/hl2/suitcharge1.wav" id="1_d848p"]
+[ext_resource type="Script" path="res://entities/anomaly_gravwell.gd" id="1_txm0o"]
+[ext_resource type="Shader" path="res://Graphics/Shaders/blackhole.gdshader" id="2_5ulyq"]
+[ext_resource type="AudioStream" uid="uid://dku34bdvtkxrf" path="res://audio/SFX/gleam-03.wav" id="3_hvd20"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_621wj"]
+radius = 1.0
+
+[sub_resource type="QuadMesh" id="QuadMesh_evcex"]
+size = Vector2(3, 3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5k6kr"]
+render_priority = 0
+shader = ExtResource("2_5ulyq")
+shader_parameter/black_hole_radius = 0.02
+shader_parameter/distortion_strength = 2.0
+shader_parameter/glitch_intensity = 0.5
+shader_parameter/time_scale = 1.0
+shader_parameter/noise_scale = 2.0
+shader_parameter/noise_intensity = 0.5
+shader_parameter/enable_glitch = false
+shader_parameter/outer_fade_start = 0.0
+shader_parameter/outer_fade_end = 0.5
+
+[node name="AnomalyGravwell" type="Node3D"]
+script = ExtResource("1_txm0o")
+force = 12.0
+lethality = 5
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_621wj")
+
+[node name="Hum" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("1_d848p")
+volume_db = -16.0
+pitch_scale = 0.2
+autoplay = true
+max_distance = 24.0
+bus = &"Sound Effects"
+
+[node name="Gleam" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_hvd20")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("QuadMesh_evcex")
+surface_material_override/0 = SubResource("ShaderMaterial_5k6kr")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]

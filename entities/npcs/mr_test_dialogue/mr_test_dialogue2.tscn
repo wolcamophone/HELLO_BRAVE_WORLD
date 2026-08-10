@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://cf6mgolusc5p0"]
+
+[ext_resource type="Texture2D" uid="uid://bknj24jo2bhqj" path="res://Graphics/textures/metal/pipes_1.png" id="2_sdpvc"]
+[ext_resource type="Script" path="res://scripts/trigger_interaction.gd" id="3_16i4y"]
+[ext_resource type="Script" path="res://scripts/dialogue/dialogic_prompter.gd" id="3_cg015"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_v7f2p"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_by7tc"]
+albedo_color = Color(2.40654e-06, 0.668999, 0.597062, 1)
+albedo_texture = ExtResource("2_sdpvc")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d6yh7"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ho425"]
+radius = 2.0
+
+[node name="MrTestDialogue2" type="StaticBody3D"]
+
+[node name="DialoguePrompter" type="Node" parent="."]
+script = ExtResource("3_cg015")
+dialogue_to_prompt = "test_dialogue"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CylinderMesh_v7f2p")
+surface_material_override/0 = SubResource("StandardMaterial3D_by7tc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CylinderShape3D_d6yh7")
+
+[node name="InteractionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("3_16i4y")
+prompt_text = "Talk"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+shape = SubResource("CylinderShape3D_ho425")
+
+[connection signal="activation" from="InteractionArea" to="DialoguePrompter" method="_on_interaction_area_activation"]

@@ -1,0 +1,414 @@
+[gd_scene load_steps=24 format=3 uid="uid://bb2hcbb3vaxyu"]
+
+[ext_resource type="Script" path="res://scripts/UI/HUD.gd" id="1_n7kud"]
+[ext_resource type="JSON" path="res://_deprec/Dialogue/Test_dialogue.json" id="2_o1v84"]
+[ext_resource type="Theme" uid="uid://24bml6th7hoi" path="res://Graphics/UI/Def_UI.theme" id="2_v80lq"]
+[ext_resource type="Texture2D" uid="uid://bqcok4y83au00" path="res://Graphics/UI/HUD/health_radial_0.png" id="3_v2uxw"]
+[ext_resource type="Texture2D" uid="uid://cugasf7g76vhn" path="res://Graphics/UI/vignette.png" id="4_cix3b"]
+[ext_resource type="Texture2D" uid="uid://d4fykdqigfar6" path="res://Graphics/UI/crt.png" id="4_esusg"]
+[ext_resource type="Texture2D" uid="uid://dvxf4do6lmw1h" path="res://Graphics/UI/HUD/health_radial_2.png" id="4_iclye"]
+[ext_resource type="Texture2D" uid="uid://ye62btw5owd8" path="res://Graphics/UI/HUD/clock_fancy_back.png" id="6_1hxwb"]
+[ext_resource type="LabelSettings" uid="uid://bldwplqgwyyd4" path="res://scripts/UI/HUD_label.tres" id="7_ksx4b"]
+[ext_resource type="Texture2D" uid="uid://dox6wlx02i6m1" path="res://Graphics/UI/HUD/clock_fancy_progress.png" id="7_ns5r4"]
+[ext_resource type="Texture2D" uid="uid://ruijco38yggy" path="res://Graphics/UI/AtlasController.png" id="8_786k8"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_foj5r"]
+blend_mode = 3
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_67jke"]
+blend_mode = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qe3rn"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8f6y2"]
+atlas = ExtResource("8_786k8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3bwea"]
+font_size = 18
+font_color = Color(1, 1, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.501961)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_otgro"]
+font_size = 18
+font_color = Color(1, 0, 0, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.501961)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_nfj2h"]
+font_size = 18
+font_color = Color(1, 0, 1, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.501961)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="LabelSettings" id="LabelSettings_elhiu"]
+font_size = 18
+font_color = Color(0, 0.983334, 1, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.501961)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.501961)
+
+[sub_resource type="Animation" id="Animation_iu6pd"]
+resource_name = "Fade"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/ShaderRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i7dvw"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/ShaderRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ujh3"]
+_data = {
+"Fade": SubResource("Animation_iu6pd"),
+"RESET": SubResource("Animation_i7dvw")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_l8kc6"]
+font_size = 24
+outline_size = 2
+outline_color = Color(0, 0, 0, 0.501961)
+shadow_size = 2
+shadow_color = Color(0, 0, 0, 0.501961)
+shadow_offset = Vector2(2, 2)
+
+[node name="HUD" type="CanvasLayer" groups=["system", "user_interface"]]
+process_mode = 3
+layer = 0
+script = ExtResource("1_n7kud")
+dialogue_json = ExtResource("2_o1v84")
+
+[node name="Control" type="Control" parent="."]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 1
+theme = ExtResource("2_v80lq")
+
+[node name="Overlays" type="Control" parent="Control"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CRT" type="TextureRect" parent="Control/Overlays"]
+texture_filter = 6
+material = SubResource("CanvasItemMaterial_foj5r")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_esusg")
+flip_h = true
+
+[node name="Vignette" type="TextureRect" parent="Control"]
+modulate = Color(1, 1, 1, 0.25098)
+self_modulate = Color(1, 1, 1, 0.25098)
+show_behind_parent = true
+texture_filter = 6
+material = SubResource("CanvasItemMaterial_67jke")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_cix3b")
+flip_h = true
+flip_v = true
+
+[node name="Diaract" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TopHalf" type="Control" parent="Control/Diaract"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="MarginContainer" type="PanelContainer" parent="Control/Diaract/TopHalf"]
+visible = false
+custom_minimum_size = Vector2(600, 250)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_qe3rn")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/Diaract/TopHalf/MarginContainer"]
+layout_mode = 2
+mouse_filter = 1
+theme_override_font_sizes/normal_font_size = 22
+text = "Mollitia consequatur iusto consequatur. Totam autem aut corporis libero id. Rem eum sequi sit est rerum. Vel vitae et porro repellendus dignissimos voluptatem voluptatem exercitationem. Iste tenetur id magni molestias qui excepturi. Velit quis deleniti ipsum reprehenderit quod ut doloribus rerum."
+
+[node name="ProgressBarTimeTrial" type="TextureProgressBar" parent="Control/Diaract/TopHalf"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 32.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 75.0
+fill_mode = 4
+texture_under = ExtResource("6_1hxwb")
+texture_progress = ExtResource("7_ns5r4")
+
+[node name="BottomHalf" type="Control" parent="Control/Diaract"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/Diaract/BottomHalf"]
+clip_children = 2
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -62.0
+offset_top = -20.0
+offset_right = 62.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="TextureRect" parent="Control/Diaract/BottomHalf/HBoxContainer"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_8f6y2")
+
+[node name="InteractText" type="Label" parent="Control/Diaract/BottomHalf/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 1
+text = "Activate"
+label_settings = ExtResource("7_ksx4b")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CheckpointMenu" type="PanelContainer" parent="Control"]
+visible = false
+custom_minimum_size = Vector2(250, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -150.0
+offset_right = 125.0
+offset_bottom = 150.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="Control/CheckpointMenu"]
+layout_mode = 2
+
+[node name="SaveGame" type="Button" parent="Control/CheckpointMenu/VBox"]
+layout_mode = 2
+text = "Save Game"
+
+[node name="GetStatusReport" type="Button" parent="Control/CheckpointMenu/VBox"]
+layout_mode = 2
+text = "Get Status Report"
+
+[node name="Leave" type="Button" parent="Control/CheckpointMenu/VBox"]
+layout_mode = 2
+text = "Leave Checkpoint"
+
+[node name="Label" type="Label" parent="Control/CheckpointMenu"]
+self_modulate = Color(1, 1, 1, 0.25098)
+layout_mode = 2
+size_flags_vertical = 8
+text = "Work in Progress. 
+Menu function is limited."
+
+[node name="HealthBar" type="TextureProgressBar" parent="Control"]
+visible = false
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -152.0
+offset_right = 152.0
+grow_vertical = 0
+max_value = 8.0
+fill_mode = 3
+texture_under = ExtResource("3_v2uxw")
+texture_progress = ExtResource("4_iclye")
+tint_progress = Color(0, 1, 0, 1)
+
+[node name="HBoxScores" type="HBoxContainer" parent="Control"]
+modulate = Color(1, 1, 1, 0.501961)
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -180.5
+offset_right = 180.5
+offset_bottom = 32.0
+grow_horizontal = 2
+alignment = 1
+
+[node name="CoinCounter" type="Label" parent="Control/HBoxScores"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Coins: 0"
+label_settings = SubResource("LabelSettings_3bwea")
+horizontal_alignment = 1
+
+[node name="CoinCounterRed" type="Label" parent="Control/HBoxScores"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Red Coins: 0"
+label_settings = SubResource("LabelSettings_otgro")
+horizontal_alignment = 1
+
+[node name="KeysCounter" type="Label" parent="Control/HBoxScores"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Keygen: 0"
+label_settings = SubResource("LabelSettings_nfj2h")
+horizontal_alignment = 1
+
+[node name="LivesCounter" type="Label" parent="Control/HBoxScores"]
+custom_minimum_size = Vector2(192, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Lives: 0"
+label_settings = SubResource("LabelSettings_elhiu")
+horizontal_alignment = 1
+
+[node name="FadeTransition" type="AnimationPlayer" parent="Control"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_4ujh3")
+}
+
+[node name="ShaderRect" type="ColorRect" parent="Control"]
+visible = false
+layout_mode = 2
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+color = Color(0, 0, 0, 1)
+
+[node name="LoadingLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.5
+offset_top = -53.0
+offset_right = 72.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Loading ...
+ "
+label_settings = SubResource("LabelSettings_l8kc6")
+
+[node name="SavingLabel" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.5
+offset_top = -53.0
+offset_right = 72.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "Saving ...
+ "
+label_settings = SubResource("LabelSettings_l8kc6")
+
+[node name="VBoxDebug" type="VBoxContainer" parent="Control"]
+visible = false
+modulate = Color(1, 1, 1, 0.643137)
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+grow_vertical = 2
+
+[node name="PlayerState" type="Label" parent="Control/VBoxDebug"]
+layout_mode = 2
+text = "GameMaster.active_player.state = "

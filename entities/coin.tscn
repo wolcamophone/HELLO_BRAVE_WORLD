@@ -1,0 +1,80 @@
+[gd_scene load_steps=12 format=3 uid="uid://3x5nioot53bp"]
+
+[ext_resource type="Script" path="res://entities/Coin.gd" id="1_wj3t6"]
+[ext_resource type="Material" uid="uid://cbrgmeyb1h0fr" path="res://entities/coin_symbol.material" id="2_5lr2w"]
+[ext_resource type="ArrayMesh" uid="uid://8qbugd3b50rp" path="res://models/coin.obj" id="3_b0ri2"]
+[ext_resource type="AudioStream" uid="uid://c6cjyd2h3a3kw" path="res://audio/SFX/bike_bell.wav" id="3_ff21n"]
+[ext_resource type="Texture2D" uid="uid://bl8tdhw7utsl5" path="res://Graphics/particles/p_star3.png" id="5_v7nf4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k1uuv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fwkoc"]
+transparency = 1
+blend_mode = 1
+no_depth_test = true
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+vertex_color_use_as_albedo = true
+vertex_color_is_srgb = true
+albedo_color = Color(2, 2, 1, 0.12549)
+albedo_texture = ExtResource("5_v7nf4")
+albedo_texture_force_srgb = true
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="Curve" id="Curve_kowal"]
+bake_resolution = 16
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_0grpx"]
+curve = SubResource("Curve_kowal")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_57ymk"]
+emission_shape = 1
+emission_sphere_radius = 0.4
+angle_min = -180.0
+angle_max = 180.0
+direction = Vector3(0, 1, 0)
+spread = 85.0
+initial_velocity_min = 4.0
+initial_velocity_max = 12.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_0grpx")
+
+[sub_resource type="QuadMesh" id="QuadMesh_3f8et"]
+
+[node name="Coin" type="Area3D" groups=["entities"]]
+monitorable = false
+script = ExtResource("1_wj3t6")
+rotation_speed = 2.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_5lr2w")
+cast_shadow = 0
+mesh = ExtResource("3_b0ri2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_k1uuv")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_ff21n")
+bus = &"Sound Effects"
+
+[node name="Sparkle" type="GPUParticles3D" parent="."]
+material_override = SubResource("StandardMaterial3D_fwkoc")
+emitting = false
+amount = 12
+amount_ratio = 0.6
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_57ymk")
+draw_pass_1 = SubResource("QuadMesh_3f8et")
